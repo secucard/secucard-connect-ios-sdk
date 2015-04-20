@@ -1,0 +1,114 @@
+PODS:
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.4.1)
+  - CocoaLumberjack (2.0.0):
+    - CocoaLumberjack/Default (= 2.0.0)
+    - CocoaLumberjack/Extensions (= 2.0.0)
+  - CocoaLumberjack/Core (2.0.0)
+  - CocoaLumberjack/Default (2.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.0):
+    - CocoaLumberjack/Default
+  - Expecta (0.4.0)
+  - Mantle (2.0):
+    - Mantle/extobjc (= 2.0)
+  - Mantle/extobjc (2.0)
+  - OMGHTTPURLRQ (2.1):
+    - OMGHTTPURLRQ/RQ (= 2.1)
+  - OMGHTTPURLRQ/FormURLEncode (2.1)
+  - OMGHTTPURLRQ/RQ (2.1):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (2.1)
+  - PromiseKit (1.5.0):
+    - PromiseKit/CALayer (= 1.5.0)
+    - PromiseKit/NSNotificationCenter (= 1.5.0)
+    - PromiseKit/NSURLConnection (= 1.5.0)
+    - PromiseKit/Pause (= 1.5.0)
+    - PromiseKit/UIActionSheet (= 1.5.0)
+    - PromiseKit/UIAlertView (= 1.5.0)
+    - PromiseKit/UIView (= 1.5.0)
+    - PromiseKit/UIViewController (= 1.5.0)
+    - PromiseKit/Until (= 1.5.0)
+    - PromiseKit/When (= 1.5.0)
+  - PromiseKit-AFNetworking (0.1.6):
+    - AFNetworking (~> 2.0)
+    - PromiseKit/Promise
+    - PromiseKit/When
+  - PromiseKit/CALayer (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/NSNotificationCenter (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/NSURLConnection (1.5.0):
+    - OMGHTTPURLRQ
+    - PromiseKit/Promise
+  - PromiseKit/Pause (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/Promise (1.5.0)
+  - PromiseKit/UIActionSheet (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/UIAlertView (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/UIView (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/UIViewController (1.5.0):
+    - PromiseKit/Promise
+  - PromiseKit/Until (1.5.0):
+    - PromiseKit/Promise
+    - PromiseKit/When
+  - PromiseKit/When (1.5.0):
+    - PromiseKit/Promise
+  - Reachability (3.2)
+  - SCSecucardConnectClientLib (0.1.0)
+  - Specta (0.5.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5)
+  - CocoaAsyncSocket (~> 7.4)
+  - CocoaLumberjack (~> 2.0)
+  - Expecta
+  - Mantle (~> 2.0)
+  - PromiseKit (~> 1.5)
+  - PromiseKit-AFNetworking
+  - Reachability (~> 3.2)
+  - SCSecucardConnectClientLib (from `../`)
+  - Specta
+
+EXTERNAL SOURCES:
+  SCSecucardConnectClientLib:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
+  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
+  Expecta: 392a6b5bfb9f4097e47dd8064d9b732079490332
+  Mantle: 17de73ef929db2234d76fde2aacfb89ab11c61e8
+  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
+  PromiseKit: 66308afa36e1f7dba6d53721c359e4d074a895b4
+  PromiseKit-AFNetworking: fbdd97205d6a78bb94d96d0d56311d1733569aae
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SCSecucardConnectClientLib: 519a397ef4e550c754c6ff48fdc9615d716c76e4
+  Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
+
+COCOAPODS: 0.36.1

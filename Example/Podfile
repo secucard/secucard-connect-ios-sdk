@@ -6,4 +6,12 @@ target 'SCSecucardConnectClientLib', :exclusive => true do
 
   pod 'Specta'
   pod 'Expecta'
+  pod 'Reachability', '~> 3.2'
+  pod 'CocoaLumberjack', '~> 2.0'
+  pod 'AFNetworking', '~> 2.5'
+  pod 'PromiseKit', '~> 1.5'
+  pod 'PromiseKit-AFNetworking'
+  pod 'Mantle', '~> 2.0'
+  pod 'CocoaAsyncSocket', '~> 7.4'
+  
 end
