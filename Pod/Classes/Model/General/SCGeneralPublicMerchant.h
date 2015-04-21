@@ -8,7 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralComponentsGeometry.h"
 
 @interface SCGeneralPublicMerchant : SCSecuObject
 

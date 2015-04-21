@@ -340,6 +340,7 @@
 		A92BE4F82A89C1E88F31D24C /* EXPMatchers+beGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = 43BE4946AF8AEF7E868EF479 /* EXPMatchers+beGreaterThan.h */; };
 		AA1CC7681ADC11520076CAFF /* SCSecuObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CC7671ADC11520076CAFF /* SCSecuObject.m */; };
 		AA1CC76B1ADC1B7C0076CAFF /* SCObjectList.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CC76A1ADC1B7C0076CAFF /* SCObjectList.m */; };
+		AA9B4E131AE68EF300718CBE /* SCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B4E121AE68EF300718CBE /* SCBaseModel.m */; };
 		AAE5A211BB40C8FE42911AEF /* SCCheckinService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A34F243AD74C05DCDC04E50 /* SCCheckinService.m */; };
 		AB19F51A96FDA3A5691A02D8 /* SCGeneralPublicMerchant.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D88B452256170FDE37667E /* SCGeneralPublicMerchant.m */; };
 		ABC34CC304D6F7AD98C9AF3C /* SPTSharedExampleGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 13E0BE0D8657C5B16F75BDCF /* SPTSharedExampleGroups.h */; };
@@ -976,6 +977,8 @@
 		AA1CC7671ADC11520076CAFF /* SCSecuObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSecuObject.m; sourceTree = "<group>"; };
 		AA1CC7691ADC1B7C0076CAFF /* SCObjectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCObjectList.h; sourceTree = "<group>"; };
 		AA1CC76A1ADC1B7C0076CAFF /* SCObjectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCObjectList.m; sourceTree = "<group>"; };
+		AA9B4E111AE68EF300718CBE /* SCBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBaseModel.h; sourceTree = "<group>"; };
+		AA9B4E121AE68EF300718CBE /* SCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBaseModel.m; sourceTree = "<group>"; };
 		AACC90F6E9BDD723A4B9C98D /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
 		AAD915741177198430A79EA9 /* SCServiceFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SCServiceFactory.m; sourceTree = "<group>"; };
 		ABCFB7B1E108FD5F69A8A72B /* NSDictionary+MTLMappingAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+MTLMappingAdditions.m"; path = "Mantle/NSDictionary+MTLMappingAdditions.m"; sourceTree = "<group>"; };
@@ -1779,6 +1782,8 @@
 				4AA74A02B542D21902CF3C61 /* Transport */,
 				AA1CC7691ADC1B7C0076CAFF /* SCObjectList.h */,
 				AA1CC76A1ADC1B7C0076CAFF /* SCObjectList.m */,
+				AA9B4E111AE68EF300718CBE /* SCBaseModel.h */,
+				AA9B4E121AE68EF300718CBE /* SCBaseModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3124,6 +3129,7 @@
 			files = (
 				AA1CC7681ADC11520076CAFF /* SCSecuObject.m in Sources */,
 				CD64D9AE88DBFEB5D3B5364D /* Pods-SCSecucardConnectClientLib-dummy.m in Sources */,
+				AA9B4E131AE68EF300718CBE /* SCBaseModel.m in Sources */,
 				AA1CC76B1ADC1B7C0076CAFF /* SCObjectList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3664,6 +3670,7 @@
 			baseConfigurationReference = F520EA0AF7A197308EDB0D53 /* Pods-SCSecucardConnectClientLib.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Target Support Files/Pods-SCSecucardConnectClientLib-SCSecucardConnectClientLib/Pods-SCSecucardConnectClientLib-SCSecucardConnectClientLib-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -3874,6 +3881,7 @@
 			baseConfigurationReference = 75E445BD271415E772AF6905 /* Pods-SCSecucardConnectClientLib.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Target Support Files/Pods-SCSecucardConnectClientLib-SCSecucardConnectClientLib/Pods-SCSecucardConnectClientLib-SCSecucardConnectClientLib-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";

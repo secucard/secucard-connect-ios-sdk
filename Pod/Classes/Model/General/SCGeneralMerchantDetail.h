@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralStore.h"
-#import "SCGeneralMerchant.h"
 
 @interface SCGeneralMerchantDetail : SCSecuObject
 

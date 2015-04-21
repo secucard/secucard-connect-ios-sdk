@@ -12,7 +12,7 @@
 #define kSortAsc    @"asc"
 #define kSortDesc   @"desc"
 
-@interface SCQueryParams : MTLModel <MTLJSONSerializing>
+@interface SCQueryParams : SCBaseModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSNumber *count;
 @property (nonatomic, copy) NSNumber *offset;

@@ -8,8 +8,6 @@
 
 #import "SCTransportStatus.h"
 
-#import "SCSmartTransaction.h"
-
 @interface SCSmartTransactionResult : SCTransportStatus
 
 @property (nonatomic, copy) SCSmartTransaction *transaction;

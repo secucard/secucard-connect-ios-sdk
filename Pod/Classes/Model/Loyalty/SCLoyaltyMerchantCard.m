@@ -20,7 +20,10 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"createdForMerchant":@"created_for_merchant",
            @"createdForStore":@"created_for_store",
            @"isBaseCard":@"is_base_card",
@@ -28,7 +31,7 @@
            @"lastCharge":@"last_charge",
            @"stockStatus":@"stock_status",
            @"lockStatus":@"lock_status"
-           };
+           }];
 }
 
 @end

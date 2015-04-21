@@ -20,11 +20,14 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"displayName":@"display_name",
            @"displayNameRaw":@"display_name_raw",
            @"stockWarnLimit":@"stock_warn_limit"
-           };
+           }];
 }
 
 

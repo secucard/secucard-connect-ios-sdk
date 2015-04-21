@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCLoyaltyBonus : MTLModel
+@interface SCLoyaltyBonus : SCBaseModel
 
 @property (nonatomic, copy) NSNumber *amount;
 @property (nonatomic, copy) NSString *currency;

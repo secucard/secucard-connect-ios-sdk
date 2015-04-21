@@ -6,12 +6,12 @@
 //
 //
 
-#import "MTLModel.h"
+#import "SCBaseModel.h"
 
 #define kObjectProperty @"object"
 #define kIdProperty @"id"
 
-@interface SCSecuObject : MTLModel
+@interface SCSecuObject : SCBaseModel
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *object;

@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCTransportStatus : MTLModel
+@interface SCTransportStatus : SCBaseModel
 
 @property (nonatomic, copy)  NSString *status;
 @property (nonatomic, copy)  NSString *error;

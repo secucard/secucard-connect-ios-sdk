@@ -6,9 +6,9 @@
 //
 //
 
-#import "Mantle.h"
+#import "SCBaseModel.h"
 
-@interface SCGeoQuery : MTLModel <MTLJSONSerializing>
+@interface SCGeoQuery : SCBaseModel
 
 @property (nonatomic, copy) NSString *field;
 @property (nonatomic, copy) NSString *distance;

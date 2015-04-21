@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultAddress : MTLModel
+@interface SCServicesIdResultAddress : SCBaseModel
 
 @property (nonatomic, copy) id postalCode;
 @property (nonatomic, copy) id country;

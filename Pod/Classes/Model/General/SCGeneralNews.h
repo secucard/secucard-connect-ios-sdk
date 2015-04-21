@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCMediaResource.h"
-
 #define kStatusRead @"read"
 #define kStatusUnread @"unread"
 

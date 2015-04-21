@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralComponentsMetaData.h"
-#import "SCGeneralLocation.h"
-
 @interface SCGeneralMerchant : SCSecuObject
 
 @property (nonatomic, copy) NSString *name;

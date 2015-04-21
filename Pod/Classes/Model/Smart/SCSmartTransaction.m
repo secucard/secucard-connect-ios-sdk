@@ -20,7 +20,10 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"basketInfo":@"basket_info",
            @"deviceSource":@"device_source",
            @"targetDevice":@"target_device",
@@ -28,7 +31,7 @@
            @"receiptLines":@"receipt",
            @"paymentRequested":@"payment_requested",
            @"paymentExecuted":@"payment_executed"
-           };
+           }];
 }
 
 

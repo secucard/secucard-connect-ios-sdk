@@ -8,8 +8,6 @@
 
 #import "SCPaymentTransaction.h"
 
-#import "SCPaymentTransferAccount.h"
-
 @interface SCPaymentSecupayPrepay : SCPaymentTransaction
 
 @property (nonatomic, copy) NSString *transferPurpose;

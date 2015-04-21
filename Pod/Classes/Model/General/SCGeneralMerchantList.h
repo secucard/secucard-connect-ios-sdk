@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralMerchantList : MTLModel
+@interface SCGeneralMerchantList : SCBaseModel
 
 @property (nonatomic, copy) NSNumber *count;
 @property (nonatomic, copy) NSArray *merchants;

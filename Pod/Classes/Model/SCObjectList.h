@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel.h"
+#import "SCBaseModel.h"
 
-@interface SCObjectList : MTLModel
+@interface SCObjectList : SCBaseModel
 
 @property (nonatomic, copy) NSString *scrollId;
 @property (nonatomic, copy) NSNumber *count;

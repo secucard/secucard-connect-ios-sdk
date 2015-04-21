@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCSmartBasket : MTLModel
+@interface SCSmartBasket : SCBaseModel
 
 @property (nonatomic, retain) NSArray *products;
 @property (nonatomic, retain) NSArray *texts;

@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCPaymentCustomer.h"
-#import "SCPaymentContract.h"
-
 #define kStatusAccepted @"accepted"
 #define kStatusCancelled @"canceled"
 #define kStatusProceed @"proceed"

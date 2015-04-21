@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCServicesIdentRequest.h"
-#import "SCServicesContract.h"
-
 @interface SCServicesIdentResult : SCSecuObject
 
 @property (nonatomic, copy) SCServicesIdentRequest *request;

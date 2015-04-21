@@ -11,10 +11,13 @@
 @implementation SCGeneralComponentsAddressComponent
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"longName":@"long_name",
            @"shortName":@"short_name"
-           };
+           }];
 }
 
 

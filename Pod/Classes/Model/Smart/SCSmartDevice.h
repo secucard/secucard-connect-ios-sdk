@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-
-
 @interface SCSmartDevice : SCSecuObject
 
 @property (nonatomic, copy) NSString *type;

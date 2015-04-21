@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralStoreSetDefault : MTLModel
+@interface SCGeneralStoreSetDefault : SCBaseModel
 
 @property (nonatomic, copy) NSString *reason;
 @end

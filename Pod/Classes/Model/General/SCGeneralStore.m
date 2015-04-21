@@ -20,7 +20,10 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"hashProperty":@"hash",
            @"nameRaw":@"name_raw",
            @"newsStatus":@"_news_status",
@@ -43,7 +46,7 @@
            @"pictureUrls":@"photo",
            @"logoUrl":@"photo_main",
            @"hasBeacon":@"has_beacon"
-           };
+           }];
 }
 
 

@@ -6,10 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
-#import "SCGeneralComponentsDayTime.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralComponentsOpenHours : MTLModel
+@interface SCGeneralComponentsOpenHours : SCBaseModel
 
 @property (nonatomic, copy) SCGeneralComponentsDayTime *open;
 @property (nonatomic, copy) SCGeneralComponentsDayTime *close;

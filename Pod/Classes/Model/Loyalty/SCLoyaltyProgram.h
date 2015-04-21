@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCLoyaltyCardGroup.h"
-
 @interface SCLoyaltyProgram : SCSecuObject
 
 @property (nonatomic, copy) NSString *description;

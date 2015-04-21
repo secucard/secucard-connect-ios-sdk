@@ -10,12 +10,17 @@
 
 @implementation SCTransportStatus
 
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"errorDetails":@"error_details",
-           @"errorDescription":@"error_description",
-           @"errorUser":@"error_user"
-           };
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                @"errorDetails":@"error_details",
+                                                                @"errorDescription":@"error_description",
+                                                                @"errorUser":@"error_user"
+                                                                }];
+
 }
 
 

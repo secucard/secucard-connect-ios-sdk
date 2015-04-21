@@ -6,11 +6,11 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
 #define kBonusTypePercent @"percent"
 
-@interface SCLoyaltyCondition : MTLModel
+@interface SCLoyaltyCondition : SCBaseModel
 
 @property (nonatomic, copy) NSNumber *startValue;
 @property (nonatomic, copy) NSString *currency;

@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultIdentificationProcess : MTLModel
+@interface SCServicesIdResultIdentificationProcess : SCBaseModel
 
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSDate *identificationTime;

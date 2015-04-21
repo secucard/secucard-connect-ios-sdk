@@ -11,9 +11,12 @@
 @implementation SCSmartCashierDisplay
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"deviceId":@"device_id"
-           };
+           }];
 }
 
 

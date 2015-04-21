@@ -6,8 +6,7 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
-#import "SCMediaResource.h"
+#import "SCBaseModel.h"
 
 @interface SCServicesIdResultAttachment : SCMediaResource
 

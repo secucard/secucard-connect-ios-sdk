@@ -8,8 +8,6 @@
 
 #import "SCTransportStatus.h"
 
-#import "SCQueryParams.h"
-
 @interface SCTransportMessage : SCTransportStatus
 
 @property (nonatomic, copy) NSString *pid;

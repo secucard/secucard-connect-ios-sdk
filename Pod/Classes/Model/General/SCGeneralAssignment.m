@@ -7,9 +7,6 @@
 //
 
 #import "SCGeneralAssignment.h"
-#import "SCGeneralMerchant.h"
-#import "SCGeneralAccountDevice.h"
-#import "SCLoyaltyCard.h"
 
 @implementation SCGeneralAssignment
 

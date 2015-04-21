@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCSmartBasketInfo : MTLModel
+@interface SCSmartBasketInfo : SCBaseModel
 
 @property (nonatomic, copy) NSNumber *sum;
 @property (nonatomic, copy) id currency;

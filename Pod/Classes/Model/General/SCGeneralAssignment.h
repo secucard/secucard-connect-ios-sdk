@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralAssignment : MTLModel
+@interface SCGeneralAssignment : SCBaseModel
 
 @property (nonatomic, copy) NSDate *created;
 @property (nonatomic, copy) NSString *type;

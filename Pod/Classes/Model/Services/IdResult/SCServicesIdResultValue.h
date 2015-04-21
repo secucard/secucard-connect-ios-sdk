@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultValue : MTLModel
+@interface SCServicesIdResultValue : SCBaseModel
 
 @property (nonatomic, copy) NSString *value;
 @property (nonatomic, copy) NSString *status;

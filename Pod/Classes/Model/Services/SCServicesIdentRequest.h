@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCServicesContract.h"
-
 #define kTypePerson @"person"
 #define kTypeCompany @"company"
 

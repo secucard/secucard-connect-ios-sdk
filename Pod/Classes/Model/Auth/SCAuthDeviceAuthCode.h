@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCAuthDeviceAuthCode : MTLModel
+@interface SCAuthDeviceAuthCode : SCBaseModel
 
 @property (nonatomic, copy) NSString *deviceCode;
 @property (nonatomic, copy) NSString *userCode;

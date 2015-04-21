@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCAnnotationProductInfo : MTLModel
+@interface SCAnnotationProductInfo : SCBaseModel
 
 @property (nonatomic, copy) NSString *resourceId;
 

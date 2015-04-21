@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralComponentsDayTime : MTLModel
+@interface SCGeneralComponentsDayTime : SCBaseModel
 
 @property (nonatomic, retain) NSNumber *day;
 @property (nonatomic, retain) NSString *time;

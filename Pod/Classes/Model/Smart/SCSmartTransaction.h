@@ -8,10 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCSmartBasket.h"
-#import "SCSmartBasketInfo.h"
-#import "SCSmartDevice.h"
-
 @interface SCSmartTransaction : SCSecuObject
 
 @property (nonatomic, copy) SCSmartBasketInfo *basketInfo;

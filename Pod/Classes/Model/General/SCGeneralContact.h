@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralAddress.h"
-
 #define kGenderMale @"MALE"
 #define kGenderFemale @"FEMALE"
 

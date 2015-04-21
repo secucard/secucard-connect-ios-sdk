@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCAuthToken : MTLModel
+@interface SCAuthToken : SCBaseModel
 
 @property (nonatomic, copy) NSString *accessToken;
 @property (nonatomic, copy) NSNumber *expiresIn;

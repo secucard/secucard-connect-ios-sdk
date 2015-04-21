@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralComponentsAddressComponent : MTLModel
+@interface SCGeneralComponentsAddressComponent : SCBaseModel
 
 @property (nonatomic, copy) NSString *longName;
 @property (nonatomic, copy) NSString *shortName;

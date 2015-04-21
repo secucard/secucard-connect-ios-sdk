@@ -11,11 +11,14 @@
 @implementation SCServicesIdRequestPerson
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"transactionId":@"transaction_id",
            @"redirectUrl":@"redirect_url",
            @"ownerTransactionId":@"owner_transaction_id"
-           };
+           }];
 }
 
 

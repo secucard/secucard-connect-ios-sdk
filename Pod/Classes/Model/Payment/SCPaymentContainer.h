@@ -8,11 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-#import "SCPaymentData.h"
-#import "SCPaymentCustomer.h"
-#import "SCPaymentContract.h"
-
 #define kTypeBankAccount @"bank_account"
 
 @interface SCPaymentContainer : SCSecuObject

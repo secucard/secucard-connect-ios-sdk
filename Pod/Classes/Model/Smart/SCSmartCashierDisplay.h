@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCSmartCashierDisplay : MTLModel
+@interface SCSmartCashierDisplay : SCBaseModel
 
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *deviceId;

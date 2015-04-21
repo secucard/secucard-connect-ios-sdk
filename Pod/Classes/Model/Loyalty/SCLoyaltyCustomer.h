@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-#import "SCMediaResource.h"
-
 @interface SCLoyaltyCustomer : SCSecuObject
 
 @property (nonatomic, copy) SCGeneralMerchant *merchant;

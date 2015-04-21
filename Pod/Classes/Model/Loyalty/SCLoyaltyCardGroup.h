@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-#import "SCMediaResource.h"
-
 @interface SCLoyaltyCardGroup : SCSecuObject
 
 @property (nonatomic, copy) NSString *displayName;

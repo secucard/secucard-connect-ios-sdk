@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCSmartText : MTLModel
+@interface SCSmartText : SCBaseModel
 
 @property (nonatomic, copy) NSString *parentId;
 @property (nonatomic, copy) NSString *desc;

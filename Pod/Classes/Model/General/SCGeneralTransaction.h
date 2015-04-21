@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-#import "SCLoyaltySale.h"
-
 #define kTypeSale @"sale"
 #define kTypeCharge @"charge"
 

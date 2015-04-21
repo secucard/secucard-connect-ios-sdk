@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultIdentificationDocument : MTLModel
+@interface SCServicesIdResultIdentificationDocument : SCBaseModel
 
 @property (nonatomic, copy) id country;
 @property (nonatomic, copy) id dateIssued;

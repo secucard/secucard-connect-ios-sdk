@@ -20,10 +20,13 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"transferPurpose":@"transfer_purpose",
            @"transferAccount":@"transfer_account"
-           };
+           }];
 }
 
 

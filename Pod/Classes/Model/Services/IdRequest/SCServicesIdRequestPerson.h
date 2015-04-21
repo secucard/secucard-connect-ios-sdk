@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdRequestPerson : MTLModel
+@interface SCServicesIdRequestPerson : SCBaseModel
 
 @property (nonatomic, copy) NSString *transactionId;
 @property (nonatomic, copy) NSString *redirectUrl;

@@ -8,11 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-#import "SCGeneralComponentsGeometry.h"
-#import "SCLoyaltyProgram.h"
-#import "SCMediaResource.h"
-
 #define kCheckinStatusDeclinedDistance @"declined_distance"
 #define kCheckinStatusDeclinedNotavail @"declined_notavail"
 #define kCheckinStatusAvailable @"available"

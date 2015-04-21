@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralContact.h"
-
 @interface SCGeneralAccount : SCSecuObject
 
 @property (nonatomic, copy) NSString *username;

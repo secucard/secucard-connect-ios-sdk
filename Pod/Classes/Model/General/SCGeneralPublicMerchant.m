@@ -20,7 +20,10 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"addressComponents":@"address_components",
            @"addressFormatted":@"address_formatted",
            @"phoneNumberFormatted":@"phone_number_formatted",
@@ -33,7 +36,7 @@
            @"openTime":@"open_time",
            @"openHours":@"open_hours",
            @"distance":@"_geometry"
-           };
+           }];
 }
 
 @end

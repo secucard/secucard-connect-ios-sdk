@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralBeaconEnvironment : MTLModel
+@interface SCGeneralBeaconEnvironment : SCBaseModel
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *proximityUUID;

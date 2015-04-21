@@ -8,11 +8,7 @@
 
 #import "SCSecuObject.h"
 
-#import "SCMediaResource.h"
-#import "SCLoyaltyCustomer.h"
-#import "SCGeneralAccount.h"
-
-@interface SCSmartCheckin : MTLModel
+@interface SCSmartCheckin : SCBaseModel
 
 @property (nonatomic, copy) NSString *customerName;
 @property (nonatomic, copy) NSString *picture;

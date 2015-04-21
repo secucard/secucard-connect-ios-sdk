@@ -11,10 +11,13 @@
 @implementation SCGeneralAddress
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"streetNumber":@"street_number",
            @"postalCode":@"postal_code"
-           };
+           }];
 }
 
 

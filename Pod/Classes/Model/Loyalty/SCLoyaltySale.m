@@ -20,13 +20,16 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"lastChange":@"last_change",
-           @"descriptionString":@"description"
+           @"descriptionString":@"description",
            @"descriptionRaw":@"description_raw",
            @"balanceAmount":@"balance_amount",
            @"balancePoints":@"balance_points"
-           };
+           }];
 }
 
 

@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultContactData : MTLModel
+@interface SCServicesIdResultContactData : SCBaseModel
 
 @property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, copy) NSString *email;

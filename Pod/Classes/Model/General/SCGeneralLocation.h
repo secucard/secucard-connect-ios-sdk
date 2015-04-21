@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralLocation : MTLModel
+@interface SCGeneralLocation : SCBaseModel
 
 @property (nonatomic, assign) double lat;
 @property (nonatomic, assign) double lon;

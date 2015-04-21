@@ -20,7 +20,10 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"foreName":@"forename",
            @"surName":@"surname",
            @"displayName":@"display_name",
@@ -28,7 +31,7 @@
            @"additionalData":@"additional_data",
            @"customerNumber":@"customernumber",
            @"dateOfBirth":@"dob"
-           };
+           }];
 }
 
 

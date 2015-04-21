@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCGeneralAddress : MTLModel
+@interface SCGeneralAddress : SCBaseModel
 
 @property (nonatomic, copy) NSString *street;
 @property (nonatomic, copy) NSString *streetNumber;

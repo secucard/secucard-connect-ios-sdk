@@ -11,11 +11,14 @@
 @implementation SCPaymentTransaction
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"orderId":@"order_id",
            @"transId":@"trans_id",
            @"transactionStatus":@"transaction_status"
-           };
+           }];
 }
 
 

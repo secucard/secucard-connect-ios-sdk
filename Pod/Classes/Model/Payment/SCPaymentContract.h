@@ -8,8 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-
 @interface SCPaymentContract : SCSecuObject
 
 @property (nonatomic, copy) NSString *contractId;

@@ -11,10 +11,13 @@
 @implementation SCSmartTransactionResult
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+  
+  NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"paymentMethod":@"payment_method",
            @"receiptLines":@"receipt"
-           };
+           }];
 }
 
 

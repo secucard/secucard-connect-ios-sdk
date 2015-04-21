@@ -8,15 +8,8 @@
 
 #import "SCGeoQuery.h"
 
-@implementation SCGeoQuery
+@implementation SCGeoQuery {
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"field":@"field",
-           @"distance":@"distance",
-           @"lat":@"lat",
-           @"lon":@"lon"
-           };
 }
 
 @end

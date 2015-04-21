@@ -6,14 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
-#import "SCServicesIdResultIdentificationDocument.h"
-#import "SCServicesIdResultIdentificationProcess.h"
-#import "SCServicesIdResultCustomData.h"
-#import "SCServicesIdResultContactData.h"
-#import "SCServicesIdResultUserData.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultPerson : MTLModel
+@interface SCServicesIdResultPerson : SCBaseModel
 
 @property (nonatomic, copy) SCServicesIdResultIdentificationProcess *identificationProcess;
 @property (nonatomic, copy) SCServicesIdResultIdentificationDocument *identificationDocument;

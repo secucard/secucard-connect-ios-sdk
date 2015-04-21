@@ -6,10 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
-#import "SCServicesIdResultAddress.h"
+#import "SCBaseModel.h"
 
-@interface SCServicesIdResultUserData : MTLModel
+@interface SCServicesIdResultUserData : SCBaseModel
 
 @property (nonatomic, copy) id dateOfBirth;
 @property (nonatomic, copy) id forename;

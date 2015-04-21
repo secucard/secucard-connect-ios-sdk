@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel.h"
+#import "SCBaseModel.h"
 
-@interface SCMediaResource : MTLModel
+@interface SCMediaResource : SCBaseModel
 
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, assign) BOOL isCached;

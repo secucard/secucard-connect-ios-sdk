@@ -8,9 +8,6 @@
 
 #import "SCSecuObject.h"
 
-#import "SCGeneralMerchant.h"
-#import "SCPaymentContract.h"
-
 @interface SCPaymentCustomer : SCSecuObject
 
 @property (nonatomic, copy) SCGeneralMerchant *merchant;

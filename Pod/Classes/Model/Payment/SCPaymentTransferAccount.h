@@ -6,9 +6,9 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCBaseModel.h"
 
-@interface SCPaymentTransferAccount : MTLModel
+@interface SCPaymentTransferAccount : SCBaseModel
 
 @property (nonatomic, copy) NSString *accountOwner;
 @property (nonatomic, copy) NSString *accountNumber;
