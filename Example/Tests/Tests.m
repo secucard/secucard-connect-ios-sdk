@@ -1,15 +1,8 @@
 //
-<<<<<<< HEAD
 //  SecucardConnectClientLibTests.m
 //  SecucardConnectClientLibTests
 //
 //  Created by Jörn Schmidt on 04/25/2015.
-=======
-//  SCSecucardConnectClientLibTests.m
-//  SCSecucardConnectClientLibTests
-//
-//  Created by Jörn Schmidt on 04/10/2015.
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
 //  Copyright (c) 2014 Jörn Schmidt. All rights reserved.
 //
 
