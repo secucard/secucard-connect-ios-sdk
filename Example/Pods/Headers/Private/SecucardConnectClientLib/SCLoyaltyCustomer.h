@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Model/Loyalty/SCLoyaltyCustomer.h

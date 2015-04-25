@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Model/Smart/SCSmartCashierDisplay.h

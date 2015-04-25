@@ -1,0 +1,49 @@
+{
+  "name": "SecucardConnectClientLib",
+  "version": "0.1.0",
+  "summary": "A short description of SecucardConnectClientLib.",
+  "description": "                       An optional longer description of SecucardConnectClientLib\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/SecucardConnectClientLib",
+  "license": "MIT",
+  "authors": {
+    "Jörn Schmidt": "schmidt@devid.net"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/SecucardConnectClientLib.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "SecucardConnectClientLib": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "public_header_files": "Pod/Classes/**/*.h",
+  "dependencies": {
+    "Reachability": [
+      "~> 3.2"
+    ],
+    "CocoaLumberjack": [
+      "~> 2.0"
+    ],
+    "AFNetworking": [
+      "~> 2.5"
+    ],
+    "PromiseKit": [
+      "~> 1.5"
+    ],
+    "PromiseKit-AFNetworking": [
+
+    ],
+    "Mantle": [
+      "~> 2.0"
+    ],
+    "CocoaAsyncSocket": [
+      "~> 7.4"
+    ]
+  }
+}
