@@ -16,6 +16,28 @@
 #import "SCObjectList.h"
 #import "SCSecuObject.h"
 
+//#import "SCUploadService.h"
+//#import "SCAccountDevicesService.h"
+//#import "SCAccountService.h"
+//#import "SCMerchantService.h"
+//#import "SCNewsService.h"
+//#import "SCPublicMerchantService.h"
+//#import "SCStoreService.h"
+//#import "SCTransactionService.h"
+//#import "SCSecuAppService.h"
+//#import "SCCardsService.h"
+//#import "SCLoyaltyCustomerService.h"
+//#import "SCMerchantCardsService.h"
+//#import "SCContainerService.h"
+//#import "SCCustomerService.h"
+//#import "SCSecupayDebitService.h"
+//#import "SCSecupayPrepayService.h"
+//#import "SCIdentService.h"
+//#import "SCCheckinService.h"
+//#import "SCDeviceService.h"
+//#import "SCSmartIdentService.h"
+//#import "SCSmartTransactionService.h"
+
 @interface SCAbstractService : NSObject
 
 - (void) get:(Class)type withId:(NSString*)idString onChannel:(ServiceChannel)channel onComplete:(void (^)(id object, NSError *error))completion;

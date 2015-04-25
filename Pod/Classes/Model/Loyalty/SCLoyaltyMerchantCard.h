@@ -10,7 +10,7 @@
 
 #import "SCGeneralMerchant.h"
 #import "SCGeneralStore.h"
-#import "SCLoyaltyCustomer.h"
+#import "SCLoyaltyCustomer.m"
 #import "SCLoyaltyCard.h"
 #import "SCLoyaltyCardGroup.h"
 

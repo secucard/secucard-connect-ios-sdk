@@ -8,6 +8,7 @@
 
 #import "SCSecuObject.h"
 
+#import "SCLoyaltyCustomer.h"
 #import "SCLoyaltyMerchantCard.h"
 
 @interface SCSmartIdent : SCSecuObject

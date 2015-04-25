@@ -1,5 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+<<<<<<< HEAD
 target 'SecucardConnectClientLib', :exclusive => true do
   pod "SecucardConnectClientLib", :path => "../"
 end
@@ -10,3 +11,21 @@ target 'Tests', :exclusive => true do
   pod 'Specta'
   pod 'Expecta'
 end
+=======
+
+target 'SCSecucardConnectClientLib', :exclusive => true do
+  pod "SCSecucardConnectClientLib", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+  pod 'Reachability', '~> 3.2'
+  pod 'CocoaLumberjack', '~> 2.0'
+  pod 'AFNetworking', '~> 2.5'
+  pod 'PromiseKit', '~> 1.5'
+  pod 'PromiseKit-AFNetworking'
+  pod 'Mantle', '~> 2.0'
+  pod 'CocoaAsyncSocket', '~> 7.4'
+  
+end
+¢
+>>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78

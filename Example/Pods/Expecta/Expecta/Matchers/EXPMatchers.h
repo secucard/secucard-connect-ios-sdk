@@ -22,4 +22,7 @@
 #import "EXPMatchers+postNotification.h"
 #import "EXPMatchers+beginWith.h"
 #import "EXPMatchers+endWith.h"
+<<<<<<< HEAD
 #import "EXPMatchers+match.h"
+=======
+>>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78

@@ -11,5 +11,9 @@ language: objective-c
 install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script:
+<<<<<<< HEAD
 - set -o pipefail && xcodebuild test -workspace Example/SecucardConnectClientLib.xcworkspace -scheme SecucardConnectClientLib-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
+=======
+- set -o pipefail && xcodebuild test -workspace Example/SCSecucardConnectClientLib.xcworkspace -scheme SCSecucardConnectClientLib-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
+>>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
 - pod lib lint --quick
