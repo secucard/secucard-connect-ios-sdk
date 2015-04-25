@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'SecucardConnectClientLib', :exclusive => true do
+  pod "SecucardConnectClientLib", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "SecucardConnectClientLib", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
