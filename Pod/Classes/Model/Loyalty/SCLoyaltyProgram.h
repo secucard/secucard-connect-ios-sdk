@@ -12,7 +12,7 @@
 
 @interface SCLoyaltyProgram : SCSecuObject
 
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *descriptionText;
 @property (nonatomic, copy) SCLoyaltyCardGroup *cardGroup;
 @property (nonatomic, copy) NSArray *conditions;
 

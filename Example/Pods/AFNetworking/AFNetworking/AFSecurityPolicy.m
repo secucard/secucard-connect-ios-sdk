@@ -198,33 +198,11 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     }
 
     self.validatesCertificateChain = YES;
-<<<<<<< HEAD
     self.validatesDomainName = YES;
-=======
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
 
     return self;
 }
 
-<<<<<<< HEAD
-=======
-#pragma mark -
-
-- (void)setSSLPinningMode:(AFSSLPinningMode)SSLPinningMode {
-    _SSLPinningMode = SSLPinningMode;
-
-    switch (self.SSLPinningMode) {
-        case AFSSLPinningModePublicKey:
-        case AFSSLPinningModeCertificate:
-            self.validatesDomainName = YES;
-            break;
-        default:
-            self.validatesDomainName = NO;
-            break;
-    }
-}
-
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
 - (void)setPinnedCertificates:(NSArray *)pinnedCertificates {
     _pinnedCertificates = pinnedCertificates;
 
@@ -261,22 +239,13 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 
     SecTrustSetPolicies(serverTrust, (__bridge CFArrayRef)policies);
 
-<<<<<<< HEAD
     if (self.SSLPinningMode == AFSSLPinningModeNone) {
         if (self.allowInvalidCertificates || AFServerTrustIsValid(serverTrust)){
-=======
-    if(self.SSLPinningMode == AFSSLPinningModeNone) {
-        if(self.allowInvalidCertificates || AFServerTrustIsValid(serverTrust)){
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
             return YES;
         } else {
             return NO;
         }
-<<<<<<< HEAD
     } else if (!AFServerTrustIsValid(serverTrust) && !self.allowInvalidCertificates) {
-=======
-    } else if(!AFServerTrustIsValid(serverTrust) && !self.allowInvalidCertificates) {
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
         return NO;
     }
     

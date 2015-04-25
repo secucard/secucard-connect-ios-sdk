@@ -92,6 +92,8 @@
     }
   }
   
+  return nil;
+  
 }
 
 - (NSString*) serviceCall:(NSString*)call withChannel:(ServiceChannel)channel andServiceMethod:(CallMethod)method andPid:(NSString*)pid andSid:(NSString*)sid

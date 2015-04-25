@@ -1,1 +1,0 @@
-../../../../../Pod/Classes/Model/Payment/SCPaymentSecupayDebit.h

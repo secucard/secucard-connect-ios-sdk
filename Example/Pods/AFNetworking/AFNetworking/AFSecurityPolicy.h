@@ -57,11 +57,7 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
 @property (nonatomic, assign) BOOL allowInvalidCertificates;
 
 /**
-<<<<<<< HEAD
  Whether or not to validate the domain name in the certificate's CN field. Defaults to `YES`.
-=======
- Whether or not to validate the domain name in the certificate's CN field. Defaults to `YES` for `AFSSLPinningModePublicKey` or `AFSSLPinningModeCertificate`, otherwise `NO`.
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
  */
 @property (nonatomic, assign) BOOL validatesDomainName;
 

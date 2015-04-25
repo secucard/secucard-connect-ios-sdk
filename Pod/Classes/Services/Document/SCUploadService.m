@@ -10,4 +10,10 @@
 
 @implementation SCUploadService
 
+-(void)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument onComplete:(void (^)(SCDocumentUploadsDocument *, NSError *))completion {
+  
+  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+  
+}
+
 @end

@@ -279,7 +279,6 @@ static inline void af_addMethod(Class class, SEL selector, Method method) {
 static NSString * const AFNSURLSessionTaskDidResumeNotification  = @"com.alamofire.networking.nsurlsessiontask.resume";
 static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofire.networking.nsurlsessiontask.suspend";
 
-<<<<<<< HEAD
 @interface NSURLSessionTask (_AFStateObserving)
 @end
 
@@ -290,29 +289,13 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
         NSURLSessionDataTask *dataTask = [[NSURLSession sessionWithConfiguration:nil] dataTaskWithURL:nil];
         Class taskClass = [dataTask superclass];
 
-=======
-@interface NSURLSessionDataTask (_AFStateObserving)
-@end
-
-@implementation NSURLSessionDataTask (_AFStateObserving)
-
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSURLSessionDataTask *dataTask = [[NSURLSession sessionWithConfiguration:nil] dataTaskWithURL:nil];
-        Class taskClass = [dataTask superclass];
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
         af_addMethod(taskClass, @selector(af_resume),  class_getInstanceMethod(self, @selector(af_resume)));
         af_addMethod(taskClass, @selector(af_suspend), class_getInstanceMethod(self, @selector(af_suspend)));
         af_swizzleSelector(taskClass, @selector(resume), @selector(af_resume));
         af_swizzleSelector(taskClass, @selector(suspend), @selector(af_suspend));
-<<<<<<< HEAD
 
         [dataTask cancel];
     }
-=======
-    });
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
 }
 
 #pragma mark -

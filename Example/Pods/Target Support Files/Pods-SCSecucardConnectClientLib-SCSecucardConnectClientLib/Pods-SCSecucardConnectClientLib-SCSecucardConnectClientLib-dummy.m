@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_SCSecucardConnectClientLib_SCSecucardConnectClientLib : NSObject
-@end
-@implementation PodsDummy_Pods_SCSecucardConnectClientLib_SCSecucardConnectClientLib
-@end

@@ -130,10 +130,7 @@ You can setup Expecta using [Carthage](https://github.com/Carthage/Carthage), [C
 
 > `expect(x).to.endWith(y);` passes if an instance of NSString, NSArray, or NSOrderedSet `x` ends with `y`.
 
-<<<<<<< HEAD
 > `expect(x).to.match(y);` passes if an instance of NSString `x` matches regular expression (given as NSString) `y` one or more times.
-=======
->>>>>>> 7808b388d351e4168bd08b487b74e45734c03a78
 
 ## Inverting Matchers
 

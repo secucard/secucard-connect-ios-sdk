@@ -14,7 +14,7 @@
 
 @property (nonatomic, copy) NSString *source;
 @property (nonatomic, copy) NSString *key;
-@property (nonatomic, copy) NSString *hash;
+@property (nonatomic, copy) NSString *hashValue;
 @property (nonatomic, copy) NSArray *addressComponents;
 @property (nonatomic, copy) NSString *addressFormatted;
 @property (nonatomic, copy) NSString *phoneNumberFormatted;

@@ -32,7 +32,8 @@
            @"openNow":@"open_now",
            @"openTime":@"open_time",
            @"openHours":@"open_hours",
-           @"distance":@"_geometry"
+           @"distance":@"_geometry",
+           @"hashValue":@"hash"
            };
 }
 

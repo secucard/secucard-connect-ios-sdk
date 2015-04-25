@@ -112,7 +112,7 @@
                                          
                                          NSString *correlationId = [message.headers objectForKey:@"correlation-id"];
                                          
-                                         NSString *messageId = [message.headers objectForKey:@"message-id"];
+//                                         NSString *messageId = [message.headers objectForKey:@"message-id"];
                                          
                                          // TODO: [SCNotificationManager sendNotificationToDisplay:@"STOMP: got message"];
                                          
