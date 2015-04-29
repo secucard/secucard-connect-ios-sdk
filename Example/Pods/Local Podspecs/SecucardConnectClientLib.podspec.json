@@ -27,9 +27,6 @@
     "Reachability": [
       "~> 3.2"
     ],
-    "CocoaLumberjack": [
-      "~> 2.0"
-    ],
     "AFNetworking": [
       "~> 2.5"
     ],
