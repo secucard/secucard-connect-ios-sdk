@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SCPersistenceManager.h"
-#import "SCServiceManager.h"
-#import "SCErrorManager.h"
 #import <PromiseKit/PromiseKit.h>
 
-#define kErrorDomainSCAccount                 @"SCSecucardCoreAccount"
+#import "SCConnectClient.h"
+#import "SCPersistenceManager.h"
+#import "SCErrorManager.h"
+
+@class SCUserCredentials;
+@class SCClientCredentials;
+
+#define kErrorDomainSCAccount               @"SCSecucardCoreAccount"
 
 #define kCredentialUsername                 @"credientialUsername"
 #define kCredentialPassword                 @"credientialPassword"
@@ -37,9 +41,8 @@
 
 + (SCAccountManager*)sharedManager;
 
-- (void) setupWithClientId:(NSString*)clientId clientSecret:(NSString*)clientSecret;
-
-- (PMKPromise*) loginWithUsername:(NSString*)username andPassword:(NSString*)password;
+- (instancetype) initWithClientCredentials:(SCClientCredentials*)clientCredentials;
+- (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials;
 - (PMKPromise*) token;
 - (PMKPromise*) refreshAccessToken;
 - (void) killToken;

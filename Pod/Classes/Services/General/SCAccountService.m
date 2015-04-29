@@ -7,31 +7,44 @@
 //
 
 #import "SCAccountService.h"
+#import "SCClientConfiguration.h"
 
 @implementation SCAccountService
 
--(void)updateAccount:(SCGeneralAccount *)account onComplete:(void (^)(SCGeneralAccount *, NSError *))completion {
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+-(PMKPromise*)updateAccount:(SCGeneralAccount *)account {
+  
+  return [[self serviceManagerByChannel:RestChannel] updateObject:account];
+  
 }
 
-- (void)getAccount:(NSString *)id onComplete:(void (^)(SCGeneralAccount *, NSError *))completion {
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+- (PMKPromise*)getAccount:(NSString *)accountId {
+  
+  return [[self serviceManagerByChannel:RestChannel] getObject:[SCGeneralAccount class] objectId:accountId];
+  
 }
 
-- (void)deleteAccount:(NSString *)id onComplete:(void (^)(BOOL, NSError *))completion {
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+- (PMKPromise*)deleteAccount:(NSString *)accountId {
+  
+  return [[self serviceManagerByChannel:RestChannel] deleteObject:[SCGeneralAccount class] objectId:accountId];
+  
 }
 
--(void)updateLocation:(NSString *)accountId location:(SCGeneralLocation *)location onComplete:(void (^)(BOOL, NSError *))completion {
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+-(PMKPromise*)updateLocation:(NSString *)accountId location:(SCGeneralLocation *)location {
+  
+  return [[self serviceManagerByChannel:StompChannel] updateObject:[SCGeneralAccount class] objectId:accountId action:@"location" actionArg:nil arg:location];
+  
 }
 
-- (void)createAccount:(SCGeneralAccount *)account onComplete:(void (^)(SCGeneralAccount *, NSError *))completion {
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+- (PMKPromise*)createAccount:(SCGeneralAccount *)account {
+  
+  return [[self serviceManagerByChannel:RestChannel] createObject:account];
+  
 }
 
-- (void)updateBeacons:(NSString *)accountId beachonList:(NSArray *)beaconList onComplete:(void (^)(BOOL, NSError *))completion {
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+- (PMKPromise*)updateBeacons:(NSString *)accountId beachonList:(NSArray *)beaconList {
+  
+  return [[self serviceManagerByChannel:StompChannel] updateObject:[SCGeneralAccount class] objectId:@"me" action:@"beaconEnvironment" actionArg:nil arg:beaconList];
+  
 }
 
 @end

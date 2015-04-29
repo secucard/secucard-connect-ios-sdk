@@ -8,30 +8,17 @@
 
 #import "SCAccountManager.h"
 
+@interface SCAccountManager()
+
+@property (nonatomic, retain) SCClientCredentials *clientCredentials;
+@property (nonatomic, retain) SCUserCredentials *userCredentials;
+
+@end
+
 /**
  *  The AccountManager is secucard wrapper for the Social Login but also regular Login. It kan hold Login information and alike
  */
 @implementation SCAccountManager
-
-/**
- *  The client ID expected by the server
- */
-NSString *thisClientId;
-
-/**
- *  The client secret expected by the server
- */
-NSString *thisClientSecret;
-
-/**
- *   the user name to authenticate with
- */
-NSString *thisUsername;
-
-/**
- *   the password to authenticate with
- */
-NSString *thisPassword;
 
 /**
  *  Shared manager as singleton
@@ -49,33 +36,25 @@ NSString *thisPassword;
   return instance;
 }
 
-- (void) setupWithClientId:(NSString*)clientId clientSecret:(NSString*)clientSecret
+- (instancetype) initWithClientCredentials:(SCClientCredentials*)clientCredentials
 {
-  
-  thisClientId = clientId;
-  thisClientSecret = clientSecret;
-  
-  if ([SCPersistenceManager keyExists:kCredentialUsername] && [SCPersistenceManager keyExists:kCredentialPassword]) {
-    
-    thisUsername = [SCPersistenceManager itemForKey:kCredentialUsername];
-    thisPassword = [SCPersistenceManager itemForKey:kCredentialPassword];
-    
-  }
-  
+  _clientCredentials = clientCredentials;
+  return self;
 }
 
-- (PMKPromise*) loginWithUsername:(NSString*)username andPassword:(NSString*)password
+- (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials
 {
+  
+  _userCredentials = userCredentials;
+  
+  [[SCConnectClient sharedInstance] setUserCredentials:userCredentials];
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    thisUsername = username;
-    thisPassword = password;
-    
     [self retrieveAccessToken].then(^() {
       
-      [SCPersistenceManager persist:username forKey:kCredentialUsername];
-      [SCPersistenceManager persist:password forKey:kCredentialPassword];
+      [SCPersistenceManager persist:_userCredentials.username forKey:kCredentialUsername];
+      [SCPersistenceManager persist:_userCredentials.password forKey:kCredentialPassword];
       
       fulfill(nil);
       
@@ -92,10 +71,7 @@ NSString *thisPassword;
 
 - (BOOL) needsInitialization
 {
-  return (thisClientId == nil ||
-          thisClientSecret == nil ||
-          thisUsername == nil ||
-          thisPassword == nil);
+  return (self.clientCredentials == nil);
 }
 
 /**
@@ -129,10 +105,10 @@ NSString *thisPassword;
     
     NSDictionary *params = @{
                              @"grant_type":@"appuser",
-                             @"username": thisUsername,
-                             @"password": thisPassword,
-                             @"client_id": thisClientId,
-                             @"client_secret": thisClientSecret,
+                             @"username": self.userCredentials.username,
+                             @"password": self.userCredentials.password,
+                             @"client_id": self.clientCredentials.clientId,
+                             @"client_secret": self.clientCredentials.clientSecret,
                              @"device": @"sddsfsdf"
                              };
     
@@ -192,8 +168,8 @@ NSString *thisPassword;
     
     NSDictionary *params = @{
                              @"grant_type":@"refresh_token",
-                             @"client_id": thisClientId,
-                             @"client_secret": thisClientSecret,
+                             @"client_id": self.clientCredentials.clientId,
+                             @"client_secret": self.clientCredentials.clientSecret,
                              @"refresh_token": self.refreshToken
                              };
     
@@ -225,9 +201,6 @@ NSString *thisPassword;
 
 /**
  *  Check if token is valid
- *
- *  @param completionBlock sucess block
- *  @param errorBlock      error block
  */
 - (PMKPromise*) token
 {
@@ -238,7 +211,7 @@ NSString *thisPassword;
     {
       
       // check if did ever login already
-      if (!thisUsername && !thisPassword) {
+      if (!self.userCredentials.username && !self.userCredentials.password) {
         reject([SCErrorManager errorWithDescription:@"No Credentials yet" andDomain:kErrorDomainSCAccount]);
       }
       else // else might have no token yet
@@ -281,8 +254,7 @@ NSString *thisPassword;
   [SCPersistenceManager removeItemForKey:kCredentialUsername];
   [SCPersistenceManager removeItemForKey:kCredentialPassword];
   
-  thisUsername = nil;
-  thisPassword = nil;
+  self.userCredentials = nil;
   
   [self killToken];
   
@@ -298,8 +270,6 @@ NSString *thisPassword;
   self.accessToken = nil;
   self.refreshToken = nil;
   self.expires = nil;
-  
-  // TODO: [SCNotificationManager sendNotificationToDisplay:[NSString stringWithFormat:@"ACCOUNT: Token: Logged out"]];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidLogout object:nil];
 
@@ -331,5 +301,12 @@ NSString *thisPassword;
   }
   return _expires;
   
+}
+
+- (SCUserCredentials *)userCredentials {
+  if (!_userCredentials) {
+    _userCredentials = [SCUserCredentials new];
+  }
+  return _userCredentials;
 }
 @end

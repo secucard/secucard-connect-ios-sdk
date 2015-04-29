@@ -8,43 +8,136 @@
 
 #import "SCAbstractService.h"
 #import "SCErrorManager.h"
-#import "SCConnectClient.h"
+#import "SCRestServiceManager.h"
+#import "SCStompManager.h"
 
 @implementation SCAbstractService
 
-- (void) get:(Class)type withId:(NSString*)idString onChannel:(ServiceChannel)channel onComplete:(void (^)(id object, NSError *error))completion {
+- (SCServiceManager*) serviceManagerByChannel:(ServiceChannel)channel {
+  
+  switch (channel) {
+    case RestChannel:
+      return [SCRestServiceManager sharedManager];
+    
+    case StompChannel:
+      return [SCStompManager sharedManager];
+      
+    default:
+      NSLog(@"No Service Manager found for cannel type: %u", channel);
+      break;
+  }
   
 }
 
-- (void) getList:(Class)type withParams:(SCQueryParams*)params onChannel:(ServiceChannel)channel onComplete:(void (^)(NSArray *list, NSError *error))completion {
+#pragma mark - SCServiceManagerProtocol
+
+- (PMKPromise*) open {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'open' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) getObjectList:(Class)type withParams:(SCQueryParams*)params onChannel:(ServiceChannel)channel onComplete:(void (^)(SCObjectList *list, NSError *error))completion {
+- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'getObject' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) update:(MTLModel*)object onChannel:(ServiceChannel)channel onComplete:(void (^)(SCSecuObject *object, NSError *error))completion {
+- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'findObjects' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) execute:(Class)type withId:(NSString*)idString action:(NSString*)action withArg:(id)actionArg returning:(Class)returnType onChannel:(ServiceChannel)channel onComplete:(void (^)(id object, NSError *error))completion {
+- (PMKPromise*) createObject:(id)object {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'createObject' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) executeAppId:(NSString*)appId action:(NSString*)action withArg:(id)actionArg returning:(Class)returnType onChannel:(ServiceChannel)channel onComplete:(void (^)(id object, NSError *error))completion {
+- (PMKPromise*) updateObject:(id)object {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'updateObject' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) create:(MTLModel*)object onChannel:(ServiceChannel)channel onComplete:(void (^)(id object, NSError *error))completion {
+- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'updateObject' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) delete:(Class)type withId:(NSString*)idString onChannel:(ServiceChannel)channel onComplete:(void (^)(BOOL success, NSError *error))completion {
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'deleteObject' needs implementation in subclass"]);
+    
+  }];
   
 }
 
-- (void) delete:(Class)type withId:(NSString*)idString action:(NSString*)action withArg:(id)actionArg onChannel:(ServiceChannel)channel onComplete:(void (^)(BOOL success, NSError *error))completion {
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'deleteObject' needs implementation in subclass"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'execute' needs implementation in subclass"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'execute' needs implementation in subclass"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) close {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"method 'close' needs implementation in subclass"]);
+    
+  }];
   
 }
 

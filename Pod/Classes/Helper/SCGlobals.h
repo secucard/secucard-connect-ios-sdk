@@ -46,6 +46,12 @@
 #define kParamAccessToken                     @"access_token"
 #define kParamRefreshToken                    @"refresh_token"
 
+typedef enum {
+  
+  RestChannel,
+  StompChannel
+  
+} ServiceChannel;
 
 @interface SCGlobals : NSObject
 

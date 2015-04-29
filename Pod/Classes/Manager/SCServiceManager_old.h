@@ -11,15 +11,14 @@
 #import "SCServiceCallWrapper.h"
 #import "SCStompManager.h"
 #import "SCGlobals.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import <PromiseKit/PromiseKit.h>
 #import "SCClientConfiguration.h"
 
 #define kErrorDomainSCService                 @"SCSecucardCoreService"
 
-@interface SCServiceManager : NSObject
+@interface SCServiceManager_old : NSObject
 
-+ (SCServiceManager *)sharedManager;
++ (SCServiceManager_old *)sharedManager;
 
 //- (PMKPromise*) makeCall:(SCServiceCallWrapper*)serviceCall withChannel:(ServiceChannel)channel;
 //

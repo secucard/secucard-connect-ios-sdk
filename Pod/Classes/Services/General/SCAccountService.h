@@ -16,17 +16,17 @@
 
 @interface SCAccountService : SCAbstractService
 
-- (void) createAccount:(SCGeneralAccount*)account onComplete:(void(^)(SCGeneralAccount *account, NSError *error))completion;
+- (PMKPromise*) createAccount:(SCGeneralAccount*)account;
   
-- (void) getAccount:(NSString*)id onComplete:(void(^)(SCGeneralAccount *account, NSError *error))completion;
+- (PMKPromise*) getAccount:(NSString*)accountId;
     
-- (void) updateAccount:(SCGeneralAccount*)account onComplete:(void(^)(SCGeneralAccount *account, NSError *error))completion;
+- (PMKPromise*) updateAccount:(SCGeneralAccount*)account;
       
-- (void) deleteAccount:(NSString*)id onComplete:(void(^)(BOOL success, NSError *error))completion;
+- (PMKPromise*) deleteAccount:(NSString*)accountId;
         
-- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location onComplete:(void(^)(BOOL success, NSError *error))completion;
+- (PMKPromise*) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location;
           
-- (void) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList onComplete:(void(^)(BOOL success, NSError *error))completion;
+- (PMKPromise*) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList;
 
 // TODO: compare to GCM function
 //- (void) updateAPNS:(NSString*)accountId arg:(id)objectArg onComplete:(void(^)(BOOL success, NSError *error))completion;

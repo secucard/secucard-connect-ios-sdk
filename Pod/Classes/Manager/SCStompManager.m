@@ -10,6 +10,29 @@
 #import "StompKit.h"
 #import "SCServiceEventObject.h"
 
+@implementation SCStompConfiguration
+
+- (instancetype) initWithHost:(NSString *)host andVHost:(NSString *)virtualHost port:(int)port userId:(NSString *)userId password:(NSString *)password useSSL:(BOOL)useSsl replyQueue:(NSString *)replyQueue connectionTimeoutSec:(int)connectionTimeoutSec socketTimeoutSec:(int)socketTimeoutSec heartbeatMs:(int)heartbeatMs {
+  
+  self = [super init];
+  if (self) {
+    self.host = host;
+    self.virtualHost = virtualHost;
+    self.port = port;
+    self.userId = userId;
+    self.password = password;
+    self.useSsl = useSsl;
+    self.replyQueue = replyQueue;
+    self.connectionTimeoutSec = connectionTimeoutSec;
+    self.socketTimeoutSec = socketTimeoutSec;
+    self.heartbeatMs = heartbeatMs;
+  }
+  return self;
+  
+}
+
+@end
+
 @interface SCStompManager()
 
 /**
@@ -17,20 +40,7 @@
  */
 @property (nonatomic, retain) STOMPClient *client;
 
-/**
- *  The host stomp is reachable at
- */
-@property (nonatomic, retain) NSString *stompHost;
-
-/**
- *  The port stomp is reachable at typically 61613 or 61614 for tls
- */
-@property (nonatomic, assign) NSUInteger stompPort;
-
-/**
- *  The app Id used for stomp connections
- */
-@property (nonatomic, retain) NSString *stompAppId;
+@property (nonatomic, retain) SCStompConfiguration *configuration;
 
 /**
  *  the correlation id
@@ -73,12 +83,10 @@
  *  @param port  the port for stomp
  *  @param appId the app id for stomp
  */
-- (void) initWithHost:(NSString*)host port:(NSUInteger)port appId:(NSString*)appId
+- (void) initWithConfiguration:(SCStompConfiguration *)configuration
 {
   
-  self.stompHost = host;
-  self.stompPort = port;
-  self.stompAppId = appId;
+  self.configuration = configuration;
   
   // if created already and connected > disconnect
   if (self.client)
@@ -86,8 +94,8 @@
       [self.client disconnect];
   
   // create the client
-  self.client = [[STOMPClient alloc] initWithHost:self.stompHost
-                                             port:self.stompPort];
+  self.client = [[STOMPClient alloc] initWithHost:self.configuration.host
+                                             port:self.configuration.port];
   
   // set the error handler
   self.client.errorHandler = ^(NSError *error) {
@@ -95,7 +103,7 @@
   };
   
   // set the receipt handler
-  __block SCStompManager *weakSelf = self;
+  __weak __block SCStompManager *weakSelf = self;
   [self.client setReceiptHandler:^(STOMPFrame *frame) {
     
     // always get token before temp queue is subscribed to
@@ -106,7 +114,7 @@
                                               headers:@{
                                                         @"id": kReplyQueue,
                                                         @"user-id": token,
-                                                        @"app-id": weakSelf.stompAppId
+                                                        @"app-id": weakSelf.configuration.userId
                                                         }
                                        messageHandler:^(STOMPMessage *message) {
                                          
@@ -240,9 +248,7 @@
 
 - (BOOL) needsInitialization
 {
-  return (self.stompHost == nil ||
-          @(self.stompPort) == nil ||
-          self.stompAppId == nil);
+  return (self.configuration == nil);
 }
 
 #pragma mark connection timer
@@ -285,7 +291,7 @@
  *  @param host       the host
  *  @param completion the completion block
  */
-- (PMKPromise*) connectToHost:(NSString*)host
+- (PMKPromise*) connect
 {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
@@ -311,8 +317,8 @@
       
       __weak SCStompManager *weakself = self;
       // connect to the broker
-      [self.client connectSecureWithTLSOption:@{(NSString*)kCFStreamSSLPeerName:self.stompHost}
-                                   andHeaders:@{kHeaderHost:host,
+      [self.client connectSecureWithTLSOption:@{(NSString*)kCFStreamSSLPeerName:self.configuration.virtualHost}
+                                   andHeaders:@{kHeaderHost:self.configuration.host,
                                                 kHeaderLogin: token,
                                                 kHeaderPasscode: token,
                                                 kHeaderHeartBeat: kHeartBeat,
@@ -366,7 +372,7 @@
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    [self connectToHost:kVirtualHost].then(^() {
+    [self connect].then(^() {
       
       NSError *parseError = [NSError new];
       
@@ -394,7 +400,7 @@
                     headers:@{
                               @"correlation-id":[NSString stringWithFormat:@"%d", correlationId],
                               @"user-id": token,
-                              @"app-id": self.stompAppId
+                              @"app-id": self.configuration.userId
                               }
                        body:jsonString];
         
@@ -437,7 +443,7 @@
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    [self connectToHost:kVirtualHost].then(^() {
+    [self connect].then(^() {
       
       NSError *parseError = [NSError new];
       
@@ -469,7 +475,7 @@
                               @"reply-to": @"/temp-queue/secucard",
                               @"receipt": @"secucardReceipt",
                               @"user-id": token,
-                              @"app-id": self.stompAppId
+                              @"app-id": self.configuration.userId
                               }
                        body:jsonString];
         
@@ -500,5 +506,117 @@
 {
   return self.currentCorrelationID++;
 }
+
+#pragma mark - SCServiceManagerProtocol
+
+- (PMKPromise*) open {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) createObject:(id)object {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) updateObject:(id)object {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+//- (PMKPromise*) close {
+//  
+//  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+//    
+//    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+//    
+//  }];
+//  
+//}
 
 @end

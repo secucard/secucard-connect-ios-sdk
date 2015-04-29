@@ -7,9 +7,6 @@
 //
 
 #import "SCErrorManager.h"
-#import "DDLog.h"
-
-static const int ddLogLevel = LOG_LEVEL_ERROR;
 
 @implementation SCErrorManager
 
@@ -34,7 +31,7 @@ static const int ddLogLevel = LOG_LEVEL_ERROR;
 }
 
 + (void) handleError:(NSError*)error {
-  DDLogError(@"Error: %@", error.localizedDescription);
+  NSLog(@"Error: %@", error.localizedDescription);
 }
 
 + (void) handleErrorWithDescription:(NSString*)description {

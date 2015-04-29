@@ -10,8 +10,8 @@
 #import "SCAccountManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import <Reachability/Reachability.h>
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import <PromiseKit/PromiseKit.h>
+#import "SCServiceManager.h"
 
 #define kErrorDomainSCRestService                 @"SCSecucardCoreRestService"
 
@@ -19,12 +19,13 @@
 
 @property (nonatomic, retain) NSString *baseUrl;
 @property (nonatomic, retain) NSString *authUrl;
-@property (nonatomic, retain) NSString *apiVersion;
+
+- (instancetype) initWithBaseUrl:(NSString*)baseUrl andAuthUrl:(NSString*)authUrl;
 
 @end
 
 
-@interface SCRestServiceManager : NSObject
+@interface SCRestServiceManager : SCServiceManager
 
 /**
  *  the current refresh token saved to a local var
@@ -41,16 +42,17 @@
 
 - (void) initWithConfiguration:(SCRestConfiguration*)configuration;
 
+
 //- (void) setupManagerWithApiBaseUrl:(NSString*)baseUrl authBaseUrl:(NSString*)authUrl version:(NSString*)version;
 
 - (PMKPromise*) requestAuthWithParams:(id)params;
 
-- (PMKPromise*) postRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
-
-- (PMKPromise*) getRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
-
-- (PMKPromise*) putRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
-
-- (PMKPromise*) deleteRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
+//- (PMKPromise*) postRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
+//
+//- (PMKPromise*) getRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
+//
+//- (PMKPromise*) putRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
+//
+//- (PMKPromise*) deleteRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
 
 @end

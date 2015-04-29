@@ -7,7 +7,7 @@
 //
 
 #import "SCAbstractService.h"
-
+#import "SCErrorManager.h"
 #import "SCDocumentUploadsDocument.h"
 
 @interface SCUploadService : SCAbstractService

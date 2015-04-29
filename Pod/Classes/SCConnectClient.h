@@ -9,15 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <CocoaLumberjack/DDASLLogger.h>
-#import <CocoaLumberjack/DDTTYLogger.h>
-#import <CocoaLumberjack/DDFileLogger.h>
-#import <CocoaLumberjack/DDLog.h>
-
 #import "SCErrorManager.h"
-
 #import "SCClientConfiguration.h"
 #import "SCAbstractService.h"
+
+@class SCClientConfiguration;
+@class SCUserCredentials;
 
 @interface SCConnectClient : NSObject
 
@@ -27,9 +24,10 @@
 
 + (SCConnectClient *)sharedInstance;
 
-- (void) initWithConfiguration:(SCClientConfiguration*)configuration;
-- (void) setUserCredentials:(NSString*)username password:(NSString*)password;
-- (void) connect;
-- (void) disconnect;
+
+- (instancetype) initWithConfiguration:(SCClientConfiguration*)configuration;
+- (void) setUserCredentials:(SCUserCredentials*)userCredentials;
+- (PMKPromise*) connect;
+- (PMKPromise*) disconnect;
 
 @end

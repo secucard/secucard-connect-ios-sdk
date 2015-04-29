@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 secucard. All rights reserved.
 //
 
-#import "SCServiceManager.h"
+#import "SCServiceManager_old.h"
 
 #define kExchangePrefix   @"/exchange/connect.api"
 #define kAPIPrefix        @"/api"
@@ -18,14 +18,14 @@
 // REST >> METHOD /api/v2/{rooting-key = General/Accounts/[Me]/BeaconEnvironment} // Me wenn accounts
 // payload {data:blabla}
 
-@implementation SCServiceManager
+@implementation SCServiceManager_old
 
-+ (SCServiceManager *)sharedManager
++ (SCServiceManager_old *)sharedManager
 {
-  static SCServiceManager *instance = nil;
+  static SCServiceManager_old *instance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    instance = [SCServiceManager new];
+    instance = [SCServiceManager_old new];
   });
   
   return instance;
@@ -65,7 +65,7 @@
       [sendParams setObject:sid forKey:@"sid"];
     }
     
-    return [[SCStompManager sharedManager] sendMessage:sendParams toExchange:typedCall];
+    return nil;//return [[SCStompManager sharedManager] sendMessage:sendParams toExchange:typedCall];
     
   }
   else if (channel == RestChannel)
@@ -73,19 +73,19 @@
     switch (method) {
         
       case MethodGet:
-        return [[SCRestServiceManager sharedManager] getRequestToEndpoint:typedCall WithParams:params];
+        return nil;//return [[SCRestServiceManager sharedManager] getRequestToEndpoint:typedCall WithParams:params];
         
       case MethodAdd:
-        return [[SCRestServiceManager sharedManager] postRequestToEndpoint:typedCall WithParams:params];
+        return nil;//return [[SCRestServiceManager sharedManager] postRequestToEndpoint:typedCall WithParams:params];
         
       case MethodUpdate:
-        return [[SCRestServiceManager sharedManager] putRequestToEndpoint:typedCall WithParams:params];
+        return nil;//return [[SCRestServiceManager sharedManager] putRequestToEndpoint:typedCall WithParams:params];
       
       case MethodRemove:
-        return [[SCRestServiceManager sharedManager] deleteRequestToEndpoint:typedCall WithParams:params];
+        return nil;//return [[SCRestServiceManager sharedManager] deleteRequestToEndpoint:typedCall WithParams:params];
         
       case MethodExecute:
-        return [[SCRestServiceManager sharedManager] postRequestToEndpoint:typedCall WithParams:params];
+        return nil;//return [[SCRestServiceManager sharedManager] postRequestToEndpoint:typedCall WithParams:params];
         
       default:
         return nil;

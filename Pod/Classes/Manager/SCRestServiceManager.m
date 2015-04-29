@@ -28,21 +28,6 @@
 AFHTTPRequestSerializer *requestSerializer;
 
 /**
- *  The Auth Base url
- */
-//NSString *authBaseUrl;
-
- /**
- *  The API Base url, which is until the version tag
- */
-//NSString *apiBaseUrl;
-
-/**
- *  The APIS version which is part of the endpoint
- */
-//NSString *apiVersion;
-
-/**
  *  get instance of manager
  *
  *  @return the singleton instance
@@ -62,6 +47,13 @@ AFHTTPRequestSerializer *requestSerializer;
   
   self.configuration = configuration;
   
+  requestSerializer = [AFJSONRequestSerializer serializer];
+  [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+  [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
+  [requestSerializer setValue:@"Bearer XXX" forHTTPHeaderField:@"Authorization"];
+  
   self.authOperationManager = [AFHTTPRequestOperationManager manager];
   [self.authOperationManager setRequestSerializer:[AFJSONRequestSerializer new]];
   [self.authOperationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -69,42 +61,8 @@ AFHTTPRequestSerializer *requestSerializer;
   self.operationManager = [AFHTTPRequestOperationManager manager];
   self.operationManager.requestSerializer = requestSerializer;
   [self.operationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  
-  // regular request serializer
-//  requestSerializer = [AFJSONRequestSerializer serializer];
-//  [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//  [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//  [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//  [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
-//  [requestSerializer setValue:@"Bearer XXX" forHTTPHeaderField:@"Authorization"];
-
+ 
 }
-
-/**
- *  Set up the singleton instance with the proper options
- *
- *  @param baseUrl      the API base URL
- *  @param authBaseUrl  the Auth base URL
- *  @param version      The version part of the endpoint URL
- */
-//- (void) setupManagerWithApiBaseUrl:(NSString*)baseUrl authBaseUrl:(NSString*)authUrl version:(NSString*)version
-//{
-//  
-//  // set data
-//  apiBaseUrl = baseUrl;
-//  authBaseUrl = authUrl;
-//  apiVersion = version;
-//
-//  
-//  // regular request serializer
-//  requestSerializer = [AFJSONRequestSerializer serializer];
-//  [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//  [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//  [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//  [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
-//  [requestSerializer setValue:@"Bearer XXX" forHTTPHeaderField:@"Authorization"];
-//  
-//}
 
 - (PMKPromise*) requestAuthWithParams:(id)params
 {
@@ -142,7 +100,7 @@ AFHTTPRequestSerializer *requestSerializer;
 
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
-      [self.operationManager POST:[NSString stringWithFormat:@"%@%@%@", self.configuration.baseUrl, self.configuration.apiVersion, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
@@ -180,7 +138,7 @@ AFHTTPRequestSerializer *requestSerializer;
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.operationManager GET:[NSString stringWithFormat:@"%@%@%@", self.configuration.baseUrl, self.configuration.apiVersion, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
           fulfill(responseObject);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           reject([self doBasicErrorHandling:error withOperation:operation]);
@@ -194,7 +152,7 @@ AFHTTPRequestSerializer *requestSerializer;
       
     } else {
       
-      [self.operationManager GET:[NSString stringWithFormat:@"%@%@%@", self.configuration.baseUrl, self.configuration.apiVersion, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
@@ -225,7 +183,7 @@ AFHTTPRequestSerializer *requestSerializer;
     
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
-      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@%@", self.configuration.baseUrl, self.configuration.apiVersion, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
@@ -256,7 +214,7 @@ AFHTTPRequestSerializer *requestSerializer;
     
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
-      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@%@", self.configuration.baseUrl, self.configuration.apiVersion, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
@@ -319,8 +277,127 @@ AFHTTPRequestSerializer *requestSerializer;
 
 @implementation SCRestConfiguration
 
-@end
+- (instancetype) initWithBaseUrl:(NSString*)baseUrl andAuthUrl:(NSString*)authUrl {
+  self = [super init];
+  if (self) {
+    self.baseUrl = baseUrl;
+    self.authUrl = authUrl;
+  }
+  return self;
+  
+}
 
-@implementation SCStompConfiguration
+#pragma mark - SCServiceManagerProtocol
+
+- (PMKPromise*) open {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) createObject:(id)object {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) updateObject:(id)object {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
+- (PMKPromise*) close {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    reject([SCErrorManager errorWithDescription:@"not implemented"]);
+    
+  }];
+  
+}
+
 
 @end
