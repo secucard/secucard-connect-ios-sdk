@@ -17,11 +17,11 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/SecucardConnectClientLib"
+  s.homepage         = https://github.com/secucard/secucard-connect-objc-client-lib"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
+  s.license          = 'GPL'
   s.author           = { "Jörn Schmidt" => "schmidt@devid.net" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/SecucardConnectClientLib.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/secucard/secucard-connect-objc-client-lib.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
