@@ -31,9 +31,22 @@
       return [SCStompManager sharedManager];
       
     default:
-      NSLog(@"No Service Manager found for cannel type: %u", channel);
-      // TODO: return default channel
-      return nil;
+      
+    {
+      switch ([SCConnectClient sharedInstance].configuration.defaultChannel) {
+        case RestChannel:
+          return [SCRestServiceManager sharedManager];
+          
+        case StompChannel:
+          return [SCStompManager sharedManager];
+          
+        default:
+          [SCErrorManager handleError:[SCErrorManager errorWithDescription:@"No channel given and not default channel set in client configuration"]];
+          return nil;
+          
+      }
+    }
+      
   }
   
 }
