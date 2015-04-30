@@ -10,12 +10,8 @@
 
 @implementation SCServicesContract
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"services.contracts";
-  }
-  return self;
++ (NSString *)object {
+  return @"services.contracts";
 }
+
 @end

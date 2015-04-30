@@ -10,12 +10,8 @@
 
 @implementation SCDocumentUploadsDocument
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"document.uploads";
-  }
-  return self;
++ (NSString *)object {
+  return @"document.uploads";
 }
+
 @end

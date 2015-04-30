@@ -10,13 +10,8 @@
 
 @implementation SCSmartIdent
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"smart.idents";
-  }
-  return self;
++ (NSString *)object {
+  return @"smart.idents";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

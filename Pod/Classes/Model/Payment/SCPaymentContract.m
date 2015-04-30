@@ -10,13 +10,8 @@
 
 @implementation SCPaymentContract
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"payment.contracts";
-  }
-  return self;
++ (NSString *)object {
+  return @"payment.contracts";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

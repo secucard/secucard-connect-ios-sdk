@@ -10,13 +10,8 @@
 
 @implementation SCLoyaltyCustomer
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"loyalty.customers";
-  }
-  return self;
++ (NSString *)object {
+  return @"loyalty.customers";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

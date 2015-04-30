@@ -10,13 +10,8 @@
 
 @implementation SCSmartDevice
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"smart.devices";
-  }
-  return self;
++ (NSString *)object {
+  return @"smart.devices";
 }
 
 - (instancetype)initWithId:(NSString*)identifier andType:(NSString*)type

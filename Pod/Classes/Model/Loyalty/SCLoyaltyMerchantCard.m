@@ -10,13 +10,8 @@
 
 @implementation SCLoyaltyMerchantCard
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"loyalty.merchantcards";
-  }
-  return self;
++ (NSString *)object {
+  return @"loyalty.merchantcards";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

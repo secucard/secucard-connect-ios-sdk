@@ -10,13 +10,8 @@
 
 @implementation SCAuthSession
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"auth.sessions";
-  }
-  return self;
++ (NSString *)object {
+  return @"auth.sessions";
 }
 
 @end

@@ -10,13 +10,8 @@
 
 @implementation SCServicesIdentRequest
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"services.identrequests";
-  }
-  return self;
++ (NSString *)object {
+  return @"services.identrequests";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

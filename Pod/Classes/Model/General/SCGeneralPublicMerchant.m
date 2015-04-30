@@ -10,15 +10,6 @@
 
 @implementation SCGeneralPublicMerchant
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"general.publicmerchants";
-  }
-  return self;
-}
-
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   return @{
            @"addressComponents":@"address_components",
@@ -35,6 +26,10 @@
            @"distance":@"_geometry",
            @"hashValue":@"hash"
            };
+}
+
++ (NSString *)object {
+  return @"General.PublicMerchants";
 }
 
 @end

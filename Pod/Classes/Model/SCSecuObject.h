@@ -14,6 +14,7 @@
 @interface SCSecuObject : MTLModel
 
 @property (nonatomic, copy) NSString *id;
-@property (nonatomic, copy) NSString *object;
+
++ (NSString*) object;
 
 @end

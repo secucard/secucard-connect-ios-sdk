@@ -10,13 +10,8 @@
 
 @implementation SCGeneralMerchant
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"general.merchants";
-  }
-  return self;
++ (NSString *)object {
+  return @"general.merchants";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

@@ -10,13 +10,8 @@
 
 @implementation SCSmartTransaction
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"smart.transactions";
-  }
-  return self;
++ (NSString *)object {
+  return @"smart.transactions";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

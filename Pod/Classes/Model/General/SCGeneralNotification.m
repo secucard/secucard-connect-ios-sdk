@@ -10,12 +10,8 @@
 
 @implementation SCGeneralNotification
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"general.notifications";
-  }
-  return self;
++ (NSString *)object {
+  return @"general.notifications";
 }
+
 @end

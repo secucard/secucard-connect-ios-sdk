@@ -10,12 +10,8 @@
 
 @implementation SCPaymentSecupayDebit
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"payment.secupaydebits";
-  }
-  return self;
++ (NSString *)object {
+  return @"payment.secupaydebits";
 }
+
 @end

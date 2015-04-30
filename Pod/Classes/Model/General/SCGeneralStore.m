@@ -10,13 +10,8 @@
 
 @implementation SCGeneralStore
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"general.stores";
-  }
-  return self;
++ (NSString *)object {
+  return @"general.stores";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

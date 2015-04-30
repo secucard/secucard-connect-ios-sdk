@@ -6,7 +6,30 @@
 //  Copyright (c) 2014 secucard. All rights reserved.
 //
 #import "SCRestServiceManager.h"
+#import <Mantle/Mantle.h>
 #import <PromiseKit-AFNetworking/AFNetworking+PromiseKit.h>
+#import "SCSecuObject.h"
+
+@interface SCRestConfiguration()
+
+@property (nonatomic, retain) NSString *baseUrl;
+@property (nonatomic, retain) NSString *authUrl;
+
+@end
+
+@implementation SCRestConfiguration
+
+- (instancetype) initWithBaseUrl:(NSString*)baseUrl andAuthUrl:(NSString*)authUrl {
+  self = [super init];
+  if (self) {
+    self.baseUrl = baseUrl;
+    self.authUrl = authUrl;
+  }
+  return self;
+  
+}
+
+@end
 
 @interface SCRestServiceManager()
 
@@ -100,11 +123,11 @@ AFHTTPRequestSerializer *requestSerializer;
 
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
-      [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
-      }];
+      });
       
     }).catch(^(NSError *error){
       
@@ -122,8 +145,6 @@ AFHTTPRequestSerializer *requestSerializer;
  *
  *  @param endpoint     endpoint URL like General/Skeletons
  *  @param params       the parameters to send
- *  @param successBlock successBlock
- *  @param errorBlock   errorBlock
  */
 - (PMKPromise*) getRequestToEndpoint:(NSString*)endpoint WithParams:(id)params
 {
@@ -138,11 +159,11 @@ AFHTTPRequestSerializer *requestSerializer;
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
           fulfill(responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
           reject([self doBasicErrorHandling:error withOperation:operation]);
-        }];
+        });
         
       }).catch(^(NSError *error) {
         
@@ -152,11 +173,11 @@ AFHTTPRequestSerializer *requestSerializer;
       
     } else {
       
-      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
-      }];
+      });
       
     }
     
@@ -173,8 +194,6 @@ AFHTTPRequestSerializer *requestSerializer;
  *
  *  @param endpoint     endpoint URL like General/Skeletons
  *  @param params       the parameters to send
- *  @param successBlock successBlock
- *  @param errorBlock   errorBlock
  */
 - (PMKPromise*) putRequestToEndpoint:(NSString*)endpoint WithParams:(id)params
 {
@@ -183,11 +202,11 @@ AFHTTPRequestSerializer *requestSerializer;
     
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
-      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
-      }];
+      });
       
     }).catch(^(NSError *error) {
       
@@ -204,8 +223,7 @@ AFHTTPRequestSerializer *requestSerializer;
  *
  *  @param endpoint     endpoint URL like General/Skeletons
  *  @param params       the parameters to send
- *  @param successBlock successBlock
- *  @param errorBlock   errorBlock
+ *
  */
 - (PMKPromise*) deleteRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params
 {
@@ -214,11 +232,11 @@ AFHTTPRequestSerializer *requestSerializer;
     
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
-      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
         fulfill(responseObject);
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
         reject([self doBasicErrorHandling:error withOperation:operation]);
-      }];
+      });
       
     }).catch(^(NSError *error) {
       
@@ -273,131 +291,159 @@ AFHTTPRequestSerializer *requestSerializer;
   
   return error;
 }
-@end
 
-@implementation SCRestConfiguration
+- (NSString*) resolveEndpoint:(Class)type {
+  return [self resolveEndpoint:type args:nil];
+}
 
-- (instancetype) initWithBaseUrl:(NSString*)baseUrl andAuthUrl:(NSString*)authUrl {
-  self = [super init];
-  if (self) {
-    self.baseUrl = baseUrl;
-    self.authUrl = authUrl;
+- (NSString*) resolveEndpoint:(Class)type args:(NSArray*)args {
+  
+  // check if class is subclass of SCSecuObject
+  if (type != nil && ![type isSubclassOfClass:[SCSecuObject class]]) {
+    [SCErrorManager handleError:[SCErrorManager errorWithDescription:@"Endpoint resolver: class is no subclass of SCSecuObject and as such, can have no endpoint"]];
+    return @"";
+  };
+  
+  
+  NSString *callString = (!type) ? @"" : [type object];                                       // -> General.PublicMerchants
+  
+  callString = [callString stringByReplacingOccurrencesOfString:@"." withString:@"/"];        // -> General/PublicMerchants
+  
+  if (!args) {
+    args = @[];
   }
-  return self;
+  
+  for (int i = 0; i <= args.count; i++) {
+
+    if (![args[i] isKindOfClass:[NSString class]]) {
+      continue;
+    }
+    
+    callString = [callString stringByAppendingString:[@"/" stringByAppendingString:args[i]]]; // -> General/PublicMerchants/pmc_231234124
+                                                     
+  }
+  
+//  // add ME to Accounts-Path
+//  if (pid != nil)
+//  {
+//    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:[NSString stringWithFormat:@"%@/", pid]];
+//  }
+//  else
+//  {
+//    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:@""];
+//  }
+//  
+//  // add SID if there
+//  if (sid != nil)
+//  {
+//    callString = [callString stringByAppendingString:[NSString stringWithFormat:@"/%@", sid]];
+//  }
+//  
+  // if not an auth call add api and version to it
+  //      if (![callString containsString:@"oauth"])
+  //      {
+  // combine all
+  //c = [NSString stringWithFormat:@"%@%@%@", kAPIPrefix, kAPIVersion, c];
+  //      }
+  
+  return callString;
+
   
 }
 
 #pragma mark - SCServiceManagerProtocol
 
+/**
+ *  opening the rest channel just fulfills instantly
+ *
+ *  @return promise fulfilling instantly
+ */
 - (PMKPromise*) open {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
+    fulfill(nil);
   }];
   
 }
 
 - (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  return [self getRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil];
   
 }
 
 - (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  NSError *error = nil;
+  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:queryParams error:&error];
+
+  return [self getRequestToEndpoint:[self resolveEndpoint:type] WithParams:params];
   
 }
 
 - (PMKPromise*) createObject:(id)object {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  NSError *error = nil;
+  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
+  
+  return [self postRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params];
   
 }
 
 - (PMKPromise*) updateObject:(id)object {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  NSError *error = nil;
+  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
+  
+  return [self putRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params];
   
 }
 
 - (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  NSError *error = nil;
+  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
+  
+  return [self putRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params];
   
 }
 
 - (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  return [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil];
   
 }
 
 - (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  return [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:nil];
   
 }
 
 - (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  NSError *error = nil;
+  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
+  
+  return [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params];
   
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
+- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(id)arg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  NSError *error = nil;
+  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
+  
+  return [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:params];
   
 }
 
 - (PMKPromise*) close {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
+    fulfill(nil);
   }];
   
 }
-
 
 @end

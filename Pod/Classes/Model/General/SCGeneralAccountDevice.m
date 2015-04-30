@@ -10,12 +10,8 @@
 
 @implementation SCGeneralAccountDevice
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"general.accountdevices";
-  }
-  return self;
++ (NSString *)object {
+  return @"general.accountdevices";
 }
+
 @end

@@ -10,13 +10,8 @@
 
 @implementation SCPaymentSecupayPrepay
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"payment.secupayprepays";
-  }
-  return self;
++ (NSString *)object {
+  return @"payment.secupayprepays";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

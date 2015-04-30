@@ -10,13 +10,8 @@
 
 @implementation SCLoyaltyCard
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"loyalty.cards";
-  }
-  return self;
++ (NSString *)object {
+  return @"loyalty.cards";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -24,6 +19,5 @@
            @"cardNumber":@"cardnumber"
            };
 }
-
 
 @end

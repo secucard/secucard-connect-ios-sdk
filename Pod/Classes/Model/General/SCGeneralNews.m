@@ -10,13 +10,8 @@
 
 @implementation SCGeneralNews
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"general.news";
-  }
-  return self;
++ (NSString *)object {
+  return @"general.news";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

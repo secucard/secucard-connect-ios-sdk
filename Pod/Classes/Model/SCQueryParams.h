@@ -19,7 +19,7 @@
 @property (nonatomic, copy) NSString *scrollId;
 @property (nonatomic, copy) NSString *scrollExpire;
 @property (nonatomic, copy) NSMutableArray *fields;
-@property (nonatomic, copy) NSMutableDictionary *sortOrder ;
+@property (nonatomic, copy) NSMutableDictionary *sortOrder;
 @property (nonatomic, copy) NSString *query;
 @property (nonatomic, copy) NSString *preset;
 @property (nonatomic, copy) SCGeoQuery *geoQuery;

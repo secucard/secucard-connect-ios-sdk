@@ -15,16 +15,37 @@
 
 #define kErrorDomainSCRestService                 @"SCSecucardCoreRestService"
 
+ /**
+ *  The RestConfiguration holds all needed data to connect appropriately to the API via Rest Calls
+ */
 @interface SCRestConfiguration : NSObject
 
-@property (nonatomic, retain) NSString *baseUrl;
-@property (nonatomic, retain) NSString *authUrl;
+/**
+ *  The base URL to the api
+ */
+@property (nonatomic, retain, readonly) NSString *baseUrl;
 
+/**
+ *  the auth url which is different as it is not secured with token
+ */
+@property (nonatomic, retain, readonly) NSString *authUrl;
+
+/**
+ *  instantiation
+ *
+ *  @param baseUrl the base url to the api
+ *  @param authUrl the authentiaction bas url
+ *
+ *  @return the configuration instance
+ */
 - (instancetype) initWithBaseUrl:(NSString*)baseUrl andAuthUrl:(NSString*)authUrl;
 
 @end
 
-
+/**
+ *  The RestServiceManager is a channel to connect to the secucard api in a standardized way as it conforms to the ServiceManager's protocol.
+ *  The RestServiceManager is also used to retrieve the auth token before being able to connect to stomp
+ */
 @interface SCRestServiceManager : SCServiceManager
 
 /**
@@ -38,21 +59,27 @@
 
 @property (nonatomic, retain) NSString *currentAccessToken;
 
+/**
+ *  retrieve the manager's instance
+ *
+ *  @return the manager's instance as singleton
+ */
 + (SCRestServiceManager*)sharedManager;
 
+/**
+ *  initializes the manager with the services configuration
+ *
+ *  @param configuration the configuration
+ */
 - (void) initWithConfiguration:(SCRestConfiguration*)configuration;
 
-
-//- (void) setupManagerWithApiBaseUrl:(NSString*)baseUrl authBaseUrl:(NSString*)authUrl version:(NSString*)version;
-
+/**
+ *  requests for authentication
+ *
+ *  @param params the auth parameters
+ *
+ *  @return returns a promise fulfilling with nil
+ */
 - (PMKPromise*) requestAuthWithParams:(id)params;
-
-//- (PMKPromise*) postRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
-//
-//- (PMKPromise*) getRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
-//
-//- (PMKPromise*) putRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
-//
-//- (PMKPromise*) deleteRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params;
 
 @end

@@ -10,12 +10,8 @@
 
 @implementation SCSmartCheckin
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"smart.checkins";
-  }
-  return self;
++ (NSString *)object {
+  return @"smart.checkins";
 }
+
 @end

@@ -10,12 +10,8 @@
 
 @implementation SCPaymentCustomer
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"payment.customers";
-  }
-  return self;
++ (NSString *)object {
+  return @"payment.customers";
 }
+
 @end

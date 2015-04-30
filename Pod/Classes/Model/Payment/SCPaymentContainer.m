@@ -10,13 +10,8 @@
 
 @implementation SCPaymentContainer
 
-- (instancetype)init
-{
-  self = [super init];
-  if (self) {
-    self.object = @"payment.containers";
-  }
-  return self;
++ (NSString *)object {
+  return @"payment.containers";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
