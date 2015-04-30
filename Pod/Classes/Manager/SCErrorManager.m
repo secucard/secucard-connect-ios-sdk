@@ -46,7 +46,9 @@
       
     case ERR_NOT_IMPLEMENTED:
       return @"Not Implemented";
-      
+    
+    case ERR_INVALID_RESULT:
+      return @"Result is invalid";
     default:
       return [NSString stringWithFormat:@"ERROR: %d", code];
   }
