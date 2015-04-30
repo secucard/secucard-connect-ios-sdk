@@ -24,119 +24,88 @@
       
     default:
       NSLog(@"No Service Manager found for cannel type: %u", channel);
-      break;
+      // TODO: return default
+      return nil;
   }
   
 }
 
-#pragma mark - SCServiceManagerProtocol
-
-- (PMKPromise*) open {
+- (PMKPromise*) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'open' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
+- (PMKPromise*) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'getObject' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
+- (PMKPromise*) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'findObjects' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) createObject:(id)object {
+- (PMKPromise*) postProcessObjects:(NSArray*)list {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'createObject' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) updateObject:(id)object {
+- (PMKPromise*) update:(id)object onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'updateObject' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+- (PMKPromise*) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'updateObject' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
   }];
   
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'deleteObject' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
+- (PMKPromise*) create:(id)object onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'deleteObject' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+- (PMKPromise*) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'execute' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
+- (PMKPromise*) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'execute' needs implementation in subclass"]);
-    
-  }];
-  
-}
-
-- (PMKPromise*) close {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"method 'close' needs implementation in subclass"]);
-    
+    reject([SCErrorManager errorWithCode:ERR_NOT_IMPLEMENTED]);
   }];
   
 }

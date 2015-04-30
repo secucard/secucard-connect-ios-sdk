@@ -49,7 +49,8 @@
 typedef enum {
   
   RestChannel,
-  StompChannel
+  StompChannel,
+  DefaultChannel
   
 } ServiceChannel;
 

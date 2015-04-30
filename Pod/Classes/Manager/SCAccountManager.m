@@ -36,10 +36,9 @@
   return instance;
 }
 
-- (instancetype) initWithClientCredentials:(SCClientCredentials*)clientCredentials
+- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials
 {
   _clientCredentials = clientCredentials;
-  return self;
 }
 
 - (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials

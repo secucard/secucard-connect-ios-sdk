@@ -7,6 +7,7 @@
 //
 
 #import "SCPublicMerchantService.h"
+#import "SCGeneralPublicMerchant.h"
 #import "SCErrorManager.h"
 
 @implementation SCPublicMerchantService
@@ -28,19 +29,11 @@
 }
 
 - (PMKPromise*) getPublicMerchant:(NSString*)id {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not Implemented"]);
-  }];
-  
+  return [self get:[SCGeneralPublicMerchant class] withId:id onChannel:DefaultChannel];
 }
 
 - (PMKPromise*) getPublicMerchants:(SCQueryParams*)params {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not Implemented"]);
-  }];
-  
+  return [self getObjectList:[SCGeneralPublicMerchant class] withParams:params onChannel:DefaultChannel];
 }
 
 @end

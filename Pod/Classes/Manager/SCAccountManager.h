@@ -41,7 +41,7 @@
 
 + (SCAccountManager*)sharedManager;
 
-- (instancetype) initWithClientCredentials:(SCClientCredentials*)clientCredentials;
+- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials;
 - (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials;
 - (PMKPromise*) token;
 - (PMKPromise*) refreshAccessToken;

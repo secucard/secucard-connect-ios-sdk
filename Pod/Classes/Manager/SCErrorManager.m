@@ -43,11 +43,12 @@
   switch (code) {
     case ERR_LOCATIONING_COULD_NOT_LOCATE:
       return @"error.couldNotLocate";
-      break;
+      
+    case ERR_NOT_IMPLEMENTED:
+      return @"Not Implemented";
       
     default:
       return [NSString stringWithFormat:@"ERROR: %d", code];
-      break;
   }
   
 }
