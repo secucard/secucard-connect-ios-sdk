@@ -10,14 +10,11 @@
 Pod::Spec.new do |s|
   s.name             = "SecucardConnectClientLib"
   s.version          = "0.1.0"
-  s.summary          = "A short description of SecucardConnectClientLib."
+  s.summary          = "Library for easy and standardized communication to the secucard infrastructure"
   s.description      = <<-DESC
-                       An optional longer description of SecucardConnectClientLib
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       This Library is the base for communicating with the secucard server infrastructure. It covers the full communication bandwidth
                        DESC
-  s.homepage         = https://github.com/secucard/secucard-connect-objc-client-lib"
+  s.homepage         = "https://github.com/secucard/secucard-connect-objc-client-lib"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'GPL'
   s.author           = { "Jörn Schmidt" => "schmidt@devid.net" }

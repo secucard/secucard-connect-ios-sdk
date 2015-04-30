@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "summary": "A short description of SecucardConnectClientLib.",
   "description": "                       An optional longer description of SecucardConnectClientLib\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/SecucardConnectClientLib",
-  "license": "MIT",
+  "homepage": "https://github.com/secucard/secucard-connect-objc-client-lib",
+  "license": "GPL",
   "authors": {
     "Jörn Schmidt": "schmidt@devid.net"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/SecucardConnectClientLib.git",
+    "git": "https://github.com/secucard/secucard-connect-objc-client-lib.git",
     "tag": "0.1.0"
   },
   "platforms": {

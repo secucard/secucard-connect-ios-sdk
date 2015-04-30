@@ -98,7 +98,7 @@ SPEC CHECKSUMS:
   PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
   PromiseKit-AFNetworking: fbdd97205d6a78bb94d96d0d56311d1733569aae
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SecucardConnectClientLib: 3120933932143f4ae9ebe2be5bc61d8f8408a734
+  SecucardConnectClientLib: 27d6cfd592b1e45a824de0d90e6880adadf21991
   Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
 
 COCOAPODS: 0.37.0.beta.1
