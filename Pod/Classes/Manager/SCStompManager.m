@@ -344,11 +344,19 @@
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
+    // disconnect client
     if (self.client.connected)
       [self.client disconnect];
     
+    // cancel disconnect requests
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
     
+    // reject earlier messages by correlation id (timouts)
+    for (SCStompStorageItem *item in self.promiseStore) {
+      item.reject([SCErrorManager errorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
+    }
+    
+  
     fulfill(nil);
     
   }];
