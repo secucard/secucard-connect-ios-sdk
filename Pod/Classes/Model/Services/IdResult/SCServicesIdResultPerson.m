@@ -11,13 +11,16 @@
 @implementation SCServicesIdResultPerson
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"identificationProcess":@"identificationprocess",
-           @"identificationDocument":@"identificationdocument",
-           @"customData":@"customdata",
-           @"contactData":@"contactdata",
-           @"userData":@"userdata"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"identificationProcess":@"identificationprocess",
+                                                                  @"identificationDocument":@"identificationdocument",
+                                                                  @"customData":@"customdata",
+                                                                  @"contactData":@"contactdata",
+                                                                  @"userData":@"userdata"
+                                                                  }];
 }
 
 

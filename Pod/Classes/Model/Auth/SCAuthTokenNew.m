@@ -11,12 +11,15 @@
 @implementation SCAuthTokenNew
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"accessToken":@"access_token",
-           @"expiresIn":@"expires_in",
-           @"tokenType":@"token_type",
-           @"refreshToken":@"refresh_token"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"accessToken":@"access_token",
+                                                                  @"expiresIn":@"expires_in",
+                                                                  @"tokenType":@"token_type",
+                                                                  @"refreshToken":@"refresh_token"
+                                                                  }];
 }
 
 @end

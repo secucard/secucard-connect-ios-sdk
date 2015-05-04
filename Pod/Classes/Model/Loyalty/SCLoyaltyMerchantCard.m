@@ -16,7 +16,7 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
-  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
   
   return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
                                                                   @"createdForMerchant":@"created_for_merchant",

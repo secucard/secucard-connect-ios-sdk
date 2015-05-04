@@ -15,9 +15,12 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"lastChange":@"last_change"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"lastChange":@"last_change"
+                                                                  }];
 }
 
 @end

@@ -15,9 +15,12 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"merchantCard":@"merchantcard"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"merchantCard":@"merchantcard"
+                                                                  }];
 }
 
 @end

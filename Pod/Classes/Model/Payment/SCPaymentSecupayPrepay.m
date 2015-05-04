@@ -15,10 +15,13 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"transferPurpose":@"transfer_purpose",
-           @"transferAccount":@"transfer_account"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"transferPurpose":@"transfer_purpose",
+                                                                  @"transferAccount":@"transfer_account"
+                                                                  }];
 }
 
 

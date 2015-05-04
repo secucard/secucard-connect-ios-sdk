@@ -11,11 +11,14 @@
 @implementation SCPaymentTransferAccount
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"accountOwner":@"account_owner",
-           @"accountNumber":@"accountnumber",
-           @"bankCode":@"bankcode"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"accountOwner":@"account_owner",
+                                                                  @"accountNumber":@"accountnumber",
+                                                                  @"bankCode":@"bankcode"
+                                                                  }];
 }
 
 

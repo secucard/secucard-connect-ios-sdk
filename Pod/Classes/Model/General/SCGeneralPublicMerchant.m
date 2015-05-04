@@ -11,21 +11,24 @@
 @implementation SCGeneralPublicMerchant
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"addressComponents":@"address_components",
-           @"addressFormatted":@"address_formatted",
-           @"phoneNumberFormatted":@"phone_number_formatted",
-           @"photoMain":@"photo_main",
-           @"categoryMain":@"category_main",
-           @"urlGooglePlus":@"url_googleplus",
-           @"urlWebsite":@"url_website",
-           @"utcOffset":@"utc_offset",
-           @"openNow":@"open_now",
-           @"openTime":@"open_time",
-           @"openHours":@"open_hours",
-           @"distance":@"_geometry",
-           @"hashValue":@"hash"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"addressComponents":@"address_components",
+                                                                  @"addressFormatted":@"address_formatted",
+                                                                  @"phoneNumberFormatted":@"phone_number_formatted",
+                                                                  @"photoMain":@"photo_main",
+                                                                  @"categoryMain":@"category_main",
+                                                                  @"urlGooglePlus":@"url_googleplus",
+                                                                  @"urlWebsite":@"url_website",
+                                                                  @"utcOffset":@"utc_offset",
+                                                                  @"openNow":@"open_now",
+                                                                  @"openTime":@"open_time",
+                                                                  @"openHours":@"open_hours",
+                                                                  @"distance":@"_geometry",
+                                                                  @"hashValue":@"hash"
+                                                                  }];
 }
 
 + (NSString *)object {

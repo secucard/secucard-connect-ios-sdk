@@ -11,11 +11,14 @@
 @implementation SCLoyaltyCondition
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"startValue":@"start_value",
-           @"currency":@"curreny",
-           @"bonusType":@"bonus_type"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"startValue":@"start_value",
+                                                                  @"currency":@"curreny",
+                                                                  @"bonusType":@"bonus_type"
+                                                                  }];
 }
 
 

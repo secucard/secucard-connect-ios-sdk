@@ -11,12 +11,15 @@
 @implementation SCGeoQuery
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"field":@"field",
-           @"distance":@"distance",
-           @"lat":@"lat",
-           @"lon":@"lon"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"field":@"field",
+                                                                  @"distance":@"distance",
+                                                                  @"lat":@"lat",
+                                                                  @"lon":@"lon"
+                                                                  }];
 }
 
 @end

@@ -15,9 +15,12 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"cardNumber":@"cardnumber"
-           };
+           }];
 }
 
 @end

@@ -11,12 +11,15 @@
 @implementation SCGeneralContact
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"dateOfBirth":@"dob",
-           @"birthPlace":@"birthplace",
-           @"companyName":@"companyname",
-           @"urlWebsite":@"url_website"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"dateOfBirth":@"dob",
+                                                                  @"birthPlace":@"birthplace",
+                                                                  @"companyName":@"companyname",
+                                                                  @"urlWebsite":@"url_website"
+                                                                  }];
 }
 
 

@@ -15,10 +15,13 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"ownerTransactionId":@"owner_transaction_id",
-           @"persons":@"person"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"ownerTransactionId":@"owner_transaction_id",
+                                                                  @"persons":@"person"
+                                                                  }];
 }
 
 

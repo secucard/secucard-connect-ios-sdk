@@ -11,10 +11,13 @@
 @implementation SCServicesIdResultIdentificationProcess
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"identificationTime":@"identificationtime",
-           @"transactionNumber":@"transactionnumber"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary: @{
+                                                                   @"identificationTime":@"identificationtime",
+                                                                   @"transactionNumber":@"transactionnumber"
+                                                                   }];
 }
 
 

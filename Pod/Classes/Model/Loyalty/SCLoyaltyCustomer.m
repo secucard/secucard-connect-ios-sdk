@@ -15,15 +15,18 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"foreName":@"forename",
-           @"surName":@"surname",
-           @"displayName":@"display_name",
-           @"daysUntilBirthday":@"days_until_birthday",
-           @"additionalData":@"additional_data",
-           @"customerNumber":@"customernumber",
-           @"dateOfBirth":@"dob"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"foreName":@"forename",
+                                                                  @"surName":@"surname",
+                                                                  @"displayName":@"display_name",
+                                                                  @"daysUntilBirthday":@"days_until_birthday",
+                                                                  @"additionalData":@"additional_data",
+                                                                  @"customerNumber":@"customernumber",
+                                                                  @"dateOfBirth":@"dob"
+                                                                  }];
 }
 
 

@@ -11,10 +11,13 @@
 @implementation SCServicesIdResultIdentificationDocument
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"dateIssued":@"dateissued",
-           @"validUntil":@"validuntil"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"dateIssued":@"dateissued",
+                                                                  @"validUntil":@"validuntil"
+                                                                  }];
 }
 
 

@@ -11,9 +11,12 @@
 @implementation SCServicesIdResultUserData
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"dateOfBirth":@"dob"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"dateOfBirth":@"dob"
+                                                                  }];
 }
 
 

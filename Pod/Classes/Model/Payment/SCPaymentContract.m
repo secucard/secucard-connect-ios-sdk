@@ -15,10 +15,13 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"contractId":@"contract_id",
-           @"internalReference":@"internal_reference"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"contractId":@"contract_id",
+                                                                  @"internalReference":@"internal_reference"
+                                                                  }];
 }
 
 @end

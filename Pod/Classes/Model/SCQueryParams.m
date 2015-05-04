@@ -12,19 +12,22 @@
 
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"scrollId":@"scroll_id",
-           @"scrollExpire":@"scroll_expire",
-           @"fields":@"fields",
-           @"sortOrder":@"sort",
-           @"query":@"q",
-           @"preset":@"preset",
-           @"geoQuery":@"geo"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"scrollId":@"scroll_id",
+                                                                  @"scrollExpire":@"scroll_expire",
+                                                                  @"fields":@"fields",
+                                                                  @"sortOrder":@"sort",
+                                                                  @"query":@"q",
+                                                                  @"preset":@"preset",
+                                                                  @"geoQuery":@"geo"
+                                                                  }];
 }
 
 //+ (NSValueTransformer *)fieldsJSONTransformer {
-//  
+//
 //  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
 //    return nil;
 //  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {

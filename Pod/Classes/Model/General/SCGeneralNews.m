@@ -15,12 +15,15 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"textTeaser":@"text_teaser",
-           @"textFull":@"text_full",
-           @"documentId":@"document_id",
-           @"accountRead":@"_account_read"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"textTeaser":@"text_teaser",
+                                                                  @"textFull":@"text_full",
+                                                                  @"documentId":@"document_id",
+                                                                  @"accountRead":@"_account_read"
+                                                                  }];
 }
 
 

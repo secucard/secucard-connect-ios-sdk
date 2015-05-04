@@ -11,10 +11,13 @@
 @implementation SCLoyaltyProgram
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"descriptionText":@"description",
-           @"cardGroup":@"cardgroup"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"descriptionText":@"description",
+                                                                  @"cardGroup":@"cardgroup"
+                                                                  }];
 }
 
 

@@ -15,11 +15,14 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"privateData":@"private",
-           @"publicData":@"public",
-           @"assigned":@"assign"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"privateData":@"private",
+                                                                  @"publicData":@"public",
+                                                                  @"assigned":@"assign"
+                                                                  }];
 }
 
 

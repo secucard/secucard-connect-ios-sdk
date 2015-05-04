@@ -15,11 +15,14 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"displayName":@"display_name",
-           @"displayNameRaw":@"display_name_raw",
-           @"stockWarnLimit":@"stock_warn_limit"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"displayName":@"display_name",
+                                                                  @"displayNameRaw":@"display_name_raw",
+                                                                  @"stockWarnLimit":@"stock_warn_limit"
+                                                                  }];
 }
 
 

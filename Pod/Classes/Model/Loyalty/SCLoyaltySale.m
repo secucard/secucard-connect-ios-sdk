@@ -15,13 +15,16 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"lastChange":@"last_change",
-           @"descriptionString":@"description",
-           @"descriptionRaw":@"description_raw",
-           @"balanceAmount":@"balance_amount",
-           @"balancePoints":@"balance_points"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary: @{
+                                                                   @"lastChange":@"last_change",
+                                                                   @"descriptionString":@"description",
+                                                                   @"descriptionRaw":@"description_raw",
+                                                                   @"balanceAmount":@"balance_amount",
+                                                                   @"balancePoints":@"balance_points"
+                                                                   }];
 }
 
 

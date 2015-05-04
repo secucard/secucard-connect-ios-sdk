@@ -11,10 +11,13 @@
 @implementation SCSmartTransactionResult
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"paymentMethod":@"payment_method",
-           @"receiptLines":@"receipt"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"paymentMethod":@"payment_method",
+                                                                  @"receiptLines":@"receipt"
+                                                                  }];
 }
 
 

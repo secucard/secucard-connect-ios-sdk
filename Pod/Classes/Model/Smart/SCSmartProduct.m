@@ -11,9 +11,12 @@
 @implementation SCSmartProduct
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"groups":@"group"
-           };
+  
+ NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"groups":@"group"
+                                                                  }];
 }
 
 

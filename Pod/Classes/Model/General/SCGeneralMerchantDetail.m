@@ -11,11 +11,14 @@
 @implementation SCGeneralMerchantDetail
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"news":@"_news",
-           @"balance":@"_balance",
-           @"points":@"_points"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"news":@"_news",
+                                                                  @"balance":@"_balance",
+                                                                  @"points":@"_points"
+                                                                  }];
 }
 
 

@@ -13,7 +13,7 @@
 @implementation SCSecuObject
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{};
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
 }
 
 + (NSString*) object {

@@ -11,7 +11,10 @@
 @implementation SCTransportMessage
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  NSDictionary *superKeys = [super JSONKeyPathsByPropertyKey];
+  return [superKeys mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+  
 }
 
 @end

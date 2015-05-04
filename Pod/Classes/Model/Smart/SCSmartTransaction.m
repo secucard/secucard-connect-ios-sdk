@@ -15,15 +15,18 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"basketInfo":@"basket_info",
-           @"deviceSource":@"device_source",
-           @"targetDevice":@"target_device",
-           @"paymentMethod":@"payment_method",
-           @"receiptLines":@"receipt",
-           @"paymentRequested":@"payment_requested",
-           @"paymentExecuted":@"payment_executed"
-           };
+  
+  NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"basketInfo":@"basket_info",
+                                                                  @"deviceSource":@"device_source",
+                                                                  @"targetDevice":@"target_device",
+                                                                  @"paymentMethod":@"payment_method",
+                                                                  @"receiptLines":@"receipt",
+                                                                  @"paymentRequested":@"payment_requested",
+                                                                  @"paymentExecuted":@"payment_executed"
+                                                                  }];
 }
 
 

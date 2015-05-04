@@ -11,12 +11,15 @@
 @implementation SCAuthDeviceAuthCode
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
+
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
            @"deviceCode":@"device_code",
            @"userCode":@"user_code",
            @"verificationUrl":@"verification_url",
            @"expiresIn":@"expires_in"
-           };
+           }];
 }
 
 @end
