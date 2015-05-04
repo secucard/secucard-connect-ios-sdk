@@ -10,4 +10,21 @@
 
 @implementation SCMerchantService
 
+/**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCMerchantService*)sharedService
+{
+  static SCMerchantService *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    instance = [SCMerchantService new];
+  });
+  
+  return instance;
+}
+
+
 @end

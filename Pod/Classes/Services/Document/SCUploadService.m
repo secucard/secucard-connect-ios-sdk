@@ -10,9 +10,9 @@
 
 @implementation SCUploadService
 
--(void)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument onComplete:(void (^)(SCDocumentUploadsDocument *, NSError *))completion {
+-(PMKPromise*)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument {
   
-  [SCErrorManager handleErrorWithDescription:@"not implemented"];
+  return [[self serviceManagerByChannel:RestChannel] execute:base64EncodeDocument.class objectId:nil action:nil actionArg:nil arg:base64EncodeDocument];
   
 }
 

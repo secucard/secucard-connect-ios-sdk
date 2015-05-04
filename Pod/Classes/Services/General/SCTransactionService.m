@@ -10,4 +10,24 @@
 
 @implementation SCTransactionService
 
++ (SCTransactionService*)sharedService
+{
+  static SCTransactionService *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    instance = [SCTransactionService new];
+  });
+  
+  return instance;
+}
+
+- (PMKPromise*) getTransactions:(SCQueryParams*)queryParams {
+  return [[self serviceManagerByChannel:RestChannel] findObjects:[SCGeneralTransaction class] queryParams:queryParams];
+}
+
+- (PMKPromise*) getTransaction:(NSString*)pid {
+  return [[self serviceManagerByChannel:RestChannel] getObject:[SCGeneralTransaction class] objectId:pid];
+}
+
+
 @end

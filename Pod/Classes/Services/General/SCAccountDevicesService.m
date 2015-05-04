@@ -10,4 +10,6 @@
 
 @implementation SCAccountDevicesService
 
+// TODO: How to register events without initialization, see java client
+
 @end

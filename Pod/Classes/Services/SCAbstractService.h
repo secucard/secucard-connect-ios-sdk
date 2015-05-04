@@ -12,6 +12,7 @@
 #import "SCServiceManager.h"
 #import "SCGlobals.h"
 #import "SCSecuObject.h"
+#import "SCObjectList.h"
 
 @interface SCAbstractService : NSObject
 

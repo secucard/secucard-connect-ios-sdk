@@ -11,6 +11,23 @@
 
 @implementation SCAccountService
 
+/**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCAccountService*)sharedService
+{
+  static SCAccountService *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    instance = [SCAccountService new];
+  });
+  
+  return instance;
+}
+
+
 -(PMKPromise*)updateAccount:(SCGeneralAccount *)account {
   
   return [[self serviceManagerByChannel:RestChannel] updateObject:account];

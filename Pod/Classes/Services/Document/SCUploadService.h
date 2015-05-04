@@ -12,6 +12,13 @@
 
 @interface SCUploadService : SCAbstractService
 
-- (void) uploadDocument:(SCDocumentUploadsDocument*)base64EncodeDocument onComplete:(void(^)(SCDocumentUploadsDocument *document, NSError *error))completion;
+/**
+ *  Uploads a document to the server
+ *
+ *  @param base64EncodeDocument the document's data
+ *
+ *  @return a promise which fulfills to SCDocumentUploadsDocument
+ */
+- (PMKPromise*) uploadDocument:(SCDocumentUploadsDocument*)base64EncodeDocument;
 
 @end
