@@ -10,13 +10,57 @@
 #import "StompKit.h"
 #import "SCServiceEventObject.h"
 
+@implementation SCStompDestination
+
+- (NSString *)destination {
+  
+  NSString *dest = [NSString stringWithFormat:@"%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix];
+  
+  dest = [dest stringByAppendingString:self.command];
+  
+  
+  if (self.type) {
+    dest = [dest stringByAppendingString:[[self.type object] lowercaseString]];                 // -> general.publicmerchants
+  }
+  
+  if (self.method) {
+    dest = [dest stringByAppendingString:@"."];
+    dest = [dest stringByAppendingString:self.method];
+  }
+  
+  return dest;
+  
+}
+
++ (instancetype) initWithCommand:(NSString*)command {
+  return [self initWithCommand:command type:nil method:nil];
+}
+
++ (instancetype) initWithCommand:(NSString*)command type:(Class)type {
+  return [self initWithCommand:command type:type method:nil];
+}
+
++ (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method {
+  
+  SCStompDestination *destination = [SCStompDestination new];
+  
+  destination.command = command;
+  destination.type = type;
+  destination.method = method;
+  
+  return destination;
+
+}
+
+@end
+
 @implementation SCStompStorageItem
 
 @end
 
 @implementation SCStompConfiguration
 
-- (instancetype) initWithHost:(NSString *)host andVHost:(NSString *)virtualHost port:(int)port userId:(NSString *)userId password:(NSString *)password useSSL:(BOOL)useSsl replyQueue:(NSString *)replyQueue connectionTimeoutSec:(int)connectionTimeoutSec socketTimeoutSec:(int)socketTimeoutSec heartbeatMs:(int)heartbeatMs {
+- (instancetype) initWithHost:(NSString *)host andVHost:(NSString *)virtualHost port:(int)port userId:(NSString *)userId password:(NSString *)password useSSL:(BOOL)useSsl replyQueue:(NSString *)replyQueue connectionTimeoutSec:(int)connectionTimeoutSec socketTimeoutSec:(int)socketTimeoutSec heartbeatMs:(int)heartbeatMs basicDestination:(NSString *)basicDestination {
   
   self = [super init];
   if (self) {
@@ -30,6 +74,7 @@
     self.connectionTimeoutSec = connectionTimeoutSec;
     self.socketTimeoutSec = socketTimeoutSec;
     self.heartbeatMs = heartbeatMs;
+    self.basicDestination = basicDestination;
   }
   return self;
   
@@ -43,11 +88,6 @@
  *  the actual stomp client used by this manager
  */
 @property (nonatomic, retain) STOMPClient *client;
-
-/**
- *  the configuration
- */
-@property (nonatomic, retain) SCStompConfiguration *configuration;
 
 /**
  *  the correlation id
@@ -330,6 +370,9 @@
     
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
       
+      self.configuration.userId = token;
+      self.configuration.password = token;
+      
       __weak SCStompManager *weakself = self;
       // connect to the broker
       
@@ -337,8 +380,8 @@
         
         [self.client connectSecureWithTLSOption:@{(NSString*)kCFStreamSSLPeerName:self.configuration.virtualHost}
                                      andHeaders:@{kHeaderHost:self.configuration.host,
-                                                  kHeaderLogin: token,
-                                                  kHeaderPasscode: token,
+                                                  kHeaderLogin: self.configuration.userId,
+                                                  kHeaderPasscode: self.configuration.password,
                                                   kHeaderHeartBeat: @(self.configuration.heartbeatMs),
                                                   kHeaderAcceptVersion : @"1.2"}
                               completionHandler:^(STOMPFrame *connectedFrame, NSError *error) {
@@ -543,11 +586,7 @@
 
 - (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  return [self sendMessage:objectId toQueue:[SCStompDestination initWithCommand:kStompMethodGet type:type].destination];
   
 }
 

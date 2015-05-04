@@ -11,7 +11,15 @@
 #import <PromiseKit/PromiseKit.h>
 #import "SCServiceManager.h"
 
-#define kErrorDomainSCStompService                 @"SCSecucardCoreStompService"
+#define kErrorDomainSCStompService                  @"SCSecucardCoreStompService"
+
+#define kStompDestinationPrefix                     @"api:"
+
+#define kStompMethodGet                             @"get:"
+#define kStompMethodUpdate                          @"update:"
+#define kStompMethodAdd                             @"add:"
+#define kStompMethodDelete                          @"delete:"
+#define kStompMethodExecute                         @"exec:"
 
 // own definitions
 //#define kVirtualHost              @"/"
@@ -20,6 +28,22 @@
 //#define kHeartBeat                @"40000,0"
 
 typedef void (^ConnectCompletion)(NSError *error);
+
+@interface SCStompDestination : NSObject
+
+@property (nonatomic, retain) NSString *command;
+
+@property (nonatomic, retain) NSString *method;
+
+@property (nonatomic, retain) Class type;
+
+@property (nonatomic, retain, readonly) NSString *destination;
+
++ (instancetype) initWithCommand:(NSString*)command;
++ (instancetype) initWithCommand:(NSString*)command type:(Class)type;
++ (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method;
+
+@end
 
 @interface SCStompStorageItem : NSObject
 
@@ -84,6 +108,11 @@ typedef void (^ConnectCompletion)(NSError *error);
 @property (nonatomic, assign)  int socketTimeoutSec;
 
 /**
+ *  the socket's timeout in seconds
+ */
+@property (nonatomic, retain)  NSString *basicDestination;
+
+/**
  *  instantiates the stomp configuration
  *
  *  @param host                 the stomp host
@@ -96,10 +125,11 @@ typedef void (^ConnectCompletion)(NSError *error);
  *  @param connectionTimeoutSec the connection timeout in seconds
  *  @param socketTimeoutSec     the socket's timeout in seconds
  *  @param heartbeatMs          the stomp heartbeat in milliseconds
+ *  @param basicDestination     the server's basic destination
  *
  *  @return the configuration's insatnce
  */
-- (instancetype) initWithHost:(NSString*)host andVHost:(NSString*)virtualHost port:(int)port userId:(NSString*)userId password:(NSString*)password useSSL:(BOOL)useSsl replyQueue:(NSString*)replyQueue connectionTimeoutSec:(int)connectionTimeoutSec socketTimeoutSec:(int)socketTimeoutSec heartbeatMs:(int)heartbeatMs;
+- (instancetype) initWithHost:(NSString*)host andVHost:(NSString*)virtualHost port:(int)port userId:(NSString*)userId password:(NSString*)password useSSL:(BOOL)useSsl replyQueue:(NSString*)replyQueue connectionTimeoutSec:(int)connectionTimeoutSec socketTimeoutSec:(int)socketTimeoutSec heartbeatMs:(int)heartbeatMs basicDestination:(NSString*)basicDestination;
 
 @end
 
@@ -115,6 +145,11 @@ typedef void (^ConnectCompletion)(NSError *error);
  *  @return the manager's instance
  */
 + (SCStompManager*)sharedManager;
+
+/**
+ *  the configuration
+ */
+@property (nonatomic, retain) SCStompConfiguration *configuration;
 
 /**
  *  init the actual stomp client
