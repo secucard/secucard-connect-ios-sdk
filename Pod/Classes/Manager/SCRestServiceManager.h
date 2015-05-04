@@ -82,4 +82,6 @@
  */
 - (PMKPromise*) requestAuthWithParams:(id)params;
 
+- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg;
+
 @end

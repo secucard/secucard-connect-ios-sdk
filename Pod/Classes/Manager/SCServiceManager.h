@@ -22,7 +22,7 @@
 - (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId;
 - (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg;
 - (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg;
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg;
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg;
 - (PMKPromise*) close;
 
 @end

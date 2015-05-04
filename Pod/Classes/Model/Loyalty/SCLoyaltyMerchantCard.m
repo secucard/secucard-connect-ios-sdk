@@ -15,15 +15,18 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{
-           @"createdForMerchant":@"created_for_merchant",
-           @"createdForStore":@"created_for_store",
-           @"isBaseCard":@"is_base_card",
-           @"lastUsage":@"last_usage",
-           @"lastCharge":@"last_charge",
-           @"stockStatus":@"stock_status",
-           @"lockStatus":@"lock_status"
-           };
+  
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  
+  return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"createdForMerchant":@"created_for_merchant",
+                                                                  @"createdForStore":@"created_for_store",
+                                                                  @"isBaseCard":@"is_base_card",
+                                                                  @"lastUsage":@"last_usage",
+                                                                  @"lastCharge":@"last_charge",
+                                                                  @"stockStatus":@"stock_status",
+                                                                  @"lockStatus":@"lock_status"
+                                                                  }];
 }
 
 @end

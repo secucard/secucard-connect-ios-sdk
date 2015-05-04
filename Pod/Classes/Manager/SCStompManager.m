@@ -478,105 +478,58 @@
  *  @param message the message to be sent
  *  @param queue   the queue to put the message on
  */
-- (PMKPromise*) sendMessage:(id)message toQueue:(NSString*)queue
+- (PMKPromise*) sendMessage:(SCTransportMessage*)message toDestination:(SCStompDestination*)destination
 {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
     [self connect].then(^() {
       
-      NSError *parseError = [NSError new];
+      NSString *correlationId = [NSString stringWithFormat:@"%d", [self getNextCorrelationID]];
       
+      NSError *transformationError = [NSError new];
+      [MTLJSONAdapter JSONDictionaryFromModel:message error:&transformationError];
+      
+      if (transformationError) {
+        [SCErrorManager handleError:[SCErrorManager errorWithDescription:transformationError.localizedDescription andDomain:kErrorDomainSCStompService]];
+        return;
+      }
+      
+      NSError *parseError = [NSError new];
       NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message
                                                          options:0
                                                            error:&parseError];
       
-      NSString *jsonString = @"";
-      
-      if (! jsonData) {
-        
-        reject([SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:parseError.domain]);
-        
-      } else {
-        
-        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
+      if (parseError) {
+        [SCErrorManager handleError:[SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:kErrorDomainSCStompService]];
+        return;
       }
+      
+      NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.client sendTo:queue
-                    headers:@{
-                              @"correlation-id":[NSString stringWithFormat:@"%d", [self getNextCorrelationID]],
-                              @"user-id": token,
-                              @"app-id": self.configuration.userId
-                              }
-                       body:jsonString];
-
-        // just fulfill, fire and forget
-        fulfill(nil);
+        NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                       @"correlation-id": correlationId,
+                                                                                       @"reply-to": self.configuration.replyQueue,
+                                                                                       @"persistent":@"true",
+                                                                                       @"user-id": token,
+                                                                                       @"app-id": self.configuration.userId
+                                                                                       }];
         
-      });
-      
-    });
-    
-  }];
-  
-}
-
-/**
- *  Send a message over to an exchange, telling it which queue to reply to
- *
- *  @param message    the message to send
- *  @param exchange   the exchange queue
- *  @param replyQueue the reply-to-queue
- */
-- (PMKPromise*) sendMessage:(id)message toExchange:(NSString*)exchange
-{
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    [self connect].then(^() {
-      
-      NSError *parseError = [NSError new];
-      
-      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message
-                                                         options:0
-                                                           error:&parseError];
-      
-      NSString *jsonString = @"";
-      
-      if (! jsonData) {
+        if ([destination isKindOfClass:[SCAppDestination class]]) {
+          [headers setObject:((SCAppDestination*)destination).appId forKey:@"app-id"];
+        }
         
-        reject([SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:parseError.domain]);
-        
-      } else {
-        
-        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-      }
-      
-      [[SCAccountManager sharedManager] token].then(^(NSString *token) {
-        
-        
-        int correlationId = [self getNextCorrelationID];
-        
-        // send to exchange
-        [self.client sendTo:exchange
-                    headers:@{
-                              @"correlation-id":[NSString stringWithFormat:@"%d", correlationId],
-                              @"reply-to": @"/temp-queue/secucard",
-                              @"receipt": @"secucardReceipt",
-                              @"user-id": token,
-                              @"app-id": self.configuration.userId
-                              }
+        [self.client sendTo:destination.destination
+                    headers:headers
                        body:jsonString];
         
         SCStompStorageItem *itemToStore = [SCStompStorageItem new];
         itemToStore.fulfill = fulfill;
         itemToStore.reject = reject;
         
-        [self.promiseStore setObject:itemToStore forKey:[NSString stringWithFormat:@"%d", correlationId]];
+        [self.promiseStore setObject:itemToStore forKey:[NSString stringWithFormat:@"%@", correlationId]];
         
       });
       
@@ -609,7 +562,7 @@
   SCTransportMessage *message = [SCTransportMessage new];
   message.data = objectId;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodGet type:type].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type]];
   
 }
 
@@ -620,7 +573,7 @@
   
   // TODO: Callback if false?
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodGet type:type].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type]];
   
 }
 
@@ -629,7 +582,7 @@
   SCTransportMessage *message = [SCTransportMessage new];
   message.data = object;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]];
   
 }
 
@@ -639,7 +592,7 @@
   message.pid = object.id;
   message.data = object;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]]];
   
 }
 
@@ -650,7 +603,7 @@
   message.sid = actionArg;
   message.data = arg;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action]];
   
 }
 
@@ -659,7 +612,7 @@
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodDelete type:type].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type]];
   
 }
 
@@ -669,7 +622,7 @@
   message.pid = objectId;
   message.sid = actionArg;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action]];
   
 }
 
@@ -680,13 +633,13 @@
   message.sid = actionArg;
   message.data = arg;
   
-  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action].destination];
+  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action]];
 
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
-  
-  return [self sendMessage:actionArg toQueue:[SCAppDestination initWithAppId:appId method:action].destination];
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg {
+
+  return [self sendMessage:actionArg toDestination:[SCAppDestination initWithAppId:appId method:action]];
   
 }
 

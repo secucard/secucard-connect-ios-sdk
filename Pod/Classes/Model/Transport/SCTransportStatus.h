@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCTransportStatus : MTLModel
+@interface SCTransportStatus : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy)  NSString *status;
 @property (nonatomic, copy)  NSString *error;

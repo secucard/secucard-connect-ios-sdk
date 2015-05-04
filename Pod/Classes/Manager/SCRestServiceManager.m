@@ -429,12 +429,9 @@ AFHTTPRequestSerializer *requestSerializer;
   
 }
 
-- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(id)arg {
+- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg {
   
-  NSError *error = nil;
-  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
-  
-  return [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:params];
+  return [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg];
   
 }
 

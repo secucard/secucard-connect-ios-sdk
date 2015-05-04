@@ -84,7 +84,7 @@
   
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
