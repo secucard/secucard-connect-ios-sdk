@@ -381,7 +381,7 @@ AFHTTPRequestSerializer *requestSerializer;
   
 }
 
-- (PMKPromise*) createObject:(id)object {
+- (PMKPromise*) createObject:(SCSecuObject *)object {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
@@ -390,7 +390,7 @@ AFHTTPRequestSerializer *requestSerializer;
   
 }
 
-- (PMKPromise*) updateObject:(id)object {
+- (PMKPromise*) updateObject:(SCSecuObject *)object {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];

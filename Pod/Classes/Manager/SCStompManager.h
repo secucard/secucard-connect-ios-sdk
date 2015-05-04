@@ -14,6 +14,7 @@
 #define kErrorDomainSCStompService                  @"SCSecucardCoreStompService"
 
 #define kStompDestinationPrefix                     @"api:"
+#define kAppDestinationPrefix                       @"app:"
 
 #define kStompMethodGet                             @"get:"
 #define kStompMethodUpdate                          @"update:"
@@ -42,6 +43,14 @@ typedef void (^ConnectCompletion)(NSError *error);
 + (instancetype) initWithCommand:(NSString*)command;
 + (instancetype) initWithCommand:(NSString*)command type:(Class)type;
 + (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method;
+
+@end
+
+@interface SCAppDestination : SCStompDestination
+
+@property (nonatomic, retain) NSString *appId;
+
++ (instancetype) initWithAppId:(NSString *)appId method:(NSString*)method;
 
 @end
 

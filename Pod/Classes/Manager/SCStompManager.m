@@ -9,6 +9,7 @@
 #import "SCStompManager.h"
 #import "StompKit.h"
 #import "SCServiceEventObject.h"
+#import "SCTransportMessage.h"
 
 @implementation SCStompDestination
 
@@ -50,6 +51,25 @@
   
   return destination;
 
+}
+
+@end
+
+@implementation SCAppDestination
+
++ (instancetype) initWithAppId:(NSString *)appId method:(NSString*)method {
+  
+  SCAppDestination *appDest = [SCAppDestination initWithCommand:nil type:nil method:method];
+  appDest.appId = appId;
+  
+  return appDest;
+  
+}
+
+- (NSString *)destination {
+  
+  return [NSString stringWithFormat:@"%@%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix, self.method];
+  
 }
 
 @end
@@ -586,87 +606,87 @@
 
 - (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
   
-  return [self sendMessage:objectId toQueue:[SCStompDestination initWithCommand:kStompMethodGet type:type].destination];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.data = objectId;
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodGet type:type].destination];
   
 }
 
 - (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.query = queryParams;
+  
+  // TODO: Callback if false?
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodGet type:type].destination];
   
 }
 
-- (PMKPromise*) createObject:(id)object {
+- (PMKPromise*) createObject:(SCSecuObject*)object {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.data = object;
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]].destination];
   
 }
 
-- (PMKPromise*) updateObject:(id)object {
+- (PMKPromise*) updateObject:(SCSecuObject*)object {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.pid = object.id;
+  message.data = object;
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]].destination];
   
 }
 
 - (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.pid = objectId;
+  message.sid = actionArg;
+  message.data = arg;
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action].destination];
   
 }
 
 - (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.pid = objectId;
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodDelete type:type].destination];
   
 }
 
 - (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.pid = objectId;
+  message.sid = actionArg;
+  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action].destination];
   
 }
 
 - (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+
+  SCTransportMessage *message = [SCTransportMessage new];
+  message.pid = objectId;
+  message.sid = actionArg;
+  message.data = arg;
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
-  
+  return [self sendMessage:message toQueue:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action].destination];
+
 }
 
 - (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSString*)actionArg {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    reject([SCErrorManager errorWithDescription:@"not implemented"]);
-    
-  }];
+  return [self sendMessage:actionArg toQueue:[SCAppDestination initWithAppId:appId method:action].destination];
   
 }
 

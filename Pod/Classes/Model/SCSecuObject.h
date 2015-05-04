@@ -7,11 +7,12 @@
 //
 
 #import "MTLModel+Secucard.h"
+#import <Mantle/Mantle.h>
 
 #define kObjectProperty @"object"
 #define kIdProperty @"id"
 
-@interface SCSecuObject : MTLModel
+@interface SCSecuObject : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *id;
 

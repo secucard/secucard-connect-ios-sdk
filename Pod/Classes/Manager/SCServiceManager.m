@@ -8,6 +8,7 @@
 
 #import "SCServiceManager.h"
 #import "SCErrorManager.h"
+#import "SCSecuObject.h"
 
 @implementation SCServiceManager
 
@@ -35,7 +36,7 @@
   
 }
 
-- (PMKPromise*) createObject:(id)object {
+- (PMKPromise*) createObject:(SCSecuObject*)object {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
@@ -43,7 +44,7 @@
   
 }
 
-- (PMKPromise*) updateObject:(id)object {
+- (PMKPromise*) updateObject:(SCSecuObject*)object {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);

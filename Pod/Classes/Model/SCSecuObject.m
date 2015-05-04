@@ -12,6 +12,10 @@
 
 @implementation SCSecuObject
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return @{};
+}
+
 + (NSString*) object {
   [SCErrorManager handleError:[SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]];
   return @"";
