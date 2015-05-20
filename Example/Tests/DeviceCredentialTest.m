@@ -70,6 +70,17 @@ describe(@"ConnectDeviceClient", ^{
   
   it(@"can connect anonymously", ^{
     
+    NSLog(@"AccessToken %@", [SCAccountManager sharedManager].accessToken);
+    NSLog(@"RefreshToken %@", [SCAccountManager sharedManager].refreshToken);
+    
+//    [[SCAccountManager sharedManager] killToken];
+    
+    if ([SCAccountManager sharedManager].accessToken == nil) {
+      setAsyncSpecTimeout(1200);
+    } else {
+      setAsyncSpecTimeout(10);
+    }
+    
     waitUntil(^(DoneCallback done) {
       
       [client connect].then(^() {

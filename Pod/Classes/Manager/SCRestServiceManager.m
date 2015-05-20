@@ -49,6 +49,7 @@
  *  A serializer for any request
  */
 AFHTTPRequestSerializer *requestSerializer;
+AFHTTPRequestSerializer *authRequestSerializer;
 
 /**
  *  get instance of manager
@@ -72,18 +73,22 @@ AFHTTPRequestSerializer *requestSerializer;
   
   requestSerializer = [AFJSONRequestSerializer serializer];
   [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//  [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
   [requestSerializer setValue:@"Bearer XXX" forHTTPHeaderField:@"Authorization"];
   
+  authRequestSerializer = [AFJSONRequestSerializer serializer];
+  [authRequestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//  [authRequestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  [authRequestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+  [authRequestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
+  
   self.authOperationManager = [AFHTTPRequestOperationManager manager];
-  [self.authOperationManager setRequestSerializer:[AFJSONRequestSerializer new]];
-  [self.authOperationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  self.authOperationManager.requestSerializer = authRequestSerializer;
   
   self.operationManager = [AFHTTPRequestOperationManager manager];
   self.operationManager.requestSerializer = requestSerializer;
-  [self.operationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   
 }
 
@@ -494,11 +499,13 @@ AFHTTPRequestSerializer *requestSerializer;
   
 }
 
-- (PMKPromise*) post:(NSString*)endpoint withParams:(id)params {
+- (PMKPromise*) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperationManager *man = (secure) ? self.operationManager : self.authOperationManager;
+    
+    [man POST:endpoint parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
       
       fulfill(responseObject);
       

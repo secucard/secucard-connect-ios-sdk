@@ -406,35 +406,34 @@
       
       if (self.configuration.useSsl) {
         
-        [self.client connectSecureWithTLSOption:@{(NSString*)kCFStreamSSLPeerName:self.configuration.virtualHost}
-                                     andHeaders:@{kHeaderHost:self.configuration.host,
+        [self.client connectSecureWithTLSOption:nil
+         
+                                     andHeaders:@{
+                                                  kHeaderHost:self.configuration.virtualHost,
                                                   kHeaderLogin: self.configuration.userId,
+                                                  kHeaderDestination: self.configuration.basicDestination,
                                                   kHeaderPasscode: self.configuration.password,
-                                                  kHeaderHeartBeat: @(self.configuration.heartbeatMs),
-                                                  kHeaderAcceptVersion : @"1.2"}
+                                                  kHeaderHeartBeat: [NSString stringWithFormat:@"%@%@", [@(self.configuration.heartbeatMs) stringValue], @",0"],
+                                                  kHeaderAcceptVersion : @"1.2"
+                                                  }
+         
                               completionHandler:^(STOMPFrame *connectedFrame, NSError *error) {
                                 
                                 if (error) {
                                   
                                   // revoke token if connection error
                                   [weakself.client hardDisconnect];
-                                  
-                                  // TODO: Need logout?
-//                                  [[SCAccountManager sharedManager] logout:^(NSError *error) {
-//                                    if (error == nil) {
-//                                      [weakself connectToHost:host OnCompletion:completion];
-//                                    }
-//                                  }];
-                                  
                                   reject([SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                                   
+                                } else {
+                                  
+                                  // all done, set timer
+                                  [weakself setConnectionTimer];
+                                  
+                                  // and call completion
+                                  fulfill(nil);
+
                                 }
-                                
-                                // all done, set timer
-                                [weakself setConnectionTimer];
-                                
-                                // and call completion
-                                fulfill(nil);
                                 
                               }];
         
@@ -451,23 +450,17 @@
                           
                           // revoke token if connection error
                           [weakself.client hardDisconnect];
-
-                          // TODO: Need logout?
-//                          [[SCAccountManager sharedManager] logout:^(NSError *error) {
-//                            if (error == nil) {
-//                              [weakself connectToHost:host OnCompletion:completion];
-//                            }
-//                          }];
-                          
                           reject([SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                           
+                        } else {
+                        
+                          // all done, set timer
+                          [weakself setConnectionTimer];
+                          
+                          // and call completion
+                          fulfill(nil);
+                          
                         }
-                        
-                        // all done, set timer
-                        [weakself setConnectionTimer];
-                        
-                        // and call completion
-                        fulfill(nil);
                         
                       }];
         

@@ -333,8 +333,10 @@
                                                                                   @"uuid": [SCConnectClient sharedInstance].configuration.deviceId
                                                                                   }];
     
-    [[SCRestServiceManager sharedManager] post:[SCConnectClient sharedInstance].configuration.restConfiguration.authUrl withParams:params].then(^(SCAuthDeviceAuthCode *code) {
-      fulfill(code);
+    NSString *endpoint = [NSString stringWithFormat:@"%@%@", [SCConnectClient sharedInstance].configuration.restConfiguration.authUrl, @"oauth/token"];
+    
+    [[SCRestServiceManager sharedManager] post:endpoint withAuth:FALSE withParams:params].then(^(id response) {
+      fulfill([MTLJSONAdapter modelOfClass:SCAuthDeviceAuthCode.class fromJSONDictionary:response error:nil]);
     }).catch(^(NSError *error) {
       reject(error);
     });
@@ -344,6 +346,8 @@
 }
 
 - (PMKPromise*) pollToken:(SCAuthDeviceAuthCode*)code {
+  
+  NSLog(@"Insert code: %@ on site %@", code.userCode, code.verificationUrl);
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
@@ -362,14 +366,23 @@
   PMKRejecter reject = [timer.userInfo objectForKey:@"rejecter"];
   
   // check if timer over expiration
-  if ([code.expiresIn floatValue] > [[NSDate date] timeIntervalSinceDate:timerStart]) {
+  NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:timerStart];
+  if ([code.expiresIn floatValue] < elapsedTime) {
     reject([SCErrorManager errorWithCode:ERR_TOKEN_POLL_EXPIRED andDomain:kErrorDomainSCAccount]);
   }
   
   [self retrieveDeviceAccessToken:code].then(^(NSString *token) {
+    
+    [timer invalidate];
     fulfill(token);
+    
   }).catch(^(NSError *error) {
-    reject(error);
+    
+    // do not reject when Error 401 as this is regular when user didn't enter the code
+    if (![error.localizedDescription containsString:@"401"]) {
+      reject(error);
+    }
+    
   });
   
 }

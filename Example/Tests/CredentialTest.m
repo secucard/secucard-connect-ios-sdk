@@ -95,8 +95,6 @@ describe(@"ConnectClient", ^{
           client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:account.username andPassword:account.password];
         }
         
-      }).then(^() {
-        
         assert(TRUE);
         
       }).catch(^(NSError *error) {

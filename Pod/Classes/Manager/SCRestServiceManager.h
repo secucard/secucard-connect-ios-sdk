@@ -86,6 +86,6 @@
 
 - (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg;
 
-- (PMKPromise*) post:(NSString*)endpoint withParams:(id)params;
+- (PMKPromise*) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params;
 
 @end
