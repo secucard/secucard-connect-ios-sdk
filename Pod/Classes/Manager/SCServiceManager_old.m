@@ -53,7 +53,7 @@
   
   NSString *typedCall = [self serviceCall:call withChannel:channel andServiceMethod:method andPid:pid andSid:sid];
   
-  if (channel == StompChannel) {
+  if (channel == PersistentChannel) {
     
     NSMutableDictionary *sendParams = [params mutableCopy];
     
@@ -68,7 +68,7 @@
     return nil;//return [[SCStompManager sharedManager] sendMessage:sendParams toExchange:typedCall];
     
   }
-  else if (channel == RestChannel)
+  else if (channel == OnDemandChannel)
   {
     switch (method) {
         
@@ -100,7 +100,7 @@
 {
   
   switch (channel) {
-    case RestChannel:
+    case OnDemandChannel:
     {
       // make basic conversion
       NSString *callString = [call stringByReplacingOccurrencesOfString:@"." withString:@"/"];
@@ -131,7 +131,7 @@
       return callString;
       
     }
-    case StompChannel:
+    case PersistentChannel:
     {
       NSString *methodString;
       

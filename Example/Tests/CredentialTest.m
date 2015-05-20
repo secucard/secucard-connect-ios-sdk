@@ -52,7 +52,7 @@ describe(@"ConnectClient", ^{
     
     SCClientConfiguration *clientConfig = [[SCClientConfiguration alloc] initWithRestConfiguration:restConfig
                                                                                 stompConfiguration:stompConfig
-                                                                                    defaultChannel:RestChannel
+                                                                                    defaultChannel:OnDemandChannel
                                                                                       stompEnabled:TRUE
                                                                                           oauthUrl:kAuthUrl
                                                                                  clientCredentials:clientCredentials

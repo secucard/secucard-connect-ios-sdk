@@ -28,28 +28,28 @@
 
 - (PMKPromise*) checkIn:(NSString*) storeId sid:(NSString*)sid {
   
-  return [[self serviceManagerByChannel:StompChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil];
+  return [[self serviceManagerByChannel:PersistentChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil];
   
 }
 
 - (PMKPromise*) setDefault:(NSString*)storeId {
   
-  return [[self serviceManagerByChannel:RestChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil];
+  return [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil];
   
 }
 
 - (PMKPromise*) getStores:(SCQueryParams*)queryParams {
   
-  return [[self serviceManagerByChannel:RestChannel] findObjects:[SCGeneralStore class] queryParams:queryParams];
+  return [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralStore class] queryParams:queryParams];
   
 }
 
 - (PMKPromise*) getStoreList:(SCQueryParams*)queryParams {
-  return [self getList:[SCGeneralStore class] withParams:queryParams onChannel:RestChannel];
+  return [self getList:[SCGeneralStore class] withParams:queryParams onChannel:OnDemandChannel];
 }
 
 - (PMKPromise*) getStore:(NSString*)pid {
-  return [self get:[SCGeneralStore class] withId:pid onChannel:RestChannel];
+  return [self get:[SCGeneralStore class] withId:pid onChannel:OnDemandChannel];
 }
 
 - (PMKPromise*) postProcessObjects:(NSArray*)objects {

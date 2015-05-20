@@ -24,20 +24,20 @@
 - (SCServiceManager*) serviceManagerByChannel:(ServiceChannel)channel {
   
   switch (channel) {
-    case RestChannel:
+    case OnDemandChannel:
       return [SCRestServiceManager sharedManager];
     
-    case StompChannel:
+    case PersistentChannel:
       return [SCStompManager sharedManager];
       
     default:
       
     {
       switch ([SCConnectClient sharedInstance].configuration.defaultChannel) {
-        case RestChannel:
+        case OnDemandChannel:
           return [SCRestServiceManager sharedManager];
           
-        case StompChannel:
+        case PersistentChannel:
           return [SCStompManager sharedManager];
           
         default:

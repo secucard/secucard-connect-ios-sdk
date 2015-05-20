@@ -12,15 +12,15 @@
 @implementation SCSmartIdentService
 
 - (PMKPromise*) getIdentsList {
-  return [self getObjectList:[SCSmartIdent class] withParams:nil onChannel:StompChannel];
+  return [self getObjectList:[SCSmartIdent class] withParams:nil onChannel:PersistentChannel];
 }
 
 - (PMKPromise*) getIdents {
-  return [self getList:[SCSmartIdent class] withParams:nil onChannel:StompChannel];
+  return [self getList:[SCSmartIdent class] withParams:nil onChannel:PersistentChannel];
 }
 
 - (PMKPromise*) readIdent:(NSString*)id {
-  return [self execute:[SCSmartIdent class] withId:id action:@"read" actionArg:nil arg:nil returnType:[SCSmartIdent class] onChannel:StompChannel];
+  return [self execute:[SCSmartIdent class] withId:id action:@"read" actionArg:nil arg:nil returnType:[SCSmartIdent class] onChannel:PersistentChannel];
 }
 
 @end

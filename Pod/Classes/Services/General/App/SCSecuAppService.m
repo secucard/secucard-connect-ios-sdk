@@ -27,15 +27,15 @@
 
 - (PMKPromise*) getMerchant:(NSString*)appId argObject:(id)argObject {
   // TODO: return type makes sense?
-  return [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCStoreList class] onChannel:RestChannel];
+  return [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCStoreList class] onChannel:OnDemandChannel];
 }
 
 - (PMKPromise*) getMerchants:(NSString*)appId arg:(SCQueryParams*)arg {
-  return [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCStoreList class] onChannel:RestChannel];
+  return [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCStoreList class] onChannel:OnDemandChannel];
 }
 
 - (PMKPromise*) addCard:(NSString*)appId argObject:(id)argObject {
-  return [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:RestChannel];
+  return [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel];
 }
 
 @end

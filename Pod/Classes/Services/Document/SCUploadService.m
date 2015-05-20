@@ -12,7 +12,7 @@
 
 -(PMKPromise*)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument {
   
-  return [[self serviceManagerByChannel:RestChannel] execute:base64EncodeDocument.class objectId:nil action:nil actionArg:nil arg:base64EncodeDocument];
+  return [[self serviceManagerByChannel:OnDemandChannel] execute:base64EncodeDocument.class objectId:nil action:nil actionArg:nil arg:base64EncodeDocument];
   
 }
 

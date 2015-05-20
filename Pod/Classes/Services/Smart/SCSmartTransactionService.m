@@ -42,7 +42,7 @@
  * @return a promise fulfilling with SCSmartTransaction
  */
 - (PMKPromise*) startTransaction:(NSString*)transactionId type:(NSString*)type {
-  return [self execute:[SCSmartTransaction class] withId:transactionId action:@"start" actionArg:type arg:nil returnType:[SCSmartTransaction class] onChannel:StompChannel];
+  return [self execute:[SCSmartTransaction class] withId:transactionId action:@"start" actionArg:type arg:nil returnType:[SCSmartTransaction class] onChannel:PersistentChannel];
 }
 
 @end

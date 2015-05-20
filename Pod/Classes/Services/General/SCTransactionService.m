@@ -22,11 +22,11 @@
 }
 
 - (PMKPromise*) getTransactions:(SCQueryParams*)queryParams {
-  return [[self serviceManagerByChannel:RestChannel] findObjects:[SCGeneralTransaction class] queryParams:queryParams];
+  return [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralTransaction class] queryParams:queryParams];
 }
 
 - (PMKPromise*) getTransaction:(NSString*)pid {
-  return [[self serviceManagerByChannel:RestChannel] getObject:[SCGeneralTransaction class] objectId:pid];
+  return [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCGeneralTransaction class] objectId:pid];
 }
 
 

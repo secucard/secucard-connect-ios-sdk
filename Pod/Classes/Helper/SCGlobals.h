@@ -48,8 +48,8 @@
 
 typedef enum {
   
-  RestChannel,
-  StompChannel,
+  OnDemandChannel,
+  PersistentChannel,
   DefaultChannel
   
 } ServiceChannel;

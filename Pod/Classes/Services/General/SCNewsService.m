@@ -28,11 +28,11 @@
 }
 
 - (PMKPromise*) getNews:(SCQueryParams*)queryParams {
-  return [[self serviceManagerByChannel:RestChannel] findObjects:[SCGeneralNews class] queryParams:queryParams];
+  return [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralNews class] queryParams:queryParams];
 }
 
 - (PMKPromise*) markRead:(NSString*)pid {
-  return [[self serviceManagerByChannel:RestChannel] execute:[SCGeneralNews class] objectId:pid action:@"markRead" actionArg:nil arg:nil];
+  return [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralNews class] objectId:pid action:@"markRead" actionArg:nil arg:nil];
 }
 
 @end

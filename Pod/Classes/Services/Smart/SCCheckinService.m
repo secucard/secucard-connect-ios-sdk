@@ -12,11 +12,11 @@
 @implementation SCCheckinService
 
 - (PMKPromise*) getCheckins {
-  return [self getList:[SCSmartCheckin class] withParams:nil onChannel:StompChannel];
+  return [self getList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel];
 }
 
 - (PMKPromise*) getCheckinsList {
-  return [self getObjectList:[SCSmartCheckin class] withParams:nil onChannel:StompChannel];
+  return [self getObjectList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel];
 }
 
 - (PMKPromise *)postProcessObjects:(NSArray *)list {

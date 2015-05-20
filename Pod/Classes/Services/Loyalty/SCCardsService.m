@@ -22,25 +22,25 @@
 
 - (PMKPromise*) getCard:(NSString*)id {
   
-  return [[self serviceManagerByChannel:RestChannel] getObject:[SCLoyaltyCard class] objectId:id];
+  return [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCLoyaltyCard class] objectId:id];
   
 }
 
 - (PMKPromise*) getCards:(SCQueryParams*)queryParams {
   
-  return [[self serviceManagerByChannel:RestChannel] findObjects:[SCLoyaltyCard class] queryParams:queryParams];
+  return [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCLoyaltyCard class] queryParams:queryParams];
   
 }
 
 - (PMKPromise*) assignUserToCard:(NSString*)cardNumber pin:(id)pin {
   
-  return [[self serviceManagerByChannel:RestChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin];
+  return [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin];
   
 }
 
 - (PMKPromise*) deleteUserFromCard:(NSString*)cardNumber {
   
-  return [[self serviceManagerByChannel:RestChannel] deleteObject:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me"];
+  return [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me"];
   
 }
 
