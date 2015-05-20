@@ -266,6 +266,13 @@
   
 }
 
+- (void) destroy {
+  [self close];
+  self.configuration = nil;
+  self.client = nil;
+}
+
+
 - (void) rejectStoredItem:(NSString*)correlationId withError:(NSError *)error {
   
   if (correlationId != nil) {
@@ -339,27 +346,20 @@
   [self performSelector:@selector(closeConnection) withObject:nil afterDelay:self.configuration.connectionTimeoutSec];
 }
 
-- (PMKPromise*) closeConnection
+- (void) closeConnection
 {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    // disconnect client
-    if (self.client.connected)
-      [self.client disconnect];
-    
-    // cancel disconnect requests
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
-    
-    // reject earlier messages by correlation id (timouts)
-    for (SCStompStorageItem *item in self.promiseStore) {
-      item.reject([SCErrorManager errorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
-    }
-    
+  // disconnect client
+  if (self.client.connected)
+    [self.client disconnect];
   
-    fulfill(nil);
-    
-  }];
+  // cancel disconnect requests
+  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
+  
+  // reject earlier messages by correlation id (timouts)
+  for (SCStompStorageItem *item in self.promiseStore) {
+    item.reject([SCErrorManager errorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
+  }
   
 }
 
@@ -651,10 +651,8 @@
   
 }
 
-- (PMKPromise*) close {
-  
-  return [self closeConnection];
-  
+- (void) close {
+  [self closeConnection];
 }
 
 @end

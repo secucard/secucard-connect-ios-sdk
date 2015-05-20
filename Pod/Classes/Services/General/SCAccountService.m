@@ -54,7 +54,7 @@
 
 - (PMKPromise*)createAccount:(SCGeneralAccount *)account {
   
-  return [[self serviceManagerByChannel:RestChannel] createObject:account];
+  return [[self serviceManagerByChannel:RestChannel] createObject:account secure:FALSE];
   
 }
 

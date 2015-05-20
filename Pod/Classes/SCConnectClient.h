@@ -12,6 +12,7 @@
 #import "SCErrorManager.h"
 #import "SCClientConfiguration.h"
 #import "SCAbstractService.h"
+#import "SCAccountService.h"
 
 @class SCClientConfiguration;
 @class SCUserCredentials;
@@ -29,5 +30,6 @@
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials;
 - (PMKPromise*) connect;
 - (PMKPromise*) disconnect;
+- (void) destroy;
 
 @end

@@ -16,6 +16,8 @@
 
 @interface SCAccountService : SCAbstractService
 
++ (SCAccountService*)sharedService;
+
 /**
  *  creates an account
  *

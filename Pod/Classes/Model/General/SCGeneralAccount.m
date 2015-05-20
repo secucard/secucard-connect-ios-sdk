@@ -7,11 +7,15 @@
 //
 
 #import "SCGeneralAccount.h"
-
+#import "MTLJSONAdapter.h"
 @implementation SCGeneralAccount
 
 + (NSString *)object {
-  return @"general.accounts";
+  return @"General.Accounts";
+}
+
++ (NSValueTransformer *)contactJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:SCGeneralContact.class];
 }
 
 @end

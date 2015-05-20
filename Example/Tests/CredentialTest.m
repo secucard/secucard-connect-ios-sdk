@@ -1,19 +1,25 @@
 //
-//  SecucardConnectClientLibTests.m
-//  SecucardConnectClientLibTests
+//  TestStuff.m
+//  SecucardConnectClientLib
 //
-//  Created by Jörn Schmidt on 04/25/2015.
-//  Copyright (c) 2014 Jörn Schmidt. All rights reserved.
+//  Created by Jörn Schmidt on 28.04.15.
+//  Copyright (c) 2015 Jörn Schmidt. All rights reserved.
 //
+
+#import <Foundation/Foundation.h>
 
 #import <Expecta/Expecta.h>
 #import <SecucardConnectClientLib/SCConnectClient.h>
 
-SpecBegin(InitClient)
+SpecBegin(ConnectClient)
 
-describe(@"InitClient", ^{
-  
-  it(@"can init", ^{
+describe(@"ConnectClient", ^{
+
+  __block SCConnectClient *client = nil;
+
+  beforeAll(^{
+
+    [[SCConnectClient sharedInstance] destroy];
     
     SCRestConfiguration *restConfig = [[SCRestConfiguration alloc] initWithBaseUrl:kBaseUrl
                                                                         andAuthUrl:kAuthUrl];
@@ -56,12 +62,93 @@ describe(@"InitClient", ^{
     
     expect(clientConfig).toNot.beNil();
     
-    SCConnectClient *client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
+    client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
     
     expect(client).toNot.beNil();
+
+  });
+  
+  it (@"can register", ^{
+    
+    waitUntil(^(DoneCallback done) {
+      
+      SCGeneralContact *contact = [SCGeneralContact new];
+      contact.forename = kContactForename;
+      contact.surname = kContactSurname;
+      contact.salutation = kContactSalutation;
+      contact.dateOfBirth = [NSDate date];
+      contact.email = kContactEmail;
+      
+      
+      SCGeneralAccount *account = [SCGeneralAccount new];
+      account.username = kAccountUsername;
+      account.password = kAcccountPassword;
+      account.contact = contact;
+      
+      [[SCAccountService sharedService] createAccount:account].then(^(SCGeneralAccount *savedAccount) {
+        
+        expect(savedAccount).toNot.beNil();
+        
+        if ([savedAccount isKindOfClass:[SCGeneralAccount class]]) {
+          client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:savedAccount.username andPassword:savedAccount.password];
+        } else {
+          client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:account.username andPassword:account.password];
+        }
+        
+      }).then(^() {
+        
+        assert(TRUE);
+        
+      }).catch(^(NSError *error) {
+        
+        expect(error).to.beNil();
+        
+      }).finally(^() {
+        
+        done();
+        
+      });
+      
+      
+    });
     
   });
   
+  it(@"can connect", ^{
+
+    waitUntil(^(DoneCallback done) {
+      
+      SCUserCredentials *userCredentials;
+      if (client.configuration.userCredentials) {
+        userCredentials = client.configuration.userCredentials;
+      } else {
+        userCredentials = [[SCUserCredentials alloc] initWithUsername:kAccountUsername andPassword:kAcccountPassword];
+      }
+      
+      [[SCAccountManager sharedManager] loginWithUserCedentials:userCredentials].then(^(){
+        
+        return [client connect];
+        
+      }).then(^() {
+        
+        assert(TRUE);
+        
+      }).catch(^(NSError *error) {
+        
+        expect(error).to.beNil();
+        
+      }).finally(^() {
+        
+        done();
+        
+      });
+      
+
+    });
+
+  });
+
+
 });
 
 SpecEnd

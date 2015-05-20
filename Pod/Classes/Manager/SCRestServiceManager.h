@@ -73,6 +73,8 @@
  */
 - (void) initWithConfiguration:(SCRestConfiguration*)configuration;
 
+- (void) destroy;
+
 /**
  *  requests for authentication
  *
@@ -83,5 +85,7 @@
 - (PMKPromise*) requestAuthWithParams:(id)params;
 
 - (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg;
+
+- (PMKPromise*) post:(NSString*)endpoint withParams:(id)params;
 
 @end

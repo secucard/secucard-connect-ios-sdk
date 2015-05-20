@@ -7,8 +7,16 @@
 //
 
 #import "SCGeneralContact.h"
+#import "MTLValueTransformer.h"
 
 @implementation SCGeneralContact
+
++ (NSDateFormatter *)dateFormatter {
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+  dateFormatter.dateFormat = @"yyyy-MM-dd";
+  return dateFormatter;
+}
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
@@ -20,6 +28,16 @@
                                                                   @"companyName":@"companyname",
                                                                   @"urlWebsite":@"url_website"
                                                                   }];
+}
+
++ (NSValueTransformer *)dateOfBirthJSONTransformer {
+  
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [self.dateFormatter dateFromString:value];
+  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [self.dateFormatter stringFromDate:value];
+  }];
+  
 }
 
 

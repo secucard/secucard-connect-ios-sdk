@@ -96,5 +96,15 @@
           
 }
 
+- (void) destroy {
+  
+  [[SCRestServiceManager sharedManager] destroy];
+  [[SCStompManager sharedManager] destroy];
+  [[SCAccountManager sharedManager] destroy];
+  self.configuration = nil;
+  self.connected = false;
+  
+}
+
 
 @end

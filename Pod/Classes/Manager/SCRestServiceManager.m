@@ -84,7 +84,16 @@ AFHTTPRequestSerializer *requestSerializer;
   self.operationManager = [AFHTTPRequestOperationManager manager];
   self.operationManager.requestSerializer = requestSerializer;
   [self.operationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
- 
+  
+}
+
+- (void) destroy {
+  [self close];
+  
+  self.configuration = nil;
+  requestSerializer = nil;
+  self.authOperationManager = nil;
+  self.operationManager = nil;
 }
 
 - (PMKPromise*) requestAuthWithParams:(id)params
@@ -93,15 +102,14 @@ AFHTTPRequestSerializer *requestSerializer;
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
     // do the actual request
-    [self.authOperationManager POST:[NSString stringWithFormat:@"%@oauth/token", self.configuration.authUrl] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, @"oauth/token"] parameters:params].then(^(id responseObject) {
       
       [self.operationManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", responseObject] forHTTPHeaderField:@"Authorization"];
       
       fulfill(responseObject);
       
-    }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
+    }).catch(^(NSError *error){
       
-      error = [self doBasicErrorHandling:error withOperation:operation];
       reject(error);
       
     });
@@ -116,24 +124,41 @@ AFHTTPRequestSerializer *requestSerializer;
  *  @param endpoint     endpoint url, like General/Skeletons
  *  @param params       the parameters to send
  */
-- (PMKPromise*) postRequestToEndpoint:(NSString*)endpoint WithParams:(id)params
+- (PMKPromise*) postRequestToEndpoint:(NSString*)endpoint WithParams:(id)params secure:(BOOL)secure
 {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-
-    [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+    
+    if (secure) {
       
-      [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+      [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+        
+        return [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
+        
+      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
         fulfill(responseObject);
-      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
-        reject([self doBasicErrorHandling:error withOperation:operation]);
+        
+      }).catch(^(NSError *error){
+        
+        reject([self doBasicErrorHandling:error]);
+        
       });
       
-    }).catch(^(NSError *error){
+    } else {
       
-      reject(error);
+      [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(id responseObject) {
+        
+        fulfill(responseObject);
+        
+      }).catch(^(NSError *error) {
+        
+        reject([self doBasicErrorHandling:error]);
+        
+      });
       
-    });
+    }
+    
     
   }];
   
@@ -146,37 +171,37 @@ AFHTTPRequestSerializer *requestSerializer;
  *  @param endpoint     endpoint URL like General/Skeletons
  *  @param params       the parameters to send
  */
-- (PMKPromise*) getRequestToEndpoint:(NSString*)endpoint WithParams:(id)params
+- (PMKPromise*) getRequestToEndpoint:(NSString*)endpoint WithParams:(id)params secure:(BOOL)secure
 {
-  
-  // TODO: REMOVE
-  BOOL needsToken = ![endpoint isEqualToString:@"General/PublicMerchants"];
-  // END OF REMOVE
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    if (needsToken) {
+    if (secure) {
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
-          fulfill(responseObject);
-        }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
-          reject([self doBasicErrorHandling:error withOperation:operation]);
-        });
+        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
+        
+      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        fulfill(responseObject);
         
       }).catch(^(NSError *error) {
         
-        reject(error);
+        reject([self doBasicErrorHandling:error]);
         
       });
       
     } else {
       
-      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, endpoint] parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
         fulfill(responseObject);
-      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
-        reject([self doBasicErrorHandling:error withOperation:operation]);
+        
+      }).catch(^(NSError *error) {
+        
+        reject([self doBasicErrorHandling:error]);
+        
       });
       
     }
@@ -195,25 +220,42 @@ AFHTTPRequestSerializer *requestSerializer;
  *  @param endpoint     endpoint URL like General/Skeletons
  *  @param params       the parameters to send
  */
-- (PMKPromise*) putRequestToEndpoint:(NSString*)endpoint WithParams:(id)params
+- (PMKPromise*) putRequestToEndpoint:(NSString*)endpoint WithParams:(id)params secure:(BOOL)secure
 {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+    if (secure) {
       
-      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+      [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+        
+        [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
+        
+      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
         fulfill(responseObject);
-      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
-        reject([self doBasicErrorHandling:error withOperation:operation]);
+        
+      }).catch(^(NSError *error) {
+        
+        reject([self doBasicErrorHandling:error]);
+        
       });
       
-    }).catch(^(NSError *error) {
       
-      reject(error);
+    } else {
       
-    });
-                                                  
+      [self.authOperationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, endpoint] parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        fulfill(responseObject);
+        
+      }).catch(^(NSError *error) {
+        
+        reject([self doBasicErrorHandling:error]);
+        
+      });
+      
+    }
+    
   }];
   
 }
@@ -225,24 +267,41 @@ AFHTTPRequestSerializer *requestSerializer;
  *  @param params       the parameters to send
  *
  */
-- (PMKPromise*) deleteRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params
+- (PMKPromise*) deleteRequestToEndpoint:(NSString*)endpoint WithParams:(NSDictionary*)params secure:(BOOL)secure
 {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
-    [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+    if (secure) {
       
-      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+      [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+        
+        [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
+        
+      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
         fulfill(responseObject);
-      }).catch(^(AFHTTPRequestOperation *operation, NSError *error) {
-        reject([self doBasicErrorHandling:error withOperation:operation]);
+        
+      }).catch(^(NSError *error) {
+        
+        reject([self doBasicErrorHandling:error]);
+        
       });
       
-    }).catch(^(NSError *error) {
       
-      reject(error);
+    } else {
       
-    });
+      [self.authOperationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, endpoint] parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+        
+        fulfill(responseObject);
+        
+      }).catch(^(NSError *error) {
+        
+        reject([self doBasicErrorHandling:error]);
+        
+      });
+      
+    }
     
   }];
   
@@ -256,38 +315,38 @@ AFHTTPRequestSerializer *requestSerializer;
  *
  *  @return the input Error as output
  */
-- (NSError*) doBasicErrorHandling:(NSError*)error withOperation:(AFHTTPRequestOperation*)operation
+- (NSError*) doBasicErrorHandling:(NSError*)error
 {
   
   //possible action by code
-  switch (operation.response.statusCode) {
-    case 400: // Invalid
-      
-      break;
-      
-    case 401: // Unauthorized
-      
-      break;
-      
-    case 403: // Forbidden
-      
-      break;
-      
-    case 426: // Update required
-      
-      break;
-      
-    case 409: // Conflict
-      
-      break;
-      
-    case 500: // Internal
-      
-      break;
-      
-    default:
-      break;
-  }
+//  switch (error.response.statusCode) {
+//    case 400: // Invalid
+//      
+//      break;
+//      
+//    case 401: // Unauthorized
+//      
+//      break;
+//      
+//    case 403: // Forbidden
+//      
+//      break;
+//      
+//    case 426: // Update required
+//      
+//      break;
+//      
+//    case 409: // Conflict
+//      
+//      break;
+//      
+//    case 500: // Internal
+//      
+//      break;
+//      
+//    default:
+//      break;
+//  }
   
   return error;
 }
@@ -302,7 +361,7 @@ AFHTTPRequestSerializer *requestSerializer;
   if (type != nil && ![type isSubclassOfClass:[SCSecuObject class]]) {
     [SCErrorManager handleError:[SCErrorManager errorWithDescription:@"Endpoint resolver: class is no subclass of SCSecuObject and as such, can have no endpoint"]];
     return @"";
-  };
+  }
   
   
   NSString *callString = (!type) ? @"" : [type object];                                       // -> General.PublicMerchants
@@ -313,32 +372,32 @@ AFHTTPRequestSerializer *requestSerializer;
     args = @[];
   }
   
-  for (int i = 0; i <= args.count; i++) {
-
+  for (int i = 0; i < args.count; i++) {
+    
     if (![args[i] isKindOfClass:[NSString class]]) {
       continue;
     }
     
     callString = [callString stringByAppendingString:[@"/" stringByAppendingString:args[i]]]; // -> General/PublicMerchants/pmc_231234124
-                                                     
+    
   }
   
-//  // add ME to Accounts-Path
-//  if (pid != nil)
-//  {
-//    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:[NSString stringWithFormat:@"%@/", pid]];
-//  }
-//  else
-//  {
-//    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:@""];
-//  }
-//  
-//  // add SID if there
-//  if (sid != nil)
-//  {
-//    callString = [callString stringByAppendingString:[NSString stringWithFormat:@"/%@", sid]];
-//  }
-//  
+  //  // add ME to Accounts-Path
+  //  if (pid != nil)
+  //  {
+  //    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:[NSString stringWithFormat:@"%@/", pid]];
+  //  }
+  //  else
+  //  {
+  //    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:@""];
+  //  }
+  //
+  //  // add SID if there
+  //  if (sid != nil)
+  //  {
+  //    callString = [callString stringByAppendingString:[NSString stringWithFormat:@"/%@", sid]];
+  //  }
+  //
   // if not an auth call add api and version to it
   //      if (![callString containsString:@"oauth"])
   //      {
@@ -347,7 +406,7 @@ AFHTTPRequestSerializer *requestSerializer;
   //      }
   
   return callString;
-
+  
   
 }
 
@@ -366,80 +425,94 @@ AFHTTPRequestSerializer *requestSerializer;
   
 }
 
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
+- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure {
   
-  return [self getRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil];
+  return [self getRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil secure:secure];
   
 }
 
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
+- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:queryParams error:&error];
-
-  return [self getRequestToEndpoint:[self resolveEndpoint:type] WithParams:params];
+  
+  return [self getRequestToEndpoint:[self resolveEndpoint:type] WithParams:params secure:secure];
   
 }
 
-- (PMKPromise*) createObject:(SCSecuObject *)object {
+- (PMKPromise*) createObject:(SCSecuObject *)object secure:(BOOL)secure {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
   
-  return [self postRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params];
+  return [self postRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure];
   
 }
 
-- (PMKPromise*) updateObject:(SCSecuObject *)object {
+- (PMKPromise*) updateObject:(SCSecuObject *)object secure:(BOOL)secure {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
   
-  return [self putRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params];
+  return [self putRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure];
   
 }
 
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
   
-  return [self putRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params];
+  return [self putRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure];
   
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure {
   
-  return [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil];
-  
-}
-
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
-  
-  return [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:nil];
+  return [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil secure:secure];
   
 }
 
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure {
+  
+  return [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:nil secure:secure];
+  
+}
+
+- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure {
   
   NSError *error = nil;
   NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
   
-  return [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params];
+  return [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure];
   
 }
 
-- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg {
+- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg secure:(BOOL)secure {
   
-  return [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg];
+  return [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg secure:secure];
   
 }
 
-- (PMKPromise*) close {
+- (PMKPromise*) post:(NSString*)endpoint withParams:(id)params {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    fulfill(nil);
+    
+    [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(AFHTTPRequestOperation *operation, id responseObject) {
+      
+      fulfill(responseObject);
+      
+    }).catch(^(NSError *error) {
+      
+      reject([self doBasicErrorHandling:error]);
+      
+    });
+    
   }];
+  
+}
+
+- (void) close {
   
 }
 

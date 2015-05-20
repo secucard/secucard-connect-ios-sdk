@@ -16,8 +16,9 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		97F3B9FA1A902B15559AB9AC /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65282C974BE7DD8A48DF44E5 /* libPods-Tests.a */; };
+		AA48B7521B0A3106007946F7 /* DeviceCredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */; };
 		AA693C2C1AEFA2A500AAB63C /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2B1AEFA2A500AAB63C /* Tests.m */; };
-		AA693C2E1AEFE82C00AAB63C /* TestStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2D1AEFE82C00AAB63C /* TestStuff.m */; };
+		AA693C2E1AEFE82C00AAB63C /* CredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */; };
 		AA9DCD611B0735FD0070022E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD5F1B0735FD0070022E /* AppDelegate.swift */; };
 		AA9DCD621B0735FD0070022E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD601B0735FD0070022E /* ViewController.swift */; };
 		AA9DCD641B0736120070022E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD631B0736120070022E /* Info.plist */; };
@@ -50,8 +51,10 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		65282C974BE7DD8A48DF44E5 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B5F6B76AA208FD52D8849B /* SecucardConnectClientLib.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SecucardConnectClientLib.podspec; path = ../SecucardConnectClientLib.podspec; sourceTree = "<group>"; };
+		AA48B7501B0A2CE1007946F7 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCredentialTest.m; sourceTree = "<group>"; };
 		AA693C2B1AEFA2A500AAB63C /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
-		AA693C2D1AEFE82C00AAB63C /* TestStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestStuff.m; sourceTree = "<group>"; };
+		AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialTest.m; sourceTree = "<group>"; };
 		AA9DCD5E1B0735FC0070022E /* SecucardConnectClientLib-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecucardConnectClientLib-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA9DCD5F1B0735FD0070022E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA9DCD601B0735FD0070022E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +148,8 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				AA693C2D1AEFE82C00AAB63C /* TestStuff.m */,
+				AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */,
+				AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */,
 				AA693C2B1AEFA2A500AAB63C /* Tests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
@@ -158,6 +162,7 @@
 				6003F5B7195388D20070C39A /* Tests-Info.plist */,
 				6003F5B8195388D20070C39A /* InfoPlist.strings */,
 				606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */,
+				AA48B7501B0A2CE1007946F7 /* globals.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,7 +361,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA693C2E1AEFE82C00AAB63C /* TestStuff.m in Sources */,
+				AA693C2E1AEFE82C00AAB63C /* CredentialTest.m in Sources */,
+				AA48B7521B0A3106007946F7 /* DeviceCredentialTest.m in Sources */,
 				AA693C2C1AEFA2A500AAB63C /* Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

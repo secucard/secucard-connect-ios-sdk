@@ -7,6 +7,7 @@
 //
 
 #import "SCAccountManager.h"
+#import "SCAuthDeviceAuthCode.h"
 
 @interface SCAccountManager()
 
@@ -39,6 +40,11 @@
 - (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials
 {
   _clientCredentials = clientCredentials;
+}
+
+- (void) destroy {
+  self.clientCredentials = nil;
+  self.userCredentials = nil;
 }
 
 - (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials
@@ -108,7 +114,7 @@
                              @"password": self.userCredentials.password,
                              @"client_id": self.clientCredentials.clientId,
                              @"client_secret": self.clientCredentials.clientSecret,
-                             @"device": @"sddsfsdf"
+                             @"device": [SCConnectClient sharedInstance].configuration.deviceId
                              };
     
     [[SCRestServiceManager sharedManager] requestAuthWithParams:params].then(^(NSDictionary *result) {
@@ -127,6 +133,54 @@
       
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
 
+      fulfill(self.accessToken);
+      
+    }).catch(^(NSError *error) {
+      
+      reject(error);
+      
+    });
+    
+  }];
+  
+}
+
+/**
+ *  Retrieves an access token for device
+ */
+- (PMKPromise*) retrieveDeviceAccessToken:(SCAuthDeviceAuthCode*)code
+{
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    if ([self needsInitialization])
+    {
+      reject([SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+    }
+    
+    NSDictionary *params = @{
+                             @"grant_type":@"device",
+                             @"client_id": self.clientCredentials.clientId,
+                             @"client_secret": self.clientCredentials.clientSecret,
+                             @"code": code.deviceCode
+                             };
+    
+    [[SCRestServiceManager sharedManager] requestAuthWithParams:params].then(^(NSDictionary *result) {
+      
+      self.accessToken = [result objectForKey:@"access_token"];
+      self.refreshToken = [result objectForKey:@"refresh_token"];
+      
+      // get expires date
+      NSNumber *interval = [result objectForKey:@"expires_in"];
+      self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
+      
+      // serialize
+      [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
+      [SCPersistenceManager persist:self.refreshToken forKey:@"refreshToken"];
+      [SCPersistenceManager persist:self.expires forKey:@"expires"];
+      
+      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
+      
       fulfill(self.accessToken);
       
     }).catch(^(NSError *error) {
@@ -206,44 +260,117 @@
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
+    // if we are freshly there without any access token
     if (self.accessToken == nil)
     {
       
-      // check if did ever login already
-      if (!self.userCredentials.username && !self.userCredentials.password) {
-        reject([SCErrorManager errorWithDescription:@"No Credentials yet" andDomain:kErrorDomainSCAccount]);
-      }
-      else // else might have no token yet
-      {
-
+      // if we have user credentials, this is a regular auth process
+      if (self.userCredentials) {
+        
         [self retrieveAccessToken].then(^(NSString *token) {
-          // TODO: [SCNotificationManager sendNotificationToDisplay:[NSString stringWithFormat:@"ACCOUNT: Token: Got \nToken: %@\nRefresh Token: %@\nExires: %@", self.accessToken, self.refreshToken, self.expires]];
+          
           fulfill(token);
+          
         }).catch(^(NSError *error) {
+          
           reject(error);
+          
+        });
+        
+      } else if ([[SCConnectClient sharedInstance].configuration.authType isEqualToString:@"device"]) {
+        
+        // else this is a three-way auth process
+        
+        // request codes
+        [self requestCode].then(^(SCAuthDeviceAuthCode *code) {
+          
+          return [self pollToken:code];
+          
+        }).then(^(NSString *token) {
+          
+          fulfill(token);
+          
+        }).catch(^(NSError *error) {
+          
+          reject(error);
+          
         });
         
       }
       
-    }
-    else if (![self accessTokenValid]) { // or token is expired
+    } else if (![self accessTokenValid]) {
       
-      // TODO: [SCNotificationManager sendNotificationToDisplay:[NSString stringWithFormat:@"ACCOUNT: Token: Invalid, refresh"]];
+      // or token is expired
       
       [self refreshAccessToken].then(^(NSString *token) {
-        // TODO: [SCNotificationManager sendNotificationToDisplay:[NSString stringWithFormat:@"ACCOUNT: Token: Got \nToken: %@\nRefresh Token: %@\nExires: %@", self.accessToken, self.refreshToken, self.expires]];
+
         fulfill(token);
+        
       }).catch(^(NSError *error) {
+        
         reject(error);
+        
       });
-    }
-    else // or it is valid
-    {
-      // TODO: [SCNotificationManager sendNotificationToDisplay:[NSString stringWithFormat:@"ACCOUNT: Token valid"]];
+    } else {
+      
+      // or it is valid
       fulfill(self.accessToken);
+      
     }
     
   }];
+  
+}
+          
+- (PMKPromise*) requestCode {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                  @"grant_type": @"device",
+                                                                                  @"client_id": [SCConnectClient sharedInstance].configuration.clientCredentials.clientId,
+                                                                                  @"client_secret": [SCConnectClient sharedInstance].configuration.clientCredentials.clientSecret,
+                                                                                  @"uuid": [SCConnectClient sharedInstance].configuration.deviceId
+                                                                                  }];
+    
+    [[SCRestServiceManager sharedManager] post:[SCConnectClient sharedInstance].configuration.restConfiguration.authUrl withParams:params].then(^(SCAuthDeviceAuthCode *code) {
+      fulfill(code);
+    }).catch(^(NSError *error) {
+      reject(error);
+    });
+    
+  }];
+  
+}
+
+- (PMKPromise*) pollToken:(SCAuthDeviceAuthCode*)code {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    NSDate *now = [NSDate date];
+    [NSTimer scheduledTimerWithTimeInterval:[code.interval floatValue] target:self selector:@selector(doPoll:) userInfo:@{@"code":code, @"fulfiller":fulfill, @"rejecter":reject, @"timerStart":now} repeats:TRUE];
+    
+  }];
+  
+}
+
+- (void) doPoll:(NSTimer*)timer {
+  
+  SCAuthDeviceAuthCode *code = [timer.userInfo objectForKey:@"code"];
+  NSDate *timerStart = [timer.userInfo objectForKey:@"timerStart"];
+  PMKFulfiller fulfill = [timer.userInfo objectForKey:@"fulfiller"];
+  PMKRejecter reject = [timer.userInfo objectForKey:@"rejecter"];
+  
+  // check if timer over expiration
+  if ([code.expiresIn floatValue] > [[NSDate date] timeIntervalSinceDate:timerStart]) {
+    reject([SCErrorManager errorWithCode:ERR_TOKEN_POLL_EXPIRED andDomain:kErrorDomainSCAccount]);
+  }
+  
+  [self retrieveDeviceAccessToken:code].then(^(NSString *token) {
+    fulfill(token);
+  }).catch(^(NSError *error) {
+    reject(error);
+  });
   
 }
 
@@ -300,12 +427,5 @@
   }
   return _expires;
   
-}
-
-- (SCUserCredentials *)userCredentials {
-  if (!_userCredentials) {
-    _userCredentials = [SCUserCredentials new];
-  }
-  return _userCredentials;
 }
 @end

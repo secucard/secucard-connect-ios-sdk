@@ -1,20 +1,26 @@
 //
-//  SecucardConnectClientLibTests.m
-//  SecucardConnectClientLibTests
+//  TestStuff.m
+//  SecucardConnectClientLib
 //
-//  Created by Jörn Schmidt on 04/25/2015.
-//  Copyright (c) 2014 Jörn Schmidt. All rights reserved.
+//  Created by Jörn Schmidt on 28.04.15.
+//  Copyright (c) 2015 Jörn Schmidt. All rights reserved.
 //
+
+#import <Foundation/Foundation.h>
 
 #import <Expecta/Expecta.h>
 #import <SecucardConnectClientLib/SCConnectClient.h>
 
-SpecBegin(InitClient)
+SpecBegin(ConnectDeviceClient)
 
-describe(@"InitClient", ^{
-  
-  it(@"can init", ^{
+describe(@"ConnectDeviceClient", ^{
+
+  __block SCConnectClient *client = nil;
+
+  beforeAll(^{
     
+    [[SCConnectClient sharedInstance] destroy];
+
     SCRestConfiguration *restConfig = [[SCRestConfiguration alloc] initWithBaseUrl:kBaseUrl
                                                                         andAuthUrl:kAuthUrl];
     
@@ -34,13 +40,13 @@ describe(@"InitClient", ^{
     
     expect(stompConfig).toNot.beNil();
     
-    SCUserCredentials *userCredentials = [[SCUserCredentials alloc] initWithUsername:kUsernameAppSample
-                                                                         andPassword:kPasswordAppSample];
+//    SCUserCredentials *userCredentials = [[SCUserCredentials alloc] initWithUsername:kUsernameCashierSample
+//                                                                         andPassword:kPasswordCashierSample];
+//    
+//    expect(userCredentials).toNot.beNil();
     
-    expect(userCredentials).toNot.beNil();
-    
-    SCClientCredentials *clientCredentials = [[SCClientCredentials alloc] initWithClientId:kClientIdAppSample
-                                                                              clientSecret:kClientSecretAppSample];
+    SCClientCredentials *clientCredentials = [[SCClientCredentials alloc] initWithClientId:kClientIdCashierSample
+                                                                              clientSecret:kClientSecretCashierSample];
     
     expect(clientCredentials).toNot.beNil();
     
@@ -50,18 +56,40 @@ describe(@"InitClient", ^{
                                                                                       stompEnabled:TRUE
                                                                                           oauthUrl:kAuthUrl
                                                                                  clientCredentials:clientCredentials
-                                                                                   userCredentials:userCredentials
-                                                                                          deviceId:kDeviceIdAppSample
+                                                                                   userCredentials:nil
+                                                                                          deviceId:kDeviceIdCashierSample
                                                                                           authType:@"device"];
     
     expect(clientConfig).toNot.beNil();
     
-    SCConnectClient *client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
+    client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
     
     expect(client).toNot.beNil();
-    
+
   });
   
+  it(@"can connect anonymously", ^{
+    
+    waitUntil(^(DoneCallback done) {
+      
+      [client connect].then(^() {
+        
+        assert(TRUE);
+        
+      }).catch(^(NSError *error) {
+        
+        expect(error).to.beNil();
+        
+      }).finally(^() {
+        
+        done();
+        
+      });
+      
+    });
+    
+  });
+
 });
 
 SpecEnd

@@ -22,12 +22,6 @@
 #define kStompMethodDelete                          @"delete:"
 #define kStompMethodExecute                         @"exec:"
 
-// own definitions
-//#define kVirtualHost              @"/"
-//#define kReplyQueue               @"/temp-queue/secucard"
-//#define kStandardTTL              30
-//#define kHeartBeat                @"40000,0"
-
 typedef void (^ConnectCompletion)(NSError *error);
 
 @interface SCStompDestination : NSObject
@@ -166,6 +160,8 @@ typedef void (^ConnectCompletion)(NSError *error);
  *  @param configuration the stomp configuration
  */
 - (void) initWithConfiguration:(SCStompConfiguration*)configuration;
+
+- (void) destroy;
 
 /**
  *  connect to stomp

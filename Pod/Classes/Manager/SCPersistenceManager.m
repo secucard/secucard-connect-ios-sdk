@@ -42,13 +42,19 @@ NSUserDefaults *defaults;
     defaults = [NSUserDefaults standardUserDefaults];
   }
   
-  id returnValue = [defaults objectForKey:key];
-  
-  if (returnValue == nil) {
-    // TODO: [SCNotificationManager sendNotificationToDisplay:[NSString stringWithFormat:@"Error: could not find value for key: %@", key]];
+  if ([self keyExists:key]) {
+    
+    @try {
+      return [defaults objectForKey:key];
+    }
+    @catch (NSException *exception) {
+      return nil;
+    }
+
   }
   
-  return returnValue;
+  return nil;
+  
 }
 
 /**
