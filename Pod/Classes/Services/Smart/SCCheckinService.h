@@ -10,4 +10,8 @@
 
 @interface SCCheckinService : SCAbstractService
 
+- (PMKPromise*) getCheckins;
+
+- (PMKPromise*) getCheckinsList;
+
 @end

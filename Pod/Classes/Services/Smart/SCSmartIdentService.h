@@ -10,4 +10,10 @@
 
 @interface SCSmartIdentService : SCAbstractService
 
+- (PMKPromise*) getIdentsList;
+
+- (PMKPromise*) getIdents;
+
+- (PMKPromise*) readIdent:(NSString*)id;
+
 @end

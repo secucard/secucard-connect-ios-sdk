@@ -7,7 +7,34 @@
 //
 
 #import "SCCheckinService.h"
+#import "SCSmartCheckin.h"
 
 @implementation SCCheckinService
+
+- (PMKPromise*) getCheckins {
+  return [self getList:[SCSmartCheckin class] withParams:nil onChannel:StompChannel];
+}
+
+- (PMKPromise*) getCheckinsList {
+  return [self getObjectList:[SCSmartCheckin class] withParams:nil onChannel:StompChannel];
+}
+
+- (PMKPromise *)postProcessObjects:(NSArray *)list {
+  
+  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+    
+    for (NSObject *object in list) {
+      
+      SCMediaResource *picture = ((SCSmartCheckin*)object).pictureObject;
+      if (picture) {
+        if (!picture.isCached) {
+          [picture download];
+        }
+      }
+      
+    }
+    
+  }];
+}
 
 @end

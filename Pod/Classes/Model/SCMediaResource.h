@@ -14,4 +14,6 @@
 @property (nonatomic, assign) BOOL isCached;
 @property (nonatomic, assign) BOOL cachingEnabled;
 
+- (void) download;
+
 @end

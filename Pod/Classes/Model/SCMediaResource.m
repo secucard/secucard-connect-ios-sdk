@@ -1,4 +1,4 @@
-//
+  //
 //  SCMediaResource.m
 //  Pods
 //
@@ -9,5 +9,9 @@
 #import "SCMediaResource.h"
 
 @implementation SCMediaResource
+
+- (void) download {
+  NSLog(@"Resource Download not implemented yet");
+}
 
 @end
