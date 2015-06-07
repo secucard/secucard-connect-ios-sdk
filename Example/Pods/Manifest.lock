@@ -93,12 +93,12 @@ SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
   Expecta: 78b4e8b0c8291fa4524d7f74016b6065c2e391ec
-  Mantle: 17de73ef929db2234d76fde2aacfb89ab11c61e8
+  Mantle: d7c75b6fb789b20f7ae30cd0d09435fe545896ff
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
   PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
   PromiseKit-AFNetworking: fbdd97205d6a78bb94d96d0d56311d1733569aae
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SecucardConnectClientLib: 27d6cfd592b1e45a824de0d90e6880adadf21991
+  SecucardConnectClientLib: ad4d6b870827c85bf1fe481a50268356aee6e39e
   Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
 
-COCOAPODS: 0.37.0.beta.1
+COCOAPODS: 0.37.2

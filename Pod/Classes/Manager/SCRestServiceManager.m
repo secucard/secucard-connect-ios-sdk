@@ -7,7 +7,6 @@
 //
 #import "SCRestServiceManager.h"
 #import <Mantle/Mantle.h>
-#import <PromiseKit-AFNetworking/AFNetworking+PromiseKit.h>
 #import "SCSecuObject.h"
 
 @interface SCRestConfiguration()
@@ -73,32 +72,31 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   requestSerializer = [AFJSONRequestSerializer serializer];
   [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//  [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
   [requestSerializer setValue:@"Bearer XXX" forHTTPHeaderField:@"Authorization"];
   
+  self.operationManager = [AFHTTPRequestOperationManager manager];
+  self.operationManager.requestSerializer = requestSerializer;
+  
   authRequestSerializer = [AFJSONRequestSerializer serializer];
   [authRequestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//  [authRequestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   [authRequestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [authRequestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
   
   self.authOperationManager = [AFHTTPRequestOperationManager manager];
   self.authOperationManager.requestSerializer = authRequestSerializer;
   
-  self.operationManager = [AFHTTPRequestOperationManager manager];
-  self.operationManager.requestSerializer = requestSerializer;
-  
 }
 
 - (void) destroy {
-  [self close];
   
+  [self close];
   self.configuration = nil;
   requestSerializer = nil;
   self.authOperationManager = nil;
   self.operationManager = nil;
+  
 }
 
 - (PMKPromise*) requestAuthWithParams:(id)params
@@ -107,17 +105,16 @@ AFHTTPRequestSerializer *authRequestSerializer;
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     
     // do the actual request
-    [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, @"oauth/token"] parameters:params].then(^(id responseObject) {
+    [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, @"oauth/token"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
       
       [self.operationManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", responseObject] forHTTPHeaderField:@"Authorization"];
-      
       fulfill(responseObject);
       
-    }).catch(^(NSError *error){
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       
       reject(error);
       
-    });
+    }];
     
   }];
   
@@ -138,32 +135,31 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        return [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
-        
-      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
-        
-        fulfill(responseObject);
-        
-      }).catch(^(NSError *error){
-        
-        reject([self doBasicErrorHandling:error]);
+        [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          
+          fulfill(responseObject);
+          
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          
+          reject([self doBasicErrorHandling:error]);
+          
+        }];
         
       });
       
     } else {
       
-      [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params].then(^(id responseObject) {
+      [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         fulfill(responseObject);
         
-      }).catch(^(NSError *error) {
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         reject([self doBasicErrorHandling:error]);
         
-      });
+      }];
       
     }
-    
     
   }];
   
@@ -185,29 +181,29 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
-        
-      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
-        
-        fulfill(responseObject);
-        
-      }).catch(^(NSError *error) {
-        
-        reject([self doBasicErrorHandling:error]);
+        [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          
+          fulfill(responseObject);
+          
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          
+          reject([self doBasicErrorHandling:error]);
+          
+        }];
         
       });
       
     } else {
       
-      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, endpoint] parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+      [self.authOperationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         fulfill(responseObject);
         
-      }).catch(^(NSError *error) {
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         reject([self doBasicErrorHandling:error]);
         
-      });
+      }];
       
     }
     
@@ -234,30 +230,30 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
-        
-      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
-        
-        fulfill(responseObject);
-        
-      }).catch(^(NSError *error) {
-        
-        reject([self doBasicErrorHandling:error]);
+        [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          
+          fulfill(responseObject);
+          
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          
+          reject([self doBasicErrorHandling:error]);
+          
+        }];
         
       });
       
       
     } else {
       
-      [self.authOperationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, endpoint] parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+      [self.authOperationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         fulfill(responseObject);
         
-      }).catch(^(NSError *error) {
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         reject([self doBasicErrorHandling:error]);
         
-      });
+      }];
       
     }
     
@@ -281,30 +277,30 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [[SCAccountManager sharedManager] token].then(^(NSString *token) {
         
-        [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params];
-        
-      }).then(^(id responseObject, AFHTTPRequestOperation *operation) {
-        
-        fulfill(responseObject);
-        
-      }).catch(^(NSError *error) {
-        
-        reject([self doBasicErrorHandling:error]);
+        [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          
+          fulfill(responseObject);
+          
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          
+          reject([self doBasicErrorHandling:error]);
+          
+        }];
         
       });
       
       
     } else {
       
-      [self.authOperationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, endpoint] parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+      [self.authOperationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         fulfill(responseObject);
         
-      }).catch(^(NSError *error) {
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         reject([self doBasicErrorHandling:error]);
         
-      });
+      }];
       
     }
     
@@ -324,34 +320,34 @@ AFHTTPRequestSerializer *authRequestSerializer;
 {
   
   //possible action by code
-//  switch (error.response.statusCode) {
-//    case 400: // Invalid
-//      
-//      break;
-//      
-//    case 401: // Unauthorized
-//      
-//      break;
-//      
-//    case 403: // Forbidden
-//      
-//      break;
-//      
-//    case 426: // Update required
-//      
-//      break;
-//      
-//    case 409: // Conflict
-//      
-//      break;
-//      
-//    case 500: // Internal
-//      
-//      break;
-//      
-//    default:
-//      break;
-//  }
+  //  switch (error.response.statusCode) {
+  //    case 400: // Invalid
+  //
+  //      break;
+  //
+  //    case 401: // Unauthorized
+  //
+  //      break;
+  //
+  //    case 403: // Forbidden
+  //
+  //      break;
+  //
+  //    case 426: // Update required
+  //
+  //      break;
+  //
+  //    case 409: // Conflict
+  //
+  //      break;
+  //
+  //    case 500: // Internal
+  //
+  //      break;
+  //
+  //    default:
+  //      break;
+  //  }
   
   return error;
 }
@@ -505,15 +501,15 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
     AFHTTPRequestOperationManager *man = (secure) ? self.operationManager : self.authOperationManager;
     
-    [man POST:endpoint parameters:params].then(^(id responseObject, AFHTTPRequestOperation *operation) {
+    [man POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
       
       fulfill(responseObject);
       
-    }).catch(^(NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       
       reject([self doBasicErrorHandling:error]);
       
-    });
+    }];
     
   }];
   

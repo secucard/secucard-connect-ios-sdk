@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		592529623B84E9494088BE02 /* Pods_SecucardConnectClientLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5765620A21745F492CB57F5D /* Pods_SecucardConnectClientLib.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -15,14 +16,13 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		97F3B9FA1A902B15559AB9AC /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65282C974BE7DD8A48DF44E5 /* libPods-Tests.a */; };
+		64A55297DB76B3D280ED58A1 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F02DEB73D0E2385E3FF667 /* Pods_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AA48B7521B0A3106007946F7 /* DeviceCredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */; };
 		AA693C2C1AEFA2A500AAB63C /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2B1AEFA2A500AAB63C /* Tests.m */; };
 		AA693C2E1AEFE82C00AAB63C /* CredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */; };
 		AA9DCD611B0735FD0070022E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD5F1B0735FD0070022E /* AppDelegate.swift */; };
 		AA9DCD621B0735FD0070022E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD601B0735FD0070022E /* ViewController.swift */; };
 		AA9DCD641B0736120070022E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD631B0736120070022E /* Info.plist */; };
-		D2792BD5250A51D667C7C54B /* libPods-SecucardConnectClientLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E799BDFF3996FEDDD4300791 /* libPods-SecucardConnectClientLib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +39,7 @@
 		003B749AD7C1A7522D956A2D /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		30089604CC4915B2DEE77DFD /* Pods-SecucardConnectClientLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClientLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClientLib/Pods-SecucardConnectClientLib.release.xcconfig"; sourceTree = "<group>"; };
 		406F92A2663DF4B60BF05FB0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		5765620A21745F492CB57F5D /* Pods_SecucardConnectClientLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectClientLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* SecucardConnectClientLib.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecucardConnectClientLib.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -49,18 +50,17 @@
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		65282C974BE7DD8A48DF44E5 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B5F6B76AA208FD52D8849B /* SecucardConnectClientLib.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SecucardConnectClientLib.podspec; path = ../SecucardConnectClientLib.podspec; sourceTree = "<group>"; };
 		AA48B7501B0A2CE1007946F7 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCredentialTest.m; sourceTree = "<group>"; };
 		AA693C2B1AEFA2A500AAB63C /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialTest.m; sourceTree = "<group>"; };
-		AA9DCD5E1B0735FC0070022E /* SecucardConnectClientLib-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecucardConnectClientLib-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA9DCD5F1B0735FD0070022E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA9DCD601B0735FD0070022E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AA9DCD631B0736120070022E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAAD66F31B22092C0056F42C /* SecucardConnectClientLib-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecucardConnectClientLib-Bridging-Header.h"; sourceTree = "<group>"; };
 		B89D5697F9DE8AB176A6893C /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E799BDFF3996FEDDD4300791 /* libPods-SecucardConnectClientLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecucardConnectClientLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1F02DEB73D0E2385E3FF667 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7B7A4590473AE6CE950072 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8807551F2B63B70A6E690F9 /* Pods-SecucardConnectClientLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClientLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClientLib/Pods-SecucardConnectClientLib.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +73,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				D2792BD5250A51D667C7C54B /* libPods-SecucardConnectClientLib.a in Frameworks */,
+				592529623B84E9494088BE02 /* Pods_SecucardConnectClientLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +84,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				97F3B9FA1A902B15559AB9AC /* libPods-Tests.a in Frameworks */,
+				64A55297DB76B3D280ED58A1 /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,8 +119,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				E799BDFF3996FEDDD4300791 /* libPods-SecucardConnectClientLib.a */,
-				65282C974BE7DD8A48DF44E5 /* libPods-Tests.a */,
+				5765620A21745F492CB57F5D /* Pods_SecucardConnectClientLib.framework */,
+				C1F02DEB73D0E2385E3FF667 /* Pods_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,7 +132,6 @@
 				AA9DCD601B0735FD0070022E /* ViewController.swift */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
-				AA9DCD5E1B0735FC0070022E /* SecucardConnectClientLib-Bridging-Header.h */,
 			);
 			path = SecucardConnectClientLib;
 			sourceTree = "<group>";
@@ -140,6 +139,7 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AAAD66F31B22092C0056F42C /* SecucardConnectClientLib-Bridging-Header.h */,
 				AA9DCD631B0736120070022E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -200,6 +200,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				362F7A827DA015A862A62168 /* Copy Pods Resources */,
+				1372D6861B84E200F056E71F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -219,6 +220,7 @@
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
 				2FC6C575F674CD68E87B5E9C /* Copy Pods Resources */,
+				C296C7419F1BC35045F59D26 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -285,6 +287,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1372D6861B84E200F056E71F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectClientLib/Pods-SecucardConnectClientLib-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2FC6C575F674CD68E87B5E9C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -343,6 +360,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C296C7419F1BC35045F59D26 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

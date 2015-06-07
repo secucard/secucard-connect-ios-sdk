@@ -124,7 +124,7 @@
   
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg {
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg {
   return [self execute:appId action:action actionArg:actionArg secure:kSecureStandard];
 }
 

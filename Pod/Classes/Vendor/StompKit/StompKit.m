@@ -7,7 +7,7 @@
 //
 
 #import "StompKit.h"
-#import "GCDAsyncSocket.h"
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 #define kDefaultTimeout 5
 #define kVersion1_2 @"1.2"

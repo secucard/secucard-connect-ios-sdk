@@ -57,6 +57,18 @@
 
 @implementation SCAppDestination
 
++ (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method {
+  
+  SCAppDestination *destination = [SCAppDestination new];
+  
+  destination.command = command;
+  destination.type = type;
+  destination.method = method;
+  
+  return destination;
+  
+}
+
 + (instancetype) initWithAppId:(NSString *)appId method:(NSString*)method {
   
   SCAppDestination *appDest = [SCAppDestination initWithCommand:nil type:nil method:method];
@@ -382,11 +394,13 @@
     // initialized at all?
     if ([self needsInitialization]) {
       reject([SCErrorManager errorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
+      return;
     }
     
     // stomp client does exist?
     if (!self.client) {
       reject([SCErrorManager errorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
+      return;
     }
     
     // is already connected? Call completion immediately
@@ -394,6 +408,7 @@
       [self extendConnectionTimer];
       [SCErrorManager handleErrorWithDescription:@"already connected. Immediate request."];
       fulfill(nil);
+      return;
     }
     
     [[SCAccountManager sharedManager] token].then(^(NSString *token) {
@@ -638,7 +653,7 @@
 
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg {
+- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(SCTransportMessage*)actionArg {
 
   return [self sendMessage:actionArg toDestination:[SCAppDestination initWithAppId:appId method:action]];
   

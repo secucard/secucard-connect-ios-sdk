@@ -7,7 +7,7 @@
 //
 
 #import "SCGeneralAccount.h"
-#import "MTLJSONAdapter.h"
+#import <Mantle/MTLJSONAdapter.h>
 @implementation SCGeneralAccount
 
 + (NSString *)object {

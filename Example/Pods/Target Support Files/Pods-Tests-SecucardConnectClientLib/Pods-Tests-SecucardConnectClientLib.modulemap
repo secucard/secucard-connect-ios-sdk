@@ -1,0 +1,6 @@
+framework module SecucardConnectClientLib {
+  umbrella header "Pods-Tests-SecucardConnectClientLib-umbrella.h"
+
+  export *
+  module * { export * }
+}

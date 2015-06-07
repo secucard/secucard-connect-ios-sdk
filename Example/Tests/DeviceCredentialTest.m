@@ -68,12 +68,12 @@ describe(@"ConnectDeviceClient", ^{
 
   });
   
-  it(@"can connect anonymously", ^{
+  fit(@"can connect anonymously", ^{
     
     NSLog(@"AccessToken %@", [SCAccountManager sharedManager].accessToken);
     NSLog(@"RefreshToken %@", [SCAccountManager sharedManager].refreshToken);
     
-//    [[SCAccountManager sharedManager] killToken];
+    //[[SCAccountManager sharedManager] killToken];
     
     if ([SCAccountManager sharedManager].accessToken == nil) {
       setAsyncSpecTimeout(1200);
@@ -85,7 +85,9 @@ describe(@"ConnectDeviceClient", ^{
       
       [client connect].then(^() {
         
-        assert(TRUE);
+        [[SCStompManager sharedManager] execute:[SCConnectClient sharedInstance].configuration.deviceId action:@"me" actionArg:@"auth.refresh"].then(^() {
+            assert(TRUE);
+        });
         
       }).catch(^(NSError *error) {
         

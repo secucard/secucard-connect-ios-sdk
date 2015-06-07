@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SecucardConnectClientLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
