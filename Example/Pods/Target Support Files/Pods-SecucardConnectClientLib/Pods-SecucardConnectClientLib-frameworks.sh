@@ -53,7 +53,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Mantle.framework'
   install_framework 'OMGHTTPURLRQ.framework'
   install_framework 'PromiseKit.framework'
-  install_framework 'PromiseKit_AFNetworking.framework'
   install_framework 'Reachability.framework'
   install_framework 'SecucardConnectClientLib.framework'
 fi
@@ -63,7 +62,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Mantle.framework'
   install_framework 'OMGHTTPURLRQ.framework'
   install_framework 'PromiseKit.framework'
-  install_framework 'PromiseKit_AFNetworking.framework'
   install_framework 'Reachability.framework'
   install_framework 'SecucardConnectClientLib.framework'
 fi

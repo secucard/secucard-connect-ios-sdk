@@ -1,30 +1,30 @@
 PODS:
-  - AFNetworking (2.5.3):
-    - AFNetworking/NSURLConnection (= 2.5.3)
-    - AFNetworking/NSURLSession (= 2.5.3)
-    - AFNetworking/Reachability (= 2.5.3)
-    - AFNetworking/Security (= 2.5.3)
-    - AFNetworking/Serialization (= 2.5.3)
-    - AFNetworking/UIKit (= 2.5.3)
-  - AFNetworking/NSURLConnection (2.5.3):
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.3):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.3)
-  - AFNetworking/Security (2.5.3)
-  - AFNetworking/Serialization (2.5.3)
-  - AFNetworking/UIKit (2.5.3):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.4.1)
-  - Expecta (0.4.2)
-  - Mantle (2.0):
-    - Mantle/extobjc (= 2.0)
-  - Mantle/extobjc (2.0)
+  - Expecta (1.0.0)
+  - Mantle (2.0.2):
+    - Mantle/extobjc (= 2.0.2)
+  - Mantle/extobjc (2.0.2)
   - OMGHTTPURLRQ (2.1):
     - OMGHTTPURLRQ/RQ (= 2.1)
   - OMGHTTPURLRQ/FormURLEncode (2.1)
@@ -43,10 +43,6 @@ PODS:
     - PromiseKit/UIViewController (= 1.5.3)
     - PromiseKit/Until (= 1.5.3)
     - PromiseKit/When (= 1.5.3)
-  - PromiseKit-AFNetworking (0.1.6):
-    - AFNetworking (~> 2.0)
-    - PromiseKit/Promise
-    - PromiseKit/When
   - PromiseKit/CALayer (1.5.3):
     - PromiseKit/Promise
   - PromiseKit/NSNotificationCenter (1.5.3):
@@ -76,9 +72,8 @@ PODS:
     - CocoaAsyncSocket (~> 7.4)
     - Mantle (~> 2.0)
     - PromiseKit (~> 1.5)
-    - PromiseKit-AFNetworking
     - Reachability (~> 3.2)
-  - Specta (0.5.0)
+  - Specta (1.0.1)
 
 DEPENDENCIES:
   - Expecta
@@ -90,15 +85,14 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
-  Expecta: 78b4e8b0c8291fa4524d7f74016b6065c2e391ec
-  Mantle: d7c75b6fb789b20f7ae30cd0d09435fe545896ff
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  Mantle: 967fd31ea0220890b2e76589198996b534bb3fb1
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
   PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
-  PromiseKit-AFNetworking: fbdd97205d6a78bb94d96d0d56311d1733569aae
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SecucardConnectClientLib: ad4d6b870827c85bf1fe481a50268356aee6e39e
-  Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
+  SecucardConnectClientLib: d28acbe8a3510f371f0f341096aba0cae35fc53c
+  Specta: 097be314a75de103703a3bf9a529dc1a398509d7
 
 COCOAPODS: 0.37.2

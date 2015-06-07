@@ -1,0 +1,43 @@
+{
+  "name": "SecucardConnectClientLib",
+  "version": "0.1.0",
+  "summary": "Library for easy and standardized communication to the secucard infrastructure",
+  "description": "                       This Library is the base for communicating with the secucard server infrastructure. It covers the full communication bandwidth\n",
+  "homepage": "https://github.com/secucard/secucard-connect-objc-client-lib",
+  "license": "GPL",
+  "authors": {
+    "Jörn Schmidt": "schmidt@devid.net"
+  },
+  "source": {
+    "git": "https://github.com/secucard/secucard-connect-objc-client-lib.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "SecucardConnectClientLib": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "public_header_files": "Pod/Classes/**/*.h",
+  "dependencies": {
+    "Reachability": [
+      "~> 3.2"
+    ],
+    "AFNetworking": [
+      "~> 2.5"
+    ],
+    "PromiseKit": [
+      "~> 1.5"
+    ],
+    "Mantle": [
+      "~> 2.0"
+    ],
+    "CocoaAsyncSocket": [
+      "~> 7.4"
+    ]
+  }
+}
