@@ -495,6 +495,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
+- (PMKPromise *)execute:(NSString *)appId command:(NSString *)command arg:(NSDictionary *)arg {
+  
+  return [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg secure:false];
+  
+}
+
 - (PMKPromise*) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params {
   
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {

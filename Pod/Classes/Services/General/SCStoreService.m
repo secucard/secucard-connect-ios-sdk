@@ -56,7 +56,7 @@
  
   return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
     for (SCGeneralStore *store in objects) {
-      
+      NSLog(@"store: %@", store.id);
       // TODO: implement this
 //      MediaResource picture = ((Store) object).getLogo();
 //      if (picture != null) {

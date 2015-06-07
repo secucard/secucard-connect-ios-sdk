@@ -22,7 +22,6 @@
 		AA693C2E1AEFE82C00AAB63C /* CredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */; };
 		AA9DCD611B0735FD0070022E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD5F1B0735FD0070022E /* AppDelegate.swift */; };
 		AA9DCD621B0735FD0070022E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD601B0735FD0070022E /* ViewController.swift */; };
-		AA9DCD641B0736120070022E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD631B0736120070022E /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,7 +270,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA9DCD641B0736120070022E /* Info.plist in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +501,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SecucardConnectClientLib/SecucardConnectClientLib-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SecucardConnectClientLib/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SecucardConnectClientLib/SecucardConnectClientLib-Bridging-Header.h";
@@ -522,6 +521,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SecucardConnectClientLib/SecucardConnectClientLib-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SecucardConnectClientLib/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SecucardConnectClientLib/SecucardConnectClientLib-Bridging-Header.h";

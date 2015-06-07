@@ -51,7 +51,7 @@
 - (PMKPromise*) makeCall:(NSString*)call withMethod:(CallMethod)method params:(id)params pid:(NSString*)pid sid:(NSString*)sid using:(ServiceChannel)channel
 {
   
-  NSString *typedCall = [self serviceCall:call withChannel:channel andServiceMethod:method andPid:pid andSid:sid];
+//  NSString *typedCall = [self serviceCall:call withChannel:channel andServiceMethod:method andPid:pid andSid:sid];
   
   if (channel == PersistentChannel) {
     
