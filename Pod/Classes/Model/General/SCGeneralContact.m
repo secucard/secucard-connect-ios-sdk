@@ -7,7 +7,7 @@
 //
 
 #import "SCGeneralContact.h"
-#import "MTLValueTransformer.h"
+#import <Mantle/Mantle.h>
 
 @implementation SCGeneralContact
 

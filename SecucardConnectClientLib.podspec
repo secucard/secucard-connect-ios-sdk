@@ -34,7 +34,6 @@ Pod::Spec.new do |s|
   s.dependency 'Reachability', '~> 3.2'
   s.dependency 'AFNetworking', '~> 2.5'
   s.dependency 'PromiseKit', '~> 1.5'
-  s.dependency 'PromiseKit-AFNetworking'
   s.dependency 'Mantle', '~> 2.0'
   s.dependency 'CocoaAsyncSocket', '~> 7.4'
 
