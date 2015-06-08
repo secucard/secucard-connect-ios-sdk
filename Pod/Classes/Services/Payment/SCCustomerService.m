@@ -22,24 +22,32 @@
   
 }
 
-- (PMKPromise*) getCustomers:(SCQueryParams*)queryParams {
+- (void)getCustomers:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
   
-  return [self getList:[SCPaymentCustomer class] withParams:queryParams onChannel:DefaultChannel];
-  
-}
-
-- (PMKPromise*) createCustomer:(SCPaymentCustomer*)customer {
-
-  return [self create:customer onChannel:DefaultChannel];
+  [self getList:[SCPaymentCustomer class] withParams:queryParams onChannel:DefaultChannel completionHandler:handler];
   
 }
 
-- (PMKPromise*) updateCustomer:(SCPaymentCustomer*)customer {
-  return [self update:customer onChannel:DefaultChannel];
+- (void)createCustomer:(SCPaymentCustomer *)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler {
+
+  [self create:customer onChannel:DefaultChannel completionHandler:handler];
+  
 }
 
-- (PMKPromise*) deleteCustomer:(NSString*)id {
-  return [self delete:[SCPaymentCustomer class] withId:id onChannel:DefaultChannel];
+- (void)updateCustomer:(SCPaymentCustomer *)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler {
+  [self update:customer onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+    
+    if ([responseObject isKindOfClass:[SCSecuObject class]]) {
+      handler((SCPaymentCustomer*)responseObject, error);
+    } else {
+      handler(nil, error);
+    }
+    
+  }];
+}
+
+- (void)deleteCustomer:(NSString *)id completionHandler:(void (^)(bool, NSError *))handler {
+  [self delete:[SCPaymentCustomer class] withId:id onChannel:DefaultChannel completionHandler:handler];
 }
 
 

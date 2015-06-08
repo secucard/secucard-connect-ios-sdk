@@ -10,8 +10,8 @@
 
 @interface SCCheckinService : SCAbstractService
 
-- (PMKPromise*) getCheckins;
+- (void) getCheckins:(void (^)(NSArray *, NSError *))handler;
 
-- (PMKPromise*) getCheckinsList;
+- (void) getCheckinsList:(void (^)(SCObjectList *, NSError *))handler;
 
 @end

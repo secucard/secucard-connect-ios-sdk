@@ -13,6 +13,7 @@
 
 @property (nonatomic, retain) SCClientCredentials *clientCredentials;
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
+@property (nonatomic, retain) void (^devicePollHandler)(NSString *, NSError *);
 
 @end
 
@@ -47,32 +48,25 @@
   self.userCredentials = nil;
 }
 
-- (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials
+- (void) loginWithUserCedentials:(SCUserCredentials*)userCredentials completionHandler:(void (^)(BOOL success, NSError *error))handler
 {
   
   _userCredentials = userCredentials;
   
   [[SCConnectClient sharedInstance] setUserCredentials:userCredentials];
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    [self retrieveAccessToken].then(^() {
+    [self retrieveAccessToken:^(NSString *token, NSError *error) {
       
-      [SCPersistenceManager persist:_userCredentials.username forKey:kCredentialUsername];
-      [SCPersistenceManager persist:_userCredentials.password forKey:kCredentialPassword];
+      if (error != nil) {
+        [SCPersistenceManager persist:_userCredentials.username forKey:kCredentialUsername];
+        [SCPersistenceManager persist:_userCredentials.password forKey:kCredentialPassword];
+      }
       
-      fulfill(nil);
+      handler(error != nil, error);
       
-    }).catch(^(NSError *error) {
-      
-      reject(error);
-      
-    });
-    
-  }];
+    }];
   
 }
-
 
 - (BOOL) needsInitialization
 {
@@ -84,7 +78,7 @@
  */
 - (BOOL) accessTokenValid
 {
-    return ( self.accessToken && [self.expires compare:[NSDate date]] != NSOrderedAscending);
+  return ( self.accessToken && [self.expires compare:[NSDate date]] != NSOrderedAscending);
 }
 
 /**
@@ -98,48 +92,45 @@
 /**
  *  Retrieves an access token
  */
-- (PMKPromise*) retrieveAccessToken
+- (void) retrieveAccessToken:(void (^)(NSString *token, NSError *error))handler
 {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+  if ([self needsInitialization])
+  {
+    handler(false, [SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+  }
+  
+  NSDictionary *params = @{
+                           @"grant_type":@"appuser",
+                           @"username": self.userCredentials.username,
+                           @"password": self.userCredentials.password,
+                           @"client_id": self.clientCredentials.clientId,
+                           @"client_secret": self.clientCredentials.clientSecret,
+                           @"device": [SCConnectClient sharedInstance].configuration.deviceId
+                           };
+  
+  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
     
-    if ([self needsInitialization])
-    {
-      reject([SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+    if (error != nil) {
+      handler(nil, error);
+      return;
     }
     
-    NSDictionary *params = @{
-                             @"grant_type":@"appuser",
-                             @"username": self.userCredentials.username,
-                             @"password": self.userCredentials.password,
-                             @"client_id": self.clientCredentials.clientId,
-                             @"client_secret": self.clientCredentials.clientSecret,
-                             @"device": [SCConnectClient sharedInstance].configuration.deviceId
-                             };
+    self.accessToken = [responseObject objectForKey:@"access_token"];
+    self.refreshToken = [responseObject objectForKey:@"refresh_token"];
     
-    [[SCRestServiceManager sharedManager] requestAuthWithParams:params].then(^(NSDictionary *result) {
-      
-      self.accessToken = [result objectForKey:@"access_token"];
-      self.refreshToken = [result objectForKey:@"refresh_token"];
-      
-      // get expires date
-      NSNumber *interval = [result objectForKey:@"expires_in"];
-      self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
-      
-      // serialize
-      [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
-      [SCPersistenceManager persist:self.refreshToken forKey:@"refreshToken"];
-      [SCPersistenceManager persist:self.expires forKey:@"expires"];
-      
-      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
-
-      fulfill(self.accessToken);
-      
-    }).catch(^(NSError *error) {
-      
-      reject(error);
-      
-    });
+    // get expires date
+    NSNumber *interval = [responseObject objectForKey:@"expires_in"];
+    self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
+    
+    // serialize
+    [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
+    [SCPersistenceManager persist:self.refreshToken forKey:@"refreshToken"];
+    [SCPersistenceManager persist:self.expires forKey:@"expires"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
+    
+    handler(self.accessToken, nil);
     
   }];
   
@@ -148,14 +139,12 @@
 /**
  *  Retrieves an access token for device
  */
-- (PMKPromise*) retrieveDeviceAccessToken:(SCAuthDeviceAuthCode*)code
+- (void) retrieveDeviceAccessToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *deviceAccessToken, NSError *error))handler;
 {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
     if ([self needsInitialization])
     {
-      reject([SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+      handler(nil, [SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
     }
     
     NSDictionary *params = @{
@@ -165,13 +154,18 @@
                              @"code": code.deviceCode
                              };
     
-    [[SCRestServiceManager sharedManager] requestAuthWithParams:params].then(^(NSDictionary *result) {
+    [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
       
-      self.accessToken = [result objectForKey:@"access_token"];
-      self.refreshToken = [result objectForKey:@"refresh_token"];
+      if (error != nil) {
+        handler(nil, error);
+        return;
+      }
+      
+      self.accessToken = [responseObject objectForKey:@"access_token"];
+      self.refreshToken = [responseObject objectForKey:@"refresh_token"];
       
       // get expires date
-      NSNumber *interval = [result objectForKey:@"expires_in"];
+      NSNumber *interval = [responseObject objectForKey:@"expires_in"];
       self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
       
       // serialize
@@ -181,42 +175,34 @@
       
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
       
-      fulfill(self.accessToken);
-      
-    }).catch(^(NSError *error) {
-      
-      reject(error);
-      
-    });
-    
-  }];
+      handler(self.accessToken, nil);
+
+    }];
   
 }
 
 /**
  *  Refreshes an access token
  */
-- (PMKPromise*) refreshAccessToken
+- (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler
 {
   
   // TODO: REMOVE, is only because of refresh token problem
   
-//  [[SCAccountManager sharedManager] killToken:^(NSError *error) {
-//    
-//    [self token:completionBlock error:errorBlock];
-//    
-//  }];
-//  
-//  return;
-
+  //  [[SCAccountManager sharedManager] killToken:^(NSError *error) {
+  //
+  //    [self token:completionBlock error:errorBlock];
+  //
+  //  }];
+  //
+  //  return;
+  
   // END OF REMOVE
   
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
     if ([self needsInitialization])
     {
-      reject([SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+      handler(nil, [SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
     }
     
     NSDictionary *params = @{
@@ -225,28 +211,26 @@
                              @"client_secret": self.clientCredentials.clientSecret,
                              @"refresh_token": self.refreshToken
                              };
+  
+  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
     
-    [[SCRestServiceManager sharedManager] requestAuthWithParams:params].then(^(NSDictionary *result) {
-      
-      self.accessToken = [result objectForKey:@"access_token"];
-      
-      // get expires date
-      NSNumber *interval = [result objectForKey:@"expires_in"];
-      self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
-      
-      // serialize
-      [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
-      [SCPersistenceManager persist:self.expires forKey:@"expires"];
-      
-      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidRefresh object:nil];
-
-      fulfill(self.accessToken);
-      
-    }).catch(^(NSError *error) {
-
-      reject(error);
-      
-    });
+    if (error) {
+      handler(nil, error);
+    }
+    
+    self.accessToken = [responseObject objectForKey:@"access_token"];
+    
+    // get expires date
+    NSNumber *interval = [responseObject objectForKey:@"expires_in"];
+    self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
+    
+    // serialize
+    [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
+    [SCPersistenceManager persist:self.expires forKey:@"expires"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidRefresh object:nil];
+    
+    handler(self.accessToken, nil);
     
   }];
   
@@ -255,106 +239,97 @@
 /**
  *  Check if token is valid
  */
-- (PMKPromise*) token
+- (void) token:(void (^)(NSString *token, NSError *error))handler
 {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+  // if we are freshly there without any access token
+  if (self.accessToken == nil)
+  {
     
-    // if we are freshly there without any access token
-    if (self.accessToken == nil)
-    {
+    // if we have user credentials, this is a regular auth process
+    if (self.userCredentials) {
       
-      // if we have user credentials, this is a regular auth process
-      if (self.userCredentials) {
-        
-        [self retrieveAccessToken].then(^(NSString *token) {
-          
-          fulfill(token);
-          
-        }).catch(^(NSError *error) {
-          
-          reject(error);
-          
-        });
-        
-      } else if ([[SCConnectClient sharedInstance].configuration.authType isEqualToString:@"device"]) {
-        
-        // else this is a three-way auth process
-        
-        // request codes
-        [self requestCode].then(^(SCAuthDeviceAuthCode *code) {
-          
-          return [self pollToken:code];
-          
-        }).then(^(NSString *token) {
-          
-          fulfill(token);
-          
-        }).catch(^(NSError *error) {
-          
-          reject(error);
-          
-        });
-        
-      }
+      [self retrieveAccessToken:^(NSString *token, NSError *error) {
+        handler(token, error);
+      }];
       
-    } else if (![self accessTokenValid]) {
+    } else if ([[SCConnectClient sharedInstance].configuration.authType isEqualToString:@"device"]) {
       
-      // or token is expired
+      // else this is a three-way auth process
       
-      [self refreshAccessToken].then(^(NSString *token) {
-
-        fulfill(token);
+      // request codes
+      [self requestCode:^(SCAuthDeviceAuthCode *code, NSError *error) {
         
-      }).catch(^(NSError *error) {
+        if (error) {
+          handler(nil, error);
+        }
         
-        reject(error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deviceAuthCodeRequesting" object:nil userInfo:@{@"code":code}];
         
-      });
-    } else {
-      
-      // or it is valid
-      fulfill(self.accessToken);
+        [self pollToken:code completionHandler:handler];
+        
+      }];
       
     }
     
-  }];
+  } else if (![self accessTokenValid]) {
+    
+    // or token is expired
+    
+    [self refreshAccessToken:^(NSString *token, NSError *error) {
+      handler(token, error);
+    }];
+    
+  } else {
+    
+    // or it is valid
+    handler(self.accessToken, nil);
+    
+  }
   
 }
-          
-- (PMKPromise*) requestCode {
+
+- (void) requestCode:(void (^)(SCAuthDeviceAuthCode *code, NSError *error))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                @"grant_type": @"device",
+                                                                                @"client_id": [SCConnectClient sharedInstance].configuration.clientCredentials.clientId,
+                                                                                @"client_secret": [SCConnectClient sharedInstance].configuration.clientCredentials.clientSecret,
+                                                                                @"uuid": [SCConnectClient sharedInstance].configuration.deviceId
+                                                                                }];
+  
+  [[SCRestServiceManager sharedManager] post:@"oauth/token" withAuth:FALSE withParams:params completionHandler:^(id responseObject, NSError *error) {
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
-                                                                                  @"grant_type": @"device",
-                                                                                  @"client_id": [SCConnectClient sharedInstance].configuration.clientCredentials.clientId,
-                                                                                  @"client_secret": [SCConnectClient sharedInstance].configuration.clientCredentials.clientSecret,
-                                                                                  @"uuid": [SCConnectClient sharedInstance].configuration.deviceId
-                                                                                  }];
+    if (error != nil) {
+      handler(nil, error);
+      return;
+    }
     
-    NSString *endpoint = [NSString stringWithFormat:@"%@%@", [SCConnectClient sharedInstance].configuration.restConfiguration.authUrl, @"oauth/token"];
+    NSError *parsingError = nil;
+    SCAuthDeviceAuthCode *code = [MTLJSONAdapter modelOfClass:SCAuthDeviceAuthCode.class fromJSONDictionary:responseObject error:&parsingError];
     
-    [[SCRestServiceManager sharedManager] post:endpoint withAuth:FALSE withParams:params].then(^(id response) {
-      fulfill([MTLJSONAdapter modelOfClass:SCAuthDeviceAuthCode.class fromJSONDictionary:response error:nil]);
-    }).catch(^(NSError *error) {
-      reject(error);
-    });
+    if (parsingError != nil) {
+      handler(nil, parsingError);
+      return;
+    }
+    
+    handler(code, nil);
     
   }];
   
 }
 
-- (PMKPromise*) pollToken:(SCAuthDeviceAuthCode*)code {
+- (void) pollToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *token, NSError *error))handler {
   
   NSLog(@"Insert code: %@ on site %@", code.userCode, code.verificationUrl);
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    NSDate *now = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:[code.interval floatValue] target:self selector:@selector(doPoll:) userInfo:@{@"code":code, @"fulfiller":fulfill, @"rejecter":reject, @"timerStart":now} repeats:TRUE];
-    
-  }];
+  NSDate *now = [NSDate date];
+  
+  self.devicePollHandler = handler;
+  
+  [NSTimer scheduledTimerWithTimeInterval:[code.interval floatValue] target:self selector:@selector(doPoll:) userInfo:@{@"code":code, @"timerStart":now} repeats:TRUE];
+  
+  
   
 }
 
@@ -362,28 +337,34 @@
   
   SCAuthDeviceAuthCode *code = [timer.userInfo objectForKey:@"code"];
   NSDate *timerStart = [timer.userInfo objectForKey:@"timerStart"];
-  PMKFulfiller fulfill = [timer.userInfo objectForKey:@"fulfiller"];
-  PMKRejecter reject = [timer.userInfo objectForKey:@"rejecter"];
   
   // check if timer over expiration
   NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:timerStart];
+  
   if ([code.expiresIn floatValue] < elapsedTime) {
-    reject([SCErrorManager errorWithCode:ERR_TOKEN_POLL_EXPIRED andDomain:kErrorDomainSCAccount]);
+    self.devicePollHandler(nil, [SCErrorManager errorWithCode:ERR_TOKEN_POLL_EXPIRED andDomain:kErrorDomainSCAccount]);
   }
   
-  [self retrieveDeviceAccessToken:code].then(^(NSString *token) {
+  __weak __block SCAccountManager *weakSelf = self;
+  
+  [self retrieveDeviceAccessToken:code completionHandler:^(NSString *deviceAccessToken, NSError *error) {
     
-    [timer invalidate];
-    fulfill(token);
-    
-  }).catch(^(NSError *error) {
-    
-    // do not reject when Error 401 as this is regular when user didn't enter the code
-    if (![error.localizedDescription containsString:@"401"]) {
-      reject(error);
+    // TODO: check error number for 401 (should be if no code from user so far)
+    if (error != nil) {
+      
+      // do not resolve when Error 401 as this is regular when user didn't enter the code
+      if (![error.localizedDescription containsString:@"401"]) {
+        weakSelf.devicePollHandler(nil, error);
+      }
+      
+    } else {
+      
+      [timer invalidate];
+      weakSelf.devicePollHandler(deviceAccessToken, nil);
+      
     }
     
-  });
+  }];
   
 }
 
@@ -411,7 +392,7 @@
   self.expires = nil;
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidLogout object:nil];
-
+  
 }
 
 - (NSString*) accessToken

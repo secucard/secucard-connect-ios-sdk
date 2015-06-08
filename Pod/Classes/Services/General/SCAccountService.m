@@ -28,39 +28,56 @@
 }
 
 
--(PMKPromise*)updateAccount:(SCGeneralAccount *)account {
+- (void) updateAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler {
   
-  return [[self serviceManagerByChannel:OnDemandChannel] updateObject:account];
-  
-}
-
-- (PMKPromise*)getAccount:(NSString *)accountId {
-  
-  return [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCGeneralAccount class] objectId:accountId];
-  
-}
-
-- (PMKPromise*)deleteAccount:(NSString *)accountId {
-  
-  return [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCGeneralAccount class] objectId:accountId];
+  [[self serviceManagerByChannel:OnDemandChannel] updateObject:account completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+    
+    if ([responseObject isKindOfClass:[SCSecuObject class]]) {
+      handler((SCGeneralAccount*)responseObject, error);
+    } else {
+      handler(nil, error);
+    }
+    
+    
+  }];
   
 }
 
--(PMKPromise*)updateLocation:(NSString *)accountId location:(SCGeneralLocation *)location {
+- (void) getAccount:(NSString*)accountId completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler {
   
-  return [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:accountId action:@"location" actionArg:nil arg:location];
-  
-}
-
-- (PMKPromise*)createAccount:(SCGeneralAccount *)account {
-  
-  return [[self serviceManagerByChannel:OnDemandChannel] createObject:account secure:FALSE];
+  [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCGeneralAccount class] objectId:accountId completionHandler:handler];
   
 }
 
-- (PMKPromise*)updateBeacons:(NSString *)accountId beachonList:(NSArray *)beaconList {
+- (void) deleteAccount:(NSString*)accountId completionHandler:(void (^)(bool, NSError *))handler {
   
-  return [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:@"me" action:@"beaconEnvironment" actionArg:nil arg:beaconList];
+  [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCGeneralAccount class] objectId:accountId completionHandler:handler];
+  
+}
+
+- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:accountId action:@"location" actionArg:nil arg:location completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
+  
+}
+
+- (void) createAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler {
+  
+  [[self serviceManagerByChannel:OnDemandChannel] createObject:account secure:FALSE completionHandler:handler];
+  
+}
+
+- (void) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler; {
+  
+  return [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:@"me" action:@"beaconEnvironment" actionArg:nil arg:beaconList completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
   
 }
 

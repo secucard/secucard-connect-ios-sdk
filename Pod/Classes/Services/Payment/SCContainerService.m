@@ -22,28 +22,36 @@
   
 }
 
-- (PMKPromise*) getContainers:(SCQueryParams*)queryParams {
-  return [self getList:[SCPaymentContainer class] withParams:queryParams onChannel:DefaultChannel];
+- (void)getContainers:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+  [self getList:[SCPaymentContainer class] withParams:queryParams onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) createContainer:(SCPaymentContainer*)container {
-  return [self create:container onChannel:DefaultChannel];
+- (void)createContainer:(SCPaymentContainer *)container completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler {
+  [self create:container onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) updateContainer:(SCPaymentContainer*)container {
-  return [self update:container onChannel:DefaultChannel];
+- (void)updateContainer:(SCPaymentContainer *)container completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler {
+  [self update:container onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+    
+    if ([responseObject isKindOfClass:[SCSecuObject class]]) {
+      handler((SCPaymentContainer*)responseObject, error);
+    } else {
+      handler(nil, error);
+    }
+    
+  }];
 }
 
-- (PMKPromise*) updateContainerAssignment:(NSString*)containerId customerId:(NSString*)customerId {
-  return [self execute:[SCPaymentContainer class] withId:containerId action:@"assign" actionArg:customerId arg:[SCPaymentCustomer new] returnType:[SCPaymentContainer class] onChannel:DefaultChannel];
+- (void)updateContainerAssignment:(NSString *)containerId customerId:(NSString *)customerId completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler {
+  [self execute:[SCPaymentContainer class] withId:containerId action:@"assign" actionArg:customerId arg:[SCPaymentCustomer new] returnType:[SCPaymentContainer class] onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) deleteContainerAssignment:(NSString*)containerId {
-  return [self delete:[SCPaymentContainer class] withId:containerId action:@"assign" actionArg:nil onChannel:DefaultChannel];
+- (void)deleteContainerAssignment:(NSString *)containerId completionHandler:(void (^)(bool, NSError *))handler {
+  [self delete:[SCPaymentContainer class] withId:containerId action:@"assign" actionArg:nil onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) deleteContainer:(NSString*)id {
-  return [self delete:[SCPaymentContainer class] withId:id onChannel:DefaultChannel];
+- (void)deleteContainer:(NSString *)id completionHandler:(void (^)(bool, NSError *))handler {
+  [self delete:[SCPaymentContainer class] withId:id onChannel:DefaultChannel completionHandler:handler];
 }
 
 @end

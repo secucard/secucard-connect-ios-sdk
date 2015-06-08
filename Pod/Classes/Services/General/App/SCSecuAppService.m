@@ -25,17 +25,21 @@
   return instance;
 }
 
-- (PMKPromise*) getMerchant:(NSString*)appId argObject:(id)argObject {
+- (void)getMerchant:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(SCGeneralMerchant *, NSError *))handler {
   // TODO: return type makes sense?
-  return [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCStoreList class] onChannel:OnDemandChannel];
+  [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCStoreList class] onChannel:OnDemandChannel completionHandler:handler];
 }
 
-- (PMKPromise*) getMerchants:(NSString*)appId arg:(SCQueryParams*)arg {
-  return [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCStoreList class] onChannel:OnDemandChannel];
+- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCStoreList class] onChannel:OnDemandChannel completionHandler:handler];
 }
 
-- (PMKPromise*) addCard:(NSString*)appId argObject:(id)argObject {
-  return [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel];
+- (void)addCard:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(bool, NSError *))handler {
+  [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
 }
 
 @end

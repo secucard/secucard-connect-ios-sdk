@@ -10,7 +10,6 @@
 #import "SCAccountManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import <Reachability/Reachability.h>
-#import <PromiseKit/PromiseKit.h>
 #import "SCServiceManager.h"
 
 #define kErrorDomainSCRestService                 @"SCSecucardCoreRestService"
@@ -80,12 +79,12 @@
  *
  *  @param params the auth parameters
  *
- *  @return returns a promise fulfilling with nil
+ *  @return returns a promise resolveing with nil
  */
-- (PMKPromise*) requestAuthWithParams:(id)params;
+- (void) requestAuthWithParams:(id)params completionHandler:(void (^)(id responseObject, NSError *error))handler;
 
-- (PMKPromise*) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg;
+- (void) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg completionHandler:(void (^)(id responseObject, NSError *error))handler;
 
-- (PMKPromise*) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params;
+- (void) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params completionHandler:(void (^)(id responseObject, NSError *error))handler;
 
 @end

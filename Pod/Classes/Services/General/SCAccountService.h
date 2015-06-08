@@ -23,36 +23,36 @@
  *
  *  @param account the account to create
  *
- *  @return returns a promise which fulfills to SCGeneralAccount
+ *  @return returns a promise which resolves to SCGeneralAccount
  */
-- (PMKPromise*) createAccount:(SCGeneralAccount*)account;
+- (void) createAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler;
 
 /**
  *  get an existing account
  *
  *  @param accountId the id to retrieve
  *
- *  @return returns a promise which fulfills to SCGeneralAccount
+ *  @return returns a promise which resolves to SCGeneralAccount
  */
-- (PMKPromise*) getAccount:(NSString*)accountId;
+- (void) getAccount:(NSString*)accountId completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler;
 
 /**
  *  update an existing account
  *
  *  @param account the account
  *
- *  @return returns a promise which fulfills to SCGeneralAccount
+ *  @return returns a promise which resolves to SCGeneralAccount
  */
-- (PMKPromise*) updateAccount:(SCGeneralAccount*)account;
+- (void) updateAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler;
 
 /**
  *  deletes ab account with the given id
  *
  *  @param accountId the account's id
  *
- *  @return returns a promise which fulfills to nil
+ *  @return returns a promise which resolves to nil
  */
-- (PMKPromise*) deleteAccount:(NSString*)accountId;
+- (void) deleteAccount:(NSString*)accountId completionHandler:(void (^)(bool, NSError *))handler;
 
 /**
  *  updates an location for the given account id
@@ -60,9 +60,9 @@
  *  @param accountId the account's id
  *  @param location  the location to send
  *
- *  @return returns a promise which fulfills to nil
+ *  @return returns a promise which resolves to nil
  */
-- (PMKPromise*) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location;
+- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location completionHandler:(void (^)(bool, NSError *))handler;
 
 /**
  *  updates the beacons for the account
@@ -70,9 +70,9 @@
  *  @param accountId  the acount's if
  *  @param beaconList the list of beacons
  *
- *  @return returns a promise which fulfills to nil
+ *  @return returns a promise which resolves to nil
  */
-- (PMKPromise*) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList;
+- (void) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler;
 
 // TODO: compare to GCM function
 //- (void) updateAPNS:(NSString*)accountId arg:(id)objectArg onComplete:(void(^)(BOOL success, NSError *error))completion;

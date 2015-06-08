@@ -22,12 +22,16 @@
   
 }
 
-- (PMKPromise*) createPrepay:(SCPaymentSecupayPrepay*)data {
-  return [self create:data onChannel:DefaultChannel];
+- (void)createPrepay:(SCPaymentSecupayPrepay *)data completionHandler:(void (^)(SCPaymentSecupayPrepay *, NSError *))handler {
+  [self create:data onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) cancelTransaction:(NSString*)id {
-  return [self execute:[SCPaymentSecupayPrepay class] withId:id action:@"cancel" actionArg:nil arg:nil returnType:nil onChannel:DefaultChannel];
+- (void)cancelTransaction:(NSString *)transactionId completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [self execute:[SCPaymentSecupayPrepay class] withId:transactionId action:@"cancel" actionArg:nil arg:nil returnType:nil onChannel:DefaultChannel completionHandler:^(id responseObject, NSError *error) {
+    handler((error == nil), error);
+  }];
+  
 }
 
 @end

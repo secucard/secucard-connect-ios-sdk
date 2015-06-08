@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PromiseKit/PromiseKit.h>
 
 #import "SCServiceManager.h"
 #import "SCGlobals.h"
@@ -18,24 +17,24 @@
 
 - (SCServiceManager*) serviceManagerByChannel:(ServiceChannel)channel;
 
-- (PMKPromise*) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel;
+- (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
 
-- (PMKPromise*) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel;
+- (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, NSError *))handler;
 
-- (PMKPromise*) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel;
+- (void) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCObjectList *, NSError *))handler;
                            
-- (PMKPromise*) postProcessObjects:(NSArray*)list;
+- (void) postProcessObjects:(NSArray*)list completionHandler:(void (^)(NSArray *, NSError *))handler;
                            
-- (PMKPromise*) update:(id)object onChannel:(ServiceChannel)channel;
+- (void) update:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCSecuObject *, NSError *))handler;
                            
-- (PMKPromise*) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel;
+- (void) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
                            
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel;
+- (void) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
                                           
-- (PMKPromise*) create:(id)object onChannel:(ServiceChannel)channel;
+- (void) create:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
                                                         
-- (PMKPromise*) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel;
+- (void) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler;
                                                         
-- (PMKPromise*) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel;
+- (void) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler;
                                                         
 @end

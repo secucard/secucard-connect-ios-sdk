@@ -26,36 +26,43 @@
   return instance;
 }
 
-- (PMKPromise*) checkIn:(NSString*) storeId sid:(NSString*)sid {
+- (void)checkIn:(NSString *)storeId sid:(NSString *)sid completionHandler:(void (^)(bool, NSError *))handler {
   
-  return [[self serviceManagerByChannel:PersistentChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil];
-  
-}
-
-- (PMKPromise*) setDefault:(NSString*)storeId {
-  
-  return [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil];
+  [[self serviceManagerByChannel:PersistentChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
   
 }
 
-- (PMKPromise*) getStores:(SCQueryParams*)queryParams {
+- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler {
   
-  return [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralStore class] queryParams:queryParams];
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
   
 }
 
-- (PMKPromise*) getStoreList:(SCQueryParams*)queryParams {
-  return [self getList:[SCGeneralStore class] withParams:queryParams onChannel:OnDemandChannel];
+- (void)getStores:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  
+  [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralStore class] queryParams:queryParams completionHandler:handler];
+  
 }
 
-- (PMKPromise*) getStore:(NSString*)pid {
-  return [self get:[SCGeneralStore class] withId:pid onChannel:OnDemandChannel];
+- (void)getStoreList:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+  [self getList:[SCGeneralStore class] withParams:queryParams onChannel:OnDemandChannel completionHandler:handler];
 }
 
-- (PMKPromise*) postProcessObjects:(NSArray*)objects {
+- (void)getStore:(NSString *)pid completionHandler:(void (^)(SCGeneralStore *, NSError *))handler {
+  [self get:[SCGeneralStore class] withId:pid onChannel:OnDemandChannel completionHandler:handler];
+}
+
+- (void)postProcessObjects:(NSArray *)list completionHandler:(void (^)(NSArray *objects, NSError *error))handler {
  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    for (SCGeneralStore *store in objects) {
+    for (SCGeneralStore *store in list) {
       NSLog(@"store: %@", store.id);
       // TODO: implement this
 //      MediaResource picture = ((Store) object).getLogo();
@@ -65,7 +72,8 @@
 //        }
 //      }
     }
-  }];
+  
+  handler(list, nil);
   
 }
 

@@ -30,22 +30,19 @@
   return self;
 }
 
-- (instancetype) initWithConfiguration:(SCClientConfiguration*)configuration {
+- (void) initWithConfiguration:(SCClientConfiguration*)configuration {
   
-  self = [self init];
-  if (self) {
-    self.configuration = configuration;
+  
+    [SCConnectClient sharedInstance].configuration = configuration;
     
     // also  initalize rest
-    [[SCRestServiceManager sharedManager] initWithConfiguration:self.configuration.restConfiguration];
+    [[SCRestServiceManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.restConfiguration];
     
     // also initialze stomp
-    [[SCStompManager sharedManager] initWithConfiguration:self.configuration.stompConfiguration];
+    [[SCStompManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.stompConfiguration];
     
     // also initialize AccountManager
-    [[SCAccountManager sharedManager] initWithClientCredentials:self.configuration.clientCredentials];
-  }
-  return self;
+    [[SCAccountManager sharedManager] initWithClientCredentials:[SCConnectClient sharedInstance].configuration.clientCredentials];
   
 }
 
@@ -60,49 +57,43 @@
   
 }
 
-- (PMKPromise*) connect {
+- (void) connect:(void (^)(bool, NSError *))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
     if (self.connected) {
-      fulfill(nil);
+      handler(true, nil);
     }
     
-    [[SCAccountManager sharedManager] token].then(^(NSString *token) {
-
-      [[SCStompManager sharedManager] connect].then(^() {
-        
-        fulfill(nil);
-        
-      });
-
-    }).catch(^(NSError *error) {
+    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
-      reject(error);
+      if (error != nil) {
+        handler(false, error);
+      }
       
-    });
-    
-    // initialize stomp
-    
-  }];
+      [[SCStompManager sharedManager] connect:^(bool success, NSError *error) {
+        
+        handler(success, error);
+        
+      }];
+      
+    }];
   
 }
 
-- (PMKPromise*) disconnect {
+- (void)disconnect:(void (^)(bool, NSError *))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    [SCErrorManager handleError:[SCErrorManager errorWithDescription:@"not implemented"]];
-  }];
+  handler(nil, [SCErrorManager errorWithDescription:@"not implemented"]);
           
 }
 
-- (void) destroy {
+- (void)destroy:(void (^)(bool, NSError *))handler {
   
   [[SCRestServiceManager sharedManager] destroy];
   [[SCStompManager sharedManager] destroy];
   [[SCAccountManager sharedManager] destroy];
   self.configuration = nil;
   self.connected = false;
+  
+  handler(true, nil);
   
 }
 

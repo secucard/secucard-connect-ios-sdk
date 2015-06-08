@@ -28,12 +28,12 @@
   return instance;
 }
 
-- (PMKPromise*) getPublicMerchant:(NSString*)id {
-  return [self get:[SCGeneralPublicMerchant class] withId:id onChannel:DefaultChannel];
+- (void)getPublicMerchant:(NSString *)id completionHandler:(void (^)(SCGeneralPublicMerchant *, NSError *))handler {
+  [self get:[SCGeneralPublicMerchant class] withId:id onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) getPublicMerchants:(SCQueryParams*)params {
-  return [self getObjectList:[SCGeneralPublicMerchant class] withParams:params onChannel:DefaultChannel];
+- (void)getPublicMerchants:(SCQueryParams *)params completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  [self getObjectList:[SCGeneralPublicMerchant class] withParams:params onChannel:DefaultChannel completionHandler:handler];
 }
 
 @end

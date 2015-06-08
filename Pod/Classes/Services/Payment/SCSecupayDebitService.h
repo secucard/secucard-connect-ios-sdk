@@ -23,17 +23,17 @@
  *
  *  @param data the debit transaction
  *
- *  @return a promise fulfilling with SCPaymentSecupayDebit
+ *  @return a promise resolveing with SCPaymentSecupayDebit
  */
-- (PMKPromise*) createTransaction:(SCPaymentSecupayDebit*)data;
+- (void) createTransaction:(SCPaymentSecupayDebit*)data completionHandler:(void (^)(SCPaymentSecupayDebit *, NSError *))handler;
 
 /**
  *  Cancel an existing transaction.
  *
  *  @param id the transaction's id
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) cancelTransaction:(NSString*)id;
+- (void) cancelTransaction:(NSString*)id completionHandler:(void (^)(bool success, NSError *))handler;
 
 @end

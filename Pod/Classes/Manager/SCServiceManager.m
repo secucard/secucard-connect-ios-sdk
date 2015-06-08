@@ -14,126 +14,84 @@
 
 @implementation SCServiceManager
 
-- (PMKPromise*) open {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) open:(void (^)(bool, NSError *))handler {
+  handler(false, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
 - (void) close {
-  
   [SCErrorManager handleError:[SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]];
-  
 }
 
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
-  return [self getObject:type objectId:objectId secure:kSecureStandard];
+- (void) getObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(id, NSError *))handler {
+  [self getObject:type objectId:objectId secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler{
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
-  return [self findObjects:type queryParams:queryParams secure:kSecureStandard];
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  [self findObjects:type queryParams:queryParams secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) createObject:(SCSecuObject*)object {
-  return [self createObject:object secure:kSecureStandard];
+- (void) createObject:(SCSecuObject*)object completionHandler:(void (^)(id, NSError *))handler {
+  [self createObject:object secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) createObject:(SCSecuObject*)object secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) createObject:(SCSecuObject*)object secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) updateObject:(SCSecuObject*)object {
-  return [self updateObject:object secure:kSecureStandard];
+- (void) updateObject:(SCSecuObject*)object completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
+  [self updateObject:object secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) updateObject:(SCSecuObject*)object secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) updateObject:(SCSecuObject*)object secure:(BOOL)secure completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
-  return [self updateObject:type objectId:objectId action:action actionArg:actionArg arg:arg secure:kSecureStandard];
+- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
+  [self updateObject:type objectId:objectId action:action actionArg:actionArg arg:arg secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
-  return [self deleteObject:type objectId:objectId secure:kSecureStandard];
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(bool, NSError *))handler {
+  [self deleteObject:type objectId:objectId secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(bool, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
-  return [self deleteObject:type objectId:objectId action:action actionArg:actionArg secure:kSecureStandard];
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg completionHandler:(void (^)(bool, NSError *))handler {
+  [self deleteObject:type objectId:objectId action:action actionArg:actionArg secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure completionHandler:(void (^)(bool, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
-  return [self execute:type objectId:objectId action:action actionArg:actionArg arg:arg secure:kSecureStandard];
+- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
+  [self execute:type objectId:objectId action:action actionArg:actionArg arg:arg secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg {
-  return [self execute:appId action:action actionArg:actionArg secure:kSecureStandard];
+- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg completionHandler:(void (^)(id, NSError *))handler {
+  [self execute:appId action:action actionArg:actionArg secure:kSecureStandard completionHandler:handler];
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg secure:(BOOL)secure {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
-  }];
-  
+- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
 
 @end

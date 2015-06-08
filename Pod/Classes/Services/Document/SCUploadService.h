@@ -17,8 +17,8 @@
  *
  *  @param base64EncodeDocument the document's data
  *
- *  @return a promise which fulfills to SCDocumentUploadsDocument
+ *  @return a promise which resolves to SCDocumentUploadsDocument
  */
-- (PMKPromise*) uploadDocument:(SCDocumentUploadsDocument*)base64EncodeDocument;
+- (void) uploadDocument:(SCDocumentUploadsDocument*)base64EncodeDocument completionHandler:(void (^)(SCDocumentUploadsDocument *, NSError *))handler;
 
 @end

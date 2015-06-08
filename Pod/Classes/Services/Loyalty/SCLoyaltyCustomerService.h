@@ -7,7 +7,7 @@
 //
 
 #import "SCAbstractService.h"
-
+#import "SCLoyaltyCustomer.h"
 @interface SCLoyaltyCustomerService : SCAbstractService
 
 /**
@@ -22,8 +22,8 @@
  *
  *  @param id the customer's id
  *
- *  @return a promise fulfilling with SCLoyaltyCustomer
+ *  @return a promise resolveing with SCLoyaltyCustomer
  */
-- (PMKPromise*) getCustomer:(NSString*)id;
+- (void) getCustomer:(NSString*)id completionHandler:(void (^)(SCLoyaltyCustomer *, NSError *))handler;
   
 @end

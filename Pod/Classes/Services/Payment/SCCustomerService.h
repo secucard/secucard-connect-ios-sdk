@@ -22,36 +22,36 @@
  *
  *  @param queryParams the search paramters
  *
- *  @return a promise fulfilling with NSArray
+ *  @return a promise resolveing with NSArray
  */
-- (PMKPromise*) getCustomers:(SCQueryParams*)queryParams;
+- (void) getCustomers:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *list, NSError *error))handler;
 
 /**
  *  create a customer
  *
  *  @param customer the customer
  *
- *  @return a promise fulfilling with SCPaymentCustomer
+ *  @return a promise resolveing with SCPaymentCustomer
  */
-- (PMKPromise*) createCustomer:(SCPaymentCustomer*)customer;
+- (void) createCustomer:(SCPaymentCustomer*)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler;
 
 /**
  *  update a customer
  *
  *  @param customer the customer
  *
- *  @return a promise fulfilling with SCPaymentCustomer
+ *  @return a promise resolveing with SCPaymentCustomer
  */
-- (PMKPromise*) updateCustomer:(SCPaymentCustomer*)customer;
+- (void) updateCustomer:(SCPaymentCustomer*)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler;
 
 /**
  *  delete a customer
  *
  *  @param id the customer's id
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) deleteCustomer:(NSString*)id;
+- (void) deleteCustomer:(NSString*)id completionHandler:(void (^)(bool success, NSError *))handler;
 
 
 @end

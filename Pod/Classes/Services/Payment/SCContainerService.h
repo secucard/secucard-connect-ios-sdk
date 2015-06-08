@@ -23,27 +23,27 @@
  *
  *  @param queryParams the search paramters
  *
- *  @return a promise fulfilling with NSArray
+ *  @return a promise resolveing with NSArray
  */
-- (PMKPromise*) getContainers:(SCQueryParams*)queryParams;
+- (void) getContainers:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler;
 
 /**
  *  create a container
  *
  *  @param container the container
  *
- *  @return a promise fulfilling with the created container
+ *  @return a promise resolveing with the created container
  */
-- (PMKPromise*) createContainer:(SCPaymentContainer*)container;
+- (void) createContainer:(SCPaymentContainer*)container completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler;
 
 /**
  *  update a container
  *
  *  @param container the container to update
  *
- *  @return a promise fulfilling with SCPaymentContainer
+ *  @return a promise resolveing with SCPaymentContainer
  */
-- (PMKPromise*) updateContainer:(SCPaymentContainer*)container;
+- (void) updateContainer:(SCPaymentContainer*)container completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler;
 
 /**
  *  assigna container to a customer
@@ -51,26 +51,26 @@
  *  @param containerId the container id
  *  @param customerId  the customer id
  *
- *  @return a promise fulfilling with the updated SCPaymentContainer
+ *  @return a promise resolveing with the updated SCPaymentContainer
  */
-- (PMKPromise*) updateContainerAssignment:(NSString*)containerId customerId:(NSString*)customerId;
+- (void) updateContainerAssignment:(NSString*)containerId customerId:(NSString*)customerId completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler;
 
 /**
  *  unassign a container from any customer
  *
  *  @param containerId the container id
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) deleteContainerAssignment:(NSString*)containerId;
+- (void) deleteContainerAssignment:(NSString*)containerId completionHandler:(void (^)(bool success, NSError *))handler;
 
 /**
  *  delete a container
  *
  *  @param id the container's id
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) deleteContainer:(NSString*)id;
+- (void) deleteContainer:(NSString*)id completionHandler:(void (^)(bool success, NSError *))handler;
 
 @end

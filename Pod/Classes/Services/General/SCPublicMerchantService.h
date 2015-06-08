@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SCAbstractService.h"
+#import "SCGeneralPublicMerchant.h"
 
 @interface SCPublicMerchantService : SCAbstractService
 
@@ -16,17 +17,17 @@
  *
  *  @param id the merchant's id
  *
- *  @return returns a promise which fulfills to SCGeneralPublicMerchant
+ *  @return returns a promise which resolves to SCGeneralPublicMerchant
  */
-- (PMKPromise*) getPublicMerchant:(NSString*)id;
+- (void) getPublicMerchant:(NSString*)id completionHandler:(void (^)(SCGeneralPublicMerchant *, NSError *))handler;
 
 /**
  *  Get a lit of public merchants
  *
  *  @param params the search parameters
  *
- *  @return returns a promise which fulfills to SCObjectList containing SCGeneralPublicMerchant
+ *  @return returns a promise which resolves to SCObjectList containing SCGeneralPublicMerchant
  */
-- (PMKPromise*) getPublicMerchants:(SCQueryParams*)params;
+- (void) getPublicMerchants:(SCQueryParams*)params completionHandler:(void (^)(SCObjectList *, NSError *))handler;
 
 @end

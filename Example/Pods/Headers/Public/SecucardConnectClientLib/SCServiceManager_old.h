@@ -1,1 +1,0 @@
-../../../../../Pod/Classes/Manager/SCServiceManager_old.h

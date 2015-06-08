@@ -7,13 +7,14 @@
 //
 
 #import "SCAbstractService.h"
+#import "SCSmartIdent.h"
 
 @interface SCSmartIdentService : SCAbstractService
 
-- (PMKPromise*) getIdentsList;
+- (void) getIdentsList:(void (^)(SCObjectList *, NSError *))handler;
 
-- (PMKPromise*) getIdents;
+- (void) getIdents:(void (^)(NSArray *, NSError *))handler;
 
-- (PMKPromise*) readIdent:(NSString*)id;
+- (void) readIdent:(NSString*)id completionHandler:(void (^)(SCSmartIdent *, NSError *))handler;
 
 @end

@@ -8,7 +8,6 @@
 #import "SCPersistenceManager.h"
 #import "SCRestServiceManager.h"
 #import "SCServiceManager.h"
-#import "SCServiceManager_old.h"
 #import "SCStompManager.h"
 #import "SCAnnotationProductInfo.h"
 #import "SCAuthDeviceAuthCode.h"

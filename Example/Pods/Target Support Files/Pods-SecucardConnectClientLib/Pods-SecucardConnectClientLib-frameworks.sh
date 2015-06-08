@@ -49,19 +49,19 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'AFNetworking.framework'
+  install_framework 'Alamofire.framework'
   install_framework 'CocoaAsyncSocket.framework'
   install_framework 'Mantle.framework'
-  install_framework 'OMGHTTPURLRQ.framework'
-  install_framework 'PromiseKit.framework'
-  install_framework 'Reachability.framework'
   install_framework 'SecucardConnectClientLib.framework'
+  install_framework 'SnapKit.framework'
+  install_framework 'SwiftyJSON.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
+  install_framework 'Alamofire.framework'
   install_framework 'CocoaAsyncSocket.framework'
   install_framework 'Mantle.framework'
-  install_framework 'OMGHTTPURLRQ.framework'
-  install_framework 'PromiseKit.framework'
-  install_framework 'Reachability.framework'
   install_framework 'SecucardConnectClientLib.framework'
+  install_framework 'SnapKit.framework'
+  install_framework 'SwiftyJSON.framework'
 fi

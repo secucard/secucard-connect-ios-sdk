@@ -23,60 +23,32 @@
   
 }
 
-- (PMKPromise*) getIdentRequests:(SCQueryParams*)queryParams {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)getIdentRequests:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
-- (PMKPromise*) getIdentRequest:(NSString*)id {
-
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)getIdentRequest:(NSString *)id completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
-- (PMKPromise*) getIdentResultsByRequestIds:(NSArray*)identRequestIds downloadAttachments:(BOOL)downloadAttachments {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)getIdentResultsByRequestIds:(NSArray *)identRequestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
-- (PMKPromise*) getIdentResultsByRequestsRaw:(NSArray*)requestIds downloadAttachments:(BOOL)downloadAttachments {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)getIdentResultsByRequestsRaw:(NSArray *)requestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
-- (PMKPromise*) createIdentRequest:(SCServicesIdentRequest*)newIdentRequest {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)createIdentRequest:(SCServicesIdentRequest *)newIdentRequest completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
-- (PMKPromise*) getIdentResults:(SCQueryParams*)queryParams downloadAttachments:(BOOL)downloadAttachments {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)getIdentResults:(SCQueryParams *)queryParams downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
-- (PMKPromise*) getIdentResult:(NSString*)id downloadAttachments:(BOOL)downloadAttachments  {
-  
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    reject([SCErrorManager errorWithDescription:@"Not implemented"]);
-  }];
-  
+- (void)getIdentResult:(NSString *)id downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler  {
+  handler(nil, [SCErrorManager errorWithDescription:@"Not implemented"]);
 }
 
 @end

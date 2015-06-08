@@ -20,27 +20,31 @@
   return instance;
 }
 
-- (PMKPromise*) getCard:(NSString*)id {
+- (void) getCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyCard *, NSError *))handler {
   
-  return [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCLoyaltyCard class] objectId:id];
-  
-}
-
-- (PMKPromise*) getCards:(SCQueryParams*)queryParams {
-  
-  return [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCLoyaltyCard class] queryParams:queryParams];
+  [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCLoyaltyCard class] objectId:id completionHandler:handler];
   
 }
 
-- (PMKPromise*) assignUserToCard:(NSString*)cardNumber pin:(id)pin {
+- (void) getCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
-  return [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin];
+  [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCLoyaltyCard class] queryParams:queryParams completionHandler:handler];
   
 }
 
-- (PMKPromise*) deleteUserFromCard:(NSString*)cardNumber {
+- (void) assignUserToCard:(NSString*)cardNumber pin:(id)pin completionHandler:(void (^)(bool, NSError *))handler {
   
-  return [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me"];
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
+  
+}
+
+- (void) deleteUserFromCard:(NSString*)cardNumber completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" completionHandler:handler];
   
 }
 

@@ -52,9 +52,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'CocoaAsyncSocket.framework'
   install_framework 'Expecta.framework'
   install_framework 'Mantle.framework'
-  install_framework 'OMGHTTPURLRQ.framework'
-  install_framework 'PromiseKit.framework'
-  install_framework 'Reachability.framework'
   install_framework 'SecucardConnectClientLib.framework'
   install_framework 'Specta.framework'
 fi
@@ -63,9 +60,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'CocoaAsyncSocket.framework'
   install_framework 'Expecta.framework'
   install_framework 'Mantle.framework'
-  install_framework 'OMGHTTPURLRQ.framework'
-  install_framework 'PromiseKit.framework'
-  install_framework 'Reachability.framework'
   install_framework 'SecucardConnectClientLib.framework'
   install_framework 'Specta.framework'
 fi

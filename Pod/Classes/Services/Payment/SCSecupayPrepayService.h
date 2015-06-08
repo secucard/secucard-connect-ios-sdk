@@ -25,7 +25,7 @@
  * @param callback Callback for async result processing.
  * @return The created transaction.
  */
-- (PMKPromise*) createPrepay:(SCPaymentSecupayPrepay*)data;
+- (void) createPrepay:(SCPaymentSecupayPrepay*)data completionHandler:(void (^)(SCPaymentSecupayPrepay *, NSError *))handler;
 
 /**
  * Cancel an existing prepay transaction.
@@ -34,6 +34,6 @@
  * @param callback Callback for async processing.
  * @return
  */
-- (PMKPromise*) cancelTransaction:(NSString*)id;
+- (void) cancelTransaction:(NSString*)transactionId completionHandler:(void (^)(bool success, NSError *))handler;
 
 @end

@@ -23,17 +23,17 @@
  *
  *  @param queryParams the search paramters
  *
- *  @return a promise fulfilling with SCObjectList of SCLoyaltyMerchantCard
+ *  @return a promise resolveing with SCObjectList of SCLoyaltyMerchantCard
  */
-- (PMKPromise*) getMerchantCards:(SCQueryParams*)queryParams;
+- (void) getMerchantCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
 
 /**
  *  get a card by id
  *
  *  @param id the card's id
  *
- *  @return a promise fulfilling with SCLoyaltyMerchantCard
+ *  @return a promise resolveing with SCLoyaltyMerchantCard
  */
-- (PMKPromise*) getMerchantCard:(NSString*)id;
+- (void) getMerchantCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, NSError *))handler;
 
 @end

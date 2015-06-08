@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PromiseKit/PromiseKit.h>
 
 #import "SCConnectClient.h"
 #import "SCPersistenceManager.h"
@@ -43,9 +42,9 @@
 
 - (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials;
 - (void) destroy;
-- (PMKPromise*) loginWithUserCedentials:(SCUserCredentials*)userCredentials;
-- (PMKPromise*) token;
-- (PMKPromise*) refreshAccessToken;
+- (void) loginWithUserCedentials:(SCUserCredentials*)userCredentials completionHandler:(void (^)(BOOL success, NSError *error))handler;
+- (void) token:(void (^)(NSString *token, NSError *error))handler;
+- (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
 - (void) killToken;
 
 - (BOOL) accessTokenValid;

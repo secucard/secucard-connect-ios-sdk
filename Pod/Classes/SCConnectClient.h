@@ -26,10 +26,10 @@
 + (SCConnectClient *)sharedInstance;
 
 
-- (instancetype) initWithConfiguration:(SCClientConfiguration*)configuration;
+- (void) initWithConfiguration:(SCClientConfiguration*)configuration;
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials;
-- (PMKPromise*) connect;
-- (PMKPromise*) disconnect;
-- (void) destroy;
+- (void) connect:(void (^)(bool, NSError *))handler;
+- (void) disconnect:(void (^)(bool, NSError *))handler;
+- (void) destroy:(void (^)(bool, NSError *))handler;
 
 @end

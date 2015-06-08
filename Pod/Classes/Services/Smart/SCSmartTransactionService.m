@@ -11,38 +11,19 @@
 
 @implementation SCSmartTransactionService
 
-/**
- *  Create a transaction
- *
- *  @param transaction the transaction to create
- *
- *  @return a promise fulfilling with a SCSmartTransaction
- */
-- (PMKPromise*) createTransaction:(SCSmartTransaction*)transaction {
-  return [self create:transaction onChannel:DefaultChannel];
+
+- (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+  [self create:transaction onChannel:DefaultChannel completionHandler:handler];
 }
 
-/**
- * Updating a transaction.
- *
- * @param transaction The transaction data to update.
- *
- * @return a promise fulfilling with SCSmartTransaction
- */
-- (PMKPromise*) updateTransaction:(SCSmartTransaction*)transaction {
-  return [self update:transaction onChannel:DefaultChannel];
+- (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+  [self update:transaction onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+    handler((SCSmartTransaction*)transaction, error);
+  }];
 }
 
-/**
- * Starting/Executing a transaction.
- *
- * @param transactionId The transaction id.
- * @param type          The transaction type like "auto" or "cash".
- *
- * @return a promise fulfilling with SCSmartTransaction
- */
-- (PMKPromise*) startTransaction:(NSString*)transactionId type:(NSString*)type {
-  return [self execute:[SCSmartTransaction class] withId:transactionId action:@"start" actionArg:type arg:nil returnType:[SCSmartTransaction class] onChannel:PersistentChannel];
+- (void) startTransaction:(NSString*)transactionId type:(NSString*)type completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+  [self execute:[SCSmartTransaction class] withId:transactionId action:@"start" actionArg:type arg:nil returnType:[SCSmartTransaction class] onChannel:PersistentChannel completionHandler:handler];
 }
 
 @end

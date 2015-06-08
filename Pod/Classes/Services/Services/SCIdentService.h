@@ -29,18 +29,18 @@
  *
  *  @param queryParams the search paramters
  *
- *  @return a promise fulfilling with NSArray of SCServicesIdentRequest
+ *  @return a promise resolveing with NSArray of SCServicesIdentRequest
  */
-- (PMKPromise*) getIdentRequests:(SCQueryParams*)queryParams;
+- (void) getIdentRequests:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler;
     
 /**
  *  Returns a single ident request object.
  *
  *  @param id the ident's id
  *
- *  @return a promise fulfilling with SCServicesIdentRequest
+ *  @return a promise resolveing with SCServicesIdentRequest
  */
-- (PMKPromise*) getIdentRequest:(NSString*)id;
+- (void) getIdentRequest:(NSString*)id completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler;
       
 /**
  *  Returns a ident result for a given list of ident request ids.
@@ -48,9 +48,9 @@
  *  @param identRequestIds     an array of ident request ids
  *  @param downloadAttachments whether to download attachments
  *
- *  @return a promise fulfilling with NSArray of SCServicesIdentRequest
+ *  @return a promise resolveing with NSArray of SCServicesIdentRequest
  */
-- (PMKPromise*) getIdentResultsByRequestIds:(NSArray*)identRequestIds downloadAttachments:(BOOL)downloadAttachments;
+- (void) getIdentResultsByRequestIds:(NSArray*)identRequestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler;
 
 /**
  *  Returns a list of raw results for a given list of ident request ids.
@@ -58,18 +58,18 @@
  *  @param requestIds          an array of ident request ids
  *  @param downloadAttachments whether to download attachments
  *
- *  @return a promise fulfilling with NSArray of SCServicesIdentRequest
+ *  @return a promise resolveing with NSArray of SCServicesIdentRequest
  */
-- (PMKPromise*) getIdentResultsByRequestsRaw:(NSArray*)requestIds downloadAttachments:(BOOL)downloadAttachments;
+- (void) getIdentResultsByRequestsRaw:(NSArray*)requestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler;
           
 /**
  *  Creates a new ident request.
  *
  *  @param newIdentRequest the new ident request
  *
- *  @return a promise fulfilling with the new SCServicesIdentRequest
+ *  @return a promise resolveing with the new SCServicesIdentRequest
  */
-- (PMKPromise*) createIdentRequest:(SCServicesIdentRequest*)newIdentRequest;
+- (void) createIdentRequest:(SCServicesIdentRequest*)newIdentRequest completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler;
             
 /**
  *  Returns a list of ident result objects according to the given query parameters.
@@ -82,9 +82,9 @@
  *                              Note: Depending on the number of returned results + persons + attachments this may be a lot!
  *                              Works only if {@link #cacheAttachments(boolean)} is set to true, which is the default.
  *
- * @return a promise fulfilling with an NSArray of SCServicesIdentRequest
+ * @return a promise resolveing with an NSArray of SCServicesIdentRequest
  */
-- (PMKPromise*) getIdentResults:(SCQueryParams*)queryParams downloadAttachments:(BOOL)downloadAttachments;
+- (void) getIdentResults:(SCQueryParams*)queryParams downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler;
 
 /**
  * Returns a single ident result object.
@@ -95,9 +95,9 @@
  *                            Note: Depending on the number of returned persons + attachments this may be a lot!
  *                            Works only if cacheAttachments is set to true, which is the default.
  *
- * @return a promise fulfilling with SCServicesIdentRequest
+ * @return a promise resolveing with SCServicesIdentRequest
  */
-- (PMKPromise*) getIdentResult:(NSString*)id downloadAttachments:(BOOL)downloadAttachments;
+- (void) getIdentResult:(NSString*)id downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler;
 
 
 @end

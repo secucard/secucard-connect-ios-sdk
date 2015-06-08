@@ -58,11 +58,11 @@
  *  @param id      the id
  *  @param channel the preferred channel
  *
- *  @return a promise fulfilling with the found instance (id)
+ *  @return a promise resolveing with the found instance (id)
  */
-- (PMKPromise*) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel {
+- (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] getObject:type objectId:id];
+  [[self serviceManagerByChannel:channel] getObject:type objectId:id completionHandler:handler];
   
 }
 
@@ -73,35 +73,23 @@
  *  @param queryParams the query parameters
  *  @param channel     the preferred channel
  *
- *  @return a promise fulfilling with a NSArray of the found objects (NSArray)
+ *  @return a promise resolveing with a NSArray of the found objects (NSArray)
  */
-- (PMKPromise*) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel {
+- (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, NSError *))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams].then(^(SCObjectList* objectList) {
-      
-      // convert object list to list
+    [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
       
       // if nil result and no error, return empty array
-      if (!objectList || objectList.count == 0) {
-        reject([SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
+      if (!list || list.count == 0) {
+        handler(nil, [SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
       }
       
-      return [self postProcessObjects:objectList.list];
+      // process list
+      [self postProcessObjects:list.list completionHandler:^(NSArray *processedList, NSError *error) {
+        handler(processedList, error);
+      }];
       
-    }).then(^(NSArray *list) {
-      
-      // fulfill promise with *objectList.list*
-      fulfill(list);
-      
-    }).catch(^(NSError *error) {
-      
-      reject(error);
-      
-    });
-    
-  }];
+    }];
   
 }
 
@@ -112,56 +100,47 @@
  *  @param queryParams the query parameters
  *  @param channel     the preferred channel
  *
- *  @return a promise fulfilling with a SCObjectList of the found objects (SCObjectList)
+ *  @return a promise resolveing with a SCObjectList of the found objects (SCObjectList)
  */
-- (PMKPromise*) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel {
+- (void) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
     __block SCObjectList *objList;
     
-    [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams].then(^(SCObjectList* objectList) {
-      
-      // convert object list to list
+    [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
       
       // if nil result and no error, return empty array
-      if (!objectList || objectList.count == 0) {
-        reject([SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
+      if (!list || list.count == 0) {
+        handler(nil, [SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
       }
       
       // save object list for later return
-      objList = objectList;
+      objList = list;
       
       // process list
-      return [self postProcessObjects:objectList.list];
+      [self postProcessObjects:list.list completionHandler:^(NSArray *processedList, NSError *error) {
+
+        if (error != nil) {
+          objList.list = processedList;
+        }
+        
+        handler(objList, error);
+      }];
       
-    }).then(^(NSArray *list) {
       
-      // fulfill promise with real *objectList*
-      fulfill(objList);
-      
-    }).catch(^(NSError *error) {
-      
-      reject(error);
-      
-    });
-    
-  }];
+    }];
   
 }
 
 /**
- *  Post process the objects found by the list retireval methods, this is used internally after a list result arrived and before it is passed by the promise fulfiller
+ *  Post process the objects found by the list retireval methods, this is used internally after a list result arrived and before it is passed by the promise resolveer
  *
  *  @param list the input list
  *
- *  @return a promise fulfilling with the output list (NSArray)
+ *  @return a promise resolveing with the output list (NSArray)
  */
-- (PMKPromise*) postProcessObjects:(NSArray*)list {
+- (void) postProcessObjects:(NSArray*)list completionHandler:(void (^)(NSArray *, NSError *))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    fulfill(list);
-  }];
+  handler(list, nil);
   
 }
 
@@ -172,11 +151,11 @@
  *  @param object  the object to be saved
  *  @param channel the preferred channel
  *
- *  @return a promise fulfilling with the refreshed object (SCSecuObject)
+ *  @return a promise resolveing with the refreshed object (SCSecuObject)
  */
-- (PMKPromise*) update:(id)object onChannel:(ServiceChannel)channel {
+- (void) update:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] updateObject:object];
+  [[self serviceManagerByChannel:channel] updateObject:object completionHandler:handler];
   
 }
 
@@ -192,11 +171,11 @@
  *  @param returnType the wanted return type
  *  @param channel    the preferred channel
  *
- *  @return a promise fulfilling with the result (id)
+ *  @return a promise resolveing with the result (id)
  */
-- (PMKPromise*) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel {
+- (void) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] execute:type objectId:id action:action actionArg:actionArg arg:arg];
+  [[self serviceManagerByChannel:channel] execute:type objectId:id action:action actionArg:actionArg arg:arg completionHandler:handler];
   
 }
 
@@ -210,11 +189,11 @@
  *  @param returnType the wanted return type
  *  @param channel    the preferred channel
  *
- *  @return a promise fulfilling with the result (id)
+ *  @return a promise resolveing with the result (id)
  */
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel {
+- (void) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] execute:appId action:action actionArg:arg];
+  [[self serviceManagerByChannel:channel] execute:appId action:action actionArg:arg completionHandler:handler];
   
 }
 
@@ -226,9 +205,9 @@
  *
  *  @return a promise returning the created object (id)
  */
-- (PMKPromise*) create:(id)object onChannel:(ServiceChannel)channel {
+- (void) create:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] createObject:object];
+  [[self serviceManagerByChannel:channel] createObject:object completionHandler:handler];
   
 }
 
@@ -239,11 +218,11 @@
  *  @param id      the id of the object
  *  @param channel the preferred channel
  *
- *  @return a promise just fulfilling without result (nil)
+ *  @return a promise just resolveing without result (nil)
  */
-- (PMKPromise*) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel {
+- (void) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] deleteObject:type objectId:id];
+  [[self serviceManagerByChannel:channel] deleteObject:type objectId:id completionHandler:handler];
   
 }
 
@@ -256,11 +235,11 @@
  *  @param actionArg the action arguments as string
  *  @param channel   the preferred channel
  *
- *  @return a promise just fulfilling without result (nil)
+ *  @return a promise just resolveing without result (nil)
  */
-- (PMKPromise*) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel {
+- (void) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler {
   
-  return [[self serviceManagerByChannel:channel] deleteObject:type objectId:id action:action actionArg:actionArg];
+  [[self serviceManagerByChannel:channel] deleteObject:type objectId:id action:action actionArg:actionArg completionHandler:handler];
   
 }
 

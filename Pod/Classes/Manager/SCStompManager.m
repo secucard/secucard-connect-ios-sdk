@@ -186,7 +186,14 @@
   [self.client setReceiptHandler:^(STOMPFrame *frame) {
     
     // always get token before temp queue is subscribed to
-    [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+    
+    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+      
+      if (error != nil) {
+        [weakSelf closeConnection];
+        [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
+        return;
+      }
       
       // subscribe to temp queue without telling the server because the server thinks it is already subscribed to.
       [weakSelf.client subscribeToWithoutRegistration:weakSelf.configuration.replyQueue
@@ -213,7 +220,7 @@
                                          // check if parsing error
                                          if (error)
                                          {
-                                           [weakSelf rejectStoredItem:correlationId withError:error];
+                                           [weakSelf resolveStoredItem:correlationId withError:error];
                                            @throw error.localizedDescription;
                                          }
                                          
@@ -245,8 +252,8 @@
                                            //
                                            //                                             [weakSelf.messageStore removeObjectForKey:correlationId];
                                            //                                           }
-
-                                           [weakSelf rejectStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
+                                           
+                                           [weakSelf resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
                                            @throw @"error in stomp response";
                                          }
                                          
@@ -265,14 +272,12 @@
                                          }
                                          
                                          // if we have a correlation id, chance is good, that there is a promise that wants to be fullfilled
-                                         [weakSelf fulfillStoredItem:correlationId withResult:resultObject];
+                                         [weakSelf resolveStoredItem:correlationId withResult:resultObject];
                                          
                                        }];
       
-    }).catch(^(NSError *error) {
-      [weakSelf closeConnection];
-      [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
-    });
+    }];
+    
     
   }];
   
@@ -285,13 +290,13 @@
 }
 
 
-- (void) rejectStoredItem:(NSString*)correlationId withError:(NSError *)error {
+- (void) resolveStoredItem:(NSString*)correlationId withError:(NSError *)error {
   
   if (correlationId != nil) {
     
-    // get fulfiller
+    // get resolveer
     SCStompStorageItem *storedItem = (SCStompStorageItem*)[self.promiseStore objectForKey:correlationId];
-    storedItem.reject(error);
+    storedItem.handler(nil, error);
     
     [self.promiseStore removeObjectForKey:correlationId];
     
@@ -299,13 +304,13 @@
   
 }
 
-- (void) fulfillStoredItem:(NSString*)correlationId withResult:(id)result {
+- (void) resolveStoredItem:(NSString*)correlationId withResult:(id)result {
   
   if (correlationId != nil) {
     
-    // get fulfiller
+    // get resolveer
     SCStompStorageItem *storedItem = (SCStompStorageItem*)[self.promiseStore objectForKey:correlationId];
-    storedItem.fulfill(result);
+    storedItem.handler(result, nil);
     
     [self.promiseStore removeObjectForKey:correlationId];
     
@@ -368,9 +373,9 @@
   // cancel disconnect requests
   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
   
-  // reject earlier messages by correlation id (timouts)
+  // resolve earlier messages by correlation id (timouts)
   for (SCStompStorageItem *item in self.promiseStore) {
-    item.reject([SCErrorManager errorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
+    item.handler(nil, [SCErrorManager errorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
   }
   
 }
@@ -386,20 +391,18 @@
  *  @param host       the host
  *  @param completion the completion block
  */
-- (PMKPromise*) connect
+- (void) connect:(void (^)(bool, NSError *))handler
 {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
     // initialized at all?
     if ([self needsInitialization]) {
-      reject([SCErrorManager errorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
+      handler(false, [SCErrorManager errorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
       return;
     }
     
     // stomp client does exist?
     if (!self.client) {
-      reject([SCErrorManager errorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
+      handler(false, [SCErrorManager errorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
       return;
     }
     
@@ -407,11 +410,11 @@
     if (self.client.connected) {
       [self extendConnectionTimer];
       [SCErrorManager handleErrorWithDescription:@"already connected. Immediate request."];
-      fulfill(nil);
+      handler(true, nil);
       return;
     }
     
-    [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
       self.configuration.userId = token;
       self.configuration.password = token;
@@ -438,7 +441,7 @@
                                   
                                   // revoke token if connection error
                                   [weakself.client hardDisconnect];
-                                  reject([SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                                  handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                                   
                                 } else {
                                   
@@ -446,8 +449,8 @@
                                   [weakself setConnectionTimer];
                                   
                                   // and call completion
-                                  fulfill(nil);
-
+                                  handler(true, nil);
+                                  
                                 }
                                 
                               }];
@@ -465,15 +468,15 @@
                           
                           // revoke token if connection error
                           [weakself.client hardDisconnect];
-                          reject([SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                          handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                           
                         } else {
-                        
+                          
                           // all done, set timer
                           [weakself setConnectionTimer];
                           
                           // and call completion
-                          fulfill(nil);
+                          handler(true, nil);
                           
                         }
                         
@@ -482,9 +485,8 @@
         
       }
       
-    });
-    
-  }];
+    }];
+  
   
 }
 
@@ -494,12 +496,10 @@
  *  @param message the message to be sent
  *  @param queue   the queue to put the message on
  */
-- (PMKPromise*) sendMessage:(SCTransportMessage*)message toDestination:(SCStompDestination*)destination
+- (void) sendMessage:(SCTransportMessage*)message toDestination:(SCStompDestination*)destination completionHandler:(void (^)(id responseObject, NSError *))handler
 {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
-    
-    [self connect].then(^() {
+    [self connect:^(bool success, NSError *error) {
       
       NSString *correlationId = [NSString stringWithFormat:@"%d", [self getNextCorrelationID]];
       
@@ -523,7 +523,7 @@
       
       NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
       
-      [[SCAccountManager sharedManager] token].then(^(NSString *token) {
+      [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
         
         NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                                        @"correlation-id": correlationId,
@@ -542,16 +542,13 @@
                        body:jsonString];
         
         SCStompStorageItem *itemToStore = [SCStompStorageItem new];
-        itemToStore.fulfill = fulfill;
-        itemToStore.reject = reject;
+        itemToStore.handler = handler;
         
         [self.promiseStore setObject:itemToStore forKey:[NSString stringWithFormat:@"%@", correlationId]];
         
-      });
+      }];
       
-    });
-    
-  }];
+    }];
   
 }
 
@@ -567,95 +564,97 @@
 
 #pragma mark - SCServiceManagerProtocol
 
-- (PMKPromise*) open {
-  
-  return [self connect];
-  
+- (void) open:(void (^)(bool, NSError *))handler {
+  [self connect:handler];
 }
 
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId {
+- (void) getObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(id, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.data = objectId;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type] completionHandler:handler];
   
 }
 
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams {
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.query = queryParams;
   
   // TODO: Callback if false?
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type] completionHandler:handler];
   
 }
 
-- (PMKPromise*) createObject:(SCSecuObject*)object {
+- (void) createObject:(SCSecuObject*)object completionHandler:(void (^)(id, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.data = object;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]completionHandler:handler];
   
 }
 
-- (PMKPromise*) updateObject:(SCSecuObject*)object {
+- (void) updateObject:(SCSecuObject*)object completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = object.id;
   message.data = object;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]] completionHandler:handler];
   
 }
 
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
   message.data = arg;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action] completionHandler:handler];
   
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId {
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(bool, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type] completionHandler:^(id responseObject, NSError *error) {
+    handler((error == nil), error);
+  }];
   
 }
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg {
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg completionHandler:(void (^)(bool, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action] completionHandler:^(id responseObject, NSError *error) {
+    handler((error == nil), error);
+  }];
   
 }
 
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg {
+- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
 
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
   message.data = arg;
   
-  return [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action]];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:handler];
 
 }
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(SCTransportMessage*)actionArg {
+- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(SCTransportMessage*)actionArg completionHandler:(void (^)(id, NSError *))handler {
 
-  return [self sendMessage:actionArg toDestination:[SCAppDestination initWithAppId:appId method:action]];
+  [self sendMessage:actionArg toDestination:[SCAppDestination initWithAppId:appId method:action] completionHandler:handler];
   
 }
 

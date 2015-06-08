@@ -25,17 +25,17 @@
  *
  *  @param queryParams the search paramters
  *
- *  @return a promise fulfilling with SCObjectList of SCGeneralTransaction
+ *  @return a promise resolveing with SCObjectList of SCGeneralTransaction
  */
-- (PMKPromise*) getTransactions:(SCQueryParams*)queryParams;
+- (void) getTransactions:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
 
 /**
  *  retrieve a transaction by it's id
  *
  *  @param pid hte tranaction's id
  *
- *  @return a promise fulfilling with SCGeneralTransaction
+ *  @return a promise resolveing with SCGeneralTransaction
  */
-- (PMKPromise*) getTransaction:(NSString*)pid;
+- (void) getTransaction:(NSString*)pid completionHandler:(void (^)(SCGeneralTransaction *, NSError *))handler;
   
 @end

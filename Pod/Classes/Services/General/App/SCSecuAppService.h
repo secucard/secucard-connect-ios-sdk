@@ -7,7 +7,7 @@
 //
 
 #import "SCAbstractService.h"
-
+#import "SCGeneralMerchant.h"
 @interface SCStoreList : SCObjectList
 
 @end
@@ -27,9 +27,9 @@
  *  @param appId     the app id
  *  @param argObject an object with the store id and merchant id
  *
- *  @return a promise fulfilling with SCObjectList with SCGeneralStore
+ *  @return a promise resolveing with SCGeneralMerchant
  */
-- (PMKPromise*) getMerchant:(NSString*)appId argObject:(id)argObject;
+- (void) getMerchant:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(SCGeneralMerchant *, NSError *))handler;
 
 /**
  *  retrieve a lst of merchants
@@ -37,9 +37,9 @@
  *  @param appId the app id
  *  @param arg   search paramters
  *
- *  @return a promise fulfiling with SCObjectList with SCGeneralStore
+ *  @return a promise fulfiling with SCObjectList with SCGeneralMerchant
  */
-- (PMKPromise*) getMerchants:(NSString*)appId arg:(SCQueryParams*)arg;
+- (void) getMerchants:(NSString*)appId arg:(SCQueryParams*)arg completionHandler:(void (^)(SCObjectList *, NSError *))handler;
 
 /**
  *  add a card to the account
@@ -47,8 +47,8 @@
  *  @param appId     the app id
  *  @param argObject an argument object with cardnumber and pin
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) addCard:(NSString*)appId argObject:(id)argObject;
+- (void) addCard:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(bool success, NSError *))handler;
 
 @end

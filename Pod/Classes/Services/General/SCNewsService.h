@@ -16,17 +16,17 @@
  *
  *  @param queryParams the search parameters
  *
- *  @return a promise which fulfills to SCObjectList
+ *  @return a promise which resolves to SCObjectList
  */
-- (PMKPromise*) getNews:(SCQueryParams*)queryParams;
+- (void) getNews:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
 
 /**
  *  mark a news remotely as read
  *
  *  @param pid the news' id
  *
- *  @return a promise which fulfills to nil
+ *  @return a promise which resolves to nil
  */
-- (PMKPromise*) markRead:(NSString*)pid;
+- (void) markRead:(NSString*)pid  completionHandler:(void (^)(bool success, NSError *))handler;
   
 @end

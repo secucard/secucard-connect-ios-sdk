@@ -11,30 +11,28 @@
 
 @implementation SCCheckinService
 
-- (PMKPromise*) getCheckins {
-  return [self getList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel];
+- (void)getCheckins:(void (^)(NSArray *, NSError *))handler {
+  [self getList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel completionHandler:handler];
 }
 
-- (PMKPromise*) getCheckinsList {
-  return [self getObjectList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel];
+- (void) getCheckinsList:(void (^)(SCObjectList *, NSError *))handler {
+  [self getObjectList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel completionHandler:handler];
 }
 
-- (PMKPromise *)postProcessObjects:(NSArray *)list {
+- (void)postProcessObjects:(NSArray *)list completionHandler:(void (^)(NSArray *, NSError *))handler {
   
-  return [PMKPromise new:^(PMKFulfiller fulfill, PMKRejecter reject) {
+  for (NSObject *object in list) {
     
-    for (NSObject *object in list) {
-      
-      SCMediaResource *picture = ((SCSmartCheckin*)object).pictureObject;
-      if (picture) {
-        if (!picture.isCached) {
-          [picture download];
-        }
+    SCMediaResource *picture = ((SCSmartCheckin*)object).pictureObject;
+    if (picture) {
+      if (!picture.isCached) {
+        [picture download];
       }
-      
     }
     
-  }];
+  }
+  
+  handler(list, nil);
 }
 
 @end

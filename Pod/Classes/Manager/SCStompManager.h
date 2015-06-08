@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "SCAccountManager.h"
-#import <PromiseKit/PromiseKit.h>
 #import "SCServiceManager.h"
 
 #define kErrorDomainSCStompService                  @"SCSecucardCoreStompService"
@@ -22,7 +21,7 @@
 #define kStompMethodDelete                          @"delete:"
 #define kStompMethodExecute                         @"exec:"
 
-typedef void (^ConnectCompletion)(NSError *error);
+typedef void (^ReceiptHandler)(id responseObject, NSError *error);
 
 @interface SCStompDestination : NSObject
 
@@ -50,8 +49,7 @@ typedef void (^ConnectCompletion)(NSError *error);
 
 @interface SCStompStorageItem : NSObject
 
-@property (nonatomic, assign) PMKFulfiller fulfill;
-@property (nonatomic, assign) PMKRejecter reject;
+@property (nonatomic, assign) ReceiptHandler handler;
 
 @end
 
@@ -68,7 +66,7 @@ typedef void (^ConnectCompletion)(NSError *error);
 /**
  *  the port (tyically 61613 or 61614)
  */
-@property (nonatomic, assign)  int port;
+@property (nonatomic, assign)  NSUInteger port;
 
 /**
  *  the password needed to connect the user
@@ -83,7 +81,7 @@ typedef void (^ConnectCompletion)(NSError *error);
 /**
  *  the stomp heartbeat in milliseconds
  */
-@property (nonatomic, assign)  int heartbeatMs;
+@property (nonatomic, assign)  NSUInteger heartbeatMs;
 
 /**
  *  if the service should use ssl
@@ -103,12 +101,12 @@ typedef void (^ConnectCompletion)(NSError *error);
 /**
  *  the connection timeout in seconds
  */
-@property (nonatomic, assign)  int connectionTimeoutSec;
+@property (nonatomic, assign)  NSUInteger connectionTimeoutSec;
 
 /**
  *  the socket's timeout in seconds
  */
-@property (nonatomic, assign)  int socketTimeoutSec;
+@property (nonatomic, assign)  NSUInteger socketTimeoutSec;
 
 /**
  *  the socket's timeout in seconds
@@ -166,7 +164,7 @@ typedef void (^ConnectCompletion)(NSError *error);
 /**
  *  connect to stomp
  */
-- (PMKPromise*) connect;
+- (void) connect:(void (^)(bool success, NSError *error))handler;
 
 
 @end

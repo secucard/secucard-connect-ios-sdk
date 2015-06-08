@@ -10,9 +10,9 @@
 
 @implementation SCUploadService
 
--(PMKPromise*)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument {
+- (void)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument completionHandler:(void (^)(SCDocumentUploadsDocument *, NSError *))handler {
   
-  return [[self serviceManagerByChannel:OnDemandChannel] execute:base64EncodeDocument.class objectId:nil action:nil actionArg:nil arg:base64EncodeDocument];
+  [[self serviceManagerByChannel:OnDemandChannel] execute:base64EncodeDocument.class objectId:nil action:nil actionArg:nil arg:base64EncodeDocument completionHandler:handler];
   
 }
 

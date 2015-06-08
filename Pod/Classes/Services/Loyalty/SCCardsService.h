@@ -23,18 +23,18 @@
  *
  *  @param id the card's id
  *
- *  @return a promise fulfilling with SCLoyaltyCard
+ *  @return a promise resolveing with SCLoyaltyCard
  */
-- (PMKPromise*) getCard:(NSString*)id;
+- (void) getCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyCard *, NSError *))handler;
 
 /**
  *  get a list of cards
  *
  *  @param queryParams the search paramters
  *
- *  @return a promise fulfilling with SCObjectList with SCLoyaltyCard
+ *  @return a promise resolveing with SCObjectList with SCLoyaltyCard
  */
-- (PMKPromise*) getCards:(SCQueryParams*)queryParams;
+- (void) getCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
 
 /**
  *  Assign a card to the user
@@ -42,17 +42,17 @@
  *  @param cardNumber the card number
  *  @param pin        the pin of the card
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) assignUserToCard:(NSString*)cardNumber pin:(id)pin;
+- (void) assignUserToCard:(NSString*)cardNumber pin:(id)pin completionHandler:(void (^)(bool, NSError *))handler;
 
 /**
  *  remove a card from the user
  *
  *  @param cardNumber the card number
  *
- *  @return a promise fulfilling with nil
+ *  @return a promise resolveing with nil
  */
-- (PMKPromise*) deleteUserFromCard:(NSString*)cardNumber;
+- (void) deleteUserFromCard:(NSString*)cardNumber completionHandler:(void (^)(bool, NSError *))handler;
 
 @end

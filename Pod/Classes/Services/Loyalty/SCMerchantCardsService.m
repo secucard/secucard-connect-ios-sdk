@@ -22,14 +22,12 @@
   
 }
 
-- (PMKPromise*) getMerchantCards:(SCQueryParams*)queryParams {
-  
-  return [self getObjectList:[SCLoyaltyMerchantCard class] withParams:queryParams onChannel:DefaultChannel];
-  
+- (void)getMerchantCards:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  [self getObjectList:[SCLoyaltyMerchantCard class] withParams:queryParams onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (PMKPromise*) getMerchantCard:(NSString*)id {
-  return [self get:[SCLoyaltyMerchantCard class] withId:id onChannel:DefaultChannel];
+- (void)getMerchantCard:(NSString *)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, NSError *))handler {
+  [self get:[SCLoyaltyMerchantCard class] withId:id onChannel:DefaultChannel completionHandler:handler];
 }
 
 

@@ -20,65 +20,27 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Alamofire (1.2.2)
   - CocoaAsyncSocket (7.4.1)
   - Expecta (1.0.0)
   - Mantle (2.0.2):
     - Mantle/extobjc (= 2.0.2)
   - Mantle/extobjc (2.0.2)
-  - OMGHTTPURLRQ (2.1):
-    - OMGHTTPURLRQ/RQ (= 2.1)
-  - OMGHTTPURLRQ/FormURLEncode (2.1)
-  - OMGHTTPURLRQ/RQ (2.1):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (2.1)
-  - PromiseKit (1.5.3):
-    - PromiseKit/CALayer (= 1.5.3)
-    - PromiseKit/NSNotificationCenter (= 1.5.3)
-    - PromiseKit/NSURLConnection (= 1.5.3)
-    - PromiseKit/Pause (= 1.5.3)
-    - PromiseKit/UIActionSheet (= 1.5.3)
-    - PromiseKit/UIAlertView (= 1.5.3)
-    - PromiseKit/UIView (= 1.5.3)
-    - PromiseKit/UIViewController (= 1.5.3)
-    - PromiseKit/Until (= 1.5.3)
-    - PromiseKit/When (= 1.5.3)
-  - PromiseKit/CALayer (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/NSNotificationCenter (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/NSURLConnection (1.5.3):
-    - OMGHTTPURLRQ
-    - PromiseKit/Promise
-  - PromiseKit/Pause (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/Promise (1.5.3)
-  - PromiseKit/UIActionSheet (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/UIAlertView (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/UIView (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/UIViewController (1.5.3):
-    - PromiseKit/Promise
-  - PromiseKit/Until (1.5.3):
-    - PromiseKit/Promise
-    - PromiseKit/When
-  - PromiseKit/When (1.5.3):
-    - PromiseKit/Promise
-  - Reachability (3.2)
   - SecucardConnectClientLib (0.1.0):
     - AFNetworking (~> 2.5)
     - CocoaAsyncSocket (~> 7.4)
     - Mantle (~> 2.0)
-    - PromiseKit (~> 1.5)
-    - Reachability (~> 3.2)
+  - SnapKit (0.10.0)
   - Specta (1.0.1)
+  - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 1.2)
   - Expecta
   - SecucardConnectClientLib (from `../`)
+  - SnapKit (~> 0.10.0)
   - Specta
+  - SwiftyJSON (~> 2.2)
 
 EXTERNAL SOURCES:
   SecucardConnectClientLib:
@@ -86,13 +48,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
   Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
   Mantle: 967fd31ea0220890b2e76589198996b534bb3fb1
-  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
-  PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SecucardConnectClientLib: d28acbe8a3510f371f0f341096aba0cae35fc53c
+  SecucardConnectClientLib: f5eec7d30c6573cc7911a7c0be84e8bd7a0cccab
+  SnapKit: 53696873f2cf84a15e8d7d0d9729ed4381196b16
   Specta: 097be314a75de103703a3bf9a529dc1a398509d7
+  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
 COCOAPODS: 0.37.2

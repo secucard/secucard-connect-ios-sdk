@@ -7,41 +7,41 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PromiseKit/PromiseKit.h>
 #import "SCQueryParams.h"
-
 #import "SCSecuObject.h"
+#import "SCObjectList.h"
+
 @protocol SCServiceManagerProtocol <NSObject>
 
-- (PMKPromise*) open;
+- (void) open:(void (^)(bool, NSError*)) handler;
 - (void) close;
 
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId;
-- (PMKPromise*) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure;
+- (void) getObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(id, NSError *))handler;
+- (void) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
 
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams;
-- (PMKPromise*) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure;
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *list, NSError *))handler;
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *list, NSError *))handler;
 
-- (PMKPromise*) createObject:(SCSecuObject*)object;
-- (PMKPromise*) createObject:(SCSecuObject*)object secure:(BOOL)secure;
+- (void) createObject:(SCSecuObject*)object completionHandler:(void (^)(id, NSError *))handler;
+- (void) createObject:(SCSecuObject*)object secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
 
-- (PMKPromise*) updateObject:(SCSecuObject*)object;
-- (PMKPromise*) updateObject:(SCSecuObject*)object secure:(BOOL)secure;
+- (void) updateObject:(SCSecuObject*)object completionHandler:(void (^)(SCSecuObject *responseObject, NSError *))handler;
+- (void) updateObject:(SCSecuObject*)object secure:(BOOL)secure completionHandler:(void (^)(SCSecuObject *responseObject, NSError *))handler;
 
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg;
-- (PMKPromise*) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure;
+- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler;
+- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId;
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure;
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(bool success, NSError *))handler;
 
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg;
-- (PMKPromise*) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure;
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure completionHandler:(void (^)(bool success, NSError *))handler;
 
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg;
-- (PMKPromise*) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure;
+- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler;
+- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
 
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg;
-- (PMKPromise*) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg secure:(BOOL)secure;
+- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg completionHandler:(void (^)(id, NSError *))handler;
+- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(NSDictionary*)actionArg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
 
 
 @end

@@ -23,9 +23,9 @@
   
 }
 
-- (PMKPromise*) getCustomer:(NSString*)id {
+- (void)getCustomer:(NSString *)id completionHandler:(void (^)(SCLoyaltyCustomer *, NSError *))handler {
   
-  return [self get:[SCLoyaltyCustomer class] withId:id onChannel:DefaultChannel];
+  [self get:[SCLoyaltyCustomer class] withId:id onChannel:DefaultChannel completionHandler:handler];
   
 }
 

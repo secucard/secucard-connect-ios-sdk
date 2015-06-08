@@ -17,44 +17,44 @@
  *  @param storeId the store's id
  *  @param sid
  *
- *  @return a promise fulfilling to nil
+ *  @return a promise resolveing to nil
  */
-- (PMKPromise*) checkIn:(NSString*) storeId sid:(NSString*)sid;
+- (void) checkIn:(NSString*) storeId sid:(NSString*)sid completionHandler:(void (^)(bool success, NSError *error))handler;
 
 /**
  *  set store as default
  *
  *  @param storeId the store's id
  *
- *  @return a promise fulfilling to nil
+ *  @return a promise resolveing to nil
  */
-- (PMKPromise*) setDefault:(NSString*)storeId;
+- (void) setDefault:(NSString*)storeId completionHandler:(void (^)(bool success, NSError *error))handler;
 
 /**
  *  retrieve a list of stores
  *
  *  @param queryParams the search paramteres
  *
- *  @return a promise fulfilling to SCObjectList of SCGeneralStore
+ *  @return a promise resolveing to SCObjectList of SCGeneralStore
  */
-- (PMKPromise*) getStores:(SCQueryParams*)queryParams;
+- (void) getStores:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *stores, NSError *error))handler;
 
 /**
  *  retrieve a list of stores
  *
  *  @param queryParams the search paramteres
  *
- *  @return a promise fulfilling to NSarray of SCGeneralStore
+ *  @return a promise resolveing to NSarray of SCGeneralStore
  */
-- (PMKPromise*) getStoreList:(SCQueryParams*)queryParams;
+- (void) getStoreList:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *storeList, NSError *error))handler;
 
 /**
  *  get a store by search query
  *
  *  @param pid         the store id
  *
- *  @return a promise fulfilling to SCGeneralStore
+ *  @return a promise resolveing to SCGeneralStore
  */
-- (PMKPromise*) getStore:(NSString*)pid;
+- (void) getStore:(NSString*)pid completionHandler:(void (^)(SCGeneralStore *store, NSError *error))handler;
 
 @end
