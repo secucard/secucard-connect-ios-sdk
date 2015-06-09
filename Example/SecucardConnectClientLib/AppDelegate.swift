@@ -6,6 +6,7 @@
   //  Copyright (c) 2015 devid. All rights reserved.
   //
   
+  import Foundation
   import UIKit
   import SecucardConnectClientLib
   import SwiftyJSON
@@ -18,6 +19,7 @@
     var mainController: MainViewController!
     var connectClient: SCConnectClient?
     var verificationView: InsertCodeView?
+    var pollingTimer: NSTimer?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       
@@ -52,7 +54,7 @@
       
       return true
     }
-        
+    
     func connectCashier( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
       
       // initialize connect client
@@ -89,8 +91,13 @@
               vView.hide()
             }
             
-            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("pollCheckins"), userInfo: nil, repeats: true)
-            
+            dispatch_async(dispatch_get_main_queue(), {
+              if let timerValid = self.pollingTimer?.valid {
+                self.pollingTimer?.invalidate()
+              }
+              self.pollingTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("pollCheckins"), userInfo: nil, repeats: true)
+            })
+
             NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
             
             handler(success: true, error: nil)
@@ -111,12 +118,14 @@
         
         if let error = error {
           
-          NSLog("couldn't get checkins because: \(error.localizedDescription)")
+          print("couldn't get checkins because: \(error.localizedDescription)")
           
         } else if let checkins = result as? [SCSmartCheckin] {
           
           self.mainController.checkins = checkins
-          self.mainController.checkinsCollection.reloadData()
+          dispatch_async(dispatch_get_main_queue(), {
+            self.mainController.checkinsCollection.reloadData()
+          })
           
         }
         

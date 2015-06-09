@@ -40,6 +40,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let connectButton: PaymentButton
   let disconnectButton: PaymentButton
+  let pollCheckinsButton: PaymentButton
   
   let payCashButton: PaymentButton
   let payECButton: PaymentButton
@@ -117,6 +118,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // Payment buttons initialization
     connectButton = PaymentButton(title: "connect", action: Selector("didTapConnect"))
     disconnectButton = PaymentButton(title: "disconnect", action: Selector("didTapDisconnect"))
+    pollCheckinsButton = PaymentButton(title: "checkins", action: Selector("didTapPollCheckins"))
     
     paySecucardButton = PaymentButton(title: "secucard", action: Selector("didTapSecucardButton"))
     payECButton = PaymentButton(title: "EC", action: Selector("didTapECButton"))
@@ -147,6 +149,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     connectButton.target = self
     disconnectButton.target = self
+    pollCheckinsButton.target = self
     
     self.connectButton.enabled = true
     self.connectButton.alpha = 1
@@ -356,6 +359,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     disconnectButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(connectButton.snp_right).offset(20)
+      make.centerY.equalTo(bottomBar)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+    }
+    
+    // polling button
+    
+    bottomBar.addSubview(pollCheckinsButton)
+    
+    pollCheckinsButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(disconnectButton.snp_right).offset(20)
       make.centerY.equalTo(bottomBar)
       make.width.equalTo(100)
       make.height.equalTo(50)
@@ -630,6 +644,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
+  func didTapPollCheckins() {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      appDelegate.pollManually()
+    }
+  }
+  
   func didTapConnect() {
     
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
@@ -659,6 +679,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     connectButton.enabled = false
     connectButton.alpha = 0.5
   }
+  
   
   // MARK: - ScanCardViewDelegate
   

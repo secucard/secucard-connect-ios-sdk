@@ -19,7 +19,12 @@ describe(@"ConnectClient", ^{
 
   beforeAll(^{
 
-    [[SCConnectClient sharedInstance] destroy];
+    [[SCConnectClient sharedInstance] destroy:^(bool success, NSError *error) {
+      
+      expect(success).to.beTruthy();
+      expect(error).to.beNil();
+      
+    }];
     
     SCRestConfiguration *restConfig = [[SCRestConfiguration alloc] initWithBaseUrl:kBaseUrl
                                                                         andAuthUrl:kAuthUrl];
@@ -62,9 +67,12 @@ describe(@"ConnectClient", ^{
     
     expect(clientConfig).toNot.beNil();
     
-    client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
+    client = [SCConnectClient sharedInstance];
     
     expect(client).toNot.beNil();
+    
+    [client initWithConfiguration:clientConfig];
+    
 
   });
   
@@ -85,28 +93,25 @@ describe(@"ConnectClient", ^{
       account.password = kAcccountPassword;
       account.contact = contact;
       
-      [[SCAccountService sharedService] createAccount:account].then(^(SCGeneralAccount *savedAccount) {
+      [[SCAccountService sharedService] createAccount:account completionHandler:^(SCGeneralAccount *savedAccount, NSError *error) {
         
         expect(savedAccount).toNot.beNil();
         
-        if ([savedAccount isKindOfClass:[SCGeneralAccount class]]) {
-          client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:savedAccount.username andPassword:savedAccount.password];
-        } else {
-          client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:account.username andPassword:account.password];
-        }
-        
-        assert(TRUE);
-        
-      }).catch(^(NSError *error) {
-        
         expect(error).to.beNil();
         
-      }).finally(^() {
+        if ([savedAccount isKindOfClass:[SCGeneralAccount class]]) {
+          
+          client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:savedAccount.username andPassword:savedAccount.password];
+          
+        } else {
+          
+          client.configuration.userCredentials = [[SCUserCredentials alloc] initWithUsername:account.username andPassword:account.password];
+          
+        }
         
         done();
         
-      });
-      
+      }];
       
     });
     
@@ -123,25 +128,20 @@ describe(@"ConnectClient", ^{
         userCredentials = [[SCUserCredentials alloc] initWithUsername:kAccountUsername andPassword:kAcccountPassword];
       }
       
-      [[SCAccountManager sharedManager] loginWithUserCedentials:userCredentials].then(^(){
-        
-        return [client connect];
-        
-      }).then(^() {
-        
-        assert(TRUE);
-        
-      }).catch(^(NSError *error) {
+      [[SCAccountManager sharedManager] loginWithUserCedentials:userCredentials completionHandler:^(BOOL success, NSError *error) {
         
         expect(error).to.beNil();
         
-      }).finally(^() {
+        return [client connect:^(bool success, NSError *error) {
+          
+          expect(error).to.beNil();
+          
+        }];
         
-        done();
+      }];
         
-      });
+      done();
       
-
     });
 
   });

@@ -50,7 +50,7 @@
   destination.method = method;
   
   return destination;
-
+  
 }
 
 @end
@@ -186,103 +186,8 @@
     [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
   };
   
-  // set the listener
-  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
-    
-    if (error != nil) {
-      [self closeConnection];
-      [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
-      return;
-    }
-    
-    // subscribe to temp queue without telling the server because the server thinks it is already subscribed to.
-    [self.client subscribeToWithoutRegistration:self.configuration.replyQueue
-                                            headers:@{
-                                                      @"id": self.configuration.replyQueue,
-                                                      @"user-id": token,
-                                                      @"app-id": self.configuration.userId
-                                                      }
-                                     messageHandler:^(STOMPMessage *message) {
-                                       
-                                       NSString *correlationId = [message.headers objectForKey:@"correlation-id"];
-                                       
-                                       [self extendConnectionTimer];
-                                       
-                                       NSError *error = nil;
-                                       NSDictionary *body = [NSJSONSerialization JSONObjectWithData: [message.body dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
-                                       
-                                       // check if parsing error
-                                       if (error)
-                                       {
-                                         [self resolveStoredItem:correlationId withError:error];
-                                         @throw error.localizedDescription;
-                                       }
-                                       
-                                       // check if error from server
-                                       if ([[body objectForKey:@"status"] isEqualToString:@"error"])
-                                       {
-                                         
-                                         // TODO: check about resending messages
-                                         //                                           // error from server means a re-send
-                                         //                                           if (correlationId != nil) {
-                                         //
-                                         //                                             NSString *storedQueue = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"queue"];
-                                         //
-                                         //                                             NSString *storedExchange = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"exchange"];
-                                         //
-                                         //                                             NSString *storedMessage = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"message"];
-                                         //
-                                         //                                             // check if sen dto queue or exchange
-                                         //                                             if (storedQueue == nil)
-                                         //                                             {
-                                         //                                                [weakSelf sendMessage:storedMessage toExchange:storedExchange];
-                                         //                                             }
-                                         //                                             else
-                                         //                                             {
-                                         //                                               [weakSelf sendMessage:storedMessage toQueue:storedQueue];
-                                         //                                             }
-                                         //
-                                         //                                             // remove from message store
-                                         //
-                                         //                                             [weakSelf.messageStore removeObjectForKey:correlationId];
-                                         //                                           }
-                                         
-                                         [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
-                                         @throw @"error in stomp response";
-                                       }
-                                       
-                                       id resultObject;
-                                       
-                                       // check if event
-                                       if ([body objectForKey:@"type"])
-                                       {
-                                         if ([[body objectForKey:@"type"] isEqualToString:@"event"])
-                                         {
-                                           
-                                           SCServiceEventObject *event = [SCServiceEventObject initWithDictionary:body];
-                                           resultObject = event.data;
-                                           
-                                         }
-                                       } else {
-                                         
-                                         resultObject = [body objectForKey:@"data"];
-                                         
-                                       }
-                                       
-                                       // if we have a correlation id, chance is good, that there is a promise that wants to be fullfilled
-                                       [self resolveStoredItem:correlationId withResult:resultObject];
-                                       
-                                     }];
-    
-  }];
-  
   [self.client setReceiptHandler:^(STOMPFrame *frame) {
-    
-    // always get token before temp queue is subscribed to
-    
-    
-    
-    
+    NSLog(@"RECEIPT_HANDLER CALLED");
   }];
   
 }
@@ -366,104 +271,174 @@
 - (void) connect:(void (^)(bool, NSError *))handler
 {
   
-    // initialized at all?
-    if ([self needsInitialization]) {
-      handler(false, [SCErrorManager errorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
-      return;
-    }
-    
-    // stomp client does exist?
-    if (!self.client) {
-      handler(false, [SCErrorManager errorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
-      return;
-    }
-    
-    // is already connected? Call completion immediately
-    if (self.client.connected) {
-      [self extendConnectionTimer];
-      [SCErrorManager handleErrorWithDescription:@"already connected. Immediate request."];
-      handler(true, nil);
-      return;
-    }
-    
-    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
-      
-      if (error != nil) {
-        handler(false, error);
-        return;
-      }
-      
-      self.configuration.userId = token;
-      self.configuration.password = token;
-      
-      __weak SCStompManager *weakself = self;
-      // connect to the broker
-      
-      if (self.configuration.useSsl) {
-        
-        [self.client connectSecureWithTLSOption:nil
-         
-                                     andHeaders:@{
-                                                  kHeaderHost:self.configuration.virtualHost,
-                                                  kHeaderLogin: self.configuration.userId,
-                                                  kHeaderDestination: self.configuration.basicDestination,
-                                                  kHeaderPasscode: self.configuration.password,
-                                                  kHeaderHeartBeat: [NSString stringWithFormat:@"%@%@", [@(self.configuration.heartbeatMs) stringValue], @",0"],
-                                                  kHeaderAcceptVersion : @"1.2"
-                                                  }
-         
-                              completionHandler:^(STOMPFrame *connectedFrame, NSError *error) {
-                                
-                                if (error) {
-                                  
-                                  // revoke token if connection error
-                                  [weakself.client hardDisconnect];
-                                  handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
-                                  
-                                } else {
-                                  
-                                  // all done, set timer
-                                  [weakself setConnectionTimer];
-                                  
-                                  // and call completion
-                                  handler(true, nil);
-                                  
-                                }
-                                
-                              }];
-        
-      } else {
-        
-        [self.client connectWithHeaders:@{kHeaderHost:self.configuration.host,
-                                          kHeaderLogin: token,
-                                          kHeaderPasscode: token,
-                                          kHeaderHeartBeat: @(self.configuration.heartbeatMs),
-                                          kHeaderAcceptVersion : @"1.2"}
-                      completionHandler:^(STOMPFrame *connectedFrame, NSError *error) {
-                        
-                        if (error) {
-                          
-                          // revoke token if connection error
-                          [weakself.client hardDisconnect];
-                          handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
-                          
-                        } else {
-                          
-                          // all done, set timer
-                          [weakself setConnectionTimer];
-                          
-                          // and call completion
-                          handler(true, nil);
-                          
-                        }
-                        
-                      }];
-        
-        
-      }
-      
-    }];
+  // initialized at all?
+  if ([self needsInitialization]) {
+    handler(false, [SCErrorManager errorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
+    return;
+  }
   
+  // stomp client does exist?
+  if (!self.client) {
+    handler(false, [SCErrorManager errorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
+    return;
+  }
+  
+  // is already connected? Call completion immediately
+  if (self.client.connected) {
+    [self extendConnectionTimer];
+    [SCErrorManager handleErrorWithDescription:@"already connected. Immediate request."];
+    handler(true, nil);
+    return;
+  }
+  
+  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+    
+    if (error != nil) {
+      handler(false, error);
+      return;
+    }
+    
+    self.configuration.userId = token;
+    self.configuration.password = token;
+    
+    __weak SCStompManager *weakself = self;
+    // connect to the broker
+    
+    if (self.configuration.useSsl) {
+      
+      [self.client connectSecureWithTLSOption:nil
+       
+                                   andHeaders:@{
+                                                kHeaderHost:self.configuration.virtualHost,
+                                                kHeaderLogin: self.configuration.userId,
+                                                kHeaderDestination: self.configuration.basicDestination,
+                                                kHeaderPasscode: self.configuration.password,
+                                                kHeaderHeartBeat: [NSString stringWithFormat:@"%@%@", [@(self.configuration.heartbeatMs) stringValue], @",0"],
+                                                kHeaderAcceptVersion : @"1.2"
+                                                }
+       
+                            completionHandler:^(STOMPFrame *connectedFrame, NSError *error) {
+                              
+                              if (error) {
+                                
+                                // revoke token if connection error
+                                [weakself.client hardDisconnect];
+                                handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                                
+                              } else {
+                                
+                                // all done, set timer
+                                [weakself setConnectionTimer];
+                                
+                                [self setMainExchangeSubscription];
+                                
+                                // and call completion
+                                handler(true, nil);
+                                
+                              }
+                              
+                            }];
+      
+    } else {
+      
+      [self.client connectWithHeaders:@{kHeaderHost:self.configuration.host,
+                                        kHeaderLogin: token,
+                                        kHeaderPasscode: token,
+                                        kHeaderHeartBeat: @(self.configuration.heartbeatMs),
+                                        kHeaderAcceptVersion : @"1.2"}
+                    completionHandler:^(STOMPFrame *connectedFrame, NSError *error) {
+                      
+                      if (error) {
+                        
+                        // revoke token if connection error
+                        [weakself.client hardDisconnect];
+                        handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                        
+                      } else {
+                        
+                        // all done, set timer
+                        [weakself setConnectionTimer];
+                        
+                        [self setMainExchangeSubscription];
+                        
+                        // and call completion
+                        handler(true, nil);
+                        
+                      }
+                      
+                    }];
+      
+      
+    }
+    
+  }];
+  
+  
+}
+
+- (void) setMainExchangeSubscription {
+  
+  // set the listener
+  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+    
+    if (error != nil) {
+      [self closeConnection];
+      [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
+      return;
+    }
+    
+    // subscribe to temp queue without telling the server because the server thinks it is already subscribed to.
+    [self.client subscribeToWithoutRegistration:self.configuration.replyQueue
+                                        headers:@{
+                                                  @"id": self.configuration.replyQueue,
+                                                  @"user-id": token,
+                                                  @"app-id": self.configuration.userId
+                                                  }
+                                 messageHandler:^(STOMPMessage *message) {
+                                   
+                                   NSString *correlationId = [message.headers objectForKey:@"correlation-id"];
+                                   
+                                   [self extendConnectionTimer];
+                                   
+                                   NSError *error = nil;
+                                   NSDictionary *body = [NSJSONSerialization JSONObjectWithData: [message.body dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
+                                   
+                                   // check if parsing error
+                                   if (error)
+                                   {
+                                     [self resolveStoredItem:correlationId withError:error];
+                                   }
+                                   
+                                   // check if error from server
+                                   if ([[body objectForKey:@"status"] isEqualToString:@"error"])
+                                   {
+                                     [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
+                                   }
+                                   
+                                   id resultObject;
+                                   
+                                   // check if event
+                                   if ([body objectForKey:@"type"])
+                                   {
+                                     if ([[body objectForKey:@"type"] isEqualToString:@"event"])
+                                     {
+                                       
+                                       SCServiceEventObject *event = [SCServiceEventObject initWithDictionary:body];
+                                       resultObject = event.data;
+                                       
+                                     }
+                                   } else {
+                                     
+                                     resultObject = [body objectForKey:@"data"];
+                                     
+                                   }
+                                   
+                                   // if we have a correlation id, chance is good, that there is a promise that wants to be fullfilled
+                                   [self resolveStoredItem:correlationId withResult:resultObject];
+                                   
+                                 }];
+    
+  }];
   
 }
 
@@ -476,53 +451,53 @@
 - (void) sendMessage:(SCTransportMessage*)message toDestination:(SCStompDestination*)destination completionHandler:(ReceiptHandler)handler
 {
   
-    [self connect:^(bool success, NSError *error) {
+  [self connect:^(bool success, NSError *error) {
+    
+    NSString *correlationId = [NSString stringWithFormat:@"%d", [self getNextCorrelationID]];
+    
+    NSError *transformationError = nil;
+    NSDictionary *messageDict = [MTLJSONAdapter JSONDictionaryFromModel:message error:&transformationError];
+    
+    if (transformationError) {
+      [SCErrorManager handleError:[SCErrorManager errorWithDescription:transformationError.localizedDescription andDomain:kErrorDomainSCStompService]];
+      return;
+    }
+    
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:messageDict options:0 error:&parseError];
+    
+    if (parseError) {
+      [SCErrorManager handleError:[SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:kErrorDomainSCStompService]];
+      return;
+    }
+    
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
-      NSString *correlationId = [NSString stringWithFormat:@"%d", [self getNextCorrelationID]];
+      NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                     @"correlation-id": correlationId,
+                                                                                     @"reply-to": self.configuration.replyQueue,
+                                                                                     @"persistent":@"true",
+                                                                                     @"user-id": token,
+                                                                                     @"app-id": self.configuration.userId
+                                                                                     }];
       
-      NSError *transformationError = nil;
-      NSDictionary *messageDict = [MTLJSONAdapter JSONDictionaryFromModel:message error:&transformationError];
-      
-      if (transformationError) {
-        [SCErrorManager handleError:[SCErrorManager errorWithDescription:transformationError.localizedDescription andDomain:kErrorDomainSCStompService]];
-        return;
+      if ([destination isKindOfClass:[SCAppDestination class]]) {
+        [headers setObject:((SCAppDestination*)destination).appId forKey:@"app-id"];
       }
       
-      NSError *parseError = nil;
-      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:messageDict options:0 error:&parseError];
+      [self.client sendTo:destination.destination
+                  headers:headers
+                     body:jsonString];
       
-      if (parseError) {
-        [SCErrorManager handleError:[SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:kErrorDomainSCStompService]];
-        return;
-      }
+      SCStompStorageItem *itemToStore = [[SCStompStorageItem alloc] initWithHandler:handler];
       
-      NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-      
-      [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
-        
-        NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:@{
-                                                                                       @"correlation-id": correlationId,
-                                                                                       @"reply-to": self.configuration.replyQueue,
-                                                                                       @"persistent":@"true",
-                                                                                       @"user-id": token,
-                                                                                       @"app-id": self.configuration.userId
-                                                                                       }];
-        
-        if ([destination isKindOfClass:[SCAppDestination class]]) {
-          [headers setObject:((SCAppDestination*)destination).appId forKey:@"app-id"];
-        }
-        
-        [self.client sendTo:destination.destination
-                    headers:headers
-                       body:jsonString];
-        
-        SCStompStorageItem *itemToStore = [[SCStompStorageItem alloc] initWithHandler:handler];
-        
-        [self.promiseStore setObject:itemToStore forKey:[NSString stringWithFormat:@"%@", correlationId]];
-        
-      }];
+      [self.promiseStore setObject:itemToStore forKey:[NSString stringWithFormat:@"%@", correlationId]];
       
     }];
+    
+  }];
   
 }
 
@@ -628,18 +603,18 @@
 }
 
 - (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
-
+  
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
   message.data = arg;
   
   [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:handler];
-
+  
 }
 
 - (void) execute:(NSString*)appId action:(NSString*)action actionArg:(SCTransportMessage*)actionArg completionHandler:(void (^)(id, NSError *))handler {
-
+  
   [self sendMessage:actionArg toDestination:[SCAppDestination initWithAppId:appId method:action] completionHandler:handler];
   
 }

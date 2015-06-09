@@ -19,7 +19,12 @@ describe(@"ConnectDeviceClient", ^{
 
   beforeAll(^{
     
-    [[SCConnectClient sharedInstance] destroy];
+    [[SCConnectClient sharedInstance] destroy:^(bool success, NSError *error) {
+      
+      expect(success).to.beTruthy();
+      expect(error).to.beNil();
+      
+    }];
 
     SCRestConfiguration *restConfig = [[SCRestConfiguration alloc] initWithBaseUrl:kBaseUrl
                                                                         andAuthUrl:kAuthUrl];
@@ -62,13 +67,15 @@ describe(@"ConnectDeviceClient", ^{
     
     expect(clientConfig).toNot.beNil();
     
-    client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
+    client = [SCConnectClient sharedInstance];
     
     expect(client).toNot.beNil();
-
+    
+    [client initWithConfiguration:clientConfig];
+    
   });
   
-  fit(@"can connect anonymously", ^{
+  it(@"can connect anonymously", ^{
     
     NSLog(@"AccessToken %@", [SCAccountManager sharedManager].accessToken);
     NSLog(@"RefreshToken %@", [SCAccountManager sharedManager].refreshToken);
@@ -83,21 +90,21 @@ describe(@"ConnectDeviceClient", ^{
     
     waitUntil(^(DoneCallback done) {
       
-      [client connect].then(^() {
+      [client connect:^(bool success, NSError *error) {
         
-        [[SCStompManager sharedManager] execute:[SCConnectClient sharedInstance].configuration.deviceId action:@"me" actionArg:@"auth.refresh"].then(^() {
-            assert(TRUE);
-        });
-        
-      }).catch(^(NSError *error) {
-        
+        expect(success).to.beTruthy();
         expect(error).to.beNil();
         
-      }).finally(^() {
+        [[SCStompManager sharedManager] execute:[SCConnectClient sharedInstance].configuration.deviceId action:@"me" actionArg:@"auth.refresh" completionHandler:^(id response, NSError *error) {
+          
+          expect(error).to.beNil();
+          assert(TRUE);
+          
+          done();
+          
+        }];
         
-        done();
-        
-      });
+      }];
       
     });
     

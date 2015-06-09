@@ -56,9 +56,11 @@ describe(@"InitClient", ^{
     
     expect(clientConfig).toNot.beNil();
     
-    SCConnectClient *client = [[SCConnectClient sharedInstance] initWithConfiguration:clientConfig];
+    SCConnectClient *client = [SCConnectClient sharedInstance];
     
     expect(client).toNot.beNil();
+    
+    [client initWithConfiguration:clientConfig];
     
   });
   

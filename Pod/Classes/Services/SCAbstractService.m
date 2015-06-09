@@ -80,8 +80,9 @@
      [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
       
       // if nil result and no error, return empty array
-      if (!list || list.count == 0) {
-        handler(nil, [SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
+      if (!list || [list.count isEqual:@0]) {
+        handler(@[], nil);
+        return;
       }
       
        // map objects in list
@@ -113,9 +114,12 @@
     
     [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
       
-      // if nil result and no error, return empty array
-      if (!list || list.count == 0) {
-        handler(nil, [SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
+      // if nil result and no error, return an object with empty array
+      if (!list || [list.count isEqual:@0]) {
+        SCObjectList *emptyListObject = [SCObjectList new];
+        emptyListObject.data = @[];
+        handler(emptyListObject, nil);
+        return;
       }
       
       // save object list for later return
