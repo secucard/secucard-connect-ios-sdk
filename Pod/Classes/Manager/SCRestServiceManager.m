@@ -74,7 +74,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
   [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
-  [requestSerializer setValue:@"Bearer XXX" forHTTPHeaderField:@"Authorization"];
+  
+  if ([SCAccountManager sharedManager].accessToken) {
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", [SCAccountManager sharedManager].accessToken] forHTTPHeaderField:@"Authorization"];
+  }
+  
   
   self.operationManager = [AFHTTPRequestOperationManager manager];
   self.operationManager.requestSerializer = requestSerializer;
@@ -404,6 +408,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
     if (error) {
       handler(nil, error);
+      return;
     }
     
     NSError *parsingError = nil;
@@ -417,21 +422,17 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
-  NSError *paramParsingError = nil;
-  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:queryParams error:&paramParsingError];
-  
-  if (paramParsingError) {
-    handler(nil, paramParsingError);
-  }
+  NSDictionary *params = [self createDic:queryParams exceptionHandler:handler];
   
   [self getRequestToEndpoint:[self resolveEndpoint:type] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
     if (error) {
       handler(nil, error);
+      return;
     }
     
     NSError *parsingError = nil;
-    SCObjectList *objectList = [MTLJSONAdapter modelOfClass:type fromJSONDictionary:responseObject error:&parsingError];
+    SCObjectList *objectList = [MTLJSONAdapter modelOfClass:[SCObjectList class] fromJSONDictionary:responseObject error:&parsingError];
     
     handler(objectList, parsingError);
     
@@ -441,13 +442,13 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) createObject:(SCSecuObject *)object secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
   
-  NSError *error = nil;
-  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
+  NSDictionary *params = [self createDic:object exceptionHandler:handler];
   
   [self postRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
     if (error) {
       handler(nil, error);
+      return;
     }
     
     NSError *parsingError = nil;
@@ -461,13 +462,13 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) updateObject:(SCSecuObject *)object secure:(BOOL)secure completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
   
-  NSError *error = nil;
-  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&error];
+  NSDictionary *params = [self createDic:object exceptionHandler:handler];
   
   [self putRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
     if (error) {
       handler(nil, error);
+      return;
     }
     
     NSError *parsingError = nil;
@@ -481,13 +482,13 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
-  NSError *error = nil;
-  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
+  NSDictionary *params = [self createDic:arg exceptionHandler:handler];
   
   [self putRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
     if (error) {
       handler(nil, error);
+      return;
     }
     
     NSError *parsingError = nil;
@@ -529,9 +530,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
-  NSError *error = nil;
-  NSDictionary *params = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&error];
-  
+  NSDictionary *params = [self createDic:arg exceptionHandler:handler];
   [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:handler];
   
 }
@@ -568,6 +567,19 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) close {
   
+}
+
+#pragma mark - helper methods
+
+- (NSDictionary*) createDic:(id)object exceptionHandler:(void(^)(id responseObject, NSError *error))handler {
+  
+  NSDictionary *params;
+  if (object) {
+    NSError *paramParsingError = nil;
+    params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&paramParsingError];
+    if (paramParsingError) { handler(nil, paramParsingError); }
+  }
+  return params;
 }
 
 @end

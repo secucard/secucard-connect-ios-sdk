@@ -77,15 +77,20 @@
  */
 - (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, NSError *))handler {
   
-    [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
+     [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
       
       // if nil result and no error, return empty array
       if (!list || list.count == 0) {
         handler(nil, [SCErrorManager errorWithCode:ERR_INVALID_RESULT]);
       }
       
+       // map objects in list
+       if (list.data) {
+         list.data = [self typeArray:list.data withType:type];
+       }
+       
       // process list
-      [self postProcessObjects:list.list completionHandler:^(NSArray *processedList, NSError *error) {
+      [self postProcessObjects:list.data completionHandler:^(NSArray *processedList, NSError *error) {
         handler(processedList, error);
       }];
       
@@ -116,11 +121,16 @@
       // save object list for later return
       objList = list;
       
+      // map objects in list
+      if (list.data) {
+          list.data = [self typeArray:list.data withType:type];
+      }
+      
       // process list
-      [self postProcessObjects:list.list completionHandler:^(NSArray *processedList, NSError *error) {
-
+      [self postProcessObjects:list.data completionHandler:^(NSArray *processedList, NSError *error) {
+      
         if (error != nil) {
-          objList.list = processedList;
+          objList.data = processedList;
         }
         
         handler(objList, error);
@@ -130,6 +140,18 @@
     }];
   
 }
+
+- (NSArray*) typeArray:(NSArray*)array withType:(Class)class {
+  
+  NSMutableArray *typedArray = [NSMutableArray new];
+  for (id object in array) {
+    NSError *parsingError = nil;
+    id typedObject = [MTLJSONAdapter modelOfClass:class fromJSONDictionary:object error:&parsingError];
+    [typedArray addObject:typedObject];
+  }
+  return [NSArray arrayWithArray:typedArray];
+}
+
 
 /**
  *  Post process the objects found by the list retireval methods, this is used internally after a list result arrived and before it is passed by the promise resolveer

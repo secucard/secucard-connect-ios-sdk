@@ -10,7 +10,8 @@
 
 @implementation SCObjectList
 
-//@"scrollId":@"scroll_id",
-//@"list":@"data",
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
 
 @end

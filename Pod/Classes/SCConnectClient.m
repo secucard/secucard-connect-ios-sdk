@@ -25,7 +25,7 @@
 {
   self = [super init];
   if (self) {
-  
+    
   }
   return self;
 }
@@ -33,16 +33,18 @@
 - (void) initWithConfiguration:(SCClientConfiguration*)configuration {
   
   
-    [SCConnectClient sharedInstance].configuration = configuration;
-    
-    // also  initalize rest
-    [[SCRestServiceManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.restConfiguration];
-    
-    // also initialze stomp
-    [[SCStompManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.stompConfiguration];
-    
-    // also initialize AccountManager
-    [[SCAccountManager sharedManager] initWithClientCredentials:[SCConnectClient sharedInstance].configuration.clientCredentials];
+  [SCConnectClient sharedInstance].configuration = configuration;
+  
+  // also initialize AccountManager
+  [[SCAccountManager sharedManager] initWithClientCredentials:[SCConnectClient sharedInstance].configuration.clientCredentials];
+  
+  // also  initalize rest
+  [[SCRestServiceManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.restConfiguration];
+  
+  // also initialze stomp
+  [[SCStompManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.stompConfiguration];
+  
+  
   
 }
 
@@ -59,30 +61,30 @@
 
 - (void) connect:(void (^)(bool, NSError *))handler {
   
-    if (self.connected) {
-      handler(true, nil);
+  if (self.connected) {
+    handler(true, nil);
+    return;
+  }
+  
+  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+    
+    if (error != nil) {
+      handler(false, error);
+      return;
     }
     
-    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
-      
-      if (error != nil) {
-        handler(false, error);
-      }
-      
-      [[SCStompManager sharedManager] connect:^(bool success, NSError *error) {
-        
-        handler(success, error);
-        
-      }];
-      
+    [[SCStompManager sharedManager] connect:^(bool success, NSError *error) {
+      handler(success, error);
     }];
+    
+  }];
   
 }
 
 - (void)disconnect:(void (^)(bool, NSError *))handler {
   
   handler(nil, [SCErrorManager errorWithDescription:@"not implemented"]);
-          
+  
 }
 
 - (void)destroy:(void (^)(bool, NSError *))handler {

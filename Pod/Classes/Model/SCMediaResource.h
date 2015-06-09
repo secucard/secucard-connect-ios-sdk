@@ -8,7 +8,7 @@
 
 #import <Mantle/Mantle.h>
 
-@interface SCMediaResource : MTLModel
+@interface SCMediaResource : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, assign) BOOL isCached;

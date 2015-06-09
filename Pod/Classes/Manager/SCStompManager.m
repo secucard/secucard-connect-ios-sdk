@@ -73,20 +73,24 @@
   
   SCAppDestination *appDest = [SCAppDestination initWithCommand:nil type:nil method:method];
   appDest.appId = appId;
-  
   return appDest;
   
 }
 
 - (NSString *)destination {
-  
   return [NSString stringWithFormat:@"%@%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix, self.method];
-  
 }
 
 @end
 
 @implementation SCStompStorageItem
+
+- (instancetype) initWithHandler:(ReceiptHandler)handler {
+  self = [super init];
+  if (self)
+    self.handler = handler;
+  return self;
+}
 
 @end
 
@@ -166,6 +170,8 @@
   
   _configuration = configuration;
   
+  self.promiseStore = [NSMutableDictionary new];
+  
   // if created already and connected, then disconnect because we initialize only disconnecting
   if (self.client)
     if (self.client.connected)
@@ -180,103 +186,101 @@
     [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
   };
   
-  // set the receipt handler
-  __weak __block SCStompManager *weakSelf = self;
+  // set the listener
+  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+    
+    if (error != nil) {
+      [self closeConnection];
+      [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
+      return;
+    }
+    
+    // subscribe to temp queue without telling the server because the server thinks it is already subscribed to.
+    [self.client subscribeToWithoutRegistration:self.configuration.replyQueue
+                                            headers:@{
+                                                      @"id": self.configuration.replyQueue,
+                                                      @"user-id": token,
+                                                      @"app-id": self.configuration.userId
+                                                      }
+                                     messageHandler:^(STOMPMessage *message) {
+                                       
+                                       NSString *correlationId = [message.headers objectForKey:@"correlation-id"];
+                                       
+                                       [self extendConnectionTimer];
+                                       
+                                       NSError *error = nil;
+                                       NSDictionary *body = [NSJSONSerialization JSONObjectWithData: [message.body dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
+                                       
+                                       // check if parsing error
+                                       if (error)
+                                       {
+                                         [self resolveStoredItem:correlationId withError:error];
+                                         @throw error.localizedDescription;
+                                       }
+                                       
+                                       // check if error from server
+                                       if ([[body objectForKey:@"status"] isEqualToString:@"error"])
+                                       {
+                                         
+                                         // TODO: check about resending messages
+                                         //                                           // error from server means a re-send
+                                         //                                           if (correlationId != nil) {
+                                         //
+                                         //                                             NSString *storedQueue = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"queue"];
+                                         //
+                                         //                                             NSString *storedExchange = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"exchange"];
+                                         //
+                                         //                                             NSString *storedMessage = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"message"];
+                                         //
+                                         //                                             // check if sen dto queue or exchange
+                                         //                                             if (storedQueue == nil)
+                                         //                                             {
+                                         //                                                [weakSelf sendMessage:storedMessage toExchange:storedExchange];
+                                         //                                             }
+                                         //                                             else
+                                         //                                             {
+                                         //                                               [weakSelf sendMessage:storedMessage toQueue:storedQueue];
+                                         //                                             }
+                                         //
+                                         //                                             // remove from message store
+                                         //
+                                         //                                             [weakSelf.messageStore removeObjectForKey:correlationId];
+                                         //                                           }
+                                         
+                                         [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
+                                         @throw @"error in stomp response";
+                                       }
+                                       
+                                       id resultObject;
+                                       
+                                       // check if event
+                                       if ([body objectForKey:@"type"])
+                                       {
+                                         if ([[body objectForKey:@"type"] isEqualToString:@"event"])
+                                         {
+                                           
+                                           SCServiceEventObject *event = [SCServiceEventObject initWithDictionary:body];
+                                           resultObject = event.data;
+                                           
+                                         }
+                                       } else {
+                                         
+                                         resultObject = [body objectForKey:@"data"];
+                                         
+                                       }
+                                       
+                                       // if we have a correlation id, chance is good, that there is a promise that wants to be fullfilled
+                                       [self resolveStoredItem:correlationId withResult:resultObject];
+                                       
+                                     }];
+    
+  }];
   
   [self.client setReceiptHandler:^(STOMPFrame *frame) {
     
     // always get token before temp queue is subscribed to
     
-    [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
-      
-      if (error != nil) {
-        [weakSelf closeConnection];
-        [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
-        return;
-      }
-      
-      // subscribe to temp queue without telling the server because the server thinks it is already subscribed to.
-      [weakSelf.client subscribeToWithoutRegistration:weakSelf.configuration.replyQueue
-                                              headers:@{
-                                                        @"id": weakSelf.configuration.replyQueue,
-                                                        @"user-id": token,
-                                                        @"app-id": weakSelf.configuration.userId
-                                                        }
-                                       messageHandler:^(STOMPMessage *message) {
-                                         
-                                         NSString *correlationId = [message.headers objectForKey:@"correlation-id"];
-                                         
-                                         //                                         NSString *messageId = [message.headers objectForKey:@"message-id"];
-                                         
-                                         // TODO: [SCNotificationManager sendNotificationToDisplay:@"STOMP: got message"];
-                                         
-                                         [weakSelf extendConnectionTimer];
-                                         
-                                         NSError *error = [NSError new];
-                                         NSDictionary *body = [NSJSONSerialization JSONObjectWithData: [message.body dataUsingEncoding:NSUTF8StringEncoding]
-                                                                                              options: NSJSONReadingMutableContainers
-                                                                                                error: &error];
-                                         
-                                         // check if parsing error
-                                         if (error)
-                                         {
-                                           [weakSelf resolveStoredItem:correlationId withError:error];
-                                           @throw error.localizedDescription;
-                                         }
-                                         
-                                         // check if error from server
-                                         if ([[body objectForKey:@"status"] isEqualToString:@"error"])
-                                         {
-                                           
-                                           // TODO: check about resending messages
-                                           //                                           // error from server means a re-send
-                                           //                                           if (correlationId != nil) {
-                                           //
-                                           //                                             NSString *storedQueue = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"queue"];
-                                           //
-                                           //                                             NSString *storedExchange = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"exchange"];
-                                           //
-                                           //                                             NSString *storedMessage = [[weakSelf.messageStore objectForKey:correlationId] objectForKey:@"message"];
-                                           //
-                                           //                                             // check if sen dto queue or exchange
-                                           //                                             if (storedQueue == nil)
-                                           //                                             {
-                                           //                                                [weakSelf sendMessage:storedMessage toExchange:storedExchange];
-                                           //                                             }
-                                           //                                             else
-                                           //                                             {
-                                           //                                               [weakSelf sendMessage:storedMessage toQueue:storedQueue];
-                                           //                                             }
-                                           //
-                                           //                                             // remove from message store
-                                           //
-                                           //                                             [weakSelf.messageStore removeObjectForKey:correlationId];
-                                           //                                           }
-                                           
-                                           [weakSelf resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
-                                           @throw @"error in stomp response";
-                                         }
-                                         
-                                         id resultObject;
-                                         
-                                         // check if event
-                                         if ([body objectForKey:@"type"])
-                                         {
-                                           if ([[body objectForKey:@"type"] isEqualToString:@"event"])
-                                           {
-                                             
-                                             SCServiceEventObject *event = [SCServiceEventObject initWithDictionary:body];
-                                             resultObject = event.data;
-                                             
-                                           }
-                                         }
-                                         
-                                         // if we have a correlation id, chance is good, that there is a promise that wants to be fullfilled
-                                         [weakSelf resolveStoredItem:correlationId withResult:resultObject];
-                                         
-                                       }];
-      
-    }];
+    
     
     
   }];
@@ -317,38 +321,6 @@
   }
   
 }
-
-//- (void) resendStoredMessages {
-//
-//  __weak SCStompManager *weakSelf = self;
-//  [self.messageStore enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//    [weakSelf resendStoredMessageForId:key];
-//  }];
-//}
-//
-//- (void) resendStoredMessageForId:(NSString*)correlationId
-//{
-//
-//  NSString *storedQueue = [[self.messageStore objectForKey:correlationId] objectForKey:@"queue"];
-//  NSString *storedExchange = [[self.messageStore objectForKey:correlationId] objectForKey:@"exchange"];
-//  NSString *storedMessage = [[self.messageStore objectForKey:correlationId] objectForKey:@"message"];
-//
-//  // check if sen dto queue or exchange
-//  if (storedQueue == nil)
-//  {
-//    [self sendMessage:storedMessage toExchange:storedExchange];
-//  }
-//  else
-//  {
-//    [self sendMessage:storedMessage toQueue:storedQueue];
-//  }
-//
-//  // remove from message store
-//
-//  [self.messageStore removeObjectForKey:correlationId];
-//
-//}
-
 
 - (BOOL) needsInitialization
 {
@@ -415,6 +387,11 @@
     }
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+      
+      if (error != nil) {
+        handler(false, error);
+        return;
+      }
       
       self.configuration.userId = token;
       self.configuration.password = token;
@@ -496,25 +473,23 @@
  *  @param message the message to be sent
  *  @param queue   the queue to put the message on
  */
-- (void) sendMessage:(SCTransportMessage*)message toDestination:(SCStompDestination*)destination completionHandler:(void (^)(id responseObject, NSError *))handler
+- (void) sendMessage:(SCTransportMessage*)message toDestination:(SCStompDestination*)destination completionHandler:(ReceiptHandler)handler
 {
   
     [self connect:^(bool success, NSError *error) {
       
       NSString *correlationId = [NSString stringWithFormat:@"%d", [self getNextCorrelationID]];
       
-      NSError *transformationError = [NSError new];
-      [MTLJSONAdapter JSONDictionaryFromModel:message error:&transformationError];
+      NSError *transformationError = nil;
+      NSDictionary *messageDict = [MTLJSONAdapter JSONDictionaryFromModel:message error:&transformationError];
       
       if (transformationError) {
         [SCErrorManager handleError:[SCErrorManager errorWithDescription:transformationError.localizedDescription andDomain:kErrorDomainSCStompService]];
         return;
       }
       
-      NSError *parseError = [NSError new];
-      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message
-                                                         options:0
-                                                           error:&parseError];
+      NSError *parseError = nil;
+      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:messageDict options:0 error:&parseError];
       
       if (parseError) {
         [SCErrorManager handleError:[SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:kErrorDomainSCStompService]];
@@ -541,8 +516,7 @@
                     headers:headers
                        body:jsonString];
         
-        SCStompStorageItem *itemToStore = [SCStompStorageItem new];
-        itemToStore.handler = handler;
+        SCStompStorageItem *itemToStore = [[SCStompStorageItem alloc] initWithHandler:handler];
         
         [self.promiseStore setObject:itemToStore forKey:[NSString stringWithFormat:@"%@", correlationId]];
         
@@ -584,7 +558,19 @@
   
   // TODO: Callback if false?
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type] completionHandler:handler];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type] completionHandler:^(id responseObject, NSError *error) {
+    
+    if (error != nil) {
+      handler(nil, error);
+      return;
+    }
+    
+    NSError *parsingError = nil;
+    SCObjectList *objectList = [MTLJSONAdapter modelOfClass:[SCObjectList class] fromJSONDictionary:responseObject error:&parsingError];
+    
+    handler(objectList, parsingError);
+    
+  }];
   
 }
 

@@ -49,7 +49,7 @@ typedef void (^ReceiptHandler)(id responseObject, NSError *error);
 
 @interface SCStompStorageItem : NSObject
 
-@property (nonatomic, assign) ReceiptHandler handler;
+@property (nonatomic, copy) ReceiptHandler handler;
 
 @end
 

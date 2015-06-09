@@ -12,7 +12,7 @@
 #import "SCLoyaltyCustomer.h"
 #import "SCGeneralAccount.h"
 
-@interface SCSmartCheckin : MTLModel
+@interface SCSmartCheckin : SCSecuObject
 
 @property (nonatomic, copy) NSString *customerName;
 @property (nonatomic, copy) NSString *picture;

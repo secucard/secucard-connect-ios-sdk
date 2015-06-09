@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SCAccountManager.h"
 #import <AFNetworking/AFNetworking.h>
-#import <Reachability/Reachability.h>
+#import "SCAccountManager.h"
 #import "SCServiceManager.h"
 
 #define kErrorDomainSCRestService                 @"SCSecucardCoreRestService"

@@ -13,7 +13,7 @@
 
 @property (nonatomic, retain) SCClientCredentials *clientCredentials;
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
-@property (nonatomic, retain) void (^devicePollHandler)(NSString *, NSError *);
+@property (nonatomic, copy) void (^devicePollHandler)(NSString *, NSError *);
 
 @end
 
@@ -186,18 +186,7 @@
  */
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler
 {
-  
-  // TODO: REMOVE, is only because of refresh token problem
-  
-  //  [[SCAccountManager sharedManager] killToken:^(NSError *error) {
-  //
-  //    [self token:completionBlock error:errorBlock];
-  //
-  //  }];
-  //
-  //  return;
-  
-  // END OF REMOVE
+
   
   
     if ([self needsInitialization])
@@ -328,8 +317,6 @@
   self.devicePollHandler = handler;
   
   [NSTimer scheduledTimerWithTimeInterval:[code.interval floatValue] target:self selector:@selector(doPoll:) userInfo:@{@"code":code, @"timerStart":now} repeats:TRUE];
-  
-  
   
 }
 

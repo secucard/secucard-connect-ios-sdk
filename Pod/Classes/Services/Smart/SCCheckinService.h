@@ -10,6 +10,8 @@
 
 @interface SCCheckinService : SCAbstractService
 
++ (SCCheckinService*)sharedService;
+
 - (void) getCheckins:(void (^)(NSArray *, NSError *))handler;
 
 - (void) getCheckinsList:(void (^)(SCObjectList *, NSError *))handler;
