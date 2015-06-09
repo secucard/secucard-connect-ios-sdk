@@ -91,6 +91,8 @@
             
             NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("pollCheckins"), userInfo: nil, repeats: true)
             
+            NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
+            
             handler(success: true, error: nil)
           } else {
             handler(success: false, error: nil)

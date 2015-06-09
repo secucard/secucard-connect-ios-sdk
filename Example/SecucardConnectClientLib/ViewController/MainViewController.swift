@@ -634,42 +634,30 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       appDelegate.connectCashier({ (success: Bool, error: NSError?) -> Void in
-        if let error = error {
-          ErrorManager.handleError(error)
-        } else {
-          if (success) {
-            NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
-          }
-        }
       })
     }
   }
   
   func didTapDisconnect() {
-    
     SCConnectClient.sharedInstance().disconnect { (success: Bool, error: NSError!) -> Void in
-      if let error = error {
-        ErrorManager.handleError(error)
-      } else {
+      if (success) {
         NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
       }
     }
-    
-    
   }
   
   func clientDidDisconnect(notification : NSNotification) {
-    self.connectButton.enabled = true
-    self.connectButton.alpha = 1
-    self.disconnectButton.enabled = false
-    self.disconnectButton.alpha = 0.5
+    connectButton.enabled = true
+    connectButton.alpha = 1
+    disconnectButton.enabled = false
+    disconnectButton.alpha = 0.5
   }
   
   func clientDidConnect(notification : NSNotification) {
-    self.disconnectButton.enabled = true
-    self.disconnectButton.alpha = 1
-    self.connectButton.enabled = false
-    self.connectButton.alpha = 0.5
+    disconnectButton.enabled = true
+    disconnectButton.alpha = 1
+    connectButton.enabled = false
+    connectButton.alpha = 0.5
   }
   
   // MARK: - ScanCardViewDelegate

@@ -82,9 +82,11 @@
 }
 
 - (void)disconnect:(void (^)(bool, NSError *))handler {
+  self.connected = false;
+  [[SCStompManager sharedManager] close];
+  [[SCRestServiceManager sharedManager] close];
   
-  handler(nil, [SCErrorManager errorWithDescription:@"not implemented"]);
-  
+  handler(true, nil);
 }
 
 - (void)destroy:(void (^)(bool, NSError *))handler {

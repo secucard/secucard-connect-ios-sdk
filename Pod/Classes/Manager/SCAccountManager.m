@@ -205,6 +205,7 @@
     
     if (error) {
       handler(nil, error);
+      return;
     }
     
     self.accessToken = [responseObject objectForKey:@"access_token"];
@@ -240,6 +241,7 @@
       
       [self retrieveAccessToken:^(NSString *token, NSError *error) {
         handler(token, error);
+        return;
       }];
       
     } else if ([[SCConnectClient sharedInstance].configuration.authType isEqualToString:@"device"]) {
@@ -251,6 +253,7 @@
         
         if (error) {
           handler(nil, error);
+          return;
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"deviceAuthCodeRequesting" object:nil userInfo:@{@"code":code}];
@@ -267,12 +270,14 @@
     
     [self refreshAccessToken:^(NSString *token, NSError *error) {
       handler(token, error);
+      return;
     }];
     
   } else {
     
     // or it is valid
     handler(self.accessToken, nil);
+    return;
     
   }
   
