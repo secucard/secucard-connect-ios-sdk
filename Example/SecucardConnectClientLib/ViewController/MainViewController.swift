@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import SnapKit
+import SecucardConnectClientLib
 
 enum CollectionType {
   case Product
@@ -33,9 +34,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   var productCategories: [JSON]?
   var basket = [BasketItem]()
-  var checkins = [Checkin]()
+  var checkins = [SCSmartCheckin]()
   
-  var customerUsed: Checkin?
+  var customerUsed: SCSmartCheckin?
+  
+  let connectButton: PaymentButton
+  let disconnectButton: PaymentButton
   
   let payCashButton: PaymentButton
   let payECButton: PaymentButton
@@ -62,7 +66,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var json: JSON = nil {
     didSet {
       if let cats = self.json["groups"].array {
-
+        
         self.productCategories = cats
         self.productCategoriesCollection.reloadData()
         self.productsCollection.reloadData()
@@ -72,6 +76,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   init() {
+    
+    self.checkins = [SCSmartCheckin]()
+    self.basket = [BasketItem]()
     
     var categoriesLayout = UICollectionViewFlowLayout()
     categoriesLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
@@ -98,22 +105,28 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     basketCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: basketLayout)
     basketCollection.registerClass(BasketUserCell.self, forCellWithReuseIdentifier: basketUserReuseIdentifier)
     basketCollection.registerClass(BasketProductCell.self, forCellWithReuseIdentifier: basketProductReuseIdentifier)
-
+    
     
     var checkinLayout = UICollectionViewFlowLayout()
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-    checkinLayout.itemSize = CGSizeMake(100, 100)
-
+    checkinLayout.itemSize = CGSizeMake(224, 50)
+    
     checkinsCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: checkinLayout)
     checkinsCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     
     // Payment buttons initialization
-    paySecucardButton = PaymentButton(title: "secucard", action: "didTapSecucardButton")
-    payECButton = PaymentButton(title: "EC", action: "didTapECButton")
-    payCashButton = PaymentButton(title: "Bar", action: "didTapCashButton")
+    connectButton = PaymentButton(title: "connect", action: Selector("didTapConnect"))
+    disconnectButton = PaymentButton(title: "disconnect", action: Selector("didTapDisconnect"))
+    
+    paySecucardButton = PaymentButton(title: "secucard", action: Selector("didTapSecucardButton"))
+    payECButton = PaymentButton(title: "EC", action: Selector("didTapECButton"))
+    payCashButton = PaymentButton(title: "Bar", action: Selector("didTapCashButton"))
     
     // call super initialization
     super.init(nibName: nil, bundle: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidDisconnect:"), name: "clientDidDisconnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidConnect:"), name: "clientDidConnect", object: nil)
     
     // add delegates to collections
     self.productCategoriesCollection.delegate = self
@@ -132,11 +145,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     payECButton.target = self
     payCashButton.target = self
     
+    connectButton.target = self
+    disconnectButton.target = self
+    
+    self.connectButton.enabled = true
+    self.connectButton.alpha = 1
+    self.disconnectButton.enabled = false
+    self.disconnectButton.alpha = 0.5
     
   }
-
+  
   required init(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented")
   }
   
   override func viewDidLoad() {
@@ -319,11 +339,29 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(50)
     }
     
+    // connect button
+    
+    bottomBar.addSubview(connectButton)
+    
+    connectButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(20)
+      make.centerY.equalTo(bottomBar)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+    }
+    
+    // disconnect button
+    
+    bottomBar.addSubview(disconnectButton)
+    
+    disconnectButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(connectButton.snp_right).offset(20)
+      make.centerY.equalTo(bottomBar)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+    }
+    
     calcPrice()
-    
-    // start polling
-    
-    
     
   }
   
@@ -359,9 +397,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func didTapEmptyButton() {
     
-    basket = [BasketItem]()
     sum = 0.0
-    basketCollection.reloadData()
+    basket = [BasketItem]()
     
   }
   
@@ -416,11 +453,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     case CollectionType.Basket:
       
       return basket.count
-
+      
     case CollectionType.Checkins:
       
       return checkins.count
-      
       
     default:
       return 0
@@ -449,40 +485,49 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
       if let items:[JSON] = json["groups"][currentCategory]["items"].array {
         
-        var cell:ProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as! ProductCell
-        cell.data = Product(product: items[indexPath.row])
-        return cell
+        if let cell:ProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as? ProductCell {
+          cell.data = Product(product: items[indexPath.row])
+          return cell
+        }
         
       }
-
+      
     case CollectionType.Basket:
       
       let item:BasketItem = basket[indexPath.row]
+      
+      switch item.type! {
         
-        switch item.type! {
-          
-        case BasketItemType.Checkin:
-          
-          var cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as! BasketUserCell
+      case BasketItemType.Checkin:
+        
+        if let cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
           cell.data = item
-          
           return cell
-          
-        case BasketItemType.Product:
-          
-          var cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as! BasketProductCell
+        }
+        
+      case BasketItemType.Product:
+        
+        if let cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
           cell.delegate = self
           cell.data = item
-          
           return cell
-          
-        default:
-          
-          return UICollectionViewCell()
-          
         }
+        
+      default:
+        
+        return UICollectionViewCell()
+        
+      }
       
-
+    case CollectionType.Checkins:
+      
+      let checkin:SCSmartCheckin = checkins[indexPath.row]
+      
+      if let cell:CheckinCell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
+        cell.data = checkin
+        return cell
+      }
+      
     default:
       
       return UICollectionViewCell()
@@ -500,7 +545,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     case CollectionType.ProductCategories:
       
       currentCategory = indexPath.row
-    
+      
     case CollectionType.Product:
       
       if let items:[JSON] = json["groups"][currentCategory]["items"].array {
@@ -514,6 +559,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         calcPrice()
         
       }
+      
+    case CollectionType.Checkins:
+      
+      NSLog(checkins[indexPath.row].customerName)
       
     default:
       
@@ -579,6 +628,48 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func didTapCashButton() {
     
+  }
+  
+  func didTapConnect() {
+    
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      appDelegate.connectCashier({ (success: Bool, error: NSError?) -> Void in
+        if let error = error {
+          ErrorManager.handleError(error)
+        } else {
+          if (success) {
+            NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
+          }
+        }
+      })
+    }
+  }
+  
+  func didTapDisconnect() {
+    
+    SCConnectClient.sharedInstance().disconnect { (success: Bool, error: NSError!) -> Void in
+      if let error = error {
+        ErrorManager.handleError(error)
+      } else {
+        NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
+      }
+    }
+    
+    
+  }
+  
+  func clientDidDisconnect(notification : NSNotification) {
+    self.connectButton.enabled = true
+    self.connectButton.alpha = 1
+    self.disconnectButton.enabled = false
+    self.disconnectButton.alpha = 0.5
+  }
+  
+  func clientDidConnect(notification : NSNotification) {
+    self.disconnectButton.enabled = true
+    self.disconnectButton.alpha = 1
+    self.connectButton.enabled = false
+    self.connectButton.alpha = 0.5
   }
   
   // MARK: - ScanCardViewDelegate

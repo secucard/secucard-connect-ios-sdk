@@ -33,6 +33,7 @@
 		AA3562551B24769400CDECB9 /* ScanCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3562461B24769400CDECB9 /* ScanCardView.swift */; };
 		AA3562561B24769400CDECB9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3562481B24769400CDECB9 /* MainViewController.swift */; };
 		AA3562581B24776600CDECB9 /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = AA3562571B24776600CDECB9 /* products.json */; };
+		AA3B292E1B270F37000F086B /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3B292D1B270F37000F086B /* ErrorManager.swift */; };
 		AA48B7521B0A3106007946F7 /* DeviceCredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */; };
 		AA693C2C1AEFA2A500AAB63C /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2B1AEFA2A500AAB63C /* Tests.m */; };
 		AA693C2E1AEFE82C00AAB63C /* CredentialTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA693C2D1AEFE82C00AAB63C /* CredentialTest.m */; };
@@ -81,6 +82,7 @@
 		AA3562461B24769400CDECB9 /* ScanCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCardView.swift; sourceTree = "<group>"; };
 		AA3562481B24769400CDECB9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AA3562571B24776600CDECB9 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		AA3B292D1B270F37000F086B /* ErrorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		AA48B7501B0A2CE1007946F7 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		AA48B7511B0A3106007946F7 /* DeviceCredentialTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCredentialTest.m; sourceTree = "<group>"; };
 		AA693C2B1AEFA2A500AAB63C /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			children = (
 				AA3562381B24769400CDECB9 /* BasketFlowLayout.swift */,
 				AA3562391B24769400CDECB9 /* Constants.swift */,
+				AA3B292D1B270F37000F086B /* ErrorManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA3562521B24769400CDECB9 /* PaymentButton.swift in Sources */,
+				AA3B292E1B270F37000F086B /* ErrorManager.swift in Sources */,
 				AA3562531B24769400CDECB9 /* ProductCategoryCell.swift in Sources */,
 				AA3562511B24769400CDECB9 /* ModifyPriceView.swift in Sources */,
 				AA3562551B24769400CDECB9 /* ScanCardView.swift in Sources */,

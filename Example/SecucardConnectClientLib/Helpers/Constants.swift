@@ -21,7 +21,7 @@ class Constants: NSObject {
   static let connectionTimeoutSec: Int32 =   30
   static let socketTimeoutSec: Int32 =   30
   static let heartbeatMs: Int32 =   40000
-  static let basicDestination: String = "/exchange/connect.api"
+  static let basicDestination: String = "/exchange/connect.api/"
   
   static let usernameAppSample: String = "checkoutsecucard"
   static let passwordAppSample: String = "checkout"
@@ -39,7 +39,7 @@ class Constants: NSObject {
   static let contactForename: String = "DeviD"
   static let contactSurname: String = "Testermann"
   static let contactSalutation: String = "Herr"
-  static let contactEmail: String = "schmidtdevid.net"
+  static let contactEmail: String = "schmidt@devid.net"
   
   static let accountUsername: String = "schmidtdevid.net"
   static let acccountPassword: String = "Secucard123"

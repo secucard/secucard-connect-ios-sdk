@@ -2,7 +2,6 @@
 
 #import "MTLModel+Secucard.h"
 #import "SCGlobals.h"
-#import "SCAccessabilityManager.h"
 #import "SCAccountManager.h"
 #import "SCErrorManager.h"
 #import "SCPersistenceManager.h"
