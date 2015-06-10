@@ -413,6 +413,7 @@
                                    if ([[body objectForKey:@"status"] isEqualToString:@"error"])
                                    {
                                      [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
+                                     return;
                                    }
                                    
                                    id resultObject;
