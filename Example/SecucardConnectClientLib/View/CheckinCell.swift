@@ -9,8 +9,14 @@
 import UIKit
 import SecucardConnectClientLib
 
+protocol CheckinCellDelegate {
+  func checkinCellRemoveTapped(cell: CheckinCell, data: SCSmartCheckin)
+}
+
 class CheckinCell: UICollectionViewCell {
 
+  var delegate: CheckinCellDelegate?
+  
   var data:SCSmartCheckin? {
     
     didSet {
@@ -30,6 +36,13 @@ class CheckinCell: UICollectionViewCell {
   
   var imageView: UIImageView
   var label: UILabel
+  var controls: UIView
+  
+  var showsControls: Bool = false {
+    didSet {
+      controls.hidden = !showsControls
+    }
+  }
   
   override init(frame: CGRect) {
     
@@ -42,10 +55,14 @@ class CheckinCell: UICollectionViewCell {
     label.numberOfLines = 0
     label.lineBreakMode = NSLineBreakMode.ByWordWrapping
     
+    controls = UIView()
+    controls.hidden = true;
+    
     super.init(frame: frame)
     
     self.addSubview(imageView)
     self.addSubview(label)
+    self.addSubview(controls)
     
     imageView.snp_makeConstraints { (make) -> Void in
       make.left.top.equalTo(self)
@@ -58,14 +75,41 @@ class CheckinCell: UICollectionViewCell {
       make.top.height.equalTo(self)
     }
     
+    controls.snp_makeConstraints { (make) -> Void in
+      make.top.height.equalTo(self)
+      make.right.equalTo(self).offset(-10)
+      make.width.equalTo(50)
+    }
+    
+    let removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    removeButton.backgroundColor = Constants.warningColor
+    removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
+    controls.addSubview(removeButton)
+    
+    removeButton.snp_makeConstraints { (make) -> Void in
+      make.left.centerY.equalTo(controls)
+      make.width.height.equalTo(50)
+    }
+    
+  }
+
+  required init(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
   }
   
-  required init(coder aDecoder: NSCoder) {
+  func didTapRemove() {
+    if let data = data {
+      delegate?.checkinCellRemoveTapped(self, data: data)
+    }
+  }
+  
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
     
-    imageView = UIImageView()
-    label = UILabel()
+      var newFrame: CGRect = layoutAttributes.frame
+//      newFrame.size.height = (theData.expanded) ? 130 : 70
+      layoutAttributes.frame = newFrame
     
-    super.init(coder: aDecoder)
+    return layoutAttributes
   }
   
 }

@@ -19,13 +19,15 @@ enum CollectionType {
   case Unknown
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanCardViewDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanCardViewDelegate, ScanViewControllerDelegate, CheckinCellDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
   let basketProductReuseIdentifier = "BasketProductCell"
   let basketUserReuseIdentifier = "BasketUserCell"
   let checkinReuseIdentifier = "CheckinCell"
+  
+  let basketSectionHeaerReuseIdentifier = "HeaderView"
   
   let productCategoriesCollection:UICollectionView
   let productsCollection:UICollectionView
@@ -36,11 +38,16 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var basket = [BasketItem]()
   var checkins = [SCSmartCheckin]()
   
-  var customerUsed: SCSmartCheckin?
+  var customerUsed: SCSmartCheckin? {
+    didSet {
+      CheckTransactionReady()
+      basketCollection.reloadData()
+    }
+  }
   
   let connectButton: PaymentButton
   let disconnectButton: PaymentButton
-  let pollCheckinsButton: PaymentButton
+  let scanCardButton: PaymentButton
   
   let payCashButton: PaymentButton
   let payECButton: PaymentButton
@@ -102,11 +109,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var basketLayout = BasketFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     basketLayout.estimatedItemSize = CGSizeMake(310, 70)
+    basketLayout.headerReferenceSize = CGSizeMake(310, 30)
     
     basketCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: basketLayout)
-    basketCollection.registerClass(BasketUserCell.self, forCellWithReuseIdentifier: basketUserReuseIdentifier)
+    basketCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     basketCollection.registerClass(BasketProductCell.self, forCellWithReuseIdentifier: basketProductReuseIdentifier)
-    
+    basketCollection.registerClass(SectionheaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: basketSectionHeaerReuseIdentifier)
     
     var checkinLayout = UICollectionViewFlowLayout()
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -118,7 +126,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // Payment buttons initialization
     connectButton = PaymentButton(title: "connect", action: Selector("didTapConnect"))
     disconnectButton = PaymentButton(title: "disconnect", action: Selector("didTapDisconnect"))
-    pollCheckinsButton = PaymentButton(title: "checkins", action: Selector("didTapPollCheckins"))
+    scanCardButton = PaymentButton(title: "scan", action: Selector("didTapScanCard"))
     
     paySecucardButton = PaymentButton(title: "secucard", action: Selector("didTapSecucardButton"))
     payECButton = PaymentButton(title: "EC", action: Selector("didTapECButton"))
@@ -149,7 +157,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     connectButton.target = self
     disconnectButton.target = self
-    pollCheckinsButton.target = self
+    scanCardButton.target = self
     
     self.connectButton.enabled = true
     self.connectButton.alpha = 1
@@ -366,9 +374,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // polling button
     
-    bottomBar.addSubview(pollCheckinsButton)
+    bottomBar.addSubview(scanCardButton)
     
-    pollCheckinsButton.snp_makeConstraints { (make) -> Void in
+    scanCardButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(disconnectButton.snp_right).offset(20)
       make.centerY.equalTo(bottomBar)
       make.width.equalTo(100)
@@ -376,6 +384,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     calcPrice()
+    CheckTransactionReady()
     
   }
   
@@ -422,7 +431,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     switch identifierForCollection(collectionView) {
       
-    case CollectionType.Product:
+    case CollectionType.Basket:
       return 2
       
     default:
@@ -445,13 +454,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
+      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+        return items.count
+      } else {
+        return 0
+      }
+      
+    case CollectionType.Basket:
+      
       if (section == 0) {
         
-        if let items:[JSON] = json["groups"][currentCategory]["items"].array {
-          return items.count
-        } else {
-          return 0
-        }
+        return basket.count
         
       } else {
         
@@ -462,11 +475,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
       }
-      
-      
-    case CollectionType.Basket:
-      
-      return basket.count
       
     case CollectionType.Checkins:
       
@@ -508,30 +516,31 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Basket:
       
-      let item:BasketItem = basket[indexPath.row]
-      
-      switch item.type! {
+      if (indexPath.section == 0) {
         
-      case BasketItemType.Checkin:
+        let item:BasketItem = basket[indexPath.row]
+
+          if let cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
+            cell.delegate = self
+            cell.data = item
+            return cell
+          }
         
-        if let cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
-          cell.data = item
-          return cell
+      } else {
+        
+        if let checkin = customerUsed {
+          
+          if let cell:CheckinCell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
+            cell.data = checkin
+            cell.delegate = self
+            cell.showsControls = true
+            return cell
+          }
+          
         }
-        
-      case BasketItemType.Product:
-        
-        if let cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
-          cell.delegate = self
-          cell.data = item
-          return cell
-        }
-        
-      default:
-        
-        return UICollectionViewCell()
         
       }
+      
       
     case CollectionType.Checkins:
       
@@ -576,7 +585,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Checkins:
       
-      NSLog(checkins[indexPath.row].customerName)
+      customerUsed = checkins[indexPath.row]
+      basketCollection.reloadData()
       
     default:
       
@@ -584,6 +594,28 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     }
   }
+  
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    
+    if collectionView == basketCollection {
+      
+      if (kind == UICollectionElementKindSectionHeader) {
+        
+        let headerView: SectionheaderView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: basketSectionHeaerReuseIdentifier, forIndexPath: indexPath) as! SectionheaderView
+        
+        headerView.label.text = (indexPath.section == 0) ? "Warenkorb" : "Käufer"
+        
+        return headerView
+        
+      }
+      
+    }
+    
+    
+    return SectionheaderView()
+    
+  }
+  
   
   
   // MARK: - ModifyPriceViewDelegate
@@ -622,15 +654,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     } else {
       
       // user did not select any customer -> scan card
-      let view = ScanCardView()
-      view.delegate = self
-      
-      if let window = UIApplication.sharedApplication().keyWindow {
-        window.addSubview(view)
-        view.snp_makeConstraints { (make) -> Void in
-          make.edges.equalTo(window)
-        }
-      }
+      showScanCardView()
       
     }
     
@@ -644,10 +668,56 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func didTapPollCheckins() {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      appDelegate.pollManually()
+  func showScanCardView() {
+    
+    let view = ScanCardView()
+    view.delegate = self
+    
+    if let window = UIApplication.sharedApplication().keyWindow {
+      window.addSubview(view)
+      view.snp_makeConstraints { (make) -> Void in
+        make.edges.equalTo(window)
+      }
     }
+    
+  }
+  
+  func startTransaction() {
+    
+    // create a smart basket
+    
+    let basket = SCSmartBasket()
+    
+    
+    let transaction = SCSmartTransaction()
+    
+    // create the ident
+    
+    
+    
+  }
+  
+  func CheckTransactionReady() {
+    
+    let ready = (basket.count > 0)
+    
+    payCashButton.enabled = ready
+    payCashButton.alpha = ready ? 1 : 0.5
+    
+    payECButton.enabled = ready
+    payECButton.alpha = ready ? 1 : 0.5
+    
+    paySecucardButton.enabled = ready
+    paySecucardButton.alpha = ready ? 1 : 0.5
+    
+  }
+  
+  func didTapScanCard() {
+    
+    var view: ScanViewController = ScanViewController()
+    view.delegate = self;
+    self.presentViewController(view, animated: true, completion: nil)
+    
   }
   
   func didTapConnect() {
@@ -685,6 +755,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func scanCardFinished(code: String) {
     
+  }
+  
+  // MARL: - CheckinCellDelegate
+  func checkinCellRemoveTapped(cell: CheckinCell, data: SCSmartCheckin) {
+    if (customerUsed == data) {
+      customerUsed = nil
+    }
+  }
+  
+  func scanViewFoundCode(barcodes: Set<NSObject>!) {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
 }

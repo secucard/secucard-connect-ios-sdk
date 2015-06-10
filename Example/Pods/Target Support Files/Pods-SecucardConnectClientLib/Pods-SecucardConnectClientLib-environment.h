@@ -90,3 +90,9 @@
 #define COCOAPODS_VERSION_MINOR_SwiftyJSON 2
 #define COCOAPODS_VERSION_PATCH_SwiftyJSON 0
 
+// TFBarcodeScanner
+#define COCOAPODS_POD_AVAILABLE_TFBarcodeScanner
+#define COCOAPODS_VERSION_MAJOR_TFBarcodeScanner 1
+#define COCOAPODS_VERSION_MINOR_TFBarcodeScanner 1
+#define COCOAPODS_VERSION_PATCH_TFBarcodeScanner 0
+

@@ -24,6 +24,7 @@ class PaymentButton: UIButton {
     self.action = action
     
     setTitle(title, forState: UIControlState.Normal)
+
     backgroundColor = Constants.tintColor
     tintColor = Constants.textColorBright
     
