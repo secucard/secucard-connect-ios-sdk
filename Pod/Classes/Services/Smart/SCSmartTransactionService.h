@@ -12,6 +12,13 @@
 @interface SCSmartTransactionService : SCAbstractService
 
 /**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCSmartTransactionService*)sharedService;
+
+/**
  *  Create a transaction
  *
  *  @param transaction the transaction to create

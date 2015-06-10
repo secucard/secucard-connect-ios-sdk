@@ -11,6 +11,16 @@
 
 @implementation SCSmartTransactionService
 
++ (SCSmartTransactionService*)sharedService
+{
+  static SCSmartTransactionService *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    instance = [SCSmartTransactionService new];
+  });
+  
+  return instance;
+}
 
 - (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
   [self create:transaction onChannel:DefaultChannel completionHandler:handler];
