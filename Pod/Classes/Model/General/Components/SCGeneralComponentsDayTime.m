@@ -10,4 +10,8 @@
 
 @implementation SCGeneralComponentsDayTime
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
 @end
