@@ -10,4 +10,8 @@
 
 @implementation SCServicesIdResultCustomData
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
 @end

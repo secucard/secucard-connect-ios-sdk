@@ -10,4 +10,8 @@
 
 @implementation SCGeneralComponentsGeometry
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
 @end

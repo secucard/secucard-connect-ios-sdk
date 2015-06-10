@@ -10,4 +10,8 @@
 
 @implementation SCGeneralLocation
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
 @end

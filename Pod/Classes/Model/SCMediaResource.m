@@ -10,6 +10,10 @@
 
 @implementation SCMediaResource
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
 - (void) download {
   NSLog(@"Resource Download not implemented yet");
 }

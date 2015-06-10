@@ -10,4 +10,8 @@
 
 @implementation SCTransportResult
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+  return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
 @end
