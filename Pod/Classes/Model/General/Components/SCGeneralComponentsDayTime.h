@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralComponentsDayTime : MTLModel
+@interface SCGeneralComponentsDayTime : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, retain) NSNumber *day;
 @property (nonatomic, retain) NSString *time;

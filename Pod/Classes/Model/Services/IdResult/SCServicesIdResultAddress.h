@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCServicesIdResultAddress : MTLModel
+@interface SCServicesIdResultAddress : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) id postalCode;
 @property (nonatomic, copy) id country;

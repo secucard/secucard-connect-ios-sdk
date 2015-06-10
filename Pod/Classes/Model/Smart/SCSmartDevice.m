@@ -23,4 +23,9 @@
   }
   return self;
 }
+
++ (NSValueTransformer *)merchantInfoJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
 @end

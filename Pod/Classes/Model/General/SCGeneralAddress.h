@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralAddress : MTLModel
+@interface SCGeneralAddress : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *street;
 @property (nonatomic, copy) NSString *streetNumber;

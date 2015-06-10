@@ -9,7 +9,7 @@
 #import "MTLModel+Secucard.h"
 #import "SCServicesIdResultAddress.h"
 
-@interface SCServicesIdResultUserData : MTLModel
+@interface SCServicesIdResultUserData : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) id dateOfBirth;
 @property (nonatomic, copy) id forename;

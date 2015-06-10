@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralComponentsAddressComponent : MTLModel
+@interface SCGeneralComponentsAddressComponent : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *longName;
 @property (nonatomic, copy) NSString *shortName;

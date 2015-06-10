@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralComponentsGeometry : MTLModel
+@interface SCGeneralComponentsGeometry : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, assign) double lat;
 @property (nonatomic, assign) double lon;

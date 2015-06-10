@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralMerchantList : MTLModel
+@interface SCGeneralMerchantList : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSNumber *count;
 @property (nonatomic, copy) NSArray *merchants;

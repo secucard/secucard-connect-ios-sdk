@@ -9,7 +9,7 @@
 #import "MTLModel+Secucard.h"
 #import "SCGeneralComponentsDayTime.h"
 
-@interface SCGeneralComponentsOpenHours : MTLModel
+@interface SCGeneralComponentsOpenHours : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) SCGeneralComponentsDayTime *open;
 @property (nonatomic, copy) SCGeneralComponentsDayTime *close;

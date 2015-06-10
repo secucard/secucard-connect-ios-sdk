@@ -7,9 +7,8 @@
 //
 
 #import "SCSecuObject.h"
-
-@class SCGeneralComponentsMetaData;
-@class SCGeneralLocation;
+#import "SCGeneralComponentsMetaData.h"
+#import "SCGeneralLocation.h"
 
 @interface SCGeneralMerchant : SCSecuObject
 

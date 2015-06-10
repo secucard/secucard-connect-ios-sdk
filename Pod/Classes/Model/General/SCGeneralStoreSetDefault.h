@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralStoreSetDefault : MTLModel
+@interface SCGeneralStoreSetDefault : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *reason;
 @end

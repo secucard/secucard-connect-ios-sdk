@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCSmartBasketInfo : MTLModel
+@interface SCSmartBasketInfo : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSNumber *sum;
 @property (nonatomic, copy) id currency;

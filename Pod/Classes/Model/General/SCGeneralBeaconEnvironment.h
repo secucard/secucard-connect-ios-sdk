@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralBeaconEnvironment : MTLModel
+@interface SCGeneralBeaconEnvironment : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *proximityUUID;

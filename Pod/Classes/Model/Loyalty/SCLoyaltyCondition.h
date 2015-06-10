@@ -10,7 +10,7 @@
 
 #define kBonusTypePercent @"percent"
 
-@interface SCLoyaltyCondition : MTLModel
+@interface SCLoyaltyCondition : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSNumber *startValue;
 @property (nonatomic, copy) NSString *currency;

@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCSmartCashierDisplay : MTLModel
+@interface SCSmartCashierDisplay : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *deviceId;

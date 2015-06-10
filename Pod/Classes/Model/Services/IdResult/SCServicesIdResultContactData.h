@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCServicesIdResultContactData : MTLModel
+@interface SCServicesIdResultContactData : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, copy) NSString *email;

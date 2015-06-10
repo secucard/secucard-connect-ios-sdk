@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCLoyaltyBonus : MTLModel
+@interface SCLoyaltyBonus : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSNumber *amount;
 @property (nonatomic, copy) NSString *currency;

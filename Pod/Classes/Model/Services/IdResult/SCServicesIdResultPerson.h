@@ -13,7 +13,7 @@
 #import "SCServicesIdResultContactData.h"
 #import "SCServicesIdResultUserData.h"
 
-@interface SCServicesIdResultPerson : MTLModel
+@interface SCServicesIdResultPerson : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) SCServicesIdResultIdentificationProcess *identificationProcess;
 @property (nonatomic, copy) SCServicesIdResultIdentificationDocument *identificationDocument;

@@ -29,5 +29,21 @@
                                                                   }];
 }
 
++ (NSValueTransformer *)basketInfoJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCSmartBasketInfo class]];
+}
+
++ (NSValueTransformer *)basketJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCSmartBasket class]];
+}
+
++ (NSValueTransformer *)targetDeviceJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCSmartDevice class]];
+}
+
++ (NSValueTransformer *)deviceSourceJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCSmartDevice class]];
+}
+
 
 @end

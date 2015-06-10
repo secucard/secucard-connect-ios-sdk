@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCAuthTokenNew : MTLModel
+@interface SCAuthTokenNew : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *accessToken;
 @property (nonatomic, copy) NSNumber *expiresIn;

@@ -23,4 +23,12 @@
                                                                   }];
 }
 
++ (NSValueTransformer *)metadataJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralComponentsMetaData class]];
+}
+
++ (NSValueTransformer *)locationJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralLocation class]];
+}
+
 @end

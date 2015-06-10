@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCGeneralAssignment : MTLModel
+@interface SCGeneralAssignment : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSDate *created;
 @property (nonatomic, copy) NSString *type;

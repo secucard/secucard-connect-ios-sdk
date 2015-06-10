@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCSmartReceiptLine : MTLModel
+@interface SCSmartReceiptLine : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *value;

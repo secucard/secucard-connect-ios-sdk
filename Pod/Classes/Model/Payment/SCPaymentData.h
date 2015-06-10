@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCPaymentData : MTLModel
+@interface SCPaymentData : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *owner;
 @property (nonatomic, copy) NSString *iban;

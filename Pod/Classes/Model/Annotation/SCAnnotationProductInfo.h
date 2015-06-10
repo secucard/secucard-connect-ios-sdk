@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCAnnotationProductInfo : MTLModel
+@interface SCAnnotationProductInfo : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *resourceId;
 

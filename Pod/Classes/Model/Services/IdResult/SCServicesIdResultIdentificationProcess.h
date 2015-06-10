@@ -8,7 +8,7 @@
 
 #import "MTLModel+Secucard.h"
 
-@interface SCServicesIdResultIdentificationProcess : MTLModel
+@interface SCServicesIdResultIdentificationProcess : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSDate *identificationTime;
