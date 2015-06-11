@@ -10,4 +10,6 @@
 
 @interface NSArray (NullStripper)
 
+- (NSArray *)arrayByReplacingNullsWithBlanks;
+
 @end

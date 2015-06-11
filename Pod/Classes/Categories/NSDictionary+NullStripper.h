@@ -10,4 +10,6 @@
 
 @interface NSDictionary (NullStripper)
 
+- (NSDictionary *)dictionaryByReplacingNullsWithBlanks;
+
 @end
