@@ -25,7 +25,7 @@ class CheckinCell: UICollectionViewCell {
         
         label.text = data.customerName
         
-        if let pictureUrl = data.pictureObject?.url {
+        if let pictureUrl = data.picture {
           imageView.setImageWithURL(NSURL(string: pictureUrl), placeholderImage: UIImage())
         }
         
@@ -50,7 +50,7 @@ class CheckinCell: UICollectionViewCell {
     imageView.contentMode = UIViewContentMode.ScaleAspectFit
     
     label = UILabel()
-    label.font = Constants.regularFont
+    label.font = Constants.headlineFont
     label.textColor = Constants.textColor
     label.numberOfLines = 0
     label.lineBreakMode = NSLineBreakMode.ByWordWrapping

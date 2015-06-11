@@ -44,6 +44,8 @@ class Constants: NSObject {
   static let accountUsername: String = "schmidtdevid.net"
   static let acccountPassword: String = "Secucard123"
   
+  static let merchantRef: String = "KundeXY"
+  
   // Colors
   static let tintColor: UIColor = UIColor(red: 51/255, green: 128/255, blue: 255/255, alpha: 1)
   static let tintColorBright: UIColor = UIColor(red: 51/255, green: 128/255, blue: 255/255, alpha: 1)

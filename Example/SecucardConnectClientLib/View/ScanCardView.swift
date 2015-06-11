@@ -25,7 +25,6 @@ class ScanCardView: UIView {
     super.init(frame: CGRectNull)
     
     alpha = 0;
-    backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
     
     let centerView = UIView()
     centerView.backgroundColor = UIColor.whiteColor()
@@ -34,14 +33,16 @@ class ScanCardView: UIView {
     centerView.snp_makeConstraints { (make) -> Void in
       make.centerX.equalTo(self)
       make.top.equalTo(80)
-      make.width.equalTo(400)
+      make.width.equalTo(600)
       make.height.equalTo(200)
     }
     
     centerView.addSubview(scanImageView)
     
     scanImageView.snp_makeConstraints { (make) -> Void in
-      make.top.left.equalTo(20)
+      make.top.left.equalTo(10)
+      make.height.equalTo(120)
+      make.width.equalTo(200)
     }
     
     titleLabel.font = Constants.headlineFont
@@ -50,8 +51,9 @@ class ScanCardView: UIView {
     centerView.addSubview(titleLabel)
     
     titleLabel.snp_makeConstraints { (make) -> Void in
+      make.top.equalTo(centerView).offset(10)
       make.left.equalTo(scanImageView.snp_right).offset(20)
-      make.right.equalTo(self).offset(-20)
+      make.right.equalTo(centerView).offset(-20)
       make.height.equalTo(40)
     }
     
@@ -90,8 +92,6 @@ class ScanCardView: UIView {
       make.bottom.equalTo(-10)
     }
     
-    numberField.becomeFirstResponder()
-    
     UIView.animateWithDuration(0.4, animations: { () -> Void in
       self.alpha = 1
     })
@@ -112,7 +112,8 @@ class ScanCardView: UIView {
   
   func didTapCancel() {
     
-    hide()
+    delegate?.scanCardFinished(numberField.text)
+    
   }
   
   func hide() {

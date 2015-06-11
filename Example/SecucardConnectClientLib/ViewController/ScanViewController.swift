@@ -10,17 +10,54 @@ import UIKit
 import TFBarcodeScanner
 
 protocol ScanViewControllerDelegate {
-  func scanViewFoundCode(barcodes: Set<NSObject>!)
+  func scanViewReturnCode(code: String)
 }
 
-class ScanViewController: TFBarcodeScannerViewController {
+class ScanViewController: TFBarcodeScannerViewController, ScanCardViewDelegate {
 
   var delegate: ScanViewControllerDelegate?
+  var scanCardView: ScanCardView = ScanCardView()
+  
+  override func viewDidLoad() {
+    
+    super.viewDidLoad()
+    
+    barcodeTypes = 0x200
+    
+    scanCardView.delegate = self
+    
+  }
+  
+  override func barcodePreviewWillShowWithDuration(duration: CGFloat) {
+    
+    view.addSubview(scanCardView)
+    
+    scanCardView.snp_makeConstraints { (make) -> Void in
+      make.edges.equalTo(view)
+    }
+    
+  }
+  
+  override func barcodePreviewWillHideWithDuration(duration: CGFloat) {
+    
+    scanCardView.removeFromSuperview()
+    
+  }
   
   override func barcodeWasScanned(barcodes: Set<NSObject>!) {
     
-    self.delegate?.scanViewFoundCode(barcodes)
+    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+    
+    if let barcode: TFBarcode = barcodes.first as? TFBarcode {
+      scanCardView.numberField.text = barcode.string
+      delegate?.scanViewReturnCode(barcode.string)
+    }
     
   }
 
+  // MARK: - ScanCardViewDelegate
+  func scanCardFinished(code: String) {
+    delegate?.scanViewReturnCode(code)
+  }
+  
 }

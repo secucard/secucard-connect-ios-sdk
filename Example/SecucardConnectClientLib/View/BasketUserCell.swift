@@ -9,64 +9,91 @@
 import UIKit
 import SecucardConnectClientLib
 
-class BasketUserCell: UICollectionViewCell {
+protocol BasketUserCellDelegate {
+  func basketUserCellRemoveTapped(cell: BasketUserCell, data: String)
+}
 
-  var data:SCSmartCheckin? {
+class BasketUserCell: UICollectionViewCell {
+  
+  var delegate: BasketUserCellDelegate?
+  
+  var data:String? {
     
     didSet {
       
       if let data = data {
         
-        label.text = data.customerName
-        
-        if let pictureUrl = data.pictureObject?.url {
-          imageView.setImageWithURL(NSURL(string: pictureUrl), placeholderImage: UIImage())
-        }
+        label.text = data
         
       }
       
     }
   }
   
-  var imageView: UIImageView
   var label: UILabel
+  var controls: UIView
   
   override init(frame: CGRect) {
     
-    imageView = UIImageView()
-    imageView.contentMode = UIViewContentMode.ScaleAspectFit
-    
     label = UILabel()
-    label.font = Constants.regularFont
+    label.font = Constants.headlineFont
     label.textColor = Constants.textColor
     label.numberOfLines = 0
     label.lineBreakMode = NSLineBreakMode.ByWordWrapping
     
+    controls = UIView()
+    
     super.init(frame: frame)
     
-    self.addSubview(imageView)
     self.addSubview(label)
-    
-    imageView.snp_makeConstraints { (make) -> Void in
-      make.left.top.equalTo(self)
-      make.width.height.equalTo(self.snp_height)
-    }
+    self.addSubview(controls)
     
     label.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(imageView.snp_right).offset(20)
+      make.left.equalTo(10)
       make.right.equalTo(-10)
       make.top.height.equalTo(self)
     }
     
-  }
-  
-  required init(coder aDecoder: NSCoder) {
+    controls.snp_makeConstraints { (make) -> Void in
+      make.top.height.equalTo(self)
+      make.right.equalTo(self).offset(-10)
+      make.width.equalTo(50)
+    }
     
-    imageView = UIImageView()
-    label = UILabel()
+    let removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    removeButton.backgroundColor = Constants.warningColor
+    removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
+    controls.addSubview(removeButton)
     
-    super.init(coder: aDecoder)
+    removeButton.snp_makeConstraints { (make) -> Void in
+      make.left.centerY.equalTo(controls)
+      make.width.height.equalTo(50)
+    }
+    
+    
   }
 
+  required init(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+  }
+  
+
+  
+  func didTapRemove() {
+    if let data = data {
+      delegate?.basketUserCellRemoveTapped(self, data: data)
+    }
+  }
+  
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+    
+    var newFrame: CGRect = layoutAttributes.frame
+    //      newFrame.size.height = (theData.expanded) ? 130 : 70
+    layoutAttributes.frame = newFrame
+    
+    return layoutAttributes
+  }
+
+  
   
 }

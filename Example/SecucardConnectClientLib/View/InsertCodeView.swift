@@ -81,19 +81,19 @@ class InsertCodeView: UIView {
 //      make.height.equalTo(50)
 //    }
     
-    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-    cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
-    cancelButton.backgroundColor = Constants.brightGreyColor
-    centerView.addSubview(cancelButton)
-    
-    cancelButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(10)
-      make.width.equalTo(100)
-      make.height.equalTo(50)
-      make.bottom.equalTo(-10)
-    }
+//    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+//    cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
+//    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+//    cancelButton.backgroundColor = Constants.brightGreyColor
+//    centerView.addSubview(cancelButton)
 //    
+//    cancelButton.snp_makeConstraints { (make) -> Void in
+//      make.left.equalTo(10)
+//      make.width.equalTo(100)
+//      make.height.equalTo(50)
+//      make.bottom.equalTo(-10)
+//    }
+//
 //    let okButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
 //    okButton.setTitle("OK", forState: UIControlState.Normal)
 //    okButton.addTarget(self, action: "didTapOK", forControlEvents: UIControlEvents.TouchUpInside)

@@ -88,14 +88,17 @@
             
             // close verification view
             if let vView = self.verificationView {
-              vView.hide()
+              dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                vView.hide()
+              })
             }
             
             dispatch_async(dispatch_get_main_queue(), {
               if let timerValid = self.pollingTimer?.valid {
                 self.pollingTimer?.invalidate()
               }
-              self.pollingTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("pollCheckins"), userInfo: nil, repeats: true)
+              self.pollingTimer = NSTimer.scheduledTimerWithTimeInterval(1000, target: self, selector: Selector("pollCheckins"), userInfo: nil, repeats: true)
+              self.pollingTimer?.fire()
             })
 
             NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)

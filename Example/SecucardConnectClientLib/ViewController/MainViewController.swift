@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 secucard. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SwiftyJSON
 import SnapKit
@@ -19,7 +20,7 @@ enum CollectionType {
   case Unknown
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanCardViewDelegate, ScanViewControllerDelegate, CheckinCellDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, CheckinCellDelegate, BasketUserCellDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -35,10 +36,21 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let checkinsCollection:UICollectionView
   
   var productCategories: [JSON]?
-  var basket = [BasketItem]()
-  var checkins = [SCSmartCheckin]()
+  var checkins = [SCSmartCheckin]() {
+    didSet {
+      checkinsCollection.reloadData()
+    }
+  }
   
-  var customerUsed: SCSmartCheckin? {
+  var basket = [BasketItem]() {
+    didSet {
+      CheckTransactionReady()
+      basketCollection.reloadData()
+      calcPrice()
+    }
+  }
+  
+  var customerUsed: CustomerItem? {
     didSet {
       CheckTransactionReady()
       basketCollection.reloadData()
@@ -48,10 +60,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let connectButton: PaymentButton
   let disconnectButton: PaymentButton
   let scanCardButton: PaymentButton
+  let showLogButton: PaymentButton
   
   let payCashButton: PaymentButton
   let payECButton: PaymentButton
   let paySecucardButton: PaymentButton
+  
+  let logView: LogView = LogView()
   
   let sumLabel: UILabel = UILabel()
   
@@ -113,6 +128,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     basketCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: basketLayout)
     basketCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
+    basketCollection.registerClass(BasketUserCell.self, forCellWithReuseIdentifier: basketUserReuseIdentifier)
     basketCollection.registerClass(BasketProductCell.self, forCellWithReuseIdentifier: basketProductReuseIdentifier)
     basketCollection.registerClass(SectionheaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: basketSectionHeaerReuseIdentifier)
     
@@ -127,6 +143,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     connectButton = PaymentButton(title: "connect", action: Selector("didTapConnect"))
     disconnectButton = PaymentButton(title: "disconnect", action: Selector("didTapDisconnect"))
     scanCardButton = PaymentButton(title: "scan", action: Selector("didTapScanCard"))
+    showLogButton = PaymentButton(title: "show log", action: Selector("didTapShowLog"))
     
     paySecucardButton = PaymentButton(title: "secucard", action: Selector("didTapSecucardButton"))
     payECButton = PaymentButton(title: "EC", action: Selector("didTapECButton"))
@@ -137,6 +154,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidDisconnect:"), name: "clientDidDisconnect", object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidConnect:"), name: "clientDidConnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompResult:"), name: "notificationStompResult", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompError:"), name: "notificationStompError", object: nil)
     
     // add delegates to collections
     self.productCategoriesCollection.delegate = self
@@ -158,6 +177,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     connectButton.target = self
     disconnectButton.target = self
     scanCardButton.target = self
+    showLogButton.target = self
     
     self.connectButton.enabled = true
     self.connectButton.alpha = 1
@@ -249,7 +269,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     emptyButton.addTarget(self, action: "didTapEmptyButton", forControlEvents: UIControlEvents.TouchUpInside)
-    emptyButton.backgroundColor = Constants.tintColor
+    emptyButton.backgroundColor = Constants.warningColor
     sumView.addSubview(emptyButton)
     
     emptyButton.snp_makeConstraints { (make) -> Void in
@@ -372,7 +392,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(50)
     }
     
-    // polling button
+    // scan card button
     
     bottomBar.addSubview(scanCardButton)
     
@@ -382,6 +402,27 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.equalTo(100)
       make.height.equalTo(50)
     }
+    
+    // show log button
+    
+    bottomBar.addSubview(showLogButton)
+    
+    showLogButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(scanCardButton.snp_right).offset(20)
+      make.centerY.equalTo(bottomBar)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+    }
+    
+    // log view
+    
+    view.addSubview(logView)
+    
+    logView.snp_makeConstraints { (make) -> Void in
+      make.edges.equalTo(view)
+    }
+    
+    logView.hidden = true
     
     calcPrice()
     CheckTransactionReady()
@@ -519,22 +560,34 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       if (indexPath.section == 0) {
         
         let item:BasketItem = basket[indexPath.row]
-
-          if let cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
-            cell.delegate = self
-            cell.data = item
-            return cell
-          }
+        
+        if let cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
+          cell.delegate = self
+          cell.data = item
+          return cell
+        }
         
       } else {
         
-        if let checkin = customerUsed {
+        if let customer = customerUsed {
           
-          if let cell:CheckinCell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
-            cell.data = checkin
-            cell.delegate = self
-            cell.showsControls = true
-            return cell
+          if customer.type == CustomerType.CheckinCustomer {
+            
+            if let cell:CheckinCell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
+              cell.data = customer.checkin
+              cell.delegate = self
+              cell.showsControls = true
+              return cell
+            }
+            
+          } else {
+            
+            if let cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
+              cell.data = customer.cardNumber
+              cell.delegate = self
+              return cell
+            }
+            
           }
           
         }
@@ -577,16 +630,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let basketItem: BasketItem = BasketItem(product: Product(product: item))
         
         basket.append(basketItem)
-        basketCollection.reloadData()
-        
         calcPrice()
         
       }
       
     case CollectionType.Checkins:
       
-      customerUsed = checkins[indexPath.row]
-      basketCollection.reloadData()
+      customerUsed = CustomerItem(checkin: checkins[indexPath.row])
       
     default:
       
@@ -625,8 +675,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     for (index:Int, basketItemTest:BasketItem) in enumerate(basket) {
       if (basketItem == basketItemTest) {
         basket.removeAtIndex(index)
-        basketCollection.reloadData()
-        calcPrice()
         return
       }
     }
@@ -648,52 +696,133 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func didTapSecucardButton() {
     
     if let usedCustomer = customerUsed {
-      
-      // user did select checked in customer
-      
+      // user did customer already
+      startTransaction()
     } else {
-      
       // user did not select any customer -> scan card
       showScanCardView()
-      
     }
     
   }
   
   func didTapECButton() {
+
+    if let usedCustomer = customerUsed {
+      // user did customer already
+      startTransaction()
+    } else {
+      // user did not select any customer -> scan card
+      showScanCardView()
+    }
     
   }
   
   func didTapCashButton() {
     
+    if let usedCustomer = customerUsed {
+      // user did customer already
+      startTransaction()
+    } else {
+      // user did not select any customer -> scan card
+      showScanCardView()
+    }
+    
   }
   
   func showScanCardView() {
-    
-    let view = ScanCardView()
-    view.delegate = self
-    
-    if let window = UIApplication.sharedApplication().keyWindow {
-      window.addSubview(view)
-      view.snp_makeConstraints { (make) -> Void in
-        make.edges.equalTo(window)
-      }
-    }
+
+    var view: ScanViewController = ScanViewController()
+    view.delegate = self;
+    self.presentViewController(view, animated: true, completion: nil)
     
   }
   
   func startTransaction() {
     
-    // create a smart basket
-    
-    let basket = SCSmartBasket()
-    
-    
     let transaction = SCSmartTransaction()
     
     // create the ident
+    let ident = SCSmartIdent()
     
+    if let type = customerUsed?.type {
+      
+      switch type {
+        
+      case CustomerType.CheckinCustomer:
+        ident.type = "checkin"
+        ident.value = customerUsed?.checkin?.id
+        break;
+      case CustomerType.CardCustomer:
+        ident.type = "card"
+        ident.value = "\(customerUsed?.cardNumber)"
+        break;
+      }
+      
+    }
     
+    transaction.idents = [ident]
+    
+    // create a basket
+    
+    let basket = SCSmartBasket()
+    
+    var productList = [AnyObject]()
+    for basketItem:BasketItem in self.basket {
+      if let productData = basketItem.product.data {
+        //productList.append(productData.dictionaryObject!)
+        //productList.append(productData.stringValue)
+      }
+    }
+    
+    basket.products = productList
+    
+    transaction.basket = basket
+    
+    // create a basket info
+    
+    let basketInfo = SCSmartBasketInfo()
+    basketInfo.sum = Int(sum*100)
+    basketInfo.currency = "EUR"
+    transaction.basketInfo = basketInfo
+    
+    // add additional info
+    
+    transaction.merchantRef = Constants.merchantRef
+    transaction.transactionRef = "\(Constants.merchantRef)_\(NSDate().timeIntervalSince1970)"
+    
+    logView.addToLog("CREATING TRANSACTION");
+    
+    SCSmartTransactionService.sharedService().createTransaction(transaction, completionHandler: { (savedTransaction: SCSmartTransaction!, error: NSError!) -> Void in
+      
+      if let error = error {
+        self.logView.addToLog("ERROR: \(error.localizedDescription)");
+        
+        ErrorManager.handleError(error)
+        
+      } else {
+        self.logView.addToLog("SUCCESS");
+      }
+      
+      if let transactionToStart = savedTransaction {
+        
+        self.logView.addToLog("SENDING TRANSACTION");
+        
+        SCSmartTransactionService.sharedService().startTransaction(transactionToStart.id, type: "auto", completionHandler: { (transaction: SCSmartTransaction!, error: NSError!) -> Void in
+          
+          if let error = error {
+            self.logView.addToLog("ERROR: \(error.localizedDescription)");
+            
+            ErrorManager.handleError(error)
+            
+          } else {
+            self.logView.addToLog("SUCCESS");
+          }
+          
+        })
+        
+      }
+      
+    })
     
   }
   
@@ -713,11 +842,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func didTapScanCard() {
-    
-    var view: ScanViewController = ScanViewController()
-    view.delegate = self;
-    self.presentViewController(view, animated: true, completion: nil)
-    
+    showScanCardView()
+  }
+  
+  func didTapShowLog() {
+    logView.hidden = false
   }
   
   func didTapConnect() {
@@ -737,35 +866,95 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func clientDidDisconnect(notification : NSNotification) {
-    connectButton.enabled = true
-    connectButton.alpha = 1
-    disconnectButton.enabled = false
-    disconnectButton.alpha = 0.5
-  }
-  
-  func clientDidConnect(notification : NSNotification) {
-    disconnectButton.enabled = true
-    disconnectButton.alpha = 1
-    connectButton.enabled = false
-    connectButton.alpha = 0.5
-  }
-  
-  
-  // MARK: - ScanCardViewDelegate
-  
-  func scanCardFinished(code: String) {
+    
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+      
+      self.connectButton.enabled = true
+      self.connectButton.alpha = 1
+      self.disconnectButton.enabled = false
+      self.disconnectButton.alpha = 0.5
+      
+    })
     
   }
   
-  // MARL: - CheckinCellDelegate
+  func clientDidConnect(notification : NSNotification) {
+    
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+    
+      self.disconnectButton.enabled = true
+      self.disconnectButton.alpha = 1
+      self.connectButton.enabled = false
+      self.connectButton.alpha = 0.5
+      
+    })
+    
+  }
+  
+  // MARK: - CheckinCellDelegate
   func checkinCellRemoveTapped(cell: CheckinCell, data: SCSmartCheckin) {
-    if (customerUsed == data) {
+    if (customerUsed?.checkin == data) {
       customerUsed = nil
     }
   }
   
-  func scanViewFoundCode(barcodes: Set<NSObject>!) {
+  // MARK: - BasketUserCellDelegate
+  func basketUserCellRemoveTapped(cell: BasketUserCell, data: String) {
+    if (customerUsed?.cardNumber == data) {
+      customerUsed = nil
+    }
+  }
+  
+  
+  func scanViewReturnCode(code: String) {
+    
     self.dismissViewControllerAnimated(true, completion: nil)
+    
+    // get user from card
+    let query = SCQueryParams()
+    query.query = code
+    SCCardsService.sharedService().getCards(query, completionHandler: { (list: SCObjectList?, error: NSError!) -> Void in
+      
+      if let objectList: SCObjectList = list {
+        
+        if let account = (objectList.data[0] as? SCLoyaltyCard)?.account {
+          
+          SCAccountService.sharedService().getAccount(account.id, completionHandler: { (theAccount: SCGeneralAccount!, error: NSError!) -> Void in
+            
+            if let theAccount = theAccount {
+              
+              self.customerUsed = CustomerItem(account: theAccount)
+              
+            } else {
+              self.customerUsed = CustomerItem(number: code)
+            }
+            
+          })
+          
+        } else {
+          self.customerUsed = CustomerItem(number: code)
+        }
+        
+      } else {
+        self.customerUsed = CustomerItem(number: code)
+      }
+      
+    })
+    
+  }
+  
+  // MARK: - Notification handlers
+  
+  func didReceiveStompResult(notification: NSNotification) {
+    if let message = notification.userInfo?["message"] as? String {
+      logView.addToLog(message)
+    }
+  }
+  
+  func didReceiveStompError(notification: NSNotification) {
+    if let message = notification.userInfo?["message"] as? String {
+      logView.addToLog(message)
+    }
   }
   
 }

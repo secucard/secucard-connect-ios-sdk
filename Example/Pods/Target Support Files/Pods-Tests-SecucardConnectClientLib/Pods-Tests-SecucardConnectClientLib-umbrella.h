@@ -1,6 +1,8 @@
 #import <UIKit/UIKit.h>
 
 #import "MTLModel+Secucard.h"
+#import "NSArray+NullStripper.h"
+#import "NSDictionary+NullStripper.h"
 #import "SCGlobals.h"
 #import "SCAccountManager.h"
 #import "SCErrorManager.h"

@@ -14,8 +14,10 @@ class ErrorManager: SCErrorManager {
     
     super.handleError(error)
     
-    let alert:UIAlertView = UIAlertView(title: "Fehler", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-    alert.show()
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+      let alert:UIAlertView = UIAlertView(title: "Fehler", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+      alert.show()
+    })
     
   }
   

@@ -8,30 +8,22 @@
 
 import UIKit
 import SwiftyJSON
+import Mantle
 
 enum BasketItemType {
   case Product
   case Checkin
 }
 
-class BasketItem: NSObject {
+class BasketItem: MTLModel, MTLJSONSerializing {
 
   var type: BasketItemType!
-  var checkin: Checkin!
-  var product: Product!
+  dynamic var product: Product!
   
   var amount: Int = 1
   var discount: Float = 1.0
   var price: Float = 0.0
   var expanded: Bool = false
-  
-  convenience init(checkin : Checkin) {
-    
-    self.init()
-    self.type = BasketItemType.Checkin
-    self.checkin = checkin
-    
-  }
   
   convenience init(product : Product) {
     
@@ -41,5 +33,14 @@ class BasketItem: NSObject {
     self.price = product.price
     
   }
+  
+  static func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+    return NSDictionary.mtl_identityPropertyMapWithModel(self)
+  }
+  
+  class func productJSONTransformer() -> NSValueTransformer {
+    return MTLJSONAdapter.dictionaryTransformerWithModelClass(Product.self);
+  }
+
   
 }

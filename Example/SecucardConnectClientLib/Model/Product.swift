@@ -8,8 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import Mantle
 
-class Product: NSObject {
+class Product: MTLModel, MTLJSONSerializing {
 
   var data: JSON?
   
@@ -60,6 +61,10 @@ class Product: NSObject {
     self.init()
     data = product
     
+  }
+  
+  static func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+    return NSDictionary.mtl_identityPropertyMapWithModel(self)
   }
   
 }
