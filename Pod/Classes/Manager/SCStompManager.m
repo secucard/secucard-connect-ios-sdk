@@ -11,6 +11,9 @@
 #import "SCServiceEventObject.h"
 #import "SCTransportMessage.h"
 
+#define kNotificationStompError          @"notificationStompError"
+#define kNotificationStompResult         @"notificationStompResult"
+
 @implementation SCStompDestination
 
 - (NSString *)destination {
@@ -18,7 +21,6 @@
   NSString *dest = [NSString stringWithFormat:@"%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix];
   
   dest = [dest stringByAppendingString:self.command];
-  
   
   if (self.type) {
     dest = [dest stringByAppendingString:[[self.type object] lowercaseString]];                 // -> general.publicmerchants
@@ -412,9 +414,14 @@
                                    // check if error from server
                                    if ([[body objectForKey:@"status"] isEqualToString:@"error"])
                                    {
-                                     [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:@"error in stomp response" andDomain:kErrorDomainSCStompService]];
+                                     
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompError object:nil userInfo:@{@"message": message.body}];
+                                     
+                                     [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:[body objectForKey:@"error_user"] andDomain:kErrorDomainSCStompService]];
                                      return;
                                    }
+                                   
+                                   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompResult object:nil userInfo:@{@"message": message.body}];
                                    
                                    id resultObject;
                                    
