@@ -11,7 +11,7 @@
 @implementation SCGeneralNews
 
 + (NSString *)object {
-  return @"general.news";
+  return @"General.News";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

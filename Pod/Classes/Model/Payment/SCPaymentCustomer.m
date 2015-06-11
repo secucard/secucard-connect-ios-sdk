@@ -11,7 +11,7 @@
 @implementation SCPaymentCustomer
 
 + (NSString *)object {
-  return @"payment.customers";
+  return @"Payment.Customers";
 }
 
 @end

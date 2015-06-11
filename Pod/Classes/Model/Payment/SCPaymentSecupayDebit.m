@@ -11,7 +11,7 @@
 @implementation SCPaymentSecupayDebit
 
 + (NSString *)object {
-  return @"payment.secupaydebits";
+  return @"Payment.Secupaydebits";
 }
 
 @end

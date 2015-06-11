@@ -12,6 +12,9 @@
 #import "SCGeneralComponentsGeometry.h"
 #import "SCLoyaltyProgram.h"
 #import "SCMediaResource.h"
+#import "SCGeneralNews.h"
+#import "SCGeneralComponentsOpenHours.h"
+#import "SCGeneralComponentsAddressComponent.h"
 
 #define kCheckinStatusDeclinedDistance @"declined_distance"
 #define kCheckinStatusDeclinedNotavail @"declined_notavail"
@@ -29,8 +32,8 @@
 @property (nonatomic, copy) NSString *nameRaw;
 @property (nonatomic, copy) SCGeneralMerchant *merchant;
 @property (nonatomic, copy) NSString *newsStatus;
-@property (nonatomic, copy) NSArray *news;
-@property (nonatomic, assign) BOOL openNow;
+@property (nonatomic, copy) NSArray* news;
+@property (nonatomic, assign) bool openNow;
 @property (nonatomic, copy) NSNumber *openTime;
 @property (nonatomic, copy) NSArray *openHours;
 @property (nonatomic, copy) SCGeneralComponentsGeometry *geometry;
@@ -43,13 +46,13 @@
 @property (nonatomic, copy) NSString *phoneNumberFormatted;
 @property (nonatomic, copy) NSString *urlWebsite;
 @property (nonatomic, copy) NSNumber *balance;
-@property (nonatomic, copy) NSNumber *poNSNumber;
+@property (nonatomic, copy) NSNumber *points;
 @property (nonatomic, copy) SCLoyaltyProgram *program;
-@property (nonatomic, assign) BOOL isDefault;
+@property (nonatomic, assign) bool isDefault;
 @property (nonatomic, copy) NSString *facebookId;
 @property (nonatomic, copy) NSArray *pictureUrls;
 @property (nonatomic, copy) NSString *logoUrl;
 @property (nonatomic, copy) SCMediaResource *logo;
-@property (nonatomic, assign) BOOL hasBeacon;
+@property (nonatomic, assign) bool hasBeacon;
 
 @end

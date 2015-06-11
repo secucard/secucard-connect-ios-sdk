@@ -11,7 +11,7 @@
 @implementation SCGeneralTransaction
 
 + (NSString *)object {
-  return @"general.transactions";
+  return @"General.Transactions";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

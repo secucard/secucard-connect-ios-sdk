@@ -11,7 +11,7 @@
 @implementation SCServicesContract
 
 + (NSString *)object {
-  return @"services.contracts";
+  return @"Services.Contracts";
 }
 
 @end

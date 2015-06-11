@@ -11,7 +11,7 @@
 @implementation SCSmartIdent
 
 + (NSString *)object {
-  return @"smart.idents";
+  return @"Smart.Idents";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -22,5 +22,14 @@
                                                                   @"merchantCard":@"merchantcard"
                                                                   }];
 }
+
++ (NSValueTransformer *)customerJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCustomer class]];
+}
+
++ (NSValueTransformer *)merchantCardJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyMerchantCard class]];
+}
+
 
 @end

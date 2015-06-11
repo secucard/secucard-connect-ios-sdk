@@ -11,7 +11,7 @@
 @implementation SCLoyaltyCard
 
 + (NSString *)object {
-  return @"loyalty.cards";
+  return @"Loyalty.Cards";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -22,5 +22,10 @@
            @"cardNumber":@"cardnumber"
            }];
 }
+
++ (NSValueTransformer *)accountJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralAccount class]];
+}
+
 
 @end

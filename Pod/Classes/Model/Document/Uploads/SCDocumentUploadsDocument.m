@@ -11,7 +11,7 @@
 @implementation SCDocumentUploadsDocument
 
 + (NSString *)object {
-  return @"document.uploads";
+  return @"Document.Uploads";
 }
 
 @end

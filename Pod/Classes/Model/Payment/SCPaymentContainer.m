@@ -11,7 +11,7 @@
 @implementation SCPaymentContainer
 
 + (NSString *)object {
-  return @"payment.containers";
+  return @"Payment.Containers";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

@@ -1,4 +1,4 @@
-//
+  //
 //  SCLoyaltyMerchantCard.m
 //  Pods
 //
@@ -11,7 +11,7 @@
 @implementation SCLoyaltyMerchantCard
 
 + (NSString *)object {
-  return @"loyalty.merchantcards";
+  return @"Loyalty.Merchantcards";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -27,6 +27,30 @@
                                                                   @"stockStatus":@"stock_status",
                                                                   @"lockStatus":@"lock_status"
                                                                   }];
+}
+
++ (NSValueTransformer *)merchantJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
++ (NSValueTransformer *)createdForMerchantJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
++ (NSValueTransformer *)cardJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCard class]];
+}
+
++ (NSValueTransformer *)createdForStoreJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralStore class]];
+}
+
++ (NSValueTransformer *)cardgroupJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCardGroup class]];
+}
+
++ (NSValueTransformer *)customerJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCustomer class]];
 }
 
 @end

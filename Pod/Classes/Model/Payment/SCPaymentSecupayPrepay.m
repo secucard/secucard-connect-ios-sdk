@@ -11,7 +11,7 @@
 @implementation SCPaymentSecupayPrepay
 
 + (NSString *)object {
-  return @"payment.secupayprepays";
+  return @"Payment.Secupayprepays";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

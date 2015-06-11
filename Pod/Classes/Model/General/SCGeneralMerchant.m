@@ -11,7 +11,7 @@
 @implementation SCGeneralMerchant
 
 + (NSString *)object {
-  return @"general.merchants";
+  return @"General.Merchants";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

@@ -18,7 +18,7 @@
 }
 
 + (NSString *)object {
-  return @"loyalty.customers";
+  return @"Loyalty.Customers";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

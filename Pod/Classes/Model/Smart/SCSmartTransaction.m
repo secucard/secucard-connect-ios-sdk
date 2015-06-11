@@ -11,7 +11,7 @@
 @implementation SCSmartTransaction
 
 + (NSString *)object {
-  return @"smart.transactions";
+  return @"Smart.Transactions";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -45,5 +45,8 @@
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCSmartDevice class]];
 }
 
++ (NSValueTransformer *)identsJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartIdent class]];
+}
 
 @end

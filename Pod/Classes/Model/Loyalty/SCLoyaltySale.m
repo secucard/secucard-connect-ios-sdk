@@ -11,7 +11,7 @@
 @implementation SCLoyaltySale
 
 + (NSString *)object {
-  return @"loyalty.sales";
+  return @"Loyalty.Sales";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

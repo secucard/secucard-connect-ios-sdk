@@ -11,7 +11,7 @@
 @implementation SCLoyaltyCardGroup
 
 + (NSString *)object {
-  return @"loyalty.cardgroups";
+  return @"Loyalty.Cardgroups";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

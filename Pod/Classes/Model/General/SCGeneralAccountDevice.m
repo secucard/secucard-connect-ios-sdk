@@ -11,7 +11,7 @@
 @implementation SCGeneralAccountDevice
 
 + (NSString *)object {
-  return @"general.accountdevices";
+  return @"General.Accountdevices";
 }
 
 @end

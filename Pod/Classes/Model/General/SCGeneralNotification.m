@@ -11,7 +11,7 @@
 @implementation SCGeneralNotification
 
 + (NSString *)object {
-  return @"general.notifications";
+  return @"General.Notifications";
 }
 
 @end

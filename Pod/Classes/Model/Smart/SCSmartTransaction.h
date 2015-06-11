@@ -11,6 +11,7 @@
 #import "SCSmartBasket.h"
 #import "SCSmartBasketInfo.h"
 #import "SCSmartDevice.h"
+#import "SCSmartIdent.h"
 
 @interface SCSmartTransaction : SCSecuObject
 

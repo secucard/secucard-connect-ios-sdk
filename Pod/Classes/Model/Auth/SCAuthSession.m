@@ -11,7 +11,7 @@
 @implementation SCAuthSession
 
 + (NSString *)object {
-  return @"auth.sessions";
+  return @"Auth.Sessions";
 }
 
 @end

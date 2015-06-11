@@ -11,7 +11,7 @@
 @implementation SCSmartDevice
 
 + (NSString *)object {
-  return @"smart.devices";
+  return @"Smart.Devices";
 }
 
 - (instancetype)initWithId:(NSString*)identifier andType:(NSString*)type
@@ -24,7 +24,7 @@
   return self;
 }
 
-+ (NSValueTransformer *)merchantInfoJSONTransformer {
++ (NSValueTransformer *)merchantJSONTransformer {
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
 }
 

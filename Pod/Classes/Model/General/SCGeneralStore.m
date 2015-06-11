@@ -8,10 +8,11 @@
 
 #import "SCGeneralStore.h"
 
+
 @implementation SCGeneralStore
 
 + (NSString *)object {
-  return @"general.stores";
+  return @"General.Stores";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -44,5 +45,32 @@
                                                                   }];
 }
 
++ (NSValueTransformer *)merchantJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
++ (NSValueTransformer *)geometryJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralComponentsGeometry class]];
+}
+
++ (NSValueTransformer *)programJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyProgram class]];
+}
+
++ (NSValueTransformer *)logoJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCMediaResource class]];
+}
+
++ (NSValueTransformer *)newsJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCGeneralNews class]];
+}
+
++ (NSValueTransformer *)openHoursJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCGeneralComponentsOpenHours class]];
+}
+
++ (NSValueTransformer *)addressComponentsJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCGeneralComponentsAddressComponent class]];
+}
 
 @end

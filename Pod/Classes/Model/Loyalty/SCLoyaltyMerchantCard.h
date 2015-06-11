@@ -11,6 +11,7 @@
 #import "SCGeneralStore.h"
 #import "SCLoyaltyCustomer.h"
 #import "SCLoyaltyCard.h"
+#import "SCLoyaltyCardGroup.h"
 
 @interface SCLoyaltyMerchantCard : SCSecuObject
 

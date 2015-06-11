@@ -11,7 +11,7 @@
 @implementation SCServicesIdentRequest
 
 + (NSString *)object {
-  return @"services.identrequests";
+  return @"Services.Identrequests";
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
