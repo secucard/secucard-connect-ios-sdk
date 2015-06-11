@@ -9,6 +9,9 @@
 #import <Mantle/Mantle.h>
 #import "SCSecuObject.h"
 
+#import "NSDictionary+NullStripper.h"
+#import "NSArray+NullStripper.h"
+
 @interface SCRestConfiguration()
 
 @property (nonatomic, retain) NSString *baseUrl;
@@ -76,7 +79,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   [requestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
   
   if ([SCAccountManager sharedManager].accessToken) {
-      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", [SCAccountManager sharedManager].accessToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", [SCAccountManager sharedManager].accessToken] forHTTPHeaderField:@"Authorization"];
   }
   
   
@@ -434,6 +437,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
     NSError *parsingError = nil;
     SCObjectList *objectList = [MTLJSONAdapter modelOfClass:[SCObjectList class] fromJSONDictionary:responseObject error:&parsingError];
     
+    //parse Objects in list
+    if (!parsingError) {
+      objectList.data = [MTLJSONAdapter modelsOfClass:type fromJSONArray:objectList.data error:&parsingError];
+    }
+    
     handler(objectList, parsingError);
     
   }];
@@ -577,9 +585,18 @@ AFHTTPRequestSerializer *authRequestSerializer;
   if (object) {
     NSError *paramParsingError = nil;
     params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&paramParsingError];
-    if (paramParsingError) { handler(nil, paramParsingError); }
+    
+    if (paramParsingError) {
+      handler(nil, paramParsingError);
+      return nil;
+    }
+    
+    params = [params copy];
+    params = [params dictionaryByReplacingNullsWithBlanks];
+    
   }
   return params;
 }
+
 
 @end
