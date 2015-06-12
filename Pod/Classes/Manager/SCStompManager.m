@@ -463,11 +463,9 @@
     
     NSString *correlationId = [NSString stringWithFormat:@"%d", [self getNextCorrelationID]];
     
-    NSError *transformationError = nil;
-    NSDictionary *messageDict = [MTLJSONAdapter JSONDictionaryFromModel:message error:&transformationError];
-    
-    if (transformationError) {
-      [SCErrorManager handleError:[SCErrorManager errorWithDescription:transformationError.localizedDescription andDomain:kErrorDomainSCStompService]];
+    NSDictionary *messageDict = [self createDic:message];
+    if (messageDict == nil) {
+      handler(nil, [SCErrorManager errorWithDescription:@"could not strip null values from dictionary"]);
       return;
     }
     
@@ -538,6 +536,7 @@
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.query = queryParams;
+
   
   // TODO: Callback if false?
   
@@ -560,8 +559,14 @@
 - (void) createObject:(SCSecuObject*)object completionHandler:(void (^)(id, NSError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
-  message.data = object;
   
+  NSError *parsingParams = nil;
+  message.data = [MTLJSONAdapter JSONDictionaryFromModel:object error:&parsingParams];;
+  
+  if (parsingParams != nil) {
+    handler(nil, parsingParams);
+  }
+
   [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]completionHandler:handler];
   
 }
@@ -570,9 +575,28 @@
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = object.id;
-  message.data = object;
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]] completionHandler:handler];
+  NSError *parsingParams = nil;
+  message.data = [MTLJSONAdapter JSONDictionaryFromModel:object error:&parsingParams];;
+  
+  if (parsingParams != nil) {
+    handler(nil, parsingParams);
+  }
+  
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]] completionHandler:^(id responseObject, NSError *error) {
+    
+    if (error != nil) {
+      handler(nil, error);
+      return;
+    }
+    
+    NSError *parsingError = nil;
+    responseObject = [MTLJSONAdapter modelOfClass:[object class] fromJSONDictionary:responseObject error:&parsingError];
+    
+    handler(responseObject, parsingError);
+
+    
+  }];
   
 }
 
@@ -581,9 +605,28 @@
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
-  message.data = arg;
+
+  NSError *parsingParams = nil;
+  message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action] completionHandler:handler];
+  if (parsingParams != nil) {
+    handler(nil, parsingParams);
+  }
+  
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action] completionHandler:^(id responseObject, NSError *error) {
+    
+    if (error != nil) {
+      handler(nil, error);
+      return;
+    }
+    
+    NSError *parsingError = nil;
+    responseObject = [MTLJSONAdapter modelOfClass:type fromJSONDictionary:responseObject error:&parsingError];
+    
+    handler(responseObject, parsingError);
+
+    
+  }];
   
 }
 
@@ -615,9 +658,27 @@
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
-  message.data = arg;
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:handler];
+  NSError *parsingParams = nil;
+  message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+  
+  if (parsingParams != nil) {
+    handler(nil, parsingParams);
+  }
+  
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:^(id responseObject, NSError *error) {
+    
+    if (error != nil) {
+      handler(nil, error);
+      return;
+    }
+    
+    NSError *parsingError = nil;
+    responseObject = [MTLJSONAdapter modelOfClass:type fromJSONDictionary:responseObject error:&parsingError];
+    
+    handler(responseObject, parsingError);
+    
+  }];
   
 }
 

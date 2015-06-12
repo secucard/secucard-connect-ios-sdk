@@ -49,4 +49,8 @@
   return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartIdent class]];
 }
 
++ (NSValueTransformer *)receiptLinesJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartReceiptLine class]];
+}
+
 @end

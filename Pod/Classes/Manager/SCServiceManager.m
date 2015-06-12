@@ -10,6 +10,9 @@
 #import "SCErrorManager.h"
 #import "SCSecuObject.h"
 
+#import "NSDictionary+NullStripper.h"
+#import "NSArray+NullStripper.h"
+
 #define kSecureStandard TRUE
 
 @implementation SCServiceManager
@@ -93,5 +96,28 @@
 - (void) execute:(NSString*)appId action:(NSString*)action actionArg:(id)actionArg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
   handler(nil, [SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]);
 }
+
+
+#pragma mark - helper methods
+
+- (NSDictionary*) createDic:(id)object {
+  
+  NSDictionary *params;
+  if (object) {
+    NSError *paramParsingError = nil;
+    params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&paramParsingError];
+    
+    if (paramParsingError) {
+      [SCErrorManager handleError:paramParsingError];
+      return nil;
+    }
+    
+    params = [params copy];
+    params = [params dictionaryByReplacingNullsWithBlanks];
+    
+  }
+  return params;
+}
+
 
 @end

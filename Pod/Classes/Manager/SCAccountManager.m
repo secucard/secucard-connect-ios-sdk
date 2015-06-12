@@ -41,6 +41,10 @@
 - (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials
 {
   _clientCredentials = clientCredentials;
+  
+  if (self.refreshToken) {
+    NSLog(@"REFRESHTOKEN: %@", [SCPersistenceManager itemForKey:@"refreshToken"]);
+  }
 }
 
 - (void) destroy {

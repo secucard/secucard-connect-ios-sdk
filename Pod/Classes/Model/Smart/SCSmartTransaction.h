@@ -12,6 +12,7 @@
 #import "SCSmartBasketInfo.h"
 #import "SCSmartDevice.h"
 #import "SCSmartIdent.h"
+#import "SCSmartReceiptLine.h"
 
 @interface SCSmartTransaction : SCSecuObject
 

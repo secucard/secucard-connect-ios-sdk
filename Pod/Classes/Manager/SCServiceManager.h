@@ -48,4 +48,6 @@
 
 @interface SCServiceManager : NSObject <SCServiceManagerProtocol>
 
+- (NSDictionary*) createDic:(id)object;
+
 @end

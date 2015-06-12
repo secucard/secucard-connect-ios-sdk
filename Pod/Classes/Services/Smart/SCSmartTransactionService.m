@@ -27,8 +27,8 @@
 }
 
 - (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
-  [self update:transaction onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
-    handler((SCSmartTransaction*)transaction, error);
+  [self update:transaction onChannel:PersistentChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+    handler((SCSmartTransaction*)responseObject, error);
   }];
 }
 

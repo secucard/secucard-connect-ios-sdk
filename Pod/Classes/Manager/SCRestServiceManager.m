@@ -9,8 +9,7 @@
 #import <Mantle/Mantle.h>
 #import "SCSecuObject.h"
 
-#import "NSDictionary+NullStripper.h"
-#import "NSArray+NullStripper.h"
+
 
 @interface SCRestConfiguration()
 
@@ -425,7 +424,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
-  NSDictionary *params = [self createDic:queryParams exceptionHandler:handler];
+  NSDictionary *params = [self createDic:queryParams];
+  
+  if (!params) {
+    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    return;
+  }
   
   [self getRequestToEndpoint:[self resolveEndpoint:type] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -450,7 +454,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) createObject:(SCSecuObject *)object secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
   
-  NSDictionary *params = [self createDic:object exceptionHandler:handler];
+  NSDictionary *params = [self createDic:object];
+  
+  if (!params) {
+    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    return;
+  }
   
   [self postRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -470,7 +479,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) updateObject:(SCSecuObject *)object secure:(BOOL)secure completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
   
-  NSDictionary *params = [self createDic:object exceptionHandler:handler];
+  NSDictionary *params = [self createDic:object];
+  
+  if (!params) {
+    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    return;
+  }
   
   [self putRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -490,7 +504,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
-  NSDictionary *params = [self createDic:arg exceptionHandler:handler];
+  NSDictionary *params = [self createDic:arg];
+  if (!params) {
+    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    return;
+  }
   
   [self putRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -538,7 +556,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
-  NSDictionary *params = [self createDic:arg exceptionHandler:handler];
+  NSDictionary *params = [self createDic:arg];
+  if (!params) {
+    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    return;
+  }
+  
   [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:handler];
   
 }
@@ -575,27 +598,6 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) close {
   
-}
-
-#pragma mark - helper methods
-
-- (NSDictionary*) createDic:(id)object exceptionHandler:(void(^)(id responseObject, NSError *error))handler {
-  
-  NSDictionary *params;
-  if (object) {
-    NSError *paramParsingError = nil;
-    params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&paramParsingError];
-    
-    if (paramParsingError) {
-      handler(nil, paramParsingError);
-      return nil;
-    }
-    
-    params = [params copy];
-    params = [params dictionaryByReplacingNullsWithBlanks];
-    
-  }
-  return params;
 }
 
 

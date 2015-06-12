@@ -17,4 +17,8 @@
   
 }
 
++ (NSValueTransformer *)queryJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCQueryParams class]];
+}
+
 @end
