@@ -324,7 +324,10 @@
                               if (error) {
                                 
                                 // revoke token if connection error
-                                [weakself.client hardDisconnect];
+                                [weakself.client disconnect:^(NSError *error) {
+                                  NSLog(@"really disconnected");
+                                }];
+                                
                                 handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                                 
                               } else {
@@ -353,7 +356,11 @@
                       if (error) {
                         
                         // revoke token if connection error
-                        [weakself.client hardDisconnect];
+                        // revoke token if connection error
+                        [weakself.client disconnect:^(NSError *error) {
+                          NSLog(@"really disconnected");
+                        }];
+                        
                         handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                         
                       } else {

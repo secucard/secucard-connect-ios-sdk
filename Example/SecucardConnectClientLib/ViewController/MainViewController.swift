@@ -761,7 +761,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     basketInfo.currency = "EUR"
     currentTransaction.basketInfo = basketInfo
     
-    saveTransaction({ (success, error) -> Void in})
+    saveTransaction({ (success, error) -> Void in
+      if let error = error {
+        ErrorManager.handleError(error)
+      }
+    })
     
   }
   
@@ -771,9 +775,25 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     if let ident = customerUsed {
       currentTransaction.idents = [ident]
       saveTransaction({ (success, error) -> Void in
-        if let resolvedIdent = self.currentTransaction.idents[0] as? SCSmartIdent {
-          self.customerUsed = resolvedIdent
+        
+        if let error = error {
+          ErrorManager.handleError(error)
         }
+        
+        if let resolvedIdent = self.currentTransaction.idents[0] as? SCSmartIdent {
+          
+          dispatch_async(dispatch_get_main_queue(), { () -> Void in
+
+            if !resolvedIdent.valid {
+              ErrorManager.handleError(ErrorManager.errorWithDescription("Identifizierung fehlgeschlagen"))
+              self.customerUsed = nil
+            } else {
+              self.customerUsed = resolvedIdent
+            }
+          
+          })
+        }
+        
       })
     }
     

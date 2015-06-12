@@ -486,7 +486,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
     return;
   }
   
-  [self putRequestToEndpoint:[self resolveEndpoint:[object class]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
+  [self putRequestToEndpoint:[self resolveEndpoint:[object class] args:@[object.id]] WithParams:params secure:secure completionHandler:^(id responseObject, NSError *error) {
     
     if (error) {
       handler(nil, error);

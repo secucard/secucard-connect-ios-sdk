@@ -9,6 +9,7 @@
 #import "SCSecuObject.h"
 
 #import "SCGeneralMerchant.h"
+#import "SCGeneralContact.h"
 #import "SCMediaResource.h"
 
 @interface SCLoyaltyCustomer : SCSecuObject
@@ -35,5 +36,6 @@
 @property (nonatomic, copy) NSDate *dateOfBirth;
 @property (nonatomic, copy) NSString *picture;
 @property (nonatomic, copy) SCMediaResource *pictureObject;
+@property (nonatomic, copy) SCGeneralContact *contact;
 
 @end

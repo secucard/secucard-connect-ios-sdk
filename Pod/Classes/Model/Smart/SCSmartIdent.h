@@ -19,6 +19,6 @@
 @property (nonatomic, copy) NSString *value;
 @property (nonatomic, copy) SCLoyaltyCustomer *customer;
 @property (nonatomic, copy) SCLoyaltyMerchantCard *merchantCard;
-@property (nonatomic, assign) BOOL valid;
+@property (nonatomic, assign) bool valid;
 
 @end

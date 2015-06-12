@@ -7,6 +7,7 @@
 //
 
 #import "SCLoyaltyMerchantCard.h"
+#import "SCGlobals.h"
 
 @implementation SCLoyaltyMerchantCard
 
@@ -51,6 +52,22 @@
 
 + (NSValueTransformer *)customerJSONTransformer {
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCustomer class]];
+}
+
++ (NSValueTransformer *)lastUsageJSONTransformer {
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [SCGlobals.dateFormatter dateFromString:value];
+  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [SCGlobals.dateFormatter stringFromDate:value];
+  }];
+}
+
++ (NSValueTransformer *)lastChargeJSONTransformer {
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [SCGlobals.dateFormatter dateFromString:value];
+  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [SCGlobals.dateFormatter stringFromDate:value];
+  }];
 }
 
 @end

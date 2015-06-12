@@ -56,6 +56,7 @@ typedef enum {
 
 @interface SCGlobals : NSObject
 
++ (NSDateFormatter *)dateFormatter;
 + (NSError*) createErrorWithDescription:(NSString*)description;
 
 @end

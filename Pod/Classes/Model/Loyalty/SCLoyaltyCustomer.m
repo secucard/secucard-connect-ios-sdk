@@ -7,15 +7,9 @@
 //
 
 #import "SCLoyaltyCustomer.h"
+#import "SCGlobals.h"
 
 @implementation SCLoyaltyCustomer
-
-+ (NSDateFormatter *)dateFormatter {
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-  dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
-  return dateFormatter;
-}
 
 + (NSString *)object {
   return @"Loyalty.Customers";
@@ -44,11 +38,15 @@
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCMediaResource class]];
 }
 
++ (NSValueTransformer *)contactJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralContact class]];
+}
+
 + (NSValueTransformer *)dateOfBirthJSONTransformer {
   return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
-    return [self.dateFormatter dateFromString:value];
+    return [SCGlobals.dateFormatter dateFromString:value];
   } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
-    return [self.dateFormatter stringFromDate:value];
+    return [SCGlobals.dateFormatter stringFromDate:value];
   }];
 }
 
