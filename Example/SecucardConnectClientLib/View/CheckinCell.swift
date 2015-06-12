@@ -9,14 +9,8 @@
 import UIKit
 import SecucardConnectClientLib
 
-protocol CheckinCellDelegate {
-  func checkinCellRemoveTapped(cell: CheckinCell, data: SCSmartCheckin)
-}
-
 class CheckinCell: UICollectionViewCell {
 
-  var delegate: CheckinCellDelegate?
-  
   var data:SCSmartCheckin? {
     
     didSet {
@@ -97,16 +91,9 @@ class CheckinCell: UICollectionViewCell {
       fatalError("init(coder:) has not been implemented")
   }
   
-  func didTapRemove() {
-    if let data = data {
-      delegate?.checkinCellRemoveTapped(self, data: data)
-    }
-  }
-  
   override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
     
       var newFrame: CGRect = layoutAttributes.frame
-//      newFrame.size.height = (theData.expanded) ? 130 : 70
       layoutAttributes.frame = newFrame
     
     return layoutAttributes

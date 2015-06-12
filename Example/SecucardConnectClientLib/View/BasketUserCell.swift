@@ -10,20 +10,26 @@ import UIKit
 import SecucardConnectClientLib
 
 protocol BasketUserCellDelegate {
-  func basketUserCellRemoveTapped(cell: BasketUserCell, data: String)
+  func identRemoveTapped()
 }
 
 class BasketUserCell: UICollectionViewCell {
   
   var delegate: BasketUserCellDelegate?
   
-  var data:String? {
+  var data:SCSmartIdent? {
     
     didSet {
       
       if let data = data {
         
-        label.text = data
+        if let customer = data.customer {
+          label.text = "\(data.customer.foreName) \(data.customer.surName)"
+          imageView.setImageWithURL(NSURL(string: data.customer.picture), placeholderImage: UIImage(named: "User"))
+        } else {
+          label.text = "\(data.type): \(data.value)"
+          imageView.image = UIImage(named: "User")
+        }
         
       }
       
@@ -31,6 +37,7 @@ class BasketUserCell: UICollectionViewCell {
   }
   
   var label: UILabel
+  var imageView: UIImageView
   var controls: UIView
   
   override init(frame: CGRect) {
@@ -43,13 +50,22 @@ class BasketUserCell: UICollectionViewCell {
     
     controls = UIView()
     
+    imageView = UIImageView()
+    imageView.backgroundColor = Constants.darkGreyColor
+    
     super.init(frame: frame)
     
     self.addSubview(label)
     self.addSubview(controls)
+    self.addSubview(imageView)
+    
+    imageView.snp_makeConstraints { (make) -> Void in
+      make.left.top.equalTo(self)
+      make.width.height.equalTo(self.snp_height)
+    }
     
     label.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(10)
+      make.left.equalTo(imageView.snp_right).offset(10)
       make.right.equalTo(-10)
       make.top.height.equalTo(self)
     }
@@ -62,6 +78,7 @@ class BasketUserCell: UICollectionViewCell {
     
     let removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     removeButton.backgroundColor = Constants.warningColor
+    removeButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
     removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
     controls.addSubview(removeButton)
     
@@ -77,12 +94,8 @@ class BasketUserCell: UICollectionViewCell {
       fatalError("init(coder:) has not been implemented")
   }
   
-
-  
   func didTapRemove() {
-    if let data = data {
-      delegate?.basketUserCellRemoveTapped(self, data: data)
-    }
+    delegate?.identRemoveTapped()
   }
   
   override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {

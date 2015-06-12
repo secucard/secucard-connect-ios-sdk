@@ -37,9 +37,6 @@ class ProductCategoryCell: UICollectionViewCell {
     self.addSubview(imageView)
     self.addSubview(label)
   
-    
-    self.backgroundColor = UIColor.whiteColor()
-
   }
 
   required init(coder aDecoder: NSCoder) {

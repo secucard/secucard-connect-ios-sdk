@@ -20,7 +20,17 @@ enum CollectionType {
   case Unknown
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, CheckinCellDelegate, BasketUserCellDelegate {
+enum PayMethod : String {
+  case Unset = "unset"
+  case Demo = "demo"
+  case Cash = "cash"
+  case Auto = "auto"
+  case Cashless = "cashless"
+  case Loyalty = "loyalty"
+  case Paypal = "paypal"
+}
+
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -47,10 +57,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       CheckTransactionReady()
       basketCollection.reloadData()
       calcPrice()
+      updateTransactionBasket()
     }
   }
   
-  var customerUsed: CustomerItem? {
+  var customerUsed: SCSmartIdent? {
     didSet {
       CheckTransactionReady()
       basketCollection.reloadData()
@@ -62,9 +73,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let scanCardButton: PaymentButton
   let showLogButton: PaymentButton
   
-  let payCashButton: PaymentButton
-  let payECButton: PaymentButton
-  let paySecucardButton: PaymentButton
+  let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: Selector("didTapPayButton"))
+  let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: Selector("didTapPayButton"))
+  let payPaypalButton = PaymentButton(payMethod: PayMethod.Paypal, action: Selector("didTapPayButton"))
+  let payLoyaltyButton = PaymentButton(payMethod: PayMethod.Loyalty, action: Selector("didTapPayButton"))
+  let payCashlessButton = PaymentButton(payMethod: PayMethod.Cashless, action: Selector("didTapPayButton"))
+  let payCashButton = PaymentButton(payMethod: PayMethod.Cash, action: Selector("didTapPayButton"))
+  
+  let availableButtons: [PaymentButton]
   
   let logView: LogView = LogView()
   
@@ -97,6 +113,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       }
     }
   }
+  
+  var currentTransaction: SCSmartTransaction = SCSmartTransaction()
   
   init() {
     
@@ -140,14 +158,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinsCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     
     // Payment buttons initialization
-    connectButton = PaymentButton(title: "connect", action: Selector("didTapConnect"))
-    disconnectButton = PaymentButton(title: "disconnect", action: Selector("didTapDisconnect"))
-    scanCardButton = PaymentButton(title: "scan", action: Selector("didTapScanCard"))
-    showLogButton = PaymentButton(title: "show log", action: Selector("didTapShowLog"))
+    connectButton = PaymentButton(icon: "Connect", action: Selector("didTapConnect"))
+    disconnectButton = PaymentButton(icon: "Disconnect", action: Selector("didTapDisconnect"))
+    scanCardButton = PaymentButton(icon: "ScanCard", action: Selector("didTapScanCard"))
+    showLogButton = PaymentButton(icon: "Log", action: Selector("didTapShowLog"))
     
-    paySecucardButton = PaymentButton(title: "secucard", action: Selector("didTapSecucardButton"))
-    payECButton = PaymentButton(title: "EC", action: Selector("didTapECButton"))
-    payCashButton = PaymentButton(title: "Bar", action: Selector("didTapCashButton"))
+    availableButtons = [payDemoButton, payPaypalButton, payLoyaltyButton, payCashlessButton, payAutoButton, payCashButton]
     
     // call super initialization
     super.init(nibName: nil, bundle: nil)
@@ -170,9 +186,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     self.checkinsCollection.delegate = self
     self.checkinsCollection.dataSource = self
     
-    paySecucardButton.target = self
-    payECButton.target = self
+    payAutoButton.target = self
+    payCashlessButton.target = self
     payCashButton.target = self
+    payLoyaltyButton.target = self
+    payPaypalButton.target = self
+    payDemoButton.target = self
     
     connectButton.target = self
     disconnectButton.target = self
@@ -198,7 +217,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // top bar
     let topBar:UIView = UIView()
-    topBar.backgroundColor = UIColor.darkGrayColor()
+    topBar.backgroundColor = Constants.darkGreyColor
     view.addSubview(topBar)
     
     topBar.snp_makeConstraints { (make) -> Void in
@@ -218,7 +237,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // tabs
     view.addSubview(productCategoriesCollection)
     
-    productCategoriesCollection.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.7)
+    productCategoriesCollection.backgroundColor = UIColor.darkGrayColor()
     
     productCategoriesCollection.snp_makeConstraints { (make) -> Void in
       make.top.equalTo(topBar.snp_bottom)
@@ -238,19 +257,60 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.equalTo(productCategoriesCollection)
     }
     
+    let checkinHeader = UILabel()
+    checkinHeader.text = "   Check-ins"
+    checkinHeader.textColor = Constants.textColorBright
+    checkinHeader.backgroundColor = Constants.darkGreyColor
+    
+    view.addSubview(checkinHeader)
+    
+    checkinHeader.snp_makeConstraints { (make) -> Void in
+      make.top.equalTo(topBar.snp_bottom)
+      make.left.equalTo(productCategoriesCollection.snp_right)
+      make.width.equalTo(224)
+      make.height.equalTo(50)
+    }
+    
+    view.addSubview(checkinsCollection)
+    
+    checkinsCollection.backgroundColor = UIColor.whiteColor()
+    
+    checkinsCollection.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(productsCollection.snp_right)
+      make.top.equalTo(checkinHeader.snp_bottom)
+      make.width.equalTo(224)
+      make.bottom.equalTo(bottomBar.snp_top)
+    }
+    
+    let basketHeader = UILabel()
+    basketHeader.text = "   Warenkorb"
+    basketHeader.textColor = Constants.textColorBright
+    basketHeader.backgroundColor = Constants.darkGreyColor
+    
+    view.addSubview(basketHeader)
+    
+    basketHeader.snp_makeConstraints { (make) -> Void in
+      make.top.equalTo(topBar.snp_bottom)
+      make.left.equalTo(checkinHeader.snp_right)
+      make.right.equalTo(view)
+      make.height.equalTo(50)
+    }
+
     view.addSubview(basketCollection)
     
     basketCollection.backgroundColor = UIColor.whiteColor()
     
     basketCollection.snp_makeConstraints { (make) -> Void in
-      make.top.equalTo(topBar.snp_bottom)
-      make.left.equalTo(productsCollection.snp_right)
-      make.width.equalTo(310)
-      make.bottom.equalTo(bottomBar.snp_top).offset(-100)
+      make.bottom.equalTo(bottomBar.snp_top).offset(-80)
+      make.top.equalTo(basketHeader.snp_bottom)
+      make.left.equalTo(checkinsCollection.snp_right)
+      make.right.equalTo(view)
     }
     
     // sum field
     var sumView: UIView = UIView()
+    sumView.backgroundColor = Constants.brightGreyColor
+    
     view.addSubview(sumView)
     sumView.snp_makeConstraints { (make) -> Void in
       make.left.width.equalTo(basketCollection)
@@ -268,6 +328,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.equalTo(100)
     }
     
+    emptyButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
     emptyButton.addTarget(self, action: "didTapEmptyButton", forControlEvents: UIControlEvents.TouchUpInside)
     emptyButton.backgroundColor = Constants.warningColor
     sumView.addSubview(emptyButton)
@@ -279,28 +340,16 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     var topBorder: UIView = UIView()
-    topBorder.backgroundColor = Constants.paneBorderColor
+    topBorder.backgroundColor = Constants.brightGreyColor
     sumView.addSubview(topBorder)
     topBorder.snp_makeConstraints { (make) -> Void in
       make.left.width.top.equalTo(sumView)
       make.height.equalTo(1)
     }
-    
-    view.addSubview(checkinsCollection)
-    
-    checkinsCollection.backgroundColor = UIColor.whiteColor()
-    
-    checkinsCollection.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(basketCollection.snp_right)
-      make.right.equalTo(view)
-      make.bottom.equalTo(bottomBar.snp_top)
-      make.top.equalTo(topBar.snp_bottom)
-    }
-    
     // line above bottom bar
     
     let bottomLine:UIView = UIView()
-    bottomLine.backgroundColor = UIColor.darkGrayColor()
+    bottomLine.backgroundColor = Constants.brightGreyColor
     view.addSubview(bottomLine)
     
     bottomLine.snp_makeConstraints { (make) -> Void in
@@ -312,11 +361,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // line between products and basket
     
     let vLine1:UIView = UIView()
-    vLine1.backgroundColor = UIColor.darkGrayColor()
+    vLine1.backgroundColor = Constants.brightGreyColor
     view.addSubview(vLine1)
     
     vLine1.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(basketCollection)
+      make.left.equalTo(checkinsCollection)
       make.top.equalTo(topBar.snp_bottom)
       make.bottom.equalTo(bottomBar.snp_top)
       make.width.equalTo(1)
@@ -325,11 +374,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // line between basket and checkins
     
     let vLine2:UIView = UIView()
-    vLine2.backgroundColor = UIColor.darkGrayColor()
+    vLine2.backgroundColor = Constants.brightGreyColor
     view.addSubview(vLine2)
     
     vLine2.snp_makeConstraints { (make) -> Void in
-      make.right.equalTo(basketCollection)
+      make.left.equalTo(basketCollection)
       make.top.equalTo(topBar.snp_bottom)
       make.bottom.equalTo(bottomBar.snp_top)
       make.width.equalTo(1)
@@ -339,35 +388,25 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // Button: Pay with secucard
     
-    bottomBar.addSubview(paySecucardButton)
-    
-    paySecucardButton.snp_makeConstraints { (make) -> Void in
-      make.centerY.equalTo(bottomBar)
-      make.right.equalTo(-20)
-      make.width.equalTo(100)
-      make.height.equalTo(50)
-    }
-    
-    // Button: Pay by Debitcard
-    
-    bottomBar.addSubview(payECButton)
-    
-    payECButton.snp_makeConstraints { (make) -> Void in
-      make.centerY.equalTo(bottomBar)
-      make.right.equalTo(paySecucardButton.snp_left).offset(-20)
-      make.width.equalTo(100)
-      make.height.equalTo(50)
-    }
-    
-    // Button: Pay Cash
-    
-    bottomBar.addSubview(payCashButton)
-    
-    payCashButton.snp_makeConstraints { (make) -> Void in
-      make.centerY.equalTo(bottomBar)
-      make.right.equalTo(payECButton.snp_left).offset(-20)
-      make.width.equalTo(100)
-      make.height.equalTo(50)
+    var lastButton: PaymentButton?
+    for button in availableButtons {
+      
+      bottomBar.addSubview(button)
+      
+      button.snp_makeConstraints { (make) -> Void in
+        if let lastButton = lastButton {
+          make.right.equalTo(lastButton.snp_left).offset(-10)
+        } else {
+          make.right.equalTo(-10)
+        }
+        
+        make.centerY.equalTo(bottomBar)
+        make.width.equalTo(100)
+        make.height.equalTo(50)
+      }
+      
+      lastButton = button
+      
     }
     
     // connect button
@@ -375,9 +414,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     bottomBar.addSubview(connectButton)
     
     connectButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(20)
+      make.left.equalTo(10)
       make.centerY.equalTo(bottomBar)
-      make.width.equalTo(100)
+      make.width.equalTo(50)
       make.height.equalTo(50)
     }
     
@@ -386,9 +425,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     bottomBar.addSubview(disconnectButton)
     
     disconnectButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(connectButton.snp_right).offset(20)
+      make.left.equalTo(connectButton.snp_right).offset(10)
       make.centerY.equalTo(bottomBar)
-      make.width.equalTo(100)
+      make.width.equalTo(50)
       make.height.equalTo(50)
     }
     
@@ -397,9 +436,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     bottomBar.addSubview(scanCardButton)
     
     scanCardButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(disconnectButton.snp_right).offset(20)
+      make.left.equalTo(disconnectButton.snp_right).offset(10)
       make.centerY.equalTo(bottomBar)
-      make.width.equalTo(100)
+      make.width.equalTo(50)
       make.height.equalTo(50)
     }
     
@@ -408,9 +447,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     bottomBar.addSubview(showLogButton)
     
     showLogButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(scanCardButton.snp_right).offset(20)
+      make.left.equalTo(scanCardButton.snp_right).offset(10)
       make.centerY.equalTo(bottomBar)
-      make.width.equalTo(100)
+      make.width.equalTo(50)
       make.height.equalTo(50)
     }
     
@@ -426,7 +465,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     calcPrice()
     CheckTransactionReady()
-    
+      
   }
   
   override func didReceiveMemoryWarning() {
@@ -538,7 +577,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         var cell:ProductCategoryCell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
         cell.data = categories[indexPath.row]
-        cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
+        cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : Constants.brightGreyColor
         
         return cell
         
@@ -569,27 +608,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
       } else {
         
-        if let customer = customerUsed {
-          
-          if customer.type == CustomerType.CheckinCustomer {
-            
-            if let cell:CheckinCell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
-              cell.data = customer.checkin
-              cell.delegate = self
-              cell.showsControls = true
-              return cell
-            }
-            
-          } else {
-            
-            if let cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
-              cell.data = customer.cardNumber
-              cell.delegate = self
-              return cell
-            }
-            
-          }
-          
+        if let cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
+          cell.data = customerUsed
+          cell.delegate = self
+          return cell
         }
         
       }
@@ -636,7 +658,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Checkins:
       
-      customerUsed = CustomerItem(checkin: checkins[indexPath.row])
+      let checkin = checkins[indexPath.row]
+      
+      let ident = SCSmartIdent()
+      ident.type = "checkin"
+      ident.value = checkin.id
+      
+      customerUsed = ident
+      updateTransactionIdent()
       
     default:
       
@@ -653,14 +682,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let headerView: SectionheaderView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: basketSectionHeaerReuseIdentifier, forIndexPath: indexPath) as! SectionheaderView
         
-        headerView.label.text = (indexPath.section == 0) ? "Warenkorb" : "Käufer"
+        headerView.label.text = (indexPath.section == 0) ? "Produkte" : "Käufer"
         
         return headerView
         
       }
       
     }
-    
     
     return SectionheaderView()
     
@@ -692,43 +720,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   // MARK: - Payment actions
   
   // payment actions
-  
-  func didTapSecucardButton() {
-    
-    if let usedCustomer = customerUsed {
-      // user did customer already
-      startTransaction()
-    } else {
-      // user did not select any customer -> scan card
-      showScanCardView()
-    }
-    
-  }
-  
-  func didTapECButton() {
 
+  func didTapPayButton(button: PaymentButton) {
     if let usedCustomer = customerUsed {
-      // user did customer already
-      startTransaction()
+      sendTransaction(button.payMethod)
     } else {
-      // user did not select any customer -> scan card
       showScanCardView()
     }
-    
   }
-  
-  func didTapCashButton() {
-    
-    if let usedCustomer = customerUsed {
-      // user did customer already
-      startTransaction()
-    } else {
-      // user did not select any customer -> scan card
-      showScanCardView()
-    }
-    
-  }
-  
+
   func showScanCardView() {
 
     var view: ScanViewController = ScanViewController()
@@ -737,33 +737,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func startTransaction() {
-    
-    let transaction = SCSmartTransaction()
-    
-    // create the ident
-    let ident = SCSmartIdent()
-    
-    if let type = customerUsed?.type {
-      
-      switch type {
-        
-      case CustomerType.CheckinCustomer:
-        ident.type = "checkin"
-        ident.value = customerUsed?.checkin?.id
-        break;
-      case CustomerType.CardCustomer:
-        ident.type = "card"
-        ident.value = "\(customerUsed?.cardNumber)"
-        break;
-      }
-      
-    }
-    
-    transaction.idents = [ident]
+  func updateTransactionBasket() {
     
     // create a basket
-    
     let basket = SCSmartBasket()
     
     var productList = [AnyObject]()
@@ -776,68 +752,134 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     basket.products = productList
     
-    transaction.basket = basket
+    currentTransaction.basket = basket
     
     // create a basket info
     
     let basketInfo = SCSmartBasketInfo()
     basketInfo.sum = Int(sum*100)
     basketInfo.currency = "EUR"
-    transaction.basketInfo = basketInfo
+    currentTransaction.basketInfo = basketInfo
     
-    // add additional info
+    saveTransaction({ (success, error) -> Void in})
     
-    transaction.merchantRef = Constants.merchantRef
-    transaction.transactionRef = "\(Constants.merchantRef)_\(NSDate().timeIntervalSince1970)"
+  }
+  
+  func updateTransactionIdent() {
     
-    logView.addToLog("CREATING TRANSACTION");
+    // create the ident
+    if let ident = customerUsed {
+      currentTransaction.idents = [ident]
+      saveTransaction({ (success, error) -> Void in
+        if let resolvedIdent = self.currentTransaction.idents[0] as? SCSmartIdent {
+          self.customerUsed = resolvedIdent
+        }
+      })
+    }
     
-    SCSmartTransactionService.sharedService().createTransaction(transaction, completionHandler: { (savedTransaction: SCSmartTransaction!, error: NSError!) -> Void in
+  }
+  
+  func saveTransaction(handler: (success: Bool,error: NSError?) -> Void) {
+    
+    currentTransaction.merchantRef = Constants.merchantRef
+    currentTransaction.transactionRef = "\(Constants.merchantRef)_\(NSDate().timeIntervalSince1970)"
+    
+    if currentTransaction.id == nil {
+      SCSmartTransactionService.sharedService().createTransaction(currentTransaction, completionHandler: { (createdTransaction: SCSmartTransaction?, error: NSError?) -> Void in
+        
+        if let createdTransaction = createdTransaction {
+          self.currentTransaction = createdTransaction
+        }
+        
+        handler(success: createdTransaction != nil, error: error)
+        
+      })
+    } else {
+      
+      SCSmartTransactionService.sharedService().updateTransaction(currentTransaction, completionHandler: { (updatedTransaction: SCSmartTransaction?, error: NSError?) -> Void in
+        
+        if let updatedTransaction = updatedTransaction {
+          self.currentTransaction = updatedTransaction
+        }
+        
+        handler(success: updatedTransaction != nil, error: error)
+        
+      })
+      
+    }
+    
+  }
+  
+  func sendTransaction(method: PayMethod) {
+    
+    // if not created yet, create it and try again
+    if currentTransaction.id == nil {
+      saveTransaction({ (success, error) -> Void in
+        if success {
+          self.sendTransaction(method)
+        }
+      })
+      return
+    }
+    
+    let statusView = TransactionStatusView();
+    view.addSubview(statusView)
+    
+    statusView.snp_makeConstraints { (make) -> Void in
+      make.edges.equalTo(view)
+    }
+    
+    statusView.addStatus("Transaktion wird durchgeführt")
+    
+    // start
+    SCSmartTransactionService.sharedService().startTransaction(currentTransaction.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: NSError?) -> Void in
       
       if let error = error {
-        self.logView.addToLog("ERROR: \(error.localizedDescription)");
         
-        ErrorManager.handleError(error)
+        self.logView.addToLog("ERROR: \(error.localizedDescription)");
+        statusView.addStatus("Transaktionsabbruch: \(error.localizedDescription)")
         
       } else {
-        self.logView.addToLog("SUCCESS");
-      }
-      
-      if let transactionToStart = savedTransaction {
         
-        self.logView.addToLog("SENDING TRANSACTION");
-        
-        SCSmartTransactionService.sharedService().startTransaction(transactionToStart.id, type: "auto", completionHandler: { (transaction: SCSmartTransaction!, error: NSError!) -> Void in
+        if let result = transactionResult {
           
-          if let error = error {
-            self.logView.addToLog("ERROR: \(error.localizedDescription)");
-            
-            ErrorManager.handleError(error)
-            
-          } else {
-            self.logView.addToLog("SUCCESS");
+          self.logView.addToLog("SUCCESS");
+          
+          // check results
+          if result.status == "ok" {
+            statusView.addStatus("Transaktion erfolgreich durchgeführt\n\nStatus:\n\n")
+          } else if result.status == "failed" {
+            statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
           }
           
-        })
-        
+          if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
+            
+            for line in receiptLines {
+              
+              if line.type == "space" {
+                
+                statusView.addStatus("\n")
+                
+              } else if line.type == "textline" {
+                
+                statusView.addStatus("\(line.value)")
+                
+              }
+            }
+          }
+        }
       }
-      
     })
-    
   }
   
   func CheckTransactionReady() {
     
     let ready = (basket.count > 0)
     
-    payCashButton.enabled = ready
-    payCashButton.alpha = ready ? 1 : 0.5
-    
-    payECButton.enabled = ready
-    payECButton.alpha = ready ? 1 : 0.5
-    
-    paySecucardButton.enabled = ready
-    paySecucardButton.alpha = ready ? 1 : 0.5
+    for button in availableButtons {
+      button.enabled = ready
+      button.alpha = ready ? 1 : 0.5
+    }
     
   }
   
@@ -891,56 +933,24 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  // MARK: - CheckinCellDelegate
-  func checkinCellRemoveTapped(cell: CheckinCell, data: SCSmartCheckin) {
-    if (customerUsed?.checkin == data) {
-      customerUsed = nil
-    }
+  func identRemoveTapped() {
+
+    customerUsed = nil
+    updateTransactionIdent()
+    
   }
-  
-  // MARK: - BasketUserCellDelegate
-  func basketUserCellRemoveTapped(cell: BasketUserCell, data: String) {
-    if (customerUsed?.cardNumber == data) {
-      customerUsed = nil
-    }
-  }
-  
   
   func scanViewReturnCode(code: String) {
     
     self.dismissViewControllerAnimated(true, completion: nil)
+   
+    let ident = SCSmartIdent()
+    ident.type = "card"
+    ident.value = code
     
-    // get user from card
-    let query = SCQueryParams()
-    query.query = code
-    SCCardsService.sharedService().getCards(query, completionHandler: { (list: SCObjectList?, error: NSError!) -> Void in
-      
-      if let objectList: SCObjectList = list {
-        
-        if let account = (objectList.data[0] as? SCLoyaltyCard)?.account {
-          
-          SCAccountService.sharedService().getAccount(account.id, completionHandler: { (theAccount: SCGeneralAccount!, error: NSError!) -> Void in
-            
-            if let theAccount = theAccount {
-              
-              self.customerUsed = CustomerItem(account: theAccount)
-              
-            } else {
-              self.customerUsed = CustomerItem(number: code)
-            }
-            
-          })
-          
-        } else {
-          self.customerUsed = CustomerItem(number: code)
-        }
-        
-      } else {
-        self.customerUsed = CustomerItem(number: code)
-      }
-      
-    })
-    
+    customerUsed = ident
+    updateTransactionIdent()
+
   }
   
   // MARK: - Notification handlers

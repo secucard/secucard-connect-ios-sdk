@@ -69,26 +69,26 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
     
     actionsButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     actionsButton.setTitle("...", forState: UIControlState.Normal)
-    actionsButton.backgroundColor = Constants.brightGreyColor
+    actionsButton.backgroundColor = Constants.darkGreyColor
     
     increaseButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     increaseButton.setTitle("+", forState: UIControlState.Normal)
-    increaseButton.backgroundColor = Constants.brightGreyColor
+    increaseButton.backgroundColor = Constants.darkGreyColor
     
     decreaseButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     decreaseButton.setTitle("-", forState: UIControlState.Normal)
-    decreaseButton.backgroundColor = Constants.brightGreyColor
+    decreaseButton.backgroundColor = Constants.darkGreyColor
     
     changePriceButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     changePriceButton.setTitle("€", forState: UIControlState.Normal)
-    changePriceButton.backgroundColor = Constants.brightGreyColor
+    changePriceButton.backgroundColor = Constants.darkGreyColor
     
     addDiscountButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     addDiscountButton.setTitle("%", forState: UIControlState.Normal)
-    addDiscountButton.backgroundColor = Constants.brightGreyColor
+    addDiscountButton.backgroundColor = Constants.darkGreyColor
     
     removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-    removeButton.setTitle("T", forState: UIControlState.Normal)
+    removeButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
     removeButton.backgroundColor = Constants.warningColor
     
     var bottomLine: UIView = UIView()

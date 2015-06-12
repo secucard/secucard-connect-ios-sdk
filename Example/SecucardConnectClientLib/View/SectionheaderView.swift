@@ -16,14 +16,14 @@ class SectionheaderView: UICollectionReusableView {
     
     super.init(frame: frame)
 
-    label.textColor = Constants.textColorBright
+    label.textColor = Constants.textColor
     self.addSubview(label)
     label.snp_makeConstraints { (make) -> Void in
       make.top.height.right.equalTo(self)
       make.left.equalTo(10)
     }
 
-    self.backgroundColor = Constants.tintColorBright
+    self.backgroundColor = Constants.brightGreyColor
     
   }
 

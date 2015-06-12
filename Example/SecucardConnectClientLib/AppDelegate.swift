@@ -12,7 +12,7 @@
   import SwiftyJSON
   
   @UIApplicationMain
-  class AppDelegate: UIResponder, UIApplicationDelegate {
+  class AppDelegate: UIResponder, UIApplicationDelegate, InitializationViewDelegate {
     
     var window: UIWindow?
     var products: JSON?
@@ -43,19 +43,46 @@
         mainController.json = parsedProducts
       }
       
-      connectCashier { (success: Bool, error: NSError?) -> Void in
-        
-      }
-      
       // show window and initial view controller
       window = UIWindow(frame: UIScreen.mainScreen().bounds)
       window?.rootViewController = self.mainController
       window?.makeKeyAndVisible()
       
+//      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientId.rawValue)
+//      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientSecret.rawValue)
+//      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.UUID.rawValue)
+      
+      connectCashier { (success: Bool, error: NSError?) -> Void in
+        
+      }
+      
       return true
     }
     
     func connectCashier( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
+
+      // check if all information for initialization ist there
+      let clientId = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientId.rawValue) as? String
+      let clientSecret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String
+      let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String
+      
+      if clientId == nil || clientSecret == nil || uuid == nil {
+        
+        let initView = InitializationView()
+        initView.delegate = self
+        
+        if let window = window  {
+          window.addSubview(initView)
+          
+          initView.snp_makeConstraints({ (make) -> Void in
+            make.edges.equalTo(window)
+          })
+        }
+        
+        return;
+        
+      }
+
       
       // initialize connect client
       
@@ -63,9 +90,9 @@
       
       let stompConfig: SCStompConfiguration = SCStompConfiguration(host: Constants.stompHost, andVHost: Constants.stompVHost, port: Constants.stompPort, userId: "", password: "", useSSL: true, replyQueue: Constants.replyQueue, connectionTimeoutSec: Constants.connectionTimeoutSec, socketTimeoutSec: Constants.socketTimeoutSec, heartbeatMs: Constants.heartbeatMs, basicDestination: Constants.basicDestination)
       
-      let clientCredentials: SCClientCredentials = SCClientCredentials(clientId: Constants.clientIdCashierSample, clientSecret: Constants.clientSecretCashierSample)
+      let clientCredentials: SCClientCredentials = SCClientCredentials(clientId: clientId, clientSecret: clientSecret)
       
-      let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: Constants.authUrl, clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: Constants.deviceIdCashierSample, authType: "device")
+      let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: Constants.authUrl, clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: uuid, authType: "device")
       
       // TEMP: add to always call device auth
       // SCAccountManager.sharedManager().killToken()
@@ -162,6 +189,12 @@
         
       }
       
+    }
+    
+    func didSaveCredentials() {
+      connectCashier { (success, error) -> Void in
+        
+      }
     }
     
     func applicationWillResignActive(application: UIApplication) {
