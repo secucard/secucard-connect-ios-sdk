@@ -613,11 +613,13 @@
   message.pid = objectId;
   message.sid = actionArg;
 
-  NSError *parsingParams = nil;
-  message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
-  
-  if (parsingParams != nil) {
-    handler(nil, parsingParams);
+  if (arg != nil) {
+    NSError *parsingParams = nil;
+    message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+    
+    if (parsingParams != nil) {
+      handler(nil, parsingParams);
+    }
   }
   
   [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action] completionHandler:^(id responseObject, NSError *error) {
@@ -666,11 +668,13 @@
   message.pid = objectId;
   message.sid = actionArg;
   
-  NSError *parsingParams = nil;
-  message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
-  
-  if (parsingParams != nil) {
-    handler(nil, parsingParams);
+  if (arg != nil) {
+    NSError *parsingParams = nil;
+    message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+    
+    if (parsingParams != nil) {
+      handler(nil, parsingParams);
+    }
   }
   
   [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:^(id responseObject, NSError *error) {

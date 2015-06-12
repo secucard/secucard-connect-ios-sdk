@@ -73,12 +73,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let scanCardButton: PaymentButton
   let showLogButton: PaymentButton
   
-  let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: Selector("didTapPayButton"))
-  let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: Selector("didTapPayButton"))
-  let payPaypalButton = PaymentButton(payMethod: PayMethod.Paypal, action: Selector("didTapPayButton"))
-  let payLoyaltyButton = PaymentButton(payMethod: PayMethod.Loyalty, action: Selector("didTapPayButton"))
-  let payCashlessButton = PaymentButton(payMethod: PayMethod.Cashless, action: Selector("didTapPayButton"))
-  let payCashButton = PaymentButton(payMethod: PayMethod.Cash, action: Selector("didTapPayButton"))
+  let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: Selector("didTapPayButton:"))
+  let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: Selector("didTapPayButton:"))
+  let payPaypalButton = PaymentButton(payMethod: PayMethod.Paypal, action: Selector("didTapPayButton:"))
+  let payLoyaltyButton = PaymentButton(payMethod: PayMethod.Loyalty, action: Selector("didTapPayButton:"))
+  let payCashlessButton = PaymentButton(payMethod: PayMethod.Cashless, action: Selector("didTapPayButton:"))
+  let payCashButton = PaymentButton(payMethod: PayMethod.Cash, action: Selector("didTapPayButton:"))
   
   let availableButtons: [PaymentButton]
   
