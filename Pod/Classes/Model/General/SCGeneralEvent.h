@@ -19,6 +19,6 @@
 @property (nonatomic, assign) SCEventType type;
 @property (nonatomic, copy) NSString *target;
 @property (nonatomic, copy) NSDate *created;
-@property (nonatomic, copy) id data;
+@property (nonatomic, copy) NSDictionary *data;
 
 @end

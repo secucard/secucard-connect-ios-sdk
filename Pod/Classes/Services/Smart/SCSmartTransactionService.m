@@ -8,6 +8,7 @@
 
 #import "SCSmartTransactionService.h"
 #import "SCSmartTransaction.h"
+#import "SCGeneralNotification.h"
 
 @implementation SCSmartTransactionService
 
@@ -17,6 +18,7 @@
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     instance = [SCSmartTransactionService new];
+    instance.registeredEventClasses = @[[SCGeneralNotification class]];
   });
   
   return instance;
