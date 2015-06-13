@@ -7,7 +7,7 @@
 //
 
 #import "SCAbstractService.h"
-#import "SCErrorManager.h"
+#import "SCLogManager.h"
 #import "SCRestServiceManager.h"
 #import "SCStompManager.h"
 #import "SCObjectList.h"
@@ -41,7 +41,7 @@
           return [SCStompManager sharedManager];
           
         default:
-          [SCErrorManager handleError:[SCErrorManager errorWithDescription:@"No channel given and not default channel set in client configuration"]];
+          [SCLogManager error:[SCLogManager makeErrorWithDescription:@"No channel given and not default channel set in client configuration"]];
           return nil;
           
       }
@@ -85,7 +85,6 @@
     }
     
   }
-  
   
 }
 

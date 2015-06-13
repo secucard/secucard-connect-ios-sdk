@@ -8,7 +8,7 @@
 //
 
 #import "SCSecuObject.h"
-#import "SCErrorManager.h"
+#import "SCLogManager.h"
 
 @implementation SCSecuObject
 
@@ -17,7 +17,7 @@
 }
 
 + (NSString*) object {
-  [SCErrorManager handleError:[SCErrorManager errorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]];
+  [SCLogManager error:[SCLogManager makeErrorWithCode:ERR_NEED_IMPLEMENTATION_IN_SUBCLASS]];
   return @"";
 }
 

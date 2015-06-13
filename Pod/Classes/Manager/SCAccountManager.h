@@ -10,7 +10,7 @@
 
 #import "SCConnectClient.h"
 #import "SCPersistenceManager.h"
-#import "SCErrorManager.h"
+#import "SCLogManager.h"
 
 @class SCUserCredentials;
 @class SCClientCredentials;

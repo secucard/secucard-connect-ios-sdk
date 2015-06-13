@@ -51,7 +51,7 @@
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials {
   
   if (!self.configuration) {
-    [SCErrorManager handleErrorWithDescription:@"You need to set the client configuration before setting user credentials"];
+    [SCLogManager errorWithDescription:@"You need to set the client configuration before setting user credentials"];
     return;
   }
   

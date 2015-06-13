@@ -340,7 +340,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   // check if class is subclass of SCSecuObject
   if (type != nil && ![type isSubclassOfClass:[SCSecuObject class]]) {
-    [SCErrorManager handleError:[SCErrorManager errorWithDescription:@"Endpoint resolver: class is no subclass of SCSecuObject and as such, can have no endpoint"]];
+    [SCLogManager error:[SCLogManager makeErrorWithDescription:@"Endpoint resolver: class is no subclass of SCSecuObject and as such, can have no endpoint"]];
     return @"";
   }
   
@@ -427,7 +427,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   NSDictionary *params = [self createDic:queryParams];
   
   if (!params) {
-    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   
@@ -457,7 +457,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   NSDictionary *params = [self createDic:object];
   
   if (!params) {
-    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   
@@ -482,7 +482,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   NSDictionary *params = [self createDic:object];
   
   if (!params) {
-    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   
@@ -506,7 +506,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   NSDictionary *params = [self createDic:arg];
   if (!params) {
-    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   
@@ -558,7 +558,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   NSDictionary *params = [self createDic:arg];
   if (!params) {
-    handler(nil, [SCErrorManager errorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   

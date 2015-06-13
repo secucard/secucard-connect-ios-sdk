@@ -8,7 +8,7 @@
 
 #import "SCPublicMerchantService.h"
 #import "SCGeneralPublicMerchant.h"
-#import "SCErrorManager.h"
+#import "SCLogManager.h"
 
 @implementation SCPublicMerchantService
 

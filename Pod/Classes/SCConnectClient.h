@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "SCErrorManager.h"
+#import "SCLogManager.h"
 #import "SCClientConfiguration.h"
 #import "SCAbstractService.h"
 #import "SCAccountService.h"

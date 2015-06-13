@@ -183,7 +183,7 @@
   
   // set the error handler
   self.client.errorHandler = ^(NSError *error) {
-    [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
+    [SCLogManager error:[SCLogManager makeErrorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
   };
   
   [self.client setReceiptHandler:^(STOMPFrame *frame) {
@@ -252,7 +252,7 @@
   
   // resolve earlier messages by correlation id (timouts)
   for (SCStompStorageItem *item in self.promiseStore) {
-    item.handler(nil, [SCErrorManager errorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
+    item.handler(nil, [SCLogManager makeErrorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
   }
   
 }
@@ -273,20 +273,20 @@
   
   // initialized at all?
   if ([self needsInitialization]) {
-    handler(false, [SCErrorManager errorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
     return;
   }
   
   // stomp client does exist?
   if (!self.client) {
-    handler(false, [SCErrorManager errorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
     return;
   }
   
   // is already connected? Call completion immediately
   if (self.client.connected) {
     [self extendConnectionTimer];
-    [SCErrorManager handleErrorWithDescription:@"already connected. Immediate request."];
+    [SCLogManager makeErrorWithDescription:@"already connected. Immediate request."];
     handler(true, nil);
     return;
   }
@@ -326,7 +326,7 @@
                                   NSLog(@"really disconnected");
                                 }];
                                 
-                                handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                                handler(false, [SCLogManager makeErrorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                                 
                               } else {
                                 
@@ -359,7 +359,7 @@
                           NSLog(@"really disconnected");
                         }];
                         
-                        handler(false, [SCErrorManager errorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                        handler(false, [SCLogManager makeErrorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
                         
                       } else {
                         
@@ -390,7 +390,7 @@
     
     if (error != nil) {
       [self closeConnection];
-      [SCErrorManager handleError:[SCErrorManager errorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
+      [SCLogManager error:[SCLogManager makeErrorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
       return;
     }
     
@@ -431,7 +431,7 @@
                                        NSError *objectParsingError = nil;
                                        SCGeneralEvent *event = [MTLJSONAdapter modelOfClass:[SCGeneralEvent class] fromJSONDictionary:body error:&objectParsingError];
                                        if (objectParsingError) {
-                                         [SCErrorManager handleError:objectParsingError];
+                                         [SCLogManager error:objectParsingError];
                                        }
                                        
                                        // send to registered instances
@@ -439,7 +439,7 @@
                                        
                                      } else {
                                        
-                                       [SCErrorManager handleErrorWithDescription:@"Error: unknown push messege type"];
+                                       [SCLogManager errorWithDescription:@"Error: unknown push messege type"];
                                        
                                      }
                                      
@@ -452,7 +452,7 @@
                                        
                                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompError object:nil userInfo:@{@"message": message.body}];
                                        
-                                       [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:[body objectForKey:@"error_user"] andDomain:kErrorDomainSCStompService]];
+                                       [self resolveStoredItem:correlationId withError:[SCLogManager makeErrorWithDescription:[body objectForKey:@"error_user"] andDomain:kErrorDomainSCStompService]];
                                        return;
                                        
                                      }
@@ -486,7 +486,7 @@
     
     NSDictionary *messageDict = [self createDic:message];
     if (messageDict == nil) {
-      handler(nil, [SCErrorManager errorWithDescription:@"could not strip null values from dictionary"]);
+      handler(nil, [SCLogManager makeErrorWithDescription:@"could not strip null values from dictionary"]);
       return;
     }
     
@@ -494,7 +494,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:messageDict options:0 error:&parseError];
     
     if (parseError) {
-      [SCErrorManager handleError:[SCErrorManager errorWithDescription:parseError.localizedDescription andDomain:kErrorDomainSCStompService]];
+      [SCLogManager error:[SCLogManager makeErrorWithDescription:parseError.localizedDescription andDomain:kErrorDomainSCStompService]];
       return;
     }
     

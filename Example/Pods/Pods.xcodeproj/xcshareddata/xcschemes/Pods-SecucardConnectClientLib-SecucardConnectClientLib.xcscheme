@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7C8FAA91A1D696CA55AAC56B"
+               BlueprintIdentifier = "79DE9BD2CC40B4523056C867"
                BuildableName = "SecucardConnectClientLib.framework"
                BlueprintName = "Pods-SecucardConnectClientLib-SecucardConnectClientLib"
                ReferencedContainer = "container:Pods.xcodeproj">

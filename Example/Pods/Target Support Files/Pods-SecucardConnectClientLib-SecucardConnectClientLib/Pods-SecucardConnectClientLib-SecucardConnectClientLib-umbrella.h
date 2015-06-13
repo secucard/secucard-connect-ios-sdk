@@ -5,7 +5,7 @@
 #import "NSDictionary+NullStripper.h"
 #import "SCGlobals.h"
 #import "SCAccountManager.h"
-#import "SCErrorManager.h"
+#import "SCLogManager.h"
 #import "SCPersistenceManager.h"
 #import "SCRestServiceManager.h"
 #import "SCServiceManager.h"

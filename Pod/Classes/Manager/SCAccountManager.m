@@ -101,7 +101,7 @@
   
   if ([self needsInitialization])
   {
-    handler(false, [SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
   }
   
   NSDictionary *params = @{
@@ -148,7 +148,7 @@
   
     if ([self needsInitialization])
     {
-      handler(nil, [SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+      handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
     }
     
     NSDictionary *params = @{
@@ -195,7 +195,7 @@
   
     if ([self needsInitialization])
     {
-      handler(nil, [SCErrorManager errorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+      handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
     }
     
     NSDictionary *params = @{
@@ -338,7 +338,7 @@
   NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:timerStart];
   
   if ([code.expiresIn floatValue] < elapsedTime) {
-    self.devicePollHandler(nil, [SCErrorManager errorWithCode:ERR_TOKEN_POLL_EXPIRED andDomain:kErrorDomainSCAccount]);
+    self.devicePollHandler(nil, [SCLogManager makeErrorWithCode:ERR_TOKEN_POLL_EXPIRED andDomain:kErrorDomainSCAccount]);
   }
   
   __weak __block SCAccountManager *weakSelf = self;
