@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SecucardConnectClientLib
 
 class LogView: UIView {
   
@@ -72,7 +73,34 @@ class LogView: UIView {
   func addToLog(string: String) {
     
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-      self.logView.text = "\(self.logView.text)\n----------------------\n\(string)"
+      self.logView.text = "\(self.logView.text)\n\n\(string)"
+    })
+    
+  }
+  
+  func addEventToLog(event: SCGeneralEvent) {
+    
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+      
+      var eventTypeString = ""
+      
+      switch event.type.value {
+      case EventTypeChanged.value:
+        eventTypeString = "changed"
+      case EventTypeAdded.value:
+        eventTypeString = "added"
+      case EventTypeDisplay.value:
+        eventTypeString = "display"
+      default:
+        eventTypeString = "unknown"
+      }
+      
+      if let eventData: AnyObject = event.data {
+        self.addToLog("EVENT: \(event.target) | TYPE: \(eventTypeString) | DATA: \(event.data)")
+      } else {
+        self.addToLog("EVENT: \(event.target) | TYPE: \(eventTypeString)")
+      }
+      
     })
     
   }

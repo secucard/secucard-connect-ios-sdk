@@ -24,6 +24,7 @@
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "showDeviceAuthInformation:", name: "deviceAuthCodeRequesting", object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "logAnyEvent:", name: "notificationStompEvent", object: nil)
       
       // read data
       if let path = NSBundle.mainBundle().pathForResource("products", ofType: "json") {
@@ -107,7 +108,7 @@
           let s: Bool = success
           
           if let error = error {
-            ErrorManager.handleError(error)
+            SCLogManager.error(error)
             handler(success: false, error: error)
           }
           
@@ -123,7 +124,14 @@
             self.pollCheckins()
             
             SCCheckinService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
-              self.pollCheckins()
+              
+              if let event = event {
+                
+                self.mainController.logView.addToLog("handled event -> get checkins")
+                self.pollCheckins()
+                
+              }
+              
             })
             
             NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
@@ -146,7 +154,7 @@
         
         if let error = error {
           
-          print("couldn't get checkins because: \(error.localizedDescription)")
+          SCLogManager.errorWithDescription("couldn't get checkins because: \(error.localizedDescription)")
           
         } else if let checkins = result as? [SCSmartCheckin] {
           
@@ -163,27 +171,33 @@
     
     func showDeviceAuthInformation(notification : NSNotification) {
       
-      if let info = notification.userInfo {
+      if let code: SCAuthDeviceAuthCode = notification.userInfo?["code"] as? SCAuthDeviceAuthCode {
         
-        if let code: SCAuthDeviceAuthCode = info["code"] as? SCAuthDeviceAuthCode {
+        if let w = window {
           
-          if let w = window {
+          verificationView = InsertCodeView(authCode: code)
+          
+          if let verificationView = verificationView {
             
-            verificationView = InsertCodeView(authCode: code)
+            w.addSubview(verificationView)
             
-            if let verificationView = verificationView {
-              
-              w.addSubview(verificationView)
-              
-              verificationView.snp_makeConstraints { (make) -> Void in
-                make.edges.equalTo(w)
-              }
-              
+            verificationView.snp_makeConstraints { (make) -> Void in
+              make.edges.equalTo(w)
             }
             
           }
           
         }
+        
+      }
+      
+    }
+    
+    func logAnyEvent(notification: NSNotification) {
+      
+      if let event = notification.userInfo?["event"] as? SCGeneralEvent {
+        
+        mainController.logView.addEventToLog(event)
         
       }
       

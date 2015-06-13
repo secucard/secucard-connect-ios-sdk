@@ -30,7 +30,7 @@ enum PayMethod : String {
   case Paypal = "paypal"
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -168,10 +168,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // call super initialization
     super.init(nibName: nil, bundle: nil)
     
+    SCLogManager.sharedManager().delegate = self
+    
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidDisconnect:"), name: "clientDidDisconnect", object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidConnect:"), name: "clientDidConnect", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompResult:"), name: "notificationStompResult", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompError:"), name: "notificationStompError", object: nil)
+//    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompResult:"), name: "notificationStompResult", object: nil)
+//    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompError:"), name: "notificationStompError", object: nil)
     
     // add delegates to collections
     self.productCategoriesCollection.delegate = self
@@ -763,7 +765,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     saveTransaction({ (success, error) -> Void in
       if let error = error {
-        ErrorManager.handleError(error)
+        SCLogManager.error(error)
       }
     })
     
@@ -777,7 +779,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       saveTransaction({ (success, error) -> Void in
         
         if let error = error {
-          ErrorManager.handleError(error)
+          SCLogManager.error(error)
         }
         
         if let resolvedIdent = self.currentTransaction.idents[0] as? SCSmartIdent {
@@ -785,7 +787,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
           dispatch_async(dispatch_get_main_queue(), { () -> Void in
 
             if !resolvedIdent.valid {
-              ErrorManager.handleError(ErrorManager.errorWithDescription("Identifizierung fehlgeschlagen"))
+              SCLogManager.errorWithDescription("Identifizierung fehlgeschlagen")
               self.customerUsed = nil
             } else {
               self.customerUsed = resolvedIdent
@@ -856,14 +858,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
       if let error = error {
         
-        self.logView.addToLog("ERROR: \(error.localizedDescription)");
+        SCLogManager.error(error)
         statusView.addStatus("Transaktionsabbruch: \(error.localizedDescription)")
         
       } else {
         
         if let result = transactionResult {
-          
-          self.logView.addToLog("SUCCESS");
           
           // check results
           if result.status == "ok" {
@@ -884,7 +884,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 
                 statusView.addStatus("\(line.value)")
                 
+              } else {
+                
+                statusView.addStatus("Type unknown: \(line.type). Value: \(line.value)")
+                
               }
+              
             }
           }
         }
@@ -985,6 +990,23 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     if let message = notification.userInfo?["message"] as? String {
       logView.addToLog(message)
     }
+  }
+  
+  // MARK: - Log Management
+  
+  func logManagerHandleLogging(message: SCLogMessage!) {
+    
+    logView.addToLog(message.message)
+    
+    if (message.level.value == LogLevelError.value) {
+    
+      dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        let alert:UIAlertView = UIAlertView(title: "Fehler", message: message.message, delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
+      })
+      
+    }
+    
   }
   
 }
