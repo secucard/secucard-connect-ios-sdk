@@ -21,6 +21,10 @@
 #define kStompMethodDelete                          @"delete:"
 #define kStompMethodExecute                         @"exec:"
 
+#define kNotificationStompError                     @"notificationStompError"
+#define kNotificationStompResult                    @"notificationStompResult"
+#define kNotificationStompEvent                     @"notificationStompEvent"
+
 typedef void (^ReceiptHandler)(id responseObject, NSError *error);
 
 @interface SCStompDestination : NSObject

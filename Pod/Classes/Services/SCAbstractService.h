@@ -12,10 +12,18 @@
 #import "SCGlobals.h"
 #import "SCSecuObject.h"
 #import "SCObjectList.h"
+#import "SCGeneralEvent.h"
+
+typedef void (^EventHandler)(SCGeneralEvent *event);
 
 @interface SCAbstractService : NSObject
 
+@property (nonatomic, retain) NSArray *registeredEventClasses;
+@property (nonatomic, retain) NSMutableArray *eventHandlers;
+
 - (SCServiceManager*) serviceManagerByChannel:(ServiceChannel)channel;
+
+- (void) addEventHandler:(EventHandler)handler;
 
 - (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
 

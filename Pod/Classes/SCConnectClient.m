@@ -74,7 +74,9 @@
     }
     
     [[SCStompManager sharedManager] connect:^(bool success, NSError *error) {
+      
       handler(success, error);
+      
     }];
     
   }];

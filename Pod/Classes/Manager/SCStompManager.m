@@ -10,9 +10,7 @@
 #import "StompKit.h"
 #import "SCServiceEventObject.h"
 #import "SCTransportMessage.h"
-
-#define kNotificationStompError          @"notificationStompError"
-#define kNotificationStompResult         @"notificationStompResult"
+#import "SCAuthSession.h"
 
 @implementation SCStompDestination
 
@@ -239,7 +237,7 @@
 - (void) setConnectionTimer
 {
   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
-  [self performSelector:@selector(closeConnection) withObject:nil afterDelay:self.configuration.connectionTimeoutSec];
+  [self performSelector:@selector(closeConnection) withObject:nil afterDelay:self.configuration.heartbeatMs+10000];
 }
 
 - (void) closeConnection
@@ -261,7 +259,7 @@
 
 - (void) extendConnectionTimer
 {
-  [self setConnectionTimer];
+  //[self setConnectionTimer];
 }
 
 /**
@@ -333,7 +331,7 @@
                               } else {
                                 
                                 // all done, set timer
-                                [weakself setConnectionTimer];
+                                // [weakself setConnectionTimer];
                                 
                                 [self setMainExchangeSubscription];
                                 
@@ -366,7 +364,7 @@
                       } else {
                         
                         // all done, set timer
-                        [weakself setConnectionTimer];
+                        //[weakself setConnectionTimer];
                         
                         [self setMainExchangeSubscription];
                         
@@ -396,6 +394,11 @@
       return;
     }
     
+    // refresh auth
+    [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@{@"refresh_interval":@120} completionHandler:^(id responseObject, NSError *error) {
+      
+    }];
+    
     // subscribe to temp queue without telling the server because the server thinks it is already subscribed to.
     [self.client subscribeToWithoutRegistration:self.configuration.replyQueue
                                         headers:@{
@@ -409,6 +412,7 @@
                                    
                                    [self extendConnectionTimer];
                                    
+                                   // make the body a dictionary
                                    NSError *error = nil;
                                    NSDictionary *body = [NSJSONSerialization JSONObjectWithData: [message.body dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
                                    
@@ -416,40 +420,50 @@
                                    if (error)
                                    {
                                      [self resolveStoredItem:correlationId withError:error];
-                                   }
-                                   
-                                   // check if error from server
-                                   if ([[body objectForKey:@"status"] isEqualToString:@"error"])
-                                   {
-                                     
-                                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompError object:nil userInfo:@{@"message": message.body}];
-                                     
-                                     [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:[body objectForKey:@"error_user"] andDomain:kErrorDomainSCStompService]];
                                      return;
                                    }
                                    
-                                   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompResult object:nil userInfo:@{@"message": message.body}];
-                                   
-                                   id resultObject;
-                                   
-                                   // check if event
-                                   if ([body objectForKey:@"type"])
-                                   {
-                                     if ([[body objectForKey:@"type"] isEqualToString:@"event"])
-                                     {
+                                   if (!correlationId) { // check if event
+                                     
+                                     if ([[body objectForKey:@"object"] isEqualToString:@"event.pushs"]) {
                                        
-                                       SCServiceEventObject *event = [SCServiceEventObject initWithDictionary:body];
-                                       resultObject = event.data;
+                                       // try to parse
+                                       NSError *objectParsingError = nil;
+                                       SCGeneralEvent *event = [MTLJSONAdapter modelOfClass:[SCGeneralEvent class] fromJSONDictionary:body error:&objectParsingError];
+                                       if (objectParsingError) {
+                                         [SCErrorManager handleError:objectParsingError];
+                                       }
+                                       
+                                       // send to registered instances
+                                       [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompEvent object:nil userInfo:@{@"event":event}];
+                                       
+                                     } else {
+                                       
+                                       [SCErrorManager handleErrorWithDescription:@"Error: unknown push messege type"];
                                        
                                      }
+                                     
+                                     
                                    } else {
                                      
-                                     resultObject = [body objectForKey:@"data"];
+                                     // check if error from server
+                                     if ([[body objectForKey:@"status"] isEqualToString:@"error"])
+                                     {
+                                       
+                                       [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompError object:nil userInfo:@{@"message": message.body}];
+                                       
+                                       [self resolveStoredItem:correlationId withError:[SCErrorManager errorWithDescription:[body objectForKey:@"error_user"] andDomain:kErrorDomainSCStompService]];
+                                       return;
+                                       
+                                     }
+                                     
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompResult object:nil userInfo:@{@"message": message.body}];
+                                     
+                                     id resultObject = [body objectForKey:@"data"];
+                                     
+                                     [self resolveStoredItem:correlationId withResult:resultObject];
                                      
                                    }
-                                   
-                                   // if we have a correlation id, chance is good, that there is a promise that wants to be fullfilled
-                                   [self resolveStoredItem:correlationId withResult:resultObject];
                                    
                                  }];
     
@@ -543,7 +557,7 @@
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.query = queryParams;
-
+  
   
   // TODO: Callback if false?
   
@@ -573,7 +587,7 @@
   if (parsingParams != nil) {
     handler(nil, parsingParams);
   }
-
+  
   [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]completionHandler:handler];
   
 }
@@ -601,7 +615,7 @@
     responseObject = [MTLJSONAdapter modelOfClass:[object class] fromJSONDictionary:responseObject error:&parsingError];
     
     handler(responseObject, parsingError);
-
+    
     
   }];
   
@@ -612,7 +626,7 @@
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
-
+  
   if (arg != nil) {
     NSError *parsingParams = nil;
     message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
@@ -633,7 +647,7 @@
     responseObject = [MTLJSONAdapter modelOfClass:type fromJSONDictionary:responseObject error:&parsingError];
     
     handler(responseObject, parsingError);
-
+    
     
   }];
   
@@ -669,11 +683,18 @@
   message.sid = actionArg;
   
   if (arg != nil) {
-    NSError *parsingParams = nil;
-    message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
     
-    if (parsingParams != nil) {
-      handler(nil, parsingParams);
+    if ([arg isKindOfClass:[MTLModel class]]) {
+      
+      NSError *parsingParams = nil;
+      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+      
+      if (parsingParams != nil) {
+        handler(nil, parsingParams);
+      }
+      
+    } else {
+      message.data = arg;
     }
   }
   

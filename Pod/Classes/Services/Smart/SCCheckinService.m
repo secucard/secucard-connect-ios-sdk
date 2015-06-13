@@ -21,7 +21,11 @@
   static SCCheckinService *instance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
+    
     instance = [SCCheckinService new];
+    
+    instance.registeredEventClasses = @[[SCSmartCheckin class]];
+    
   });
   
   return instance;

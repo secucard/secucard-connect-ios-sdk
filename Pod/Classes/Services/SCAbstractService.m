@@ -51,6 +51,44 @@
   
 }
 
+// handle events
+
+- (void)setRegisteredEventClasses:(NSArray *)registeredEventClasses {
+  
+  NSMutableArray *array = [NSMutableArray new];
+  for (SCSecuObject *object in registeredEventClasses) {
+    [array addObject:[object.object lowercaseString]];
+  }
+  _registeredEventClasses = [NSArray arrayWithArray:array];
+  
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dispatchEvent:) name:kNotificationStompEvent object:nil]; 
+}
+
+- (void) addEventHandler:(EventHandler)handler {
+  
+  if (!self.eventHandlers) {
+    self.eventHandlers = [NSMutableArray new];
+  }
+  [self.eventHandlers addObject:handler];
+  
+}
+
+- (void) dispatchEvent:(NSNotification*)notification {
+  
+  SCGeneralEvent *event = [notification.userInfo objectForKey:@"event"];
+  
+  // only handle events with the reviously set target
+  if ([self.registeredEventClasses containsObject:event.target]) {
+  
+    for (EventHandler handler in self.eventHandlers) {
+      handler(event);
+    }
+    
+  }
+  
+  
+}
+
 /**
  *  retrieve an object
  *

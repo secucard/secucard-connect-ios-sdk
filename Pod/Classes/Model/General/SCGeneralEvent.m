@@ -10,4 +10,12 @@
 
 @implementation SCGeneralEvent
 
++ (NSValueTransformer *)typeJSONTransformer {
+  return [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{
+                                                                         @"changed": @(EventTypeChanged),
+                                                                         @"added": @(EventTypeAdded),
+                                                                         @"display": @(EventTypeDisplay)
+                                                                         }];
+}
+
 @end

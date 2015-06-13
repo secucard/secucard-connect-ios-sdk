@@ -7,6 +7,7 @@
 //
 
 #import "SCSecuObject.h"
+#import "SCGlobals.h"
 
 #define kTypeProperty @"type"
 #define kDataPropterty @"data"
@@ -15,7 +16,7 @@
 
 @interface SCGeneralEvent : SCSecuObject
 
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic, assign) SCEventType type;
 @property (nonatomic, copy) NSString *target;
 @property (nonatomic, copy) NSDate *created;
 @property (nonatomic, copy) id data;

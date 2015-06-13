@@ -10,7 +10,7 @@
 
 #import "SCQueryParams.h"
 
-@interface SCTransportMessage : SCTransportStatus
+@interface SCTransportMessage : SCTransportStatus <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *pid;
 @property (nonatomic, copy) NSString *sid;

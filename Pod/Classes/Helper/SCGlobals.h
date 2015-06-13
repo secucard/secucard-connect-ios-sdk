@@ -54,6 +54,14 @@ typedef enum {
   
 } ServiceChannel;
 
+typedef enum {
+
+  EventTypeChanged,
+  EventTypeAdded,
+  EventTypeDisplay
+  
+} SCEventType;
+
 @interface SCGlobals : NSObject
 
 + (NSDateFormatter *)dateFormatter;

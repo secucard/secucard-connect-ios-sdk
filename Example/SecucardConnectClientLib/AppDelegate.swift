@@ -48,9 +48,9 @@
       window?.rootViewController = self.mainController
       window?.makeKeyAndVisible()
       
-//      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientId.rawValue)
-//      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientSecret.rawValue)
-//      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.UUID.rawValue)
+      //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientId.rawValue)
+      //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientSecret.rawValue)
+      //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.UUID.rawValue)
       
       connectCashier { (success: Bool, error: NSError?) -> Void in
         
@@ -60,7 +60,7 @@
     }
     
     func connectCashier( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
-
+      
       // check if all information for initialization ist there
       let clientId = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientId.rawValue) as? String
       let clientSecret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String
@@ -82,7 +82,7 @@
         return;
         
       }
-
+      
       
       // initialize connect client
       
@@ -120,14 +120,12 @@
               })
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
-              if let timerValid = self.pollingTimer?.valid {
-                self.pollingTimer?.invalidate()
-              }
-              self.pollingTimer = NSTimer.scheduledTimerWithTimeInterval(1000, target: self, selector: Selector("pollCheckins"), userInfo: nil, repeats: true)
-              self.pollingTimer?.fire()
+            self.pollCheckins()
+            
+            SCCheckinService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
+              self.pollCheckins()
             })
-
+            
             NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
             
             handler(success: true, error: nil)
@@ -152,8 +150,8 @@
           
         } else if let checkins = result as? [SCSmartCheckin] {
           
-          self.mainController.checkins = checkins
           dispatch_async(dispatch_get_main_queue(), {
+            self.mainController.checkins = checkins
             self.mainController.checkinsCollection.reloadData()
           })
           
