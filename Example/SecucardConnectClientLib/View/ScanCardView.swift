@@ -70,6 +70,7 @@ class ScanCardView: UIView {
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
+    cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     centerView.addSubview(cancelButton)
     
     cancelButton.snp_makeConstraints { (make) -> Void in

@@ -72,6 +72,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let disconnectButton: PaymentButton
   let scanCardButton: PaymentButton
   let showLogButton: PaymentButton
+  let settingsButton: PaymentButton
   
   let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: Selector("didTapPayButton:"))
   let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: Selector("didTapPayButton:"))
@@ -162,6 +163,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     disconnectButton = PaymentButton(icon: "Disconnect", action: Selector("didTapDisconnect"))
     scanCardButton = PaymentButton(icon: "ScanCard", action: Selector("didTapScanCard"))
     showLogButton = PaymentButton(icon: "Log", action: Selector("didTapShowLog"))
+    settingsButton = PaymentButton(icon: "Settings", action: Selector("didTapShowSettings"))
     
     availableButtons = [payDemoButton, payPaypalButton, payLoyaltyButton, payCashlessButton, payAutoButton, payCashButton]
     
@@ -199,6 +201,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     disconnectButton.target = self
     scanCardButton.target = self
     showLogButton.target = self
+    settingsButton.target = self
     
     self.connectButton.enabled = true
     self.connectButton.alpha = 1
@@ -450,6 +453,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     showLogButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(scanCardButton.snp_right).offset(10)
+      make.centerY.equalTo(bottomBar)
+      make.width.equalTo(50)
+      make.height.equalTo(50)
+    }
+    
+    // show log button
+    
+    bottomBar.addSubview(settingsButton)
+    
+    settingsButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(showLogButton.snp_right).offset(10)
       make.centerY.equalTo(bottomBar)
       make.width.equalTo(50)
       make.height.equalTo(50)
@@ -851,6 +865,29 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.edges.equalTo(view)
     }
     
+    SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
+      
+      if let event = event {
+        
+        if event.target == SCGeneralNotification.object().lowercaseString {
+          
+          var parsingError: NSError?
+          if let notification = MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: event.data, error: &parsingError) as? SCGeneralNotification {
+          
+            if let parsingError = parsingError {
+              SCLogManager.error(parsingError)
+            } else {
+              statusView.addStatus(notification.text)
+            }
+            
+          }
+          
+        }
+        
+      }
+      
+    })
+    
     statusView.addStatus("Transaktion wird durchgeführt")
     
     // start
@@ -914,6 +951,21 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func didTapShowLog() {
     logView.hidden = false
+  }
+  
+  func didTapShowSettings() {
+    
+    let initView = InitializationView()
+    
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      initView.delegate = appDelegate
+    }
+    
+    view.addSubview(initView)
+    initView.snp_makeConstraints({ (make) -> Void in
+      make.edges.equalTo(view)
+    })
+    
   }
   
   func didTapConnect() {

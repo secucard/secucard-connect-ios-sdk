@@ -101,6 +101,7 @@ class ModifyPriceView: UIView {
     let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     cancelButton.backgroundColor = Constants.brightGreyColor
     centerView.addSubview(cancelButton)
     

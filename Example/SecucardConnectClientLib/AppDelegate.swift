@@ -28,11 +28,18 @@
       
       // read data
       if let path = NSBundle.mainBundle().pathForResource("products", ofType: "json") {
+        
         if let data = NSData(contentsOfFile: path) {
-          products = JSON(data: data, options: NSJSONReadingOptions.AllowFragments, error: nil)
-          // print out data
-          //        println("jsonData:\(products)")
-          //        println("error\(products?.error)")
+          
+          var parsingError: NSError?
+          products = JSON(data: data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+          
+          if let parsingError = parsingError {
+            
+            SCLogManager.error(parsingError)
+            
+          }
+          
         }
       }
       
@@ -54,6 +61,10 @@
       //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.UUID.rawValue)
       
       connectCashier { (success: Bool, error: NSError?) -> Void in
+        
+        if let error = error {
+          SCLogManager.error(error)
+        }
         
       }
       
@@ -108,7 +119,6 @@
           let s: Bool = success
           
           if let error = error {
-            SCLogManager.error(error)
             handler(success: false, error: error)
           }
           
@@ -123,22 +133,37 @@
             
             self.pollCheckins()
             
+            // Add EventHandlers
+            
+            
+            
             SCCheckinService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
               
               if let event = event {
-                
                 self.mainController.logView.addToLog("handled event -> get checkins")
                 self.pollCheckins()
-                
               }
               
             })
             
+            SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
+              
+              if let event = event {
+                self.mainController.logView.addToLog("handled event -> print notification to transaction status")
+              }
+              
+            })
+            
+            
+            
             NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
             
             handler(success: true, error: nil)
+            
           } else {
+            
             handler(success: false, error: nil)
+            
           }
           
         })
@@ -204,9 +229,23 @@
     }
     
     func didSaveCredentials() {
-      connectCashier { (success, error) -> Void in
+      
+      SCConnectClient.sharedInstance().disconnect { (success: Bool, error: NSError!) -> Void in
+        
+        if (success) {
+          NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
+        }
+        
+        self.connectCashier { (success, error) -> Void in
+          
+          if let error = error {
+            SCLogManager.error(error)
+          }
+        }
         
       }
+      
+      
     }
     
     func applicationWillResignActive(application: UIApplication) {

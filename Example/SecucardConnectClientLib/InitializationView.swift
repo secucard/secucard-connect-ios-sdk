@@ -70,7 +70,13 @@ class InitializationView: UIView {
     clientIdField.font = Constants.headlineFont
     clientIdField.layer.borderWidth = 1
     clientIdField.layer.borderColor = Constants.darkGreyColor.CGColor
-    clientIdField.text = Constants.clientIdCashierSample
+
+    if let clientId = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientId.rawValue) as? String {
+      clientIdField.text = clientId
+    } else {
+      clientIdField.text = Constants.clientIdCashierSample
+    }
+    
     centerView.addSubview(clientIdField)
     
     clientIdField.snp_makeConstraints { (make) -> Void in
@@ -97,7 +103,13 @@ class InitializationView: UIView {
     clientSecretField.font = Constants.headlineFont
     clientSecretField.layer.borderWidth = 1
     clientSecretField.layer.borderColor = Constants.darkGreyColor.CGColor
-    clientSecretField.text = Constants.clientSecretCashierSample
+    
+    if let secret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String {
+      clientSecretField.text = secret
+    } else {
+      clientSecretField.text = Constants.clientSecretCashierSample
+    }
+    
     centerView.addSubview(clientSecretField)
     
     clientSecretField.snp_makeConstraints { (make) -> Void in
@@ -124,7 +136,13 @@ class InitializationView: UIView {
     uuidField.font = Constants.headlineFont
     uuidField.layer.borderWidth = 1
     uuidField.layer.borderColor = Constants.darkGreyColor.CGColor
-    uuidField.text = Constants.deviceIdCashierSample
+    
+    if let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String {
+      uuidField.text = uuid
+    } else {
+      uuidField.text = Constants.deviceIdCashierSample
+    }
+    
     centerView.addSubview(uuidField)
     
     uuidField.snp_makeConstraints { (make) -> Void in
