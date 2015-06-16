@@ -8,6 +8,8 @@
 
 #import "SCAccountManager.h"
 #import "SCAuthDeviceAuthCode.h"
+#import "SCRestServiceManager.h"
+#import "SCStompManager.h"
 
 @interface SCAccountManager()
 

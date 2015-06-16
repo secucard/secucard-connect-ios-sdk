@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Utility/SCStompConfiguration.h

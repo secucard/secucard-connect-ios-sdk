@@ -7,6 +7,9 @@
 //
 
 #import "SCConnectClient.h"
+#import "SCAccountManager.h"
+#import "SCRestServiceManager.h"
+#import "SCStompManager.h"
 
 @implementation SCConnectClient
 

@@ -11,9 +11,8 @@
 #import "SCConnectClient.h"
 #import "SCPersistenceManager.h"
 #import "SCLogManager.h"
-
-@class SCUserCredentials;
-@class SCClientCredentials;
+#import "SCUserCredentials.h"
+#import "SCClientCredentials.h"
 
 #define kErrorDomainSCAccount               @"SCSecucardCoreAccount"
 

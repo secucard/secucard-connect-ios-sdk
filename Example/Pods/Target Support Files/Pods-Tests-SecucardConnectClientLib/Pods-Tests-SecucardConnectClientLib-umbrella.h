@@ -114,6 +114,10 @@
 #import "SCDeviceService.h"
 #import "SCSmartIdentService.h"
 #import "SCSmartTransactionService.h"
+#import "SCClientCredentials.h"
+#import "SCRestConfiguration.h"
+#import "SCStompConfiguration.h"
+#import "SCUserCredentials.h"
 #import "StompKit.h"
 
 FOUNDATION_EXPORT double SecucardConnectClientLibVersionNumber;

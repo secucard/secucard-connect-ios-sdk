@@ -7,30 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SCRestServiceManager.h"
-#import "SCStompManager.h"
+
 #import "SCGlobals.h"
 
-@interface SCClientCredentials : NSObject
+#import "SCClientCredentials.h"
+#import "SCUserCredentials.h"
 
-@property (nonatomic, retain) NSString *clientId;
-@property (nonatomic, retain) NSString *clientSecret;
-
-- (instancetype) initWithClientId:(NSString*)clientId clientSecret:(NSString*)clientSecret;
-
-@end
-
-@interface SCUserCredentials : NSObject
-
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *password;
-
-- (instancetype) initWithUsername:(NSString*)username andPassword:(NSString*)password;
-
-@end
-
-@class SCRestConfiguration;
-@class SCStompConfiguration;
+#import "SCRestConfiguration.h"
+#import "SCStompConfiguration.h"
 
 @interface SCClientConfiguration : NSObject
 
@@ -38,8 +22,6 @@
 @property (nonatomic, retain) SCStompConfiguration *stompConfiguration;
 @property (nonatomic, assign) ServiceChannel defaultChannel;
 @property (nonatomic, assign) BOOL stompEnabled;
-// TODO: needed? @property (nonatomic, retain) NSString *cacheDir;
-// TODO: needed? @property (nonatomic, retain) NSNumber *authWaitTimeoutSec;
 @property (nonatomic, retain) NSString *oauthUrl;
 @property (nonatomic, retain) SCClientCredentials *clientCredentials;
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
