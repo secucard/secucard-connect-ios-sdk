@@ -8,17 +8,17 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "SecucardConnectClientLib"
-  s.version          = "0.1.0"
-  s.summary          = "Library for easy and standardized communication to the secucard infrastructure"
+  s.name             = 'SecucardConnectClientLib'
+  s.version          = '0.2.0'
+  s.summary          = 'Library for easy and standardized communication to the secucard infrastructure'
   s.description      = <<-DESC
                        This Library is the base for communicating with the secucard server infrastructure. It covers the full communication bandwidth
                        DESC
-  s.homepage         = "https://github.com/secucard/secucard-connect-objc-client-lib"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = 'https://github.com/secucard/secucard-connect-objc-client-lib'
+  # s.screenshots    = 'www.example.com/screenshots_1", "www.example.com/screenshots_2'
   s.license          = 'GPL'
-  s.author           = { "Jörn Schmidt" => "schmidt@devid.net" }
-  s.source           = { :git => "https://github.com/secucard/secucard-connect-objc-client-lib.git" }
+  s.author           = { 'Jörn Schmidt' => 'schmidt@devid.net' }
+  s.source           = { :git => 'https://github.com/secucard/secucard-connect-objc-client-lib.git', :tag => '0.2.0'}
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   }
 
   s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+
   s.dependency 'AFNetworking', '~> 2.5'
   s.dependency 'Mantle', '~> 2.0'
   s.dependency 'CocoaAsyncSocket', '~> 7.4'
