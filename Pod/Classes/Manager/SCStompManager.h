@@ -28,36 +28,6 @@
 
 typedef void (^ReceiptHandler)(id responseObject, NSError *error);
 
-@interface SCStompDestination : NSObject
-
-@property (nonatomic, retain) NSString *command;
-
-@property (nonatomic, retain) NSString *method;
-
-@property (nonatomic, retain) Class type;
-
-@property (nonatomic, retain, readonly) NSString *destination;
-
-+ (instancetype) initWithCommand:(NSString*)command;
-+ (instancetype) initWithCommand:(NSString*)command type:(Class)type;
-+ (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method;
-
-@end
-
-@interface SCAppDestination : SCStompDestination
-
-@property (nonatomic, retain) NSString *appId;
-
-+ (instancetype) initWithAppId:(NSString *)appId method:(NSString*)method;
-
-@end
-
-@interface SCStompStorageItem : NSObject
-
-@property (nonatomic, copy) ReceiptHandler handler;
-
-@end
-
 /**
  *  The StompManager
  */

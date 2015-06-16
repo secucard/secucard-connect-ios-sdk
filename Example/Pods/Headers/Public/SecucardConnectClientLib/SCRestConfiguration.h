@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Utility/SCRestConfiguration.h
+../../../../../Pod/Classes/Manager/SCRestConfiguration.h

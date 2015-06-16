@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Utility/SCUserCredentials.h
+../../../../../Pod/Classes/SCUserCredentials.h

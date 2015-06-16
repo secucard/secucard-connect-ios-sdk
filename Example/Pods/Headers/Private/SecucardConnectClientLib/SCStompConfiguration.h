@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Utility/SCStompConfiguration.h
+../../../../../Pod/Classes/Manager/SCStompConfiguration.h
