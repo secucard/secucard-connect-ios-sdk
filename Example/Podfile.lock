@@ -26,7 +26,7 @@ PODS:
   - Mantle (2.0.2):
     - Mantle/extobjc (= 2.0.2)
   - Mantle/extobjc (2.0.2)
-  - SecucardConnectClientLib (0.1.0):
+  - SecucardConnectClientLib (0.2.0):
     - AFNetworking (~> 2.5)
     - CocoaAsyncSocket (~> 7.4)
     - Mantle (~> 2.0)
@@ -54,7 +54,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
   Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
   Mantle: 967fd31ea0220890b2e76589198996b534bb3fb1
-  SecucardConnectClientLib: f5eec7d30c6573cc7911a7c0be84e8bd7a0cccab
+  SecucardConnectClientLib: d691ba4c133b620137b2d8275e108e16c87b5020
   SnapKit: 53696873f2cf84a15e8d7d0d9729ed4381196b16
   Specta: 9cec98310dca411f7c7ffd6943552b501622abfe
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c

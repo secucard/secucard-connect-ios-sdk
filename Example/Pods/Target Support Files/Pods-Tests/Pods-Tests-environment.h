@@ -75,7 +75,7 @@
 // SecucardConnectClientLib
 #define COCOAPODS_POD_AVAILABLE_SecucardConnectClientLib
 #define COCOAPODS_VERSION_MAJOR_SecucardConnectClientLib 0
-#define COCOAPODS_VERSION_MINOR_SecucardConnectClientLib 1
+#define COCOAPODS_VERSION_MINOR_SecucardConnectClientLib 2
 #define COCOAPODS_VERSION_PATCH_SecucardConnectClientLib 0
 
 // Specta
