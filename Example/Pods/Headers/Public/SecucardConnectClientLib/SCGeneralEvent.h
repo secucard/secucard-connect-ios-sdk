@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Model/General/SCGeneralEvent.h

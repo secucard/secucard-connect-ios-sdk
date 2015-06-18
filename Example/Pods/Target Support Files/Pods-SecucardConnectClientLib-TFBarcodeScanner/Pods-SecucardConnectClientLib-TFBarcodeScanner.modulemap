@@ -1,0 +1,6 @@
+framework module TFBarcodeScanner {
+  umbrella header "Pods-SecucardConnectClientLib-TFBarcodeScanner-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Model/General/Components/SCGeneralComponentsGeometry.h

@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Helper/SCGlobals.h
