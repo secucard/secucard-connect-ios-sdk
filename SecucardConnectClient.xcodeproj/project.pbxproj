@@ -1,0 +1,1676 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA19B68A1B334542005CEB53 /* SecucardConnectClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6891B334542005CEB53 /* SecucardConnectClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B6901B334542005CEB53 /* SecucardConnectClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA19B6841B334542005CEB53 /* SecucardConnectClient.framework */; };
+		AA19B6971B334542005CEB53 /* SecucardConnectClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6961B334542005CEB53 /* SecucardConnectClientTests.m */; };
+		AA19B7B01B334568005CEB53 /* MTLModel+Secucard.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6A11B334568005CEB53 /* MTLModel+Secucard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7B11B334568005CEB53 /* MTLModel+Secucard.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6A21B334568005CEB53 /* MTLModel+Secucard.m */; };
+		AA19B7B21B334568005CEB53 /* NSArray+NullStripper.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6A31B334568005CEB53 /* NSArray+NullStripper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7B31B334568005CEB53 /* NSArray+NullStripper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6A41B334568005CEB53 /* NSArray+NullStripper.m */; };
+		AA19B7B41B334568005CEB53 /* NSDictionary+NullStripper.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6A51B334568005CEB53 /* NSDictionary+NullStripper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7B51B334568005CEB53 /* NSDictionary+NullStripper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6A61B334568005CEB53 /* NSDictionary+NullStripper.m */; };
+		AA19B7B61B334568005CEB53 /* SCGlobals.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6A81B334568005CEB53 /* SCGlobals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7B71B334568005CEB53 /* SCGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6A91B334568005CEB53 /* SCGlobals.m */; };
+		AA19B7B81B334568005CEB53 /* SCAccountManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6AB1B334568005CEB53 /* SCAccountManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7B91B334568005CEB53 /* SCAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6AC1B334568005CEB53 /* SCAccountManager.m */; };
+		AA19B7BA1B334568005CEB53 /* SCAppDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6AD1B334568005CEB53 /* SCAppDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7BB1B334568005CEB53 /* SCAppDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6AE1B334568005CEB53 /* SCAppDestination.m */; };
+		AA19B7BC1B334568005CEB53 /* SCLogManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6AF1B334568005CEB53 /* SCLogManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7BD1B334568005CEB53 /* SCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6B01B334568005CEB53 /* SCLogManager.m */; };
+		AA19B7BE1B334568005CEB53 /* SCPersistenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6B11B334568005CEB53 /* SCPersistenceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7BF1B334568005CEB53 /* SCPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6B21B334568005CEB53 /* SCPersistenceManager.m */; };
+		AA19B7C01B334568005CEB53 /* SCRestConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6B31B334568005CEB53 /* SCRestConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7C11B334568005CEB53 /* SCRestConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6B41B334568005CEB53 /* SCRestConfiguration.m */; };
+		AA19B7C21B334568005CEB53 /* SCRestServiceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6B51B334568005CEB53 /* SCRestServiceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7C31B334568005CEB53 /* SCRestServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6B61B334568005CEB53 /* SCRestServiceManager.m */; };
+		AA19B7C41B334568005CEB53 /* SCServiceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6B71B334568005CEB53 /* SCServiceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7C51B334568005CEB53 /* SCServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6B81B334568005CEB53 /* SCServiceManager.m */; };
+		AA19B7C61B334568005CEB53 /* SCStompConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6B91B334568005CEB53 /* SCStompConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7C71B334568005CEB53 /* SCStompConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6BA1B334568005CEB53 /* SCStompConfiguration.m */; };
+		AA19B7C81B334568005CEB53 /* SCStompDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6BB1B334568005CEB53 /* SCStompDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7C91B334568005CEB53 /* SCStompDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6BC1B334568005CEB53 /* SCStompDestination.m */; };
+		AA19B7CA1B334568005CEB53 /* SCStompManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6BD1B334568005CEB53 /* SCStompManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7CB1B334568005CEB53 /* SCStompManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6BE1B334568005CEB53 /* SCStompManager.m */; };
+		AA19B7CC1B334568005CEB53 /* SCStompStorageItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6BF1B334568005CEB53 /* SCStompStorageItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7CD1B334568005CEB53 /* SCStompStorageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6C01B334568005CEB53 /* SCStompStorageItem.m */; };
+		AA19B7CE1B334568005CEB53 /* SCAnnotationProductInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6C31B334568005CEB53 /* SCAnnotationProductInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7CF1B334568005CEB53 /* SCAnnotationProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6C41B334568005CEB53 /* SCAnnotationProductInfo.m */; };
+		AA19B7D01B334568005CEB53 /* SCAuthDeviceAuthCode.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6C61B334568005CEB53 /* SCAuthDeviceAuthCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7D11B334568005CEB53 /* SCAuthDeviceAuthCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6C71B334568005CEB53 /* SCAuthDeviceAuthCode.m */; };
+		AA19B7D21B334568005CEB53 /* SCAuthSession.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6C81B334568005CEB53 /* SCAuthSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7D31B334568005CEB53 /* SCAuthSession.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6C91B334568005CEB53 /* SCAuthSession.m */; };
+		AA19B7D41B334568005CEB53 /* SCAuthToken.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6CA1B334568005CEB53 /* SCAuthToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7D51B334568005CEB53 /* SCAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6CB1B334568005CEB53 /* SCAuthToken.m */; };
+		AA19B7D61B334568005CEB53 /* SCAuthTokenNew.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6CC1B334568005CEB53 /* SCAuthTokenNew.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7D71B334568005CEB53 /* SCAuthTokenNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6CD1B334568005CEB53 /* SCAuthTokenNew.m */; };
+		AA19B7D81B334568005CEB53 /* SCDocumentUploadsDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6D01B334568005CEB53 /* SCDocumentUploadsDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7D91B334568005CEB53 /* SCDocumentUploadsDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6D11B334568005CEB53 /* SCDocumentUploadsDocument.m */; };
+		AA19B7DA1B334568005CEB53 /* SCGeneralComponentsAddressComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6D41B334568005CEB53 /* SCGeneralComponentsAddressComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7DB1B334568005CEB53 /* SCGeneralComponentsAddressComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6D51B334568005CEB53 /* SCGeneralComponentsAddressComponent.m */; };
+		AA19B7DC1B334568005CEB53 /* SCGeneralComponentsAssign.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6D61B334568005CEB53 /* SCGeneralComponentsAssign.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7DD1B334568005CEB53 /* SCGeneralComponentsAssign.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6D71B334568005CEB53 /* SCGeneralComponentsAssign.m */; };
+		AA19B7DE1B334568005CEB53 /* SCGeneralComponentsDayTime.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6D81B334568005CEB53 /* SCGeneralComponentsDayTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7DF1B334568005CEB53 /* SCGeneralComponentsDayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6D91B334568005CEB53 /* SCGeneralComponentsDayTime.m */; };
+		AA19B7E01B334568005CEB53 /* SCGeneralComponentsGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6DA1B334568005CEB53 /* SCGeneralComponentsGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7E11B334568005CEB53 /* SCGeneralComponentsGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6DB1B334568005CEB53 /* SCGeneralComponentsGeometry.m */; };
+		AA19B7E21B334568005CEB53 /* SCGeneralComponentsMetaData.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6DC1B334568005CEB53 /* SCGeneralComponentsMetaData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7E31B334568005CEB53 /* SCGeneralComponentsMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6DD1B334568005CEB53 /* SCGeneralComponentsMetaData.m */; };
+		AA19B7E41B334568005CEB53 /* SCGeneralComponentsOpenHours.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6DE1B334568005CEB53 /* SCGeneralComponentsOpenHours.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7E51B334568005CEB53 /* SCGeneralComponentsOpenHours.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6DF1B334568005CEB53 /* SCGeneralComponentsOpenHours.m */; };
+		AA19B7E61B334568005CEB53 /* SCGeneralAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6E01B334568005CEB53 /* SCGeneralAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7E71B334568005CEB53 /* SCGeneralAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6E11B334568005CEB53 /* SCGeneralAccount.m */; };
+		AA19B7E81B334568005CEB53 /* SCGeneralAccountDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6E21B334568005CEB53 /* SCGeneralAccountDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7E91B334568005CEB53 /* SCGeneralAccountDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6E31B334568005CEB53 /* SCGeneralAccountDevice.m */; };
+		AA19B7EA1B334568005CEB53 /* SCGeneralAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6E41B334568005CEB53 /* SCGeneralAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7EB1B334568005CEB53 /* SCGeneralAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6E51B334568005CEB53 /* SCGeneralAddress.m */; };
+		AA19B7EC1B334568005CEB53 /* SCGeneralAssignment.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6E61B334568005CEB53 /* SCGeneralAssignment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7ED1B334568005CEB53 /* SCGeneralAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6E71B334568005CEB53 /* SCGeneralAssignment.m */; };
+		AA19B7EE1B334568005CEB53 /* SCGeneralBeaconEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6E81B334568005CEB53 /* SCGeneralBeaconEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7EF1B334568005CEB53 /* SCGeneralBeaconEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6E91B334568005CEB53 /* SCGeneralBeaconEnvironment.m */; };
+		AA19B7F01B334568005CEB53 /* SCGeneralContact.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6EA1B334568005CEB53 /* SCGeneralContact.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7F11B334568005CEB53 /* SCGeneralContact.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6EB1B334568005CEB53 /* SCGeneralContact.m */; };
+		AA19B7F21B334568005CEB53 /* SCGeneralEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6EC1B334568005CEB53 /* SCGeneralEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7F31B334568005CEB53 /* SCGeneralEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6ED1B334568005CEB53 /* SCGeneralEvent.m */; };
+		AA19B7F41B334568005CEB53 /* SCGeneralLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6EE1B334568005CEB53 /* SCGeneralLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7F51B334568005CEB53 /* SCGeneralLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6EF1B334568005CEB53 /* SCGeneralLocation.m */; };
+		AA19B7F61B334568005CEB53 /* SCGeneralMerchant.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6F01B334568005CEB53 /* SCGeneralMerchant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7F71B334568005CEB53 /* SCGeneralMerchant.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6F11B334568005CEB53 /* SCGeneralMerchant.m */; };
+		AA19B7F81B334568005CEB53 /* SCGeneralMerchantDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6F21B334568005CEB53 /* SCGeneralMerchantDetail.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7F91B334568005CEB53 /* SCGeneralMerchantDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6F31B334568005CEB53 /* SCGeneralMerchantDetail.m */; };
+		AA19B7FA1B334568005CEB53 /* SCGeneralMerchantList.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6F41B334568005CEB53 /* SCGeneralMerchantList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7FB1B334568005CEB53 /* SCGeneralMerchantList.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6F51B334568005CEB53 /* SCGeneralMerchantList.m */; };
+		AA19B7FC1B334568005CEB53 /* SCGeneralNews.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6F61B334568005CEB53 /* SCGeneralNews.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7FD1B334568005CEB53 /* SCGeneralNews.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6F71B334568005CEB53 /* SCGeneralNews.m */; };
+		AA19B7FE1B334568005CEB53 /* SCGeneralNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6F81B334568005CEB53 /* SCGeneralNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B7FF1B334568005CEB53 /* SCGeneralNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6F91B334568005CEB53 /* SCGeneralNotification.m */; };
+		AA19B8001B334568005CEB53 /* SCGeneralPublicMerchant.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6FA1B334568005CEB53 /* SCGeneralPublicMerchant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8011B334568005CEB53 /* SCGeneralPublicMerchant.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6FB1B334568005CEB53 /* SCGeneralPublicMerchant.m */; };
+		AA19B8021B334568005CEB53 /* SCGeneralStore.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6FC1B334568005CEB53 /* SCGeneralStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8031B334568005CEB53 /* SCGeneralStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6FD1B334568005CEB53 /* SCGeneralStore.m */; };
+		AA19B8041B334568005CEB53 /* SCGeneralStoreSetDefault.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B6FE1B334568005CEB53 /* SCGeneralStoreSetDefault.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8051B334568005CEB53 /* SCGeneralStoreSetDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B6FF1B334568005CEB53 /* SCGeneralStoreSetDefault.m */; };
+		AA19B8061B334568005CEB53 /* SCGeneralTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7001B334568005CEB53 /* SCGeneralTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8071B334568005CEB53 /* SCGeneralTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7011B334568005CEB53 /* SCGeneralTransaction.m */; };
+		AA19B8081B334568005CEB53 /* SCLoyaltyBonus.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7031B334568005CEB53 /* SCLoyaltyBonus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8091B334568005CEB53 /* SCLoyaltyBonus.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7041B334568005CEB53 /* SCLoyaltyBonus.m */; };
+		AA19B80A1B334568005CEB53 /* SCLoyaltyCard.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7051B334568005CEB53 /* SCLoyaltyCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B80B1B334568005CEB53 /* SCLoyaltyCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7061B334568005CEB53 /* SCLoyaltyCard.m */; };
+		AA19B80C1B334568005CEB53 /* SCLoyaltyCardGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7071B334568005CEB53 /* SCLoyaltyCardGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B80D1B334568005CEB53 /* SCLoyaltyCardGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7081B334568005CEB53 /* SCLoyaltyCardGroup.m */; };
+		AA19B80E1B334568005CEB53 /* SCLoyaltyCondition.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7091B334568005CEB53 /* SCLoyaltyCondition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B80F1B334568005CEB53 /* SCLoyaltyCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B70A1B334568005CEB53 /* SCLoyaltyCondition.m */; };
+		AA19B8101B334568005CEB53 /* SCLoyaltyCustomer.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B70B1B334568005CEB53 /* SCLoyaltyCustomer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8111B334568005CEB53 /* SCLoyaltyCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B70C1B334568005CEB53 /* SCLoyaltyCustomer.m */; };
+		AA19B8121B334568005CEB53 /* SCLoyaltyMerchantCard.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B70D1B334568005CEB53 /* SCLoyaltyMerchantCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8131B334568005CEB53 /* SCLoyaltyMerchantCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B70E1B334568005CEB53 /* SCLoyaltyMerchantCard.m */; };
+		AA19B8141B334568005CEB53 /* SCLoyaltyProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B70F1B334568005CEB53 /* SCLoyaltyProgram.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8151B334568005CEB53 /* SCLoyaltyProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7101B334568005CEB53 /* SCLoyaltyProgram.m */; };
+		AA19B8161B334568005CEB53 /* SCLoyaltySale.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7111B334568005CEB53 /* SCLoyaltySale.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8171B334568005CEB53 /* SCLoyaltySale.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7121B334568005CEB53 /* SCLoyaltySale.m */; };
+		AA19B8181B334568005CEB53 /* SCPaymentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7141B334568005CEB53 /* SCPaymentContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8191B334568005CEB53 /* SCPaymentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7151B334568005CEB53 /* SCPaymentContainer.m */; };
+		AA19B81A1B334568005CEB53 /* SCPaymentContract.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7161B334568005CEB53 /* SCPaymentContract.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B81B1B334568005CEB53 /* SCPaymentContract.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7171B334568005CEB53 /* SCPaymentContract.m */; };
+		AA19B81C1B334568005CEB53 /* SCPaymentCustomer.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7181B334568005CEB53 /* SCPaymentCustomer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B81D1B334568005CEB53 /* SCPaymentCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7191B334568005CEB53 /* SCPaymentCustomer.m */; };
+		AA19B81E1B334568005CEB53 /* SCPaymentData.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B71A1B334568005CEB53 /* SCPaymentData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B81F1B334568005CEB53 /* SCPaymentData.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B71B1B334568005CEB53 /* SCPaymentData.m */; };
+		AA19B8201B334568005CEB53 /* SCPaymentSecupayDebit.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B71C1B334568005CEB53 /* SCPaymentSecupayDebit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8211B334568005CEB53 /* SCPaymentSecupayDebit.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B71D1B334568005CEB53 /* SCPaymentSecupayDebit.m */; };
+		AA19B8221B334568005CEB53 /* SCPaymentSecupayPrepay.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B71E1B334568005CEB53 /* SCPaymentSecupayPrepay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8231B334568005CEB53 /* SCPaymentSecupayPrepay.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B71F1B334568005CEB53 /* SCPaymentSecupayPrepay.m */; };
+		AA19B8241B334568005CEB53 /* SCPaymentTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7201B334568005CEB53 /* SCPaymentTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8251B334568005CEB53 /* SCPaymentTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7211B334568005CEB53 /* SCPaymentTransaction.m */; };
+		AA19B8261B334568005CEB53 /* SCPaymentTransferAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7221B334568005CEB53 /* SCPaymentTransferAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8271B334568005CEB53 /* SCPaymentTransferAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7231B334568005CEB53 /* SCPaymentTransferAccount.m */; };
+		AA19B8281B334568005CEB53 /* SCGeoQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7241B334568005CEB53 /* SCGeoQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8291B334568005CEB53 /* SCGeoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7251B334568005CEB53 /* SCGeoQuery.m */; };
+		AA19B82A1B334568005CEB53 /* SCMediaResource.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7261B334568005CEB53 /* SCMediaResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B82B1B334568005CEB53 /* SCMediaResource.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7271B334568005CEB53 /* SCMediaResource.m */; };
+		AA19B82C1B334568005CEB53 /* SCObjectList.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7281B334568005CEB53 /* SCObjectList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B82D1B334568005CEB53 /* SCObjectList.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7291B334568005CEB53 /* SCObjectList.m */; };
+		AA19B82E1B334568005CEB53 /* SCQueryParams.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B72A1B334568005CEB53 /* SCQueryParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B82F1B334568005CEB53 /* SCQueryParams.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B72B1B334568005CEB53 /* SCQueryParams.m */; };
+		AA19B8301B334568005CEB53 /* SCSecuObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B72C1B334568005CEB53 /* SCSecuObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8311B334568005CEB53 /* SCSecuObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B72D1B334568005CEB53 /* SCSecuObject.m */; };
+		AA19B8321B334568005CEB53 /* SCServiceCallWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B72F1B334568005CEB53 /* SCServiceCallWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8331B334568005CEB53 /* SCServiceCallWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7301B334568005CEB53 /* SCServiceCallWrapper.m */; };
+		AA19B8341B334568005CEB53 /* SCServiceEventObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7311B334568005CEB53 /* SCServiceEventObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8351B334568005CEB53 /* SCServiceEventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7321B334568005CEB53 /* SCServiceEventObject.m */; };
+		AA19B8361B334568005CEB53 /* SCServicesIdRequestPerson.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7351B334568005CEB53 /* SCServicesIdRequestPerson.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8371B334568005CEB53 /* SCServicesIdRequestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7361B334568005CEB53 /* SCServicesIdRequestPerson.m */; };
+		AA19B8381B334568005CEB53 /* SCServicesIdResultAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7381B334568005CEB53 /* SCServicesIdResultAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8391B334568005CEB53 /* SCServicesIdResultAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7391B334568005CEB53 /* SCServicesIdResultAddress.m */; };
+		AA19B83A1B334568005CEB53 /* SCServicesIdResultAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B73A1B334568005CEB53 /* SCServicesIdResultAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B83B1B334568005CEB53 /* SCServicesIdResultAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B73B1B334568005CEB53 /* SCServicesIdResultAttachment.m */; };
+		AA19B83C1B334568005CEB53 /* SCServicesIdResultContactData.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B73C1B334568005CEB53 /* SCServicesIdResultContactData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B83D1B334568005CEB53 /* SCServicesIdResultContactData.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B73D1B334568005CEB53 /* SCServicesIdResultContactData.m */; };
+		AA19B83E1B334568005CEB53 /* SCServicesIdResultCustomData.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B73E1B334568005CEB53 /* SCServicesIdResultCustomData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B83F1B334568005CEB53 /* SCServicesIdResultCustomData.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B73F1B334568005CEB53 /* SCServicesIdResultCustomData.m */; };
+		AA19B8401B334568005CEB53 /* SCServicesIdResultIdentificationDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7401B334568005CEB53 /* SCServicesIdResultIdentificationDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8411B334568005CEB53 /* SCServicesIdResultIdentificationDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7411B334568005CEB53 /* SCServicesIdResultIdentificationDocument.m */; };
+		AA19B8421B334568005CEB53 /* SCServicesIdResultIdentificationProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7421B334568005CEB53 /* SCServicesIdResultIdentificationProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8431B334568005CEB53 /* SCServicesIdResultIdentificationProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7431B334568005CEB53 /* SCServicesIdResultIdentificationProcess.m */; };
+		AA19B8441B334568005CEB53 /* SCServicesIdResultPerson.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7441B334568005CEB53 /* SCServicesIdResultPerson.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8451B334568005CEB53 /* SCServicesIdResultPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7451B334568005CEB53 /* SCServicesIdResultPerson.m */; };
+		AA19B8461B334568005CEB53 /* SCServicesIdResultUserData.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7461B334568005CEB53 /* SCServicesIdResultUserData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8471B334568005CEB53 /* SCServicesIdResultUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7471B334568005CEB53 /* SCServicesIdResultUserData.m */; };
+		AA19B8481B334568005CEB53 /* SCServicesIdResultValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7481B334568005CEB53 /* SCServicesIdResultValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8491B334568005CEB53 /* SCServicesIdResultValue.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7491B334568005CEB53 /* SCServicesIdResultValue.m */; };
+		AA19B84A1B334568005CEB53 /* SCServicesContract.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B74A1B334568005CEB53 /* SCServicesContract.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B84B1B334568005CEB53 /* SCServicesContract.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B74B1B334568005CEB53 /* SCServicesContract.m */; };
+		AA19B84C1B334568005CEB53 /* SCServicesIdentRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B74C1B334568005CEB53 /* SCServicesIdentRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B84D1B334568005CEB53 /* SCServicesIdentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B74D1B334568005CEB53 /* SCServicesIdentRequest.m */; };
+		AA19B84E1B334568005CEB53 /* SCServicesIdentResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B74E1B334568005CEB53 /* SCServicesIdentResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B84F1B334568005CEB53 /* SCServicesIdentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B74F1B334568005CEB53 /* SCServicesIdentResult.m */; };
+		AA19B8501B334568005CEB53 /* SCSmartBasket.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7511B334568005CEB53 /* SCSmartBasket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8511B334568005CEB53 /* SCSmartBasket.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7521B334568005CEB53 /* SCSmartBasket.m */; };
+		AA19B8521B334568005CEB53 /* SCSmartBasketInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7531B334568005CEB53 /* SCSmartBasketInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8531B334568005CEB53 /* SCSmartBasketInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7541B334568005CEB53 /* SCSmartBasketInfo.m */; };
+		AA19B8541B334568005CEB53 /* SCSmartCashierDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7551B334568005CEB53 /* SCSmartCashierDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8551B334568005CEB53 /* SCSmartCashierDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7561B334568005CEB53 /* SCSmartCashierDisplay.m */; };
+		AA19B8561B334568005CEB53 /* SCSmartCheckin.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7571B334568005CEB53 /* SCSmartCheckin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8571B334568005CEB53 /* SCSmartCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7581B334568005CEB53 /* SCSmartCheckin.m */; };
+		AA19B8581B334568005CEB53 /* SCSmartDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7591B334568005CEB53 /* SCSmartDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8591B334568005CEB53 /* SCSmartDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B75A1B334568005CEB53 /* SCSmartDevice.m */; };
+		AA19B85A1B334568005CEB53 /* SCSmartIdent.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B75B1B334568005CEB53 /* SCSmartIdent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B85B1B334568005CEB53 /* SCSmartIdent.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B75C1B334568005CEB53 /* SCSmartIdent.m */; };
+		AA19B85C1B334568005CEB53 /* SCSmartProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B75D1B334568005CEB53 /* SCSmartProduct.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B85D1B334568005CEB53 /* SCSmartProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B75E1B334568005CEB53 /* SCSmartProduct.m */; };
+		AA19B85E1B334568005CEB53 /* SCSmartProductGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B75F1B334568005CEB53 /* SCSmartProductGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B85F1B334568005CEB53 /* SCSmartProductGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7601B334568005CEB53 /* SCSmartProductGroup.m */; };
+		AA19B8601B334568005CEB53 /* SCSmartReceiptLine.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7611B334568005CEB53 /* SCSmartReceiptLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8611B334568005CEB53 /* SCSmartReceiptLine.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7621B334568005CEB53 /* SCSmartReceiptLine.m */; };
+		AA19B8621B334568005CEB53 /* SCSmartText.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7631B334568005CEB53 /* SCSmartText.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8631B334568005CEB53 /* SCSmartText.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7641B334568005CEB53 /* SCSmartText.m */; };
+		AA19B8641B334568005CEB53 /* SCSmartTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7651B334568005CEB53 /* SCSmartTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8651B334568005CEB53 /* SCSmartTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7661B334568005CEB53 /* SCSmartTransaction.m */; };
+		AA19B8661B334568005CEB53 /* SCSmartTransactionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7671B334568005CEB53 /* SCSmartTransactionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8671B334568005CEB53 /* SCSmartTransactionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7681B334568005CEB53 /* SCSmartTransactionResult.m */; };
+		AA19B8681B334568005CEB53 /* SCTransportMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B76A1B334568005CEB53 /* SCTransportMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8691B334568005CEB53 /* SCTransportMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B76B1B334568005CEB53 /* SCTransportMessage.m */; };
+		AA19B86A1B334568005CEB53 /* SCTransportResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B76C1B334568005CEB53 /* SCTransportResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B86B1B334568005CEB53 /* SCTransportResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B76D1B334568005CEB53 /* SCTransportResult.m */; };
+		AA19B86C1B334568005CEB53 /* SCTransportStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B76E1B334568005CEB53 /* SCTransportStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B86D1B334568005CEB53 /* SCTransportStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B76F1B334568005CEB53 /* SCTransportStatus.m */; };
+		AA19B86E1B334568005CEB53 /* SCClientConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7701B334568005CEB53 /* SCClientConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B86F1B334568005CEB53 /* SCClientConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7711B334568005CEB53 /* SCClientConfiguration.m */; };
+		AA19B8701B334568005CEB53 /* SCClientCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7721B334568005CEB53 /* SCClientCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8711B334568005CEB53 /* SCClientCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7731B334568005CEB53 /* SCClientCredentials.m */; };
+		AA19B8721B334568005CEB53 /* SCConnectClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7741B334568005CEB53 /* SCConnectClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8731B334568005CEB53 /* SCConnectClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7751B334568005CEB53 /* SCConnectClient.m */; };
+		AA19B8741B334568005CEB53 /* SCUserCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7761B334568005CEB53 /* SCUserCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8751B334568005CEB53 /* SCUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7771B334568005CEB53 /* SCUserCredentials.m */; };
+		AA19B8761B334568005CEB53 /* SCUploadService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B77A1B334568005CEB53 /* SCUploadService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8771B334568005CEB53 /* SCUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B77B1B334568005CEB53 /* SCUploadService.m */; };
+		AA19B8781B334568005CEB53 /* SCSecuAppService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B77E1B334568005CEB53 /* SCSecuAppService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8791B334568005CEB53 /* SCSecuAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B77F1B334568005CEB53 /* SCSecuAppService.m */; };
+		AA19B87A1B334568005CEB53 /* SCAccountDevicesService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7801B334568005CEB53 /* SCAccountDevicesService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B87B1B334568005CEB53 /* SCAccountDevicesService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7811B334568005CEB53 /* SCAccountDevicesService.m */; };
+		AA19B87C1B334568005CEB53 /* SCAccountService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7821B334568005CEB53 /* SCAccountService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B87D1B334568005CEB53 /* SCAccountService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7831B334568005CEB53 /* SCAccountService.m */; };
+		AA19B87E1B334568005CEB53 /* SCMerchantService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7841B334568005CEB53 /* SCMerchantService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B87F1B334568005CEB53 /* SCMerchantService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7851B334568005CEB53 /* SCMerchantService.m */; };
+		AA19B8801B334568005CEB53 /* SCNewsService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7861B334568005CEB53 /* SCNewsService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8811B334568005CEB53 /* SCNewsService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7871B334568005CEB53 /* SCNewsService.m */; };
+		AA19B8821B334568005CEB53 /* SCPublicMerchantService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7881B334568005CEB53 /* SCPublicMerchantService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8831B334568005CEB53 /* SCPublicMerchantService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7891B334568005CEB53 /* SCPublicMerchantService.m */; };
+		AA19B8841B334568005CEB53 /* SCStoreService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B78A1B334568005CEB53 /* SCStoreService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8851B334568005CEB53 /* SCStoreService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B78B1B334568005CEB53 /* SCStoreService.m */; };
+		AA19B8861B334568005CEB53 /* SCTransactionService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B78C1B334568005CEB53 /* SCTransactionService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8871B334568005CEB53 /* SCTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B78D1B334568005CEB53 /* SCTransactionService.m */; };
+		AA19B8881B334568005CEB53 /* SCCardsService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B78F1B334568005CEB53 /* SCCardsService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8891B334568005CEB53 /* SCCardsService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7901B334568005CEB53 /* SCCardsService.m */; };
+		AA19B88A1B334568005CEB53 /* SCLoyaltyCustomerService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7911B334568005CEB53 /* SCLoyaltyCustomerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B88B1B334568005CEB53 /* SCLoyaltyCustomerService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7921B334568005CEB53 /* SCLoyaltyCustomerService.m */; };
+		AA19B88C1B334568005CEB53 /* SCMerchantCardsService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7931B334568005CEB53 /* SCMerchantCardsService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B88D1B334568005CEB53 /* SCMerchantCardsService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7941B334568005CEB53 /* SCMerchantCardsService.m */; };
+		AA19B88E1B334568005CEB53 /* SCContainerService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7961B334568005CEB53 /* SCContainerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B88F1B334568005CEB53 /* SCContainerService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7971B334568005CEB53 /* SCContainerService.m */; };
+		AA19B8901B334568005CEB53 /* SCCustomerService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7981B334568005CEB53 /* SCCustomerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8911B334568005CEB53 /* SCCustomerService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7991B334568005CEB53 /* SCCustomerService.m */; };
+		AA19B8921B334568005CEB53 /* SCSecupayDebitService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B79A1B334568005CEB53 /* SCSecupayDebitService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8931B334568005CEB53 /* SCSecupayDebitService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B79B1B334568005CEB53 /* SCSecupayDebitService.m */; };
+		AA19B8941B334568005CEB53 /* SCSecupayPrepayService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B79C1B334568005CEB53 /* SCSecupayPrepayService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8951B334568005CEB53 /* SCSecupayPrepayService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B79D1B334568005CEB53 /* SCSecupayPrepayService.m */; };
+		AA19B8961B334568005CEB53 /* SCAbstractService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B79E1B334568005CEB53 /* SCAbstractService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8971B334568005CEB53 /* SCAbstractService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B79F1B334568005CEB53 /* SCAbstractService.m */; };
+		AA19B8981B334568005CEB53 /* SCIdentService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7A11B334568005CEB53 /* SCIdentService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8991B334568005CEB53 /* SCIdentService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7A21B334568005CEB53 /* SCIdentService.m */; };
+		AA19B89A1B334568005CEB53 /* SCCheckinService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7A41B334568005CEB53 /* SCCheckinService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B89B1B334568005CEB53 /* SCCheckinService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7A51B334568005CEB53 /* SCCheckinService.m */; };
+		AA19B89C1B334568005CEB53 /* SCDeviceService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7A61B334568005CEB53 /* SCDeviceService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B89D1B334568005CEB53 /* SCDeviceService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7A71B334568005CEB53 /* SCDeviceService.m */; };
+		AA19B89E1B334568005CEB53 /* SCSmartIdentService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7A81B334568005CEB53 /* SCSmartIdentService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B89F1B334568005CEB53 /* SCSmartIdentService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7A91B334568005CEB53 /* SCSmartIdentService.m */; };
+		AA19B8A01B334568005CEB53 /* SCSmartTransactionService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7AA1B334568005CEB53 /* SCSmartTransactionService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8A11B334568005CEB53 /* SCSmartTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7AB1B334568005CEB53 /* SCSmartTransactionService.m */; };
+		AA19B8A21B334568005CEB53 /* StompKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7AE1B334568005CEB53 /* StompKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA19B8A31B334568005CEB53 /* StompKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7AF1B334568005CEB53 /* StompKit.m */; };
+		CC1D99F5B966E147CD691FE4 /* libPods-SecucardConnectClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CB37ACD074783C16CBBFFD /* libPods-SecucardConnectClient.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA19B6911B334542005CEB53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA19B67B1B334542005CEB53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA19B6831B334542005CEB53;
+			remoteInfo = SecucardConnectClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		15CB37ACD074783C16CBBFFD /* libPods-SecucardConnectClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecucardConnectClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74839717297B8F969606CC25 /* Pods-SecucardConnectClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClient/Pods-SecucardConnectClient.release.xcconfig"; sourceTree = "<group>"; };
+		AA19B6841B334542005CEB53 /* SecucardConnectClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SecucardConnectClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA19B6881B334542005CEB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA19B6891B334542005CEB53 /* SecucardConnectClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecucardConnectClient.h; sourceTree = "<group>"; };
+		AA19B68F1B334542005CEB53 /* SecucardConnectClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecucardConnectClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA19B6951B334542005CEB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA19B6961B334542005CEB53 /* SecucardConnectClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecucardConnectClientTests.m; sourceTree = "<group>"; };
+		AA19B6A11B334568005CEB53 /* MTLModel+Secucard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTLModel+Secucard.h"; sourceTree = "<group>"; };
+		AA19B6A21B334568005CEB53 /* MTLModel+Secucard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTLModel+Secucard.m"; sourceTree = "<group>"; };
+		AA19B6A31B334568005CEB53 /* NSArray+NullStripper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NullStripper.h"; sourceTree = "<group>"; };
+		AA19B6A41B334568005CEB53 /* NSArray+NullStripper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NullStripper.m"; sourceTree = "<group>"; };
+		AA19B6A51B334568005CEB53 /* NSDictionary+NullStripper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NullStripper.h"; sourceTree = "<group>"; };
+		AA19B6A61B334568005CEB53 /* NSDictionary+NullStripper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NullStripper.m"; sourceTree = "<group>"; };
+		AA19B6A81B334568005CEB53 /* SCGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGlobals.h; sourceTree = "<group>"; };
+		AA19B6A91B334568005CEB53 /* SCGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGlobals.m; sourceTree = "<group>"; };
+		AA19B6AB1B334568005CEB53 /* SCAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAccountManager.h; sourceTree = "<group>"; };
+		AA19B6AC1B334568005CEB53 /* SCAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAccountManager.m; sourceTree = "<group>"; };
+		AA19B6AD1B334568005CEB53 /* SCAppDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppDestination.h; sourceTree = "<group>"; };
+		AA19B6AE1B334568005CEB53 /* SCAppDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppDestination.m; sourceTree = "<group>"; };
+		AA19B6AF1B334568005CEB53 /* SCLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLogManager.h; sourceTree = "<group>"; };
+		AA19B6B01B334568005CEB53 /* SCLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLogManager.m; sourceTree = "<group>"; };
+		AA19B6B11B334568005CEB53 /* SCPersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPersistenceManager.h; sourceTree = "<group>"; };
+		AA19B6B21B334568005CEB53 /* SCPersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPersistenceManager.m; sourceTree = "<group>"; };
+		AA19B6B31B334568005CEB53 /* SCRestConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRestConfiguration.h; sourceTree = "<group>"; };
+		AA19B6B41B334568005CEB53 /* SCRestConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRestConfiguration.m; sourceTree = "<group>"; };
+		AA19B6B51B334568005CEB53 /* SCRestServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRestServiceManager.h; sourceTree = "<group>"; };
+		AA19B6B61B334568005CEB53 /* SCRestServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRestServiceManager.m; sourceTree = "<group>"; };
+		AA19B6B71B334568005CEB53 /* SCServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServiceManager.h; sourceTree = "<group>"; };
+		AA19B6B81B334568005CEB53 /* SCServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServiceManager.m; sourceTree = "<group>"; };
+		AA19B6B91B334568005CEB53 /* SCStompConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStompConfiguration.h; sourceTree = "<group>"; };
+		AA19B6BA1B334568005CEB53 /* SCStompConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStompConfiguration.m; sourceTree = "<group>"; };
+		AA19B6BB1B334568005CEB53 /* SCStompDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStompDestination.h; sourceTree = "<group>"; };
+		AA19B6BC1B334568005CEB53 /* SCStompDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStompDestination.m; sourceTree = "<group>"; };
+		AA19B6BD1B334568005CEB53 /* SCStompManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStompManager.h; sourceTree = "<group>"; };
+		AA19B6BE1B334568005CEB53 /* SCStompManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStompManager.m; sourceTree = "<group>"; };
+		AA19B6BF1B334568005CEB53 /* SCStompStorageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStompStorageItem.h; sourceTree = "<group>"; };
+		AA19B6C01B334568005CEB53 /* SCStompStorageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStompStorageItem.m; sourceTree = "<group>"; };
+		AA19B6C31B334568005CEB53 /* SCAnnotationProductInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAnnotationProductInfo.h; sourceTree = "<group>"; };
+		AA19B6C41B334568005CEB53 /* SCAnnotationProductInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAnnotationProductInfo.m; sourceTree = "<group>"; };
+		AA19B6C61B334568005CEB53 /* SCAuthDeviceAuthCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAuthDeviceAuthCode.h; sourceTree = "<group>"; };
+		AA19B6C71B334568005CEB53 /* SCAuthDeviceAuthCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAuthDeviceAuthCode.m; sourceTree = "<group>"; };
+		AA19B6C81B334568005CEB53 /* SCAuthSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAuthSession.h; sourceTree = "<group>"; };
+		AA19B6C91B334568005CEB53 /* SCAuthSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAuthSession.m; sourceTree = "<group>"; };
+		AA19B6CA1B334568005CEB53 /* SCAuthToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAuthToken.h; sourceTree = "<group>"; };
+		AA19B6CB1B334568005CEB53 /* SCAuthToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAuthToken.m; sourceTree = "<group>"; };
+		AA19B6CC1B334568005CEB53 /* SCAuthTokenNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAuthTokenNew.h; sourceTree = "<group>"; };
+		AA19B6CD1B334568005CEB53 /* SCAuthTokenNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAuthTokenNew.m; sourceTree = "<group>"; };
+		AA19B6D01B334568005CEB53 /* SCDocumentUploadsDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDocumentUploadsDocument.h; sourceTree = "<group>"; };
+		AA19B6D11B334568005CEB53 /* SCDocumentUploadsDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDocumentUploadsDocument.m; sourceTree = "<group>"; };
+		AA19B6D41B334568005CEB53 /* SCGeneralComponentsAddressComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralComponentsAddressComponent.h; sourceTree = "<group>"; };
+		AA19B6D51B334568005CEB53 /* SCGeneralComponentsAddressComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralComponentsAddressComponent.m; sourceTree = "<group>"; };
+		AA19B6D61B334568005CEB53 /* SCGeneralComponentsAssign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralComponentsAssign.h; sourceTree = "<group>"; };
+		AA19B6D71B334568005CEB53 /* SCGeneralComponentsAssign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralComponentsAssign.m; sourceTree = "<group>"; };
+		AA19B6D81B334568005CEB53 /* SCGeneralComponentsDayTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralComponentsDayTime.h; sourceTree = "<group>"; };
+		AA19B6D91B334568005CEB53 /* SCGeneralComponentsDayTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralComponentsDayTime.m; sourceTree = "<group>"; };
+		AA19B6DA1B334568005CEB53 /* SCGeneralComponentsGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralComponentsGeometry.h; sourceTree = "<group>"; };
+		AA19B6DB1B334568005CEB53 /* SCGeneralComponentsGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralComponentsGeometry.m; sourceTree = "<group>"; };
+		AA19B6DC1B334568005CEB53 /* SCGeneralComponentsMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralComponentsMetaData.h; sourceTree = "<group>"; };
+		AA19B6DD1B334568005CEB53 /* SCGeneralComponentsMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralComponentsMetaData.m; sourceTree = "<group>"; };
+		AA19B6DE1B334568005CEB53 /* SCGeneralComponentsOpenHours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralComponentsOpenHours.h; sourceTree = "<group>"; };
+		AA19B6DF1B334568005CEB53 /* SCGeneralComponentsOpenHours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralComponentsOpenHours.m; sourceTree = "<group>"; };
+		AA19B6E01B334568005CEB53 /* SCGeneralAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralAccount.h; sourceTree = "<group>"; };
+		AA19B6E11B334568005CEB53 /* SCGeneralAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralAccount.m; sourceTree = "<group>"; };
+		AA19B6E21B334568005CEB53 /* SCGeneralAccountDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralAccountDevice.h; sourceTree = "<group>"; };
+		AA19B6E31B334568005CEB53 /* SCGeneralAccountDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralAccountDevice.m; sourceTree = "<group>"; };
+		AA19B6E41B334568005CEB53 /* SCGeneralAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralAddress.h; sourceTree = "<group>"; };
+		AA19B6E51B334568005CEB53 /* SCGeneralAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralAddress.m; sourceTree = "<group>"; };
+		AA19B6E61B334568005CEB53 /* SCGeneralAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralAssignment.h; sourceTree = "<group>"; };
+		AA19B6E71B334568005CEB53 /* SCGeneralAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralAssignment.m; sourceTree = "<group>"; };
+		AA19B6E81B334568005CEB53 /* SCGeneralBeaconEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralBeaconEnvironment.h; sourceTree = "<group>"; };
+		AA19B6E91B334568005CEB53 /* SCGeneralBeaconEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralBeaconEnvironment.m; sourceTree = "<group>"; };
+		AA19B6EA1B334568005CEB53 /* SCGeneralContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralContact.h; sourceTree = "<group>"; };
+		AA19B6EB1B334568005CEB53 /* SCGeneralContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralContact.m; sourceTree = "<group>"; };
+		AA19B6EC1B334568005CEB53 /* SCGeneralEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralEvent.h; sourceTree = "<group>"; };
+		AA19B6ED1B334568005CEB53 /* SCGeneralEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralEvent.m; sourceTree = "<group>"; };
+		AA19B6EE1B334568005CEB53 /* SCGeneralLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralLocation.h; sourceTree = "<group>"; };
+		AA19B6EF1B334568005CEB53 /* SCGeneralLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralLocation.m; sourceTree = "<group>"; };
+		AA19B6F01B334568005CEB53 /* SCGeneralMerchant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralMerchant.h; sourceTree = "<group>"; };
+		AA19B6F11B334568005CEB53 /* SCGeneralMerchant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralMerchant.m; sourceTree = "<group>"; };
+		AA19B6F21B334568005CEB53 /* SCGeneralMerchantDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralMerchantDetail.h; sourceTree = "<group>"; };
+		AA19B6F31B334568005CEB53 /* SCGeneralMerchantDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralMerchantDetail.m; sourceTree = "<group>"; };
+		AA19B6F41B334568005CEB53 /* SCGeneralMerchantList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralMerchantList.h; sourceTree = "<group>"; };
+		AA19B6F51B334568005CEB53 /* SCGeneralMerchantList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralMerchantList.m; sourceTree = "<group>"; };
+		AA19B6F61B334568005CEB53 /* SCGeneralNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralNews.h; sourceTree = "<group>"; };
+		AA19B6F71B334568005CEB53 /* SCGeneralNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralNews.m; sourceTree = "<group>"; };
+		AA19B6F81B334568005CEB53 /* SCGeneralNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralNotification.h; sourceTree = "<group>"; };
+		AA19B6F91B334568005CEB53 /* SCGeneralNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralNotification.m; sourceTree = "<group>"; };
+		AA19B6FA1B334568005CEB53 /* SCGeneralPublicMerchant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralPublicMerchant.h; sourceTree = "<group>"; };
+		AA19B6FB1B334568005CEB53 /* SCGeneralPublicMerchant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralPublicMerchant.m; sourceTree = "<group>"; };
+		AA19B6FC1B334568005CEB53 /* SCGeneralStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralStore.h; sourceTree = "<group>"; };
+		AA19B6FD1B334568005CEB53 /* SCGeneralStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralStore.m; sourceTree = "<group>"; };
+		AA19B6FE1B334568005CEB53 /* SCGeneralStoreSetDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralStoreSetDefault.h; sourceTree = "<group>"; };
+		AA19B6FF1B334568005CEB53 /* SCGeneralStoreSetDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralStoreSetDefault.m; sourceTree = "<group>"; };
+		AA19B7001B334568005CEB53 /* SCGeneralTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralTransaction.h; sourceTree = "<group>"; };
+		AA19B7011B334568005CEB53 /* SCGeneralTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralTransaction.m; sourceTree = "<group>"; };
+		AA19B7031B334568005CEB53 /* SCLoyaltyBonus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyBonus.h; sourceTree = "<group>"; };
+		AA19B7041B334568005CEB53 /* SCLoyaltyBonus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyBonus.m; sourceTree = "<group>"; };
+		AA19B7051B334568005CEB53 /* SCLoyaltyCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyCard.h; sourceTree = "<group>"; };
+		AA19B7061B334568005CEB53 /* SCLoyaltyCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyCard.m; sourceTree = "<group>"; };
+		AA19B7071B334568005CEB53 /* SCLoyaltyCardGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyCardGroup.h; sourceTree = "<group>"; };
+		AA19B7081B334568005CEB53 /* SCLoyaltyCardGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyCardGroup.m; sourceTree = "<group>"; };
+		AA19B7091B334568005CEB53 /* SCLoyaltyCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyCondition.h; sourceTree = "<group>"; };
+		AA19B70A1B334568005CEB53 /* SCLoyaltyCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyCondition.m; sourceTree = "<group>"; };
+		AA19B70B1B334568005CEB53 /* SCLoyaltyCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyCustomer.h; sourceTree = "<group>"; };
+		AA19B70C1B334568005CEB53 /* SCLoyaltyCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyCustomer.m; sourceTree = "<group>"; };
+		AA19B70D1B334568005CEB53 /* SCLoyaltyMerchantCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyMerchantCard.h; sourceTree = "<group>"; };
+		AA19B70E1B334568005CEB53 /* SCLoyaltyMerchantCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyMerchantCard.m; sourceTree = "<group>"; };
+		AA19B70F1B334568005CEB53 /* SCLoyaltyProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyProgram.h; sourceTree = "<group>"; };
+		AA19B7101B334568005CEB53 /* SCLoyaltyProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyProgram.m; sourceTree = "<group>"; };
+		AA19B7111B334568005CEB53 /* SCLoyaltySale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltySale.h; sourceTree = "<group>"; };
+		AA19B7121B334568005CEB53 /* SCLoyaltySale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltySale.m; sourceTree = "<group>"; };
+		AA19B7141B334568005CEB53 /* SCPaymentContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentContainer.h; sourceTree = "<group>"; };
+		AA19B7151B334568005CEB53 /* SCPaymentContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentContainer.m; sourceTree = "<group>"; };
+		AA19B7161B334568005CEB53 /* SCPaymentContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentContract.h; sourceTree = "<group>"; };
+		AA19B7171B334568005CEB53 /* SCPaymentContract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentContract.m; sourceTree = "<group>"; };
+		AA19B7181B334568005CEB53 /* SCPaymentCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentCustomer.h; sourceTree = "<group>"; };
+		AA19B7191B334568005CEB53 /* SCPaymentCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentCustomer.m; sourceTree = "<group>"; };
+		AA19B71A1B334568005CEB53 /* SCPaymentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentData.h; sourceTree = "<group>"; };
+		AA19B71B1B334568005CEB53 /* SCPaymentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentData.m; sourceTree = "<group>"; };
+		AA19B71C1B334568005CEB53 /* SCPaymentSecupayDebit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentSecupayDebit.h; sourceTree = "<group>"; };
+		AA19B71D1B334568005CEB53 /* SCPaymentSecupayDebit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentSecupayDebit.m; sourceTree = "<group>"; };
+		AA19B71E1B334568005CEB53 /* SCPaymentSecupayPrepay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentSecupayPrepay.h; sourceTree = "<group>"; };
+		AA19B71F1B334568005CEB53 /* SCPaymentSecupayPrepay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentSecupayPrepay.m; sourceTree = "<group>"; };
+		AA19B7201B334568005CEB53 /* SCPaymentTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentTransaction.h; sourceTree = "<group>"; };
+		AA19B7211B334568005CEB53 /* SCPaymentTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentTransaction.m; sourceTree = "<group>"; };
+		AA19B7221B334568005CEB53 /* SCPaymentTransferAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPaymentTransferAccount.h; sourceTree = "<group>"; };
+		AA19B7231B334568005CEB53 /* SCPaymentTransferAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPaymentTransferAccount.m; sourceTree = "<group>"; };
+		AA19B7241B334568005CEB53 /* SCGeoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeoQuery.h; sourceTree = "<group>"; };
+		AA19B7251B334568005CEB53 /* SCGeoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeoQuery.m; sourceTree = "<group>"; };
+		AA19B7261B334568005CEB53 /* SCMediaResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMediaResource.h; sourceTree = "<group>"; };
+		AA19B7271B334568005CEB53 /* SCMediaResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMediaResource.m; sourceTree = "<group>"; };
+		AA19B7281B334568005CEB53 /* SCObjectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCObjectList.h; sourceTree = "<group>"; };
+		AA19B7291B334568005CEB53 /* SCObjectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCObjectList.m; sourceTree = "<group>"; };
+		AA19B72A1B334568005CEB53 /* SCQueryParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCQueryParams.h; sourceTree = "<group>"; };
+		AA19B72B1B334568005CEB53 /* SCQueryParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCQueryParams.m; sourceTree = "<group>"; };
+		AA19B72C1B334568005CEB53 /* SCSecuObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSecuObject.h; sourceTree = "<group>"; };
+		AA19B72D1B334568005CEB53 /* SCSecuObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSecuObject.m; sourceTree = "<group>"; };
+		AA19B72F1B334568005CEB53 /* SCServiceCallWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServiceCallWrapper.h; sourceTree = "<group>"; };
+		AA19B7301B334568005CEB53 /* SCServiceCallWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServiceCallWrapper.m; sourceTree = "<group>"; };
+		AA19B7311B334568005CEB53 /* SCServiceEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServiceEventObject.h; sourceTree = "<group>"; };
+		AA19B7321B334568005CEB53 /* SCServiceEventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServiceEventObject.m; sourceTree = "<group>"; };
+		AA19B7351B334568005CEB53 /* SCServicesIdRequestPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdRequestPerson.h; sourceTree = "<group>"; };
+		AA19B7361B334568005CEB53 /* SCServicesIdRequestPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdRequestPerson.m; sourceTree = "<group>"; };
+		AA19B7381B334568005CEB53 /* SCServicesIdResultAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultAddress.h; sourceTree = "<group>"; };
+		AA19B7391B334568005CEB53 /* SCServicesIdResultAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultAddress.m; sourceTree = "<group>"; };
+		AA19B73A1B334568005CEB53 /* SCServicesIdResultAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultAttachment.h; sourceTree = "<group>"; };
+		AA19B73B1B334568005CEB53 /* SCServicesIdResultAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultAttachment.m; sourceTree = "<group>"; };
+		AA19B73C1B334568005CEB53 /* SCServicesIdResultContactData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultContactData.h; sourceTree = "<group>"; };
+		AA19B73D1B334568005CEB53 /* SCServicesIdResultContactData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultContactData.m; sourceTree = "<group>"; };
+		AA19B73E1B334568005CEB53 /* SCServicesIdResultCustomData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultCustomData.h; sourceTree = "<group>"; };
+		AA19B73F1B334568005CEB53 /* SCServicesIdResultCustomData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultCustomData.m; sourceTree = "<group>"; };
+		AA19B7401B334568005CEB53 /* SCServicesIdResultIdentificationDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultIdentificationDocument.h; sourceTree = "<group>"; };
+		AA19B7411B334568005CEB53 /* SCServicesIdResultIdentificationDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultIdentificationDocument.m; sourceTree = "<group>"; };
+		AA19B7421B334568005CEB53 /* SCServicesIdResultIdentificationProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultIdentificationProcess.h; sourceTree = "<group>"; };
+		AA19B7431B334568005CEB53 /* SCServicesIdResultIdentificationProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultIdentificationProcess.m; sourceTree = "<group>"; };
+		AA19B7441B334568005CEB53 /* SCServicesIdResultPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultPerson.h; sourceTree = "<group>"; };
+		AA19B7451B334568005CEB53 /* SCServicesIdResultPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultPerson.m; sourceTree = "<group>"; };
+		AA19B7461B334568005CEB53 /* SCServicesIdResultUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultUserData.h; sourceTree = "<group>"; };
+		AA19B7471B334568005CEB53 /* SCServicesIdResultUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultUserData.m; sourceTree = "<group>"; };
+		AA19B7481B334568005CEB53 /* SCServicesIdResultValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdResultValue.h; sourceTree = "<group>"; };
+		AA19B7491B334568005CEB53 /* SCServicesIdResultValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdResultValue.m; sourceTree = "<group>"; };
+		AA19B74A1B334568005CEB53 /* SCServicesContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesContract.h; sourceTree = "<group>"; };
+		AA19B74B1B334568005CEB53 /* SCServicesContract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesContract.m; sourceTree = "<group>"; };
+		AA19B74C1B334568005CEB53 /* SCServicesIdentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdentRequest.h; sourceTree = "<group>"; };
+		AA19B74D1B334568005CEB53 /* SCServicesIdentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdentRequest.m; sourceTree = "<group>"; };
+		AA19B74E1B334568005CEB53 /* SCServicesIdentResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCServicesIdentResult.h; sourceTree = "<group>"; };
+		AA19B74F1B334568005CEB53 /* SCServicesIdentResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCServicesIdentResult.m; sourceTree = "<group>"; };
+		AA19B7511B334568005CEB53 /* SCSmartBasket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartBasket.h; sourceTree = "<group>"; };
+		AA19B7521B334568005CEB53 /* SCSmartBasket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartBasket.m; sourceTree = "<group>"; };
+		AA19B7531B334568005CEB53 /* SCSmartBasketInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartBasketInfo.h; sourceTree = "<group>"; };
+		AA19B7541B334568005CEB53 /* SCSmartBasketInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartBasketInfo.m; sourceTree = "<group>"; };
+		AA19B7551B334568005CEB53 /* SCSmartCashierDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartCashierDisplay.h; sourceTree = "<group>"; };
+		AA19B7561B334568005CEB53 /* SCSmartCashierDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartCashierDisplay.m; sourceTree = "<group>"; };
+		AA19B7571B334568005CEB53 /* SCSmartCheckin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartCheckin.h; sourceTree = "<group>"; };
+		AA19B7581B334568005CEB53 /* SCSmartCheckin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartCheckin.m; sourceTree = "<group>"; };
+		AA19B7591B334568005CEB53 /* SCSmartDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartDevice.h; sourceTree = "<group>"; };
+		AA19B75A1B334568005CEB53 /* SCSmartDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartDevice.m; sourceTree = "<group>"; };
+		AA19B75B1B334568005CEB53 /* SCSmartIdent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartIdent.h; sourceTree = "<group>"; };
+		AA19B75C1B334568005CEB53 /* SCSmartIdent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartIdent.m; sourceTree = "<group>"; };
+		AA19B75D1B334568005CEB53 /* SCSmartProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartProduct.h; sourceTree = "<group>"; };
+		AA19B75E1B334568005CEB53 /* SCSmartProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartProduct.m; sourceTree = "<group>"; };
+		AA19B75F1B334568005CEB53 /* SCSmartProductGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartProductGroup.h; sourceTree = "<group>"; };
+		AA19B7601B334568005CEB53 /* SCSmartProductGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartProductGroup.m; sourceTree = "<group>"; };
+		AA19B7611B334568005CEB53 /* SCSmartReceiptLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartReceiptLine.h; sourceTree = "<group>"; };
+		AA19B7621B334568005CEB53 /* SCSmartReceiptLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartReceiptLine.m; sourceTree = "<group>"; };
+		AA19B7631B334568005CEB53 /* SCSmartText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartText.h; sourceTree = "<group>"; };
+		AA19B7641B334568005CEB53 /* SCSmartText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartText.m; sourceTree = "<group>"; };
+		AA19B7651B334568005CEB53 /* SCSmartTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartTransaction.h; sourceTree = "<group>"; };
+		AA19B7661B334568005CEB53 /* SCSmartTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartTransaction.m; sourceTree = "<group>"; };
+		AA19B7671B334568005CEB53 /* SCSmartTransactionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartTransactionResult.h; sourceTree = "<group>"; };
+		AA19B7681B334568005CEB53 /* SCSmartTransactionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartTransactionResult.m; sourceTree = "<group>"; };
+		AA19B76A1B334568005CEB53 /* SCTransportMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTransportMessage.h; sourceTree = "<group>"; };
+		AA19B76B1B334568005CEB53 /* SCTransportMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTransportMessage.m; sourceTree = "<group>"; };
+		AA19B76C1B334568005CEB53 /* SCTransportResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTransportResult.h; sourceTree = "<group>"; };
+		AA19B76D1B334568005CEB53 /* SCTransportResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTransportResult.m; sourceTree = "<group>"; };
+		AA19B76E1B334568005CEB53 /* SCTransportStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTransportStatus.h; sourceTree = "<group>"; };
+		AA19B76F1B334568005CEB53 /* SCTransportStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTransportStatus.m; sourceTree = "<group>"; };
+		AA19B7701B334568005CEB53 /* SCClientConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCClientConfiguration.h; sourceTree = "<group>"; };
+		AA19B7711B334568005CEB53 /* SCClientConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCClientConfiguration.m; sourceTree = "<group>"; };
+		AA19B7721B334568005CEB53 /* SCClientCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCClientCredentials.h; sourceTree = "<group>"; };
+		AA19B7731B334568005CEB53 /* SCClientCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCClientCredentials.m; sourceTree = "<group>"; };
+		AA19B7741B334568005CEB53 /* SCConnectClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCConnectClient.h; sourceTree = "<group>"; };
+		AA19B7751B334568005CEB53 /* SCConnectClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCConnectClient.m; sourceTree = "<group>"; };
+		AA19B7761B334568005CEB53 /* SCUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCUserCredentials.h; sourceTree = "<group>"; };
+		AA19B7771B334568005CEB53 /* SCUserCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCUserCredentials.m; sourceTree = "<group>"; };
+		AA19B77A1B334568005CEB53 /* SCUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCUploadService.h; sourceTree = "<group>"; };
+		AA19B77B1B334568005CEB53 /* SCUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCUploadService.m; sourceTree = "<group>"; };
+		AA19B77E1B334568005CEB53 /* SCSecuAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSecuAppService.h; sourceTree = "<group>"; };
+		AA19B77F1B334568005CEB53 /* SCSecuAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSecuAppService.m; sourceTree = "<group>"; };
+		AA19B7801B334568005CEB53 /* SCAccountDevicesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAccountDevicesService.h; sourceTree = "<group>"; };
+		AA19B7811B334568005CEB53 /* SCAccountDevicesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAccountDevicesService.m; sourceTree = "<group>"; };
+		AA19B7821B334568005CEB53 /* SCAccountService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAccountService.h; sourceTree = "<group>"; };
+		AA19B7831B334568005CEB53 /* SCAccountService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAccountService.m; sourceTree = "<group>"; };
+		AA19B7841B334568005CEB53 /* SCMerchantService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMerchantService.h; sourceTree = "<group>"; };
+		AA19B7851B334568005CEB53 /* SCMerchantService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMerchantService.m; sourceTree = "<group>"; };
+		AA19B7861B334568005CEB53 /* SCNewsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNewsService.h; sourceTree = "<group>"; };
+		AA19B7871B334568005CEB53 /* SCNewsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNewsService.m; sourceTree = "<group>"; };
+		AA19B7881B334568005CEB53 /* SCPublicMerchantService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPublicMerchantService.h; sourceTree = "<group>"; };
+		AA19B7891B334568005CEB53 /* SCPublicMerchantService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPublicMerchantService.m; sourceTree = "<group>"; };
+		AA19B78A1B334568005CEB53 /* SCStoreService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStoreService.h; sourceTree = "<group>"; };
+		AA19B78B1B334568005CEB53 /* SCStoreService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStoreService.m; sourceTree = "<group>"; };
+		AA19B78C1B334568005CEB53 /* SCTransactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTransactionService.h; sourceTree = "<group>"; };
+		AA19B78D1B334568005CEB53 /* SCTransactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTransactionService.m; sourceTree = "<group>"; };
+		AA19B78F1B334568005CEB53 /* SCCardsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCardsService.h; sourceTree = "<group>"; };
+		AA19B7901B334568005CEB53 /* SCCardsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCardsService.m; sourceTree = "<group>"; };
+		AA19B7911B334568005CEB53 /* SCLoyaltyCustomerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoyaltyCustomerService.h; sourceTree = "<group>"; };
+		AA19B7921B334568005CEB53 /* SCLoyaltyCustomerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoyaltyCustomerService.m; sourceTree = "<group>"; };
+		AA19B7931B334568005CEB53 /* SCMerchantCardsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMerchantCardsService.h; sourceTree = "<group>"; };
+		AA19B7941B334568005CEB53 /* SCMerchantCardsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMerchantCardsService.m; sourceTree = "<group>"; };
+		AA19B7961B334568005CEB53 /* SCContainerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCContainerService.h; sourceTree = "<group>"; };
+		AA19B7971B334568005CEB53 /* SCContainerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCContainerService.m; sourceTree = "<group>"; };
+		AA19B7981B334568005CEB53 /* SCCustomerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCustomerService.h; sourceTree = "<group>"; };
+		AA19B7991B334568005CEB53 /* SCCustomerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCustomerService.m; sourceTree = "<group>"; };
+		AA19B79A1B334568005CEB53 /* SCSecupayDebitService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSecupayDebitService.h; sourceTree = "<group>"; };
+		AA19B79B1B334568005CEB53 /* SCSecupayDebitService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSecupayDebitService.m; sourceTree = "<group>"; };
+		AA19B79C1B334568005CEB53 /* SCSecupayPrepayService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSecupayPrepayService.h; sourceTree = "<group>"; };
+		AA19B79D1B334568005CEB53 /* SCSecupayPrepayService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSecupayPrepayService.m; sourceTree = "<group>"; };
+		AA19B79E1B334568005CEB53 /* SCAbstractService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAbstractService.h; sourceTree = "<group>"; };
+		AA19B79F1B334568005CEB53 /* SCAbstractService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAbstractService.m; sourceTree = "<group>"; };
+		AA19B7A11B334568005CEB53 /* SCIdentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIdentService.h; sourceTree = "<group>"; };
+		AA19B7A21B334568005CEB53 /* SCIdentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIdentService.m; sourceTree = "<group>"; };
+		AA19B7A41B334568005CEB53 /* SCCheckinService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCheckinService.h; sourceTree = "<group>"; };
+		AA19B7A51B334568005CEB53 /* SCCheckinService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCheckinService.m; sourceTree = "<group>"; };
+		AA19B7A61B334568005CEB53 /* SCDeviceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDeviceService.h; sourceTree = "<group>"; };
+		AA19B7A71B334568005CEB53 /* SCDeviceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDeviceService.m; sourceTree = "<group>"; };
+		AA19B7A81B334568005CEB53 /* SCSmartIdentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartIdentService.h; sourceTree = "<group>"; };
+		AA19B7A91B334568005CEB53 /* SCSmartIdentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartIdentService.m; sourceTree = "<group>"; };
+		AA19B7AA1B334568005CEB53 /* SCSmartTransactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmartTransactionService.h; sourceTree = "<group>"; };
+		AA19B7AB1B334568005CEB53 /* SCSmartTransactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartTransactionService.m; sourceTree = "<group>"; };
+		AA19B7AE1B334568005CEB53 /* StompKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompKit.h; sourceTree = "<group>"; };
+		AA19B7AF1B334568005CEB53 /* StompKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompKit.m; sourceTree = "<group>"; };
+		C6647FF5B37941FD811B01A9 /* Pods-SecucardConnectClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClient/Pods-SecucardConnectClient.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA19B6801B334542005CEB53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC1D99F5B966E147CD691FE4 /* libPods-SecucardConnectClient.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA19B68C1B334542005CEB53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA19B6901B334542005CEB53 /* SecucardConnectClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		59DA47C09993FCC2325ED74E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C6647FF5B37941FD811B01A9 /* Pods-SecucardConnectClient.debug.xcconfig */,
+				74839717297B8F969606CC25 /* Pods-SecucardConnectClient.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA19B67A1B334542005CEB53 = {
+			isa = PBXGroup;
+			children = (
+				AA19B6861B334542005CEB53 /* SecucardConnectClient */,
+				AA19B6931B334542005CEB53 /* SecucardConnectClientTests */,
+				AA19B6851B334542005CEB53 /* Products */,
+				59DA47C09993FCC2325ED74E /* Pods */,
+				C7221CDB18B34FA9CA718100 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AA19B6851B334542005CEB53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6841B334542005CEB53 /* SecucardConnectClient.framework */,
+				AA19B68F1B334542005CEB53 /* SecucardConnectClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA19B6861B334542005CEB53 /* SecucardConnectClient */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6A01B334568005CEB53 /* Categories */,
+				AA19B6A71B334568005CEB53 /* Helper */,
+				AA19B6AA1B334568005CEB53 /* Manager */,
+				AA19B6C11B334568005CEB53 /* Model */,
+				AA19B7701B334568005CEB53 /* SCClientConfiguration.h */,
+				AA19B7711B334568005CEB53 /* SCClientConfiguration.m */,
+				AA19B7721B334568005CEB53 /* SCClientCredentials.h */,
+				AA19B7731B334568005CEB53 /* SCClientCredentials.m */,
+				AA19B7741B334568005CEB53 /* SCConnectClient.h */,
+				AA19B7751B334568005CEB53 /* SCConnectClient.m */,
+				AA19B7761B334568005CEB53 /* SCUserCredentials.h */,
+				AA19B7771B334568005CEB53 /* SCUserCredentials.m */,
+				AA19B7781B334568005CEB53 /* Services */,
+				AA19B7AC1B334568005CEB53 /* Vendor */,
+				AA19B6891B334542005CEB53 /* SecucardConnectClient.h */,
+				AA19B6871B334542005CEB53 /* Supporting Files */,
+			);
+			path = SecucardConnectClient;
+			sourceTree = "<group>";
+		};
+		AA19B6871B334542005CEB53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6881B334542005CEB53 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA19B6931B334542005CEB53 /* SecucardConnectClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6961B334542005CEB53 /* SecucardConnectClientTests.m */,
+				AA19B6941B334542005CEB53 /* Supporting Files */,
+			);
+			path = SecucardConnectClientTests;
+			sourceTree = "<group>";
+		};
+		AA19B6941B334542005CEB53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6951B334542005CEB53 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA19B6A01B334568005CEB53 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6A11B334568005CEB53 /* MTLModel+Secucard.h */,
+				AA19B6A21B334568005CEB53 /* MTLModel+Secucard.m */,
+				AA19B6A31B334568005CEB53 /* NSArray+NullStripper.h */,
+				AA19B6A41B334568005CEB53 /* NSArray+NullStripper.m */,
+				AA19B6A51B334568005CEB53 /* NSDictionary+NullStripper.h */,
+				AA19B6A61B334568005CEB53 /* NSDictionary+NullStripper.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		AA19B6A71B334568005CEB53 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6A81B334568005CEB53 /* SCGlobals.h */,
+				AA19B6A91B334568005CEB53 /* SCGlobals.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		AA19B6AA1B334568005CEB53 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6AB1B334568005CEB53 /* SCAccountManager.h */,
+				AA19B6AC1B334568005CEB53 /* SCAccountManager.m */,
+				AA19B6AD1B334568005CEB53 /* SCAppDestination.h */,
+				AA19B6AE1B334568005CEB53 /* SCAppDestination.m */,
+				AA19B6AF1B334568005CEB53 /* SCLogManager.h */,
+				AA19B6B01B334568005CEB53 /* SCLogManager.m */,
+				AA19B6B11B334568005CEB53 /* SCPersistenceManager.h */,
+				AA19B6B21B334568005CEB53 /* SCPersistenceManager.m */,
+				AA19B6B31B334568005CEB53 /* SCRestConfiguration.h */,
+				AA19B6B41B334568005CEB53 /* SCRestConfiguration.m */,
+				AA19B6B51B334568005CEB53 /* SCRestServiceManager.h */,
+				AA19B6B61B334568005CEB53 /* SCRestServiceManager.m */,
+				AA19B6B71B334568005CEB53 /* SCServiceManager.h */,
+				AA19B6B81B334568005CEB53 /* SCServiceManager.m */,
+				AA19B6B91B334568005CEB53 /* SCStompConfiguration.h */,
+				AA19B6BA1B334568005CEB53 /* SCStompConfiguration.m */,
+				AA19B6BB1B334568005CEB53 /* SCStompDestination.h */,
+				AA19B6BC1B334568005CEB53 /* SCStompDestination.m */,
+				AA19B6BD1B334568005CEB53 /* SCStompManager.h */,
+				AA19B6BE1B334568005CEB53 /* SCStompManager.m */,
+				AA19B6BF1B334568005CEB53 /* SCStompStorageItem.h */,
+				AA19B6C01B334568005CEB53 /* SCStompStorageItem.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		AA19B6C11B334568005CEB53 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6C21B334568005CEB53 /* Annotation */,
+				AA19B6C51B334568005CEB53 /* Auth */,
+				AA19B6CE1B334568005CEB53 /* Document */,
+				AA19B6D21B334568005CEB53 /* General */,
+				AA19B7021B334568005CEB53 /* Loyalty */,
+				AA19B7131B334568005CEB53 /* Payment */,
+				AA19B7241B334568005CEB53 /* SCGeoQuery.h */,
+				AA19B7251B334568005CEB53 /* SCGeoQuery.m */,
+				AA19B7261B334568005CEB53 /* SCMediaResource.h */,
+				AA19B7271B334568005CEB53 /* SCMediaResource.m */,
+				AA19B7281B334568005CEB53 /* SCObjectList.h */,
+				AA19B7291B334568005CEB53 /* SCObjectList.m */,
+				AA19B72A1B334568005CEB53 /* SCQueryParams.h */,
+				AA19B72B1B334568005CEB53 /* SCQueryParams.m */,
+				AA19B72C1B334568005CEB53 /* SCSecuObject.h */,
+				AA19B72D1B334568005CEB53 /* SCSecuObject.m */,
+				AA19B72E1B334568005CEB53 /* ServiceModel */,
+				AA19B7331B334568005CEB53 /* Services */,
+				AA19B7501B334568005CEB53 /* Smart */,
+				AA19B7691B334568005CEB53 /* Transport */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AA19B6C21B334568005CEB53 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6C31B334568005CEB53 /* SCAnnotationProductInfo.h */,
+				AA19B6C41B334568005CEB53 /* SCAnnotationProductInfo.m */,
+			);
+			path = Annotation;
+			sourceTree = "<group>";
+		};
+		AA19B6C51B334568005CEB53 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6C61B334568005CEB53 /* SCAuthDeviceAuthCode.h */,
+				AA19B6C71B334568005CEB53 /* SCAuthDeviceAuthCode.m */,
+				AA19B6C81B334568005CEB53 /* SCAuthSession.h */,
+				AA19B6C91B334568005CEB53 /* SCAuthSession.m */,
+				AA19B6CA1B334568005CEB53 /* SCAuthToken.h */,
+				AA19B6CB1B334568005CEB53 /* SCAuthToken.m */,
+				AA19B6CC1B334568005CEB53 /* SCAuthTokenNew.h */,
+				AA19B6CD1B334568005CEB53 /* SCAuthTokenNew.m */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		AA19B6CE1B334568005CEB53 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6CF1B334568005CEB53 /* Uploads */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		AA19B6CF1B334568005CEB53 /* Uploads */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6D01B334568005CEB53 /* SCDocumentUploadsDocument.h */,
+				AA19B6D11B334568005CEB53 /* SCDocumentUploadsDocument.m */,
+			);
+			path = Uploads;
+			sourceTree = "<group>";
+		};
+		AA19B6D21B334568005CEB53 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6D31B334568005CEB53 /* Components */,
+				AA19B6E01B334568005CEB53 /* SCGeneralAccount.h */,
+				AA19B6E11B334568005CEB53 /* SCGeneralAccount.m */,
+				AA19B6E21B334568005CEB53 /* SCGeneralAccountDevice.h */,
+				AA19B6E31B334568005CEB53 /* SCGeneralAccountDevice.m */,
+				AA19B6E41B334568005CEB53 /* SCGeneralAddress.h */,
+				AA19B6E51B334568005CEB53 /* SCGeneralAddress.m */,
+				AA19B6E61B334568005CEB53 /* SCGeneralAssignment.h */,
+				AA19B6E71B334568005CEB53 /* SCGeneralAssignment.m */,
+				AA19B6E81B334568005CEB53 /* SCGeneralBeaconEnvironment.h */,
+				AA19B6E91B334568005CEB53 /* SCGeneralBeaconEnvironment.m */,
+				AA19B6EA1B334568005CEB53 /* SCGeneralContact.h */,
+				AA19B6EB1B334568005CEB53 /* SCGeneralContact.m */,
+				AA19B6EC1B334568005CEB53 /* SCGeneralEvent.h */,
+				AA19B6ED1B334568005CEB53 /* SCGeneralEvent.m */,
+				AA19B6EE1B334568005CEB53 /* SCGeneralLocation.h */,
+				AA19B6EF1B334568005CEB53 /* SCGeneralLocation.m */,
+				AA19B6F01B334568005CEB53 /* SCGeneralMerchant.h */,
+				AA19B6F11B334568005CEB53 /* SCGeneralMerchant.m */,
+				AA19B6F21B334568005CEB53 /* SCGeneralMerchantDetail.h */,
+				AA19B6F31B334568005CEB53 /* SCGeneralMerchantDetail.m */,
+				AA19B6F41B334568005CEB53 /* SCGeneralMerchantList.h */,
+				AA19B6F51B334568005CEB53 /* SCGeneralMerchantList.m */,
+				AA19B6F61B334568005CEB53 /* SCGeneralNews.h */,
+				AA19B6F71B334568005CEB53 /* SCGeneralNews.m */,
+				AA19B6F81B334568005CEB53 /* SCGeneralNotification.h */,
+				AA19B6F91B334568005CEB53 /* SCGeneralNotification.m */,
+				AA19B6FA1B334568005CEB53 /* SCGeneralPublicMerchant.h */,
+				AA19B6FB1B334568005CEB53 /* SCGeneralPublicMerchant.m */,
+				AA19B6FC1B334568005CEB53 /* SCGeneralStore.h */,
+				AA19B6FD1B334568005CEB53 /* SCGeneralStore.m */,
+				AA19B6FE1B334568005CEB53 /* SCGeneralStoreSetDefault.h */,
+				AA19B6FF1B334568005CEB53 /* SCGeneralStoreSetDefault.m */,
+				AA19B7001B334568005CEB53 /* SCGeneralTransaction.h */,
+				AA19B7011B334568005CEB53 /* SCGeneralTransaction.m */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		AA19B6D31B334568005CEB53 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B6D41B334568005CEB53 /* SCGeneralComponentsAddressComponent.h */,
+				AA19B6D51B334568005CEB53 /* SCGeneralComponentsAddressComponent.m */,
+				AA19B6D61B334568005CEB53 /* SCGeneralComponentsAssign.h */,
+				AA19B6D71B334568005CEB53 /* SCGeneralComponentsAssign.m */,
+				AA19B6D81B334568005CEB53 /* SCGeneralComponentsDayTime.h */,
+				AA19B6D91B334568005CEB53 /* SCGeneralComponentsDayTime.m */,
+				AA19B6DA1B334568005CEB53 /* SCGeneralComponentsGeometry.h */,
+				AA19B6DB1B334568005CEB53 /* SCGeneralComponentsGeometry.m */,
+				AA19B6DC1B334568005CEB53 /* SCGeneralComponentsMetaData.h */,
+				AA19B6DD1B334568005CEB53 /* SCGeneralComponentsMetaData.m */,
+				AA19B6DE1B334568005CEB53 /* SCGeneralComponentsOpenHours.h */,
+				AA19B6DF1B334568005CEB53 /* SCGeneralComponentsOpenHours.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AA19B7021B334568005CEB53 /* Loyalty */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7031B334568005CEB53 /* SCLoyaltyBonus.h */,
+				AA19B7041B334568005CEB53 /* SCLoyaltyBonus.m */,
+				AA19B7051B334568005CEB53 /* SCLoyaltyCard.h */,
+				AA19B7061B334568005CEB53 /* SCLoyaltyCard.m */,
+				AA19B7071B334568005CEB53 /* SCLoyaltyCardGroup.h */,
+				AA19B7081B334568005CEB53 /* SCLoyaltyCardGroup.m */,
+				AA19B7091B334568005CEB53 /* SCLoyaltyCondition.h */,
+				AA19B70A1B334568005CEB53 /* SCLoyaltyCondition.m */,
+				AA19B70B1B334568005CEB53 /* SCLoyaltyCustomer.h */,
+				AA19B70C1B334568005CEB53 /* SCLoyaltyCustomer.m */,
+				AA19B70D1B334568005CEB53 /* SCLoyaltyMerchantCard.h */,
+				AA19B70E1B334568005CEB53 /* SCLoyaltyMerchantCard.m */,
+				AA19B70F1B334568005CEB53 /* SCLoyaltyProgram.h */,
+				AA19B7101B334568005CEB53 /* SCLoyaltyProgram.m */,
+				AA19B7111B334568005CEB53 /* SCLoyaltySale.h */,
+				AA19B7121B334568005CEB53 /* SCLoyaltySale.m */,
+			);
+			path = Loyalty;
+			sourceTree = "<group>";
+		};
+		AA19B7131B334568005CEB53 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7141B334568005CEB53 /* SCPaymentContainer.h */,
+				AA19B7151B334568005CEB53 /* SCPaymentContainer.m */,
+				AA19B7161B334568005CEB53 /* SCPaymentContract.h */,
+				AA19B7171B334568005CEB53 /* SCPaymentContract.m */,
+				AA19B7181B334568005CEB53 /* SCPaymentCustomer.h */,
+				AA19B7191B334568005CEB53 /* SCPaymentCustomer.m */,
+				AA19B71A1B334568005CEB53 /* SCPaymentData.h */,
+				AA19B71B1B334568005CEB53 /* SCPaymentData.m */,
+				AA19B71C1B334568005CEB53 /* SCPaymentSecupayDebit.h */,
+				AA19B71D1B334568005CEB53 /* SCPaymentSecupayDebit.m */,
+				AA19B71E1B334568005CEB53 /* SCPaymentSecupayPrepay.h */,
+				AA19B71F1B334568005CEB53 /* SCPaymentSecupayPrepay.m */,
+				AA19B7201B334568005CEB53 /* SCPaymentTransaction.h */,
+				AA19B7211B334568005CEB53 /* SCPaymentTransaction.m */,
+				AA19B7221B334568005CEB53 /* SCPaymentTransferAccount.h */,
+				AA19B7231B334568005CEB53 /* SCPaymentTransferAccount.m */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		AA19B72E1B334568005CEB53 /* ServiceModel */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B72F1B334568005CEB53 /* SCServiceCallWrapper.h */,
+				AA19B7301B334568005CEB53 /* SCServiceCallWrapper.m */,
+				AA19B7311B334568005CEB53 /* SCServiceEventObject.h */,
+				AA19B7321B334568005CEB53 /* SCServiceEventObject.m */,
+			);
+			path = ServiceModel;
+			sourceTree = "<group>";
+		};
+		AA19B7331B334568005CEB53 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7341B334568005CEB53 /* IdRequest */,
+				AA19B7371B334568005CEB53 /* IdResult */,
+				AA19B74A1B334568005CEB53 /* SCServicesContract.h */,
+				AA19B74B1B334568005CEB53 /* SCServicesContract.m */,
+				AA19B74C1B334568005CEB53 /* SCServicesIdentRequest.h */,
+				AA19B74D1B334568005CEB53 /* SCServicesIdentRequest.m */,
+				AA19B74E1B334568005CEB53 /* SCServicesIdentResult.h */,
+				AA19B74F1B334568005CEB53 /* SCServicesIdentResult.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA19B7341B334568005CEB53 /* IdRequest */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7351B334568005CEB53 /* SCServicesIdRequestPerson.h */,
+				AA19B7361B334568005CEB53 /* SCServicesIdRequestPerson.m */,
+			);
+			path = IdRequest;
+			sourceTree = "<group>";
+		};
+		AA19B7371B334568005CEB53 /* IdResult */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7381B334568005CEB53 /* SCServicesIdResultAddress.h */,
+				AA19B7391B334568005CEB53 /* SCServicesIdResultAddress.m */,
+				AA19B73A1B334568005CEB53 /* SCServicesIdResultAttachment.h */,
+				AA19B73B1B334568005CEB53 /* SCServicesIdResultAttachment.m */,
+				AA19B73C1B334568005CEB53 /* SCServicesIdResultContactData.h */,
+				AA19B73D1B334568005CEB53 /* SCServicesIdResultContactData.m */,
+				AA19B73E1B334568005CEB53 /* SCServicesIdResultCustomData.h */,
+				AA19B73F1B334568005CEB53 /* SCServicesIdResultCustomData.m */,
+				AA19B7401B334568005CEB53 /* SCServicesIdResultIdentificationDocument.h */,
+				AA19B7411B334568005CEB53 /* SCServicesIdResultIdentificationDocument.m */,
+				AA19B7421B334568005CEB53 /* SCServicesIdResultIdentificationProcess.h */,
+				AA19B7431B334568005CEB53 /* SCServicesIdResultIdentificationProcess.m */,
+				AA19B7441B334568005CEB53 /* SCServicesIdResultPerson.h */,
+				AA19B7451B334568005CEB53 /* SCServicesIdResultPerson.m */,
+				AA19B7461B334568005CEB53 /* SCServicesIdResultUserData.h */,
+				AA19B7471B334568005CEB53 /* SCServicesIdResultUserData.m */,
+				AA19B7481B334568005CEB53 /* SCServicesIdResultValue.h */,
+				AA19B7491B334568005CEB53 /* SCServicesIdResultValue.m */,
+			);
+			path = IdResult;
+			sourceTree = "<group>";
+		};
+		AA19B7501B334568005CEB53 /* Smart */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7511B334568005CEB53 /* SCSmartBasket.h */,
+				AA19B7521B334568005CEB53 /* SCSmartBasket.m */,
+				AA19B7531B334568005CEB53 /* SCSmartBasketInfo.h */,
+				AA19B7541B334568005CEB53 /* SCSmartBasketInfo.m */,
+				AA19B7551B334568005CEB53 /* SCSmartCashierDisplay.h */,
+				AA19B7561B334568005CEB53 /* SCSmartCashierDisplay.m */,
+				AA19B7571B334568005CEB53 /* SCSmartCheckin.h */,
+				AA19B7581B334568005CEB53 /* SCSmartCheckin.m */,
+				AA19B7591B334568005CEB53 /* SCSmartDevice.h */,
+				AA19B75A1B334568005CEB53 /* SCSmartDevice.m */,
+				AA19B75B1B334568005CEB53 /* SCSmartIdent.h */,
+				AA19B75C1B334568005CEB53 /* SCSmartIdent.m */,
+				AA19B75D1B334568005CEB53 /* SCSmartProduct.h */,
+				AA19B75E1B334568005CEB53 /* SCSmartProduct.m */,
+				AA19B75F1B334568005CEB53 /* SCSmartProductGroup.h */,
+				AA19B7601B334568005CEB53 /* SCSmartProductGroup.m */,
+				AA19B7611B334568005CEB53 /* SCSmartReceiptLine.h */,
+				AA19B7621B334568005CEB53 /* SCSmartReceiptLine.m */,
+				AA19B7631B334568005CEB53 /* SCSmartText.h */,
+				AA19B7641B334568005CEB53 /* SCSmartText.m */,
+				AA19B7651B334568005CEB53 /* SCSmartTransaction.h */,
+				AA19B7661B334568005CEB53 /* SCSmartTransaction.m */,
+				AA19B7671B334568005CEB53 /* SCSmartTransactionResult.h */,
+				AA19B7681B334568005CEB53 /* SCSmartTransactionResult.m */,
+			);
+			path = Smart;
+			sourceTree = "<group>";
+		};
+		AA19B7691B334568005CEB53 /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B76A1B334568005CEB53 /* SCTransportMessage.h */,
+				AA19B76B1B334568005CEB53 /* SCTransportMessage.m */,
+				AA19B76C1B334568005CEB53 /* SCTransportResult.h */,
+				AA19B76D1B334568005CEB53 /* SCTransportResult.m */,
+				AA19B76E1B334568005CEB53 /* SCTransportStatus.h */,
+				AA19B76F1B334568005CEB53 /* SCTransportStatus.m */,
+			);
+			path = Transport;
+			sourceTree = "<group>";
+		};
+		AA19B7781B334568005CEB53 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7791B334568005CEB53 /* Document */,
+				AA19B77C1B334568005CEB53 /* General */,
+				AA19B78E1B334568005CEB53 /* Loyalty */,
+				AA19B7951B334568005CEB53 /* Payment */,
+				AA19B79E1B334568005CEB53 /* SCAbstractService.h */,
+				AA19B79F1B334568005CEB53 /* SCAbstractService.m */,
+				AA19B7A01B334568005CEB53 /* Services */,
+				AA19B7A31B334568005CEB53 /* Smart */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA19B7791B334568005CEB53 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B77A1B334568005CEB53 /* SCUploadService.h */,
+				AA19B77B1B334568005CEB53 /* SCUploadService.m */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		AA19B77C1B334568005CEB53 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B77D1B334568005CEB53 /* App */,
+				AA19B7801B334568005CEB53 /* SCAccountDevicesService.h */,
+				AA19B7811B334568005CEB53 /* SCAccountDevicesService.m */,
+				AA19B7821B334568005CEB53 /* SCAccountService.h */,
+				AA19B7831B334568005CEB53 /* SCAccountService.m */,
+				AA19B7841B334568005CEB53 /* SCMerchantService.h */,
+				AA19B7851B334568005CEB53 /* SCMerchantService.m */,
+				AA19B7861B334568005CEB53 /* SCNewsService.h */,
+				AA19B7871B334568005CEB53 /* SCNewsService.m */,
+				AA19B7881B334568005CEB53 /* SCPublicMerchantService.h */,
+				AA19B7891B334568005CEB53 /* SCPublicMerchantService.m */,
+				AA19B78A1B334568005CEB53 /* SCStoreService.h */,
+				AA19B78B1B334568005CEB53 /* SCStoreService.m */,
+				AA19B78C1B334568005CEB53 /* SCTransactionService.h */,
+				AA19B78D1B334568005CEB53 /* SCTransactionService.m */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		AA19B77D1B334568005CEB53 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B77E1B334568005CEB53 /* SCSecuAppService.h */,
+				AA19B77F1B334568005CEB53 /* SCSecuAppService.m */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA19B78E1B334568005CEB53 /* Loyalty */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B78F1B334568005CEB53 /* SCCardsService.h */,
+				AA19B7901B334568005CEB53 /* SCCardsService.m */,
+				AA19B7911B334568005CEB53 /* SCLoyaltyCustomerService.h */,
+				AA19B7921B334568005CEB53 /* SCLoyaltyCustomerService.m */,
+				AA19B7931B334568005CEB53 /* SCMerchantCardsService.h */,
+				AA19B7941B334568005CEB53 /* SCMerchantCardsService.m */,
+			);
+			path = Loyalty;
+			sourceTree = "<group>";
+		};
+		AA19B7951B334568005CEB53 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7961B334568005CEB53 /* SCContainerService.h */,
+				AA19B7971B334568005CEB53 /* SCContainerService.m */,
+				AA19B7981B334568005CEB53 /* SCCustomerService.h */,
+				AA19B7991B334568005CEB53 /* SCCustomerService.m */,
+				AA19B79A1B334568005CEB53 /* SCSecupayDebitService.h */,
+				AA19B79B1B334568005CEB53 /* SCSecupayDebitService.m */,
+				AA19B79C1B334568005CEB53 /* SCSecupayPrepayService.h */,
+				AA19B79D1B334568005CEB53 /* SCSecupayPrepayService.m */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		AA19B7A01B334568005CEB53 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7A11B334568005CEB53 /* SCIdentService.h */,
+				AA19B7A21B334568005CEB53 /* SCIdentService.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA19B7A31B334568005CEB53 /* Smart */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7A41B334568005CEB53 /* SCCheckinService.h */,
+				AA19B7A51B334568005CEB53 /* SCCheckinService.m */,
+				AA19B7A61B334568005CEB53 /* SCDeviceService.h */,
+				AA19B7A71B334568005CEB53 /* SCDeviceService.m */,
+				AA19B7A81B334568005CEB53 /* SCSmartIdentService.h */,
+				AA19B7A91B334568005CEB53 /* SCSmartIdentService.m */,
+				AA19B7AA1B334568005CEB53 /* SCSmartTransactionService.h */,
+				AA19B7AB1B334568005CEB53 /* SCSmartTransactionService.m */,
+			);
+			path = Smart;
+			sourceTree = "<group>";
+		};
+		AA19B7AC1B334568005CEB53 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7AD1B334568005CEB53 /* StompKit */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		AA19B7AD1B334568005CEB53 /* StompKit */ = {
+			isa = PBXGroup;
+			children = (
+				AA19B7AE1B334568005CEB53 /* StompKit.h */,
+				AA19B7AF1B334568005CEB53 /* StompKit.m */,
+			);
+			path = StompKit;
+			sourceTree = "<group>";
+		};
+		C7221CDB18B34FA9CA718100 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15CB37ACD074783C16CBBFFD /* libPods-SecucardConnectClient.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		AA19B6811B334542005CEB53 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA19B89E1B334568005CEB53 /* SCSmartIdentService.h in Headers */,
+				AA19B7D41B334568005CEB53 /* SCAuthToken.h in Headers */,
+				AA19B86E1B334568005CEB53 /* SCClientConfiguration.h in Headers */,
+				AA19B82E1B334568005CEB53 /* SCQueryParams.h in Headers */,
+				AA19B8921B334568005CEB53 /* SCSecupayDebitService.h in Headers */,
+				AA19B7EA1B334568005CEB53 /* SCGeneralAddress.h in Headers */,
+				AA19B8A21B334568005CEB53 /* StompKit.h in Headers */,
+				AA19B7B81B334568005CEB53 /* SCAccountManager.h in Headers */,
+				AA19B8781B334568005CEB53 /* SCSecuAppService.h in Headers */,
+				AA19B7BE1B334568005CEB53 /* SCPersistenceManager.h in Headers */,
+				AA19B80C1B334568005CEB53 /* SCLoyaltyCardGroup.h in Headers */,
+				AA19B7E61B334568005CEB53 /* SCGeneralAccount.h in Headers */,
+				AA19B7B61B334568005CEB53 /* SCGlobals.h in Headers */,
+				AA19B8961B334568005CEB53 /* SCAbstractService.h in Headers */,
+				AA19B7D61B334568005CEB53 /* SCAuthTokenNew.h in Headers */,
+				AA19B8021B334568005CEB53 /* SCGeneralStore.h in Headers */,
+				AA19B80E1B334568005CEB53 /* SCLoyaltyCondition.h in Headers */,
+				AA19B85C1B334568005CEB53 /* SCSmartProduct.h in Headers */,
+				AA19B8621B334568005CEB53 /* SCSmartText.h in Headers */,
+				AA19B7B01B334568005CEB53 /* MTLModel+Secucard.h in Headers */,
+				AA19B84E1B334568005CEB53 /* SCServicesIdentResult.h in Headers */,
+				AA19B8161B334568005CEB53 /* SCLoyaltySale.h in Headers */,
+				AA19B8461B334568005CEB53 /* SCServicesIdResultUserData.h in Headers */,
+				AA19B7E21B334568005CEB53 /* SCGeneralComponentsMetaData.h in Headers */,
+				AA19B7C21B334568005CEB53 /* SCRestServiceManager.h in Headers */,
+				AA19B7F41B334568005CEB53 /* SCGeneralLocation.h in Headers */,
+				AA19B8381B334568005CEB53 /* SCServicesIdResultAddress.h in Headers */,
+				AA19B7E01B334568005CEB53 /* SCGeneralComponentsGeometry.h in Headers */,
+				AA19B8701B334568005CEB53 /* SCClientCredentials.h in Headers */,
+				AA19B7E41B334568005CEB53 /* SCGeneralComponentsOpenHours.h in Headers */,
+				AA19B84C1B334568005CEB53 /* SCServicesIdentRequest.h in Headers */,
+				AA19B89C1B334568005CEB53 /* SCDeviceService.h in Headers */,
+				AA19B8881B334568005CEB53 /* SCCardsService.h in Headers */,
+				AA19B7C61B334568005CEB53 /* SCStompConfiguration.h in Headers */,
+				AA19B89A1B334568005CEB53 /* SCCheckinService.h in Headers */,
+				AA19B7DC1B334568005CEB53 /* SCGeneralComponentsAssign.h in Headers */,
+				AA19B81E1B334568005CEB53 /* SCPaymentData.h in Headers */,
+				AA19B8281B334568005CEB53 /* SCGeoQuery.h in Headers */,
+				AA19B80A1B334568005CEB53 /* SCLoyaltyCard.h in Headers */,
+				AA19B8581B334568005CEB53 /* SCSmartDevice.h in Headers */,
+				AA19B7EE1B334568005CEB53 /* SCGeneralBeaconEnvironment.h in Headers */,
+				AA19B8221B334568005CEB53 /* SCPaymentSecupayPrepay.h in Headers */,
+				AA19B8321B334568005CEB53 /* SCServiceCallWrapper.h in Headers */,
+				AA19B8741B334568005CEB53 /* SCUserCredentials.h in Headers */,
+				AA19B7B21B334568005CEB53 /* NSArray+NullStripper.h in Headers */,
+				AA19B83E1B334568005CEB53 /* SCServicesIdResultCustomData.h in Headers */,
+				AA19B8361B334568005CEB53 /* SCServicesIdRequestPerson.h in Headers */,
+				AA19B8861B334568005CEB53 /* SCTransactionService.h in Headers */,
+				AA19B84A1B334568005CEB53 /* SCServicesContract.h in Headers */,
+				AA19B8041B334568005CEB53 /* SCGeneralStoreSetDefault.h in Headers */,
+				AA19B86A1B334568005CEB53 /* SCTransportResult.h in Headers */,
+				AA19B87E1B334568005CEB53 /* SCMerchantService.h in Headers */,
+				AA19B8941B334568005CEB53 /* SCSecupayPrepayService.h in Headers */,
+				AA19B8A01B334568005CEB53 /* SCSmartTransactionService.h in Headers */,
+				AA19B7FA1B334568005CEB53 /* SCGeneralMerchantList.h in Headers */,
+				AA19B8561B334568005CEB53 /* SCSmartCheckin.h in Headers */,
+				AA19B8641B334568005CEB53 /* SCSmartTransaction.h in Headers */,
+				AA19B7CC1B334568005CEB53 /* SCStompStorageItem.h in Headers */,
+				AA19B87A1B334568005CEB53 /* SCAccountDevicesService.h in Headers */,
+				AA19B7DA1B334568005CEB53 /* SCGeneralComponentsAddressComponent.h in Headers */,
+				AA19B7C41B334568005CEB53 /* SCServiceManager.h in Headers */,
+				AA19B8241B334568005CEB53 /* SCPaymentTransaction.h in Headers */,
+				AA19B7D81B334568005CEB53 /* SCDocumentUploadsDocument.h in Headers */,
+				AA19B8761B334568005CEB53 /* SCUploadService.h in Headers */,
+				AA19B86C1B334568005CEB53 /* SCTransportStatus.h in Headers */,
+				AA19B83A1B334568005CEB53 /* SCServicesIdResultAttachment.h in Headers */,
+				AA19B8681B334568005CEB53 /* SCTransportMessage.h in Headers */,
+				AA19B8081B334568005CEB53 /* SCLoyaltyBonus.h in Headers */,
+				AA19B68A1B334542005CEB53 /* SecucardConnectClient.h in Headers */,
+				AA19B81C1B334568005CEB53 /* SCPaymentCustomer.h in Headers */,
+				AA19B8501B334568005CEB53 /* SCSmartBasket.h in Headers */,
+				AA19B8301B334568005CEB53 /* SCSecuObject.h in Headers */,
+				AA19B8481B334568005CEB53 /* SCServicesIdResultValue.h in Headers */,
+				AA19B8181B334568005CEB53 /* SCPaymentContainer.h in Headers */,
+				AA19B7F21B334568005CEB53 /* SCGeneralEvent.h in Headers */,
+				AA19B7F61B334568005CEB53 /* SCGeneralMerchant.h in Headers */,
+				AA19B8141B334568005CEB53 /* SCLoyaltyProgram.h in Headers */,
+				AA19B7BA1B334568005CEB53 /* SCAppDestination.h in Headers */,
+				AA19B8341B334568005CEB53 /* SCServiceEventObject.h in Headers */,
+				AA19B8441B334568005CEB53 /* SCServicesIdResultPerson.h in Headers */,
+				AA19B8401B334568005CEB53 /* SCServicesIdResultIdentificationDocument.h in Headers */,
+				AA19B8121B334568005CEB53 /* SCLoyaltyMerchantCard.h in Headers */,
+				AA19B83C1B334568005CEB53 /* SCServicesIdResultContactData.h in Headers */,
+				AA19B8981B334568005CEB53 /* SCIdentService.h in Headers */,
+				AA19B7D21B334568005CEB53 /* SCAuthSession.h in Headers */,
+				AA19B7F81B334568005CEB53 /* SCGeneralMerchantDetail.h in Headers */,
+				AA19B7D01B334568005CEB53 /* SCAuthDeviceAuthCode.h in Headers */,
+				AA19B87C1B334568005CEB53 /* SCAccountService.h in Headers */,
+				AA19B8601B334568005CEB53 /* SCSmartReceiptLine.h in Headers */,
+				AA19B82C1B334568005CEB53 /* SCObjectList.h in Headers */,
+				AA19B8821B334568005CEB53 /* SCPublicMerchantService.h in Headers */,
+				AA19B7FE1B334568005CEB53 /* SCGeneralNotification.h in Headers */,
+				AA19B88C1B334568005CEB53 /* SCMerchantCardsService.h in Headers */,
+				AA19B8101B334568005CEB53 /* SCLoyaltyCustomer.h in Headers */,
+				AA19B7B41B334568005CEB53 /* NSDictionary+NullStripper.h in Headers */,
+				AA19B82A1B334568005CEB53 /* SCMediaResource.h in Headers */,
+				AA19B85A1B334568005CEB53 /* SCSmartIdent.h in Headers */,
+				AA19B8541B334568005CEB53 /* SCSmartCashierDisplay.h in Headers */,
+				AA19B81A1B334568005CEB53 /* SCPaymentContract.h in Headers */,
+				AA19B8721B334568005CEB53 /* SCConnectClient.h in Headers */,
+				AA19B88E1B334568005CEB53 /* SCContainerService.h in Headers */,
+				AA19B88A1B334568005CEB53 /* SCLoyaltyCustomerService.h in Headers */,
+				AA19B8661B334568005CEB53 /* SCSmartTransactionResult.h in Headers */,
+				AA19B7FC1B334568005CEB53 /* SCGeneralNews.h in Headers */,
+				AA19B8201B334568005CEB53 /* SCPaymentSecupayDebit.h in Headers */,
+				AA19B7EC1B334568005CEB53 /* SCGeneralAssignment.h in Headers */,
+				AA19B7CA1B334568005CEB53 /* SCStompManager.h in Headers */,
+				AA19B8001B334568005CEB53 /* SCGeneralPublicMerchant.h in Headers */,
+				AA19B7BC1B334568005CEB53 /* SCLogManager.h in Headers */,
+				AA19B7DE1B334568005CEB53 /* SCGeneralComponentsDayTime.h in Headers */,
+				AA19B7C01B334568005CEB53 /* SCRestConfiguration.h in Headers */,
+				AA19B7E81B334568005CEB53 /* SCGeneralAccountDevice.h in Headers */,
+				AA19B7CE1B334568005CEB53 /* SCAnnotationProductInfo.h in Headers */,
+				AA19B8261B334568005CEB53 /* SCPaymentTransferAccount.h in Headers */,
+				AA19B85E1B334568005CEB53 /* SCSmartProductGroup.h in Headers */,
+				AA19B8841B334568005CEB53 /* SCStoreService.h in Headers */,
+				AA19B8801B334568005CEB53 /* SCNewsService.h in Headers */,
+				AA19B7F01B334568005CEB53 /* SCGeneralContact.h in Headers */,
+				AA19B8901B334568005CEB53 /* SCCustomerService.h in Headers */,
+				AA19B8521B334568005CEB53 /* SCSmartBasketInfo.h in Headers */,
+				AA19B7C81B334568005CEB53 /* SCStompDestination.h in Headers */,
+				AA19B8421B334568005CEB53 /* SCServicesIdResultIdentificationProcess.h in Headers */,
+				AA19B8061B334568005CEB53 /* SCGeneralTransaction.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		AA19B6831B334542005CEB53 /* SecucardConnectClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA19B69A1B334542005CEB53 /* Build configuration list for PBXNativeTarget "SecucardConnectClient" */;
+			buildPhases = (
+				92BEE7A676108317BC7BA69D /* Check Pods Manifest.lock */,
+				AA19B67F1B334542005CEB53 /* Sources */,
+				AA19B6801B334542005CEB53 /* Frameworks */,
+				AA19B6811B334542005CEB53 /* Headers */,
+				AA19B6821B334542005CEB53 /* Resources */,
+				368895639E20D3413C7C6F59 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SecucardConnectClient;
+			productName = SecucardConnectClient;
+			productReference = AA19B6841B334542005CEB53 /* SecucardConnectClient.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AA19B68E1B334542005CEB53 /* SecucardConnectClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA19B69D1B334542005CEB53 /* Build configuration list for PBXNativeTarget "SecucardConnectClientTests" */;
+			buildPhases = (
+				AA19B68B1B334542005CEB53 /* Sources */,
+				AA19B68C1B334542005CEB53 /* Frameworks */,
+				AA19B68D1B334542005CEB53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA19B6921B334542005CEB53 /* PBXTargetDependency */,
+			);
+			name = SecucardConnectClientTests;
+			productName = SecucardConnectClientTests;
+			productReference = AA19B68F1B334542005CEB53 /* SecucardConnectClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA19B67B1B334542005CEB53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = secucard;
+				TargetAttributes = {
+					AA19B6831B334542005CEB53 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					AA19B68E1B334542005CEB53 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = AA19B67E1B334542005CEB53 /* Build configuration list for PBXProject "SecucardConnectClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AA19B67A1B334542005CEB53;
+			productRefGroup = AA19B6851B334542005CEB53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA19B6831B334542005CEB53 /* SecucardConnectClient */,
+				AA19B68E1B334542005CEB53 /* SecucardConnectClientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA19B6821B334542005CEB53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA19B68D1B334542005CEB53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		368895639E20D3413C7C6F59 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectClient/Pods-SecucardConnectClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92BEE7A676108317BC7BA69D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA19B67F1B334542005CEB53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA19B82B1B334568005CEB53 /* SCMediaResource.m in Sources */,
+				AA19B7F71B334568005CEB53 /* SCGeneralMerchant.m in Sources */,
+				AA19B8871B334568005CEB53 /* SCTransactionService.m in Sources */,
+				AA19B8711B334568005CEB53 /* SCClientCredentials.m in Sources */,
+				AA19B7C11B334568005CEB53 /* SCRestConfiguration.m in Sources */,
+				AA19B8231B334568005CEB53 /* SCPaymentSecupayPrepay.m in Sources */,
+				AA19B7F51B334568005CEB53 /* SCGeneralLocation.m in Sources */,
+				AA19B7FD1B334568005CEB53 /* SCGeneralNews.m in Sources */,
+				AA19B8111B334568005CEB53 /* SCLoyaltyCustomer.m in Sources */,
+				AA19B88F1B334568005CEB53 /* SCContainerService.m in Sources */,
+				AA19B7BB1B334568005CEB53 /* SCAppDestination.m in Sources */,
+				AA19B8911B334568005CEB53 /* SCCustomerService.m in Sources */,
+				AA19B7CF1B334568005CEB53 /* SCAnnotationProductInfo.m in Sources */,
+				AA19B8611B334568005CEB53 /* SCSmartReceiptLine.m in Sources */,
+				AA19B7B71B334568005CEB53 /* SCGlobals.m in Sources */,
+				AA19B80D1B334568005CEB53 /* SCLoyaltyCardGroup.m in Sources */,
+				AA19B7D51B334568005CEB53 /* SCAuthToken.m in Sources */,
+				AA19B83F1B334568005CEB53 /* SCServicesIdResultCustomData.m in Sources */,
+				AA19B8991B334568005CEB53 /* SCIdentService.m in Sources */,
+				AA19B7DB1B334568005CEB53 /* SCGeneralComponentsAddressComponent.m in Sources */,
+				AA19B7D31B334568005CEB53 /* SCAuthSession.m in Sources */,
+				AA19B8031B334568005CEB53 /* SCGeneralStore.m in Sources */,
+				AA19B7C51B334568005CEB53 /* SCServiceManager.m in Sources */,
+				AA19B81B1B334568005CEB53 /* SCPaymentContract.m in Sources */,
+				AA19B7F91B334568005CEB53 /* SCGeneralMerchantDetail.m in Sources */,
+				AA19B85D1B334568005CEB53 /* SCSmartProduct.m in Sources */,
+				AA19B8211B334568005CEB53 /* SCPaymentSecupayDebit.m in Sources */,
+				AA19B81F1B334568005CEB53 /* SCPaymentData.m in Sources */,
+				AA19B8591B334568005CEB53 /* SCSmartDevice.m in Sources */,
+				AA19B88D1B334568005CEB53 /* SCMerchantCardsService.m in Sources */,
+				AA19B8791B334568005CEB53 /* SCSecuAppService.m in Sources */,
+				AA19B8571B334568005CEB53 /* SCSmartCheckin.m in Sources */,
+				AA19B8A31B334568005CEB53 /* StompKit.m in Sources */,
+				AA19B8431B334568005CEB53 /* SCServicesIdResultIdentificationProcess.m in Sources */,
+				AA19B8391B334568005CEB53 /* SCServicesIdResultAddress.m in Sources */,
+				AA19B7EF1B334568005CEB53 /* SCGeneralBeaconEnvironment.m in Sources */,
+				AA19B7E11B334568005CEB53 /* SCGeneralComponentsGeometry.m in Sources */,
+				AA19B8491B334568005CEB53 /* SCServicesIdResultValue.m in Sources */,
+				AA19B81D1B334568005CEB53 /* SCPaymentCustomer.m in Sources */,
+				AA19B86F1B334568005CEB53 /* SCClientConfiguration.m in Sources */,
+				AA19B84D1B334568005CEB53 /* SCServicesIdentRequest.m in Sources */,
+				AA19B88B1B334568005CEB53 /* SCLoyaltyCustomerService.m in Sources */,
+				AA19B7E51B334568005CEB53 /* SCGeneralComponentsOpenHours.m in Sources */,
+				AA19B7F31B334568005CEB53 /* SCGeneralEvent.m in Sources */,
+				AA19B87D1B334568005CEB53 /* SCAccountService.m in Sources */,
+				AA19B8451B334568005CEB53 /* SCServicesIdResultPerson.m in Sources */,
+				AA19B7DD1B334568005CEB53 /* SCGeneralComponentsAssign.m in Sources */,
+				AA19B7BD1B334568005CEB53 /* SCLogManager.m in Sources */,
+				AA19B8251B334568005CEB53 /* SCPaymentTransaction.m in Sources */,
+				AA19B86D1B334568005CEB53 /* SCTransportStatus.m in Sources */,
+				AA19B7CB1B334568005CEB53 /* SCStompManager.m in Sources */,
+				AA19B8191B334568005CEB53 /* SCPaymentContainer.m in Sources */,
+				AA19B8471B334568005CEB53 /* SCServicesIdResultUserData.m in Sources */,
+				AA19B8771B334568005CEB53 /* SCUploadService.m in Sources */,
+				AA19B87F1B334568005CEB53 /* SCMerchantService.m in Sources */,
+				AA19B7B31B334568005CEB53 /* NSArray+NullStripper.m in Sources */,
+				AA19B8291B334568005CEB53 /* SCGeoQuery.m in Sources */,
+				AA19B8831B334568005CEB53 /* SCPublicMerchantService.m in Sources */,
+				AA19B7E71B334568005CEB53 /* SCGeneralAccount.m in Sources */,
+				AA19B89F1B334568005CEB53 /* SCSmartIdentService.m in Sources */,
+				AA19B7FB1B334568005CEB53 /* SCGeneralMerchantList.m in Sources */,
+				AA19B8A11B334568005CEB53 /* SCSmartTransactionService.m in Sources */,
+				AA19B8091B334568005CEB53 /* SCLoyaltyBonus.m in Sources */,
+				AA19B83D1B334568005CEB53 /* SCServicesIdResultContactData.m in Sources */,
+				AA19B8751B334568005CEB53 /* SCUserCredentials.m in Sources */,
+				AA19B7C31B334568005CEB53 /* SCRestServiceManager.m in Sources */,
+				AA19B8891B334568005CEB53 /* SCCardsService.m in Sources */,
+				AA19B8151B334568005CEB53 /* SCLoyaltyProgram.m in Sources */,
+				AA19B80F1B334568005CEB53 /* SCLoyaltyCondition.m in Sources */,
+				AA19B7B11B334568005CEB53 /* MTLModel+Secucard.m in Sources */,
+				AA19B84F1B334568005CEB53 /* SCServicesIdentResult.m in Sources */,
+				AA19B7F11B334568005CEB53 /* SCGeneralContact.m in Sources */,
+				AA19B7EB1B334568005CEB53 /* SCGeneralAddress.m in Sources */,
+				AA19B86B1B334568005CEB53 /* SCTransportResult.m in Sources */,
+				AA19B85B1B334568005CEB53 /* SCSmartIdent.m in Sources */,
+				AA19B8671B334568005CEB53 /* SCSmartTransactionResult.m in Sources */,
+				AA19B7D91B334568005CEB53 /* SCDocumentUploadsDocument.m in Sources */,
+				AA19B7B51B334568005CEB53 /* NSDictionary+NullStripper.m in Sources */,
+				AA19B89D1B334568005CEB53 /* SCDeviceService.m in Sources */,
+				AA19B80B1B334568005CEB53 /* SCLoyaltyCard.m in Sources */,
+				AA19B8171B334568005CEB53 /* SCLoyaltySale.m in Sources */,
+				AA19B8951B334568005CEB53 /* SCSecupayPrepayService.m in Sources */,
+				AA19B8131B334568005CEB53 /* SCLoyaltyMerchantCard.m in Sources */,
+				AA19B7ED1B334568005CEB53 /* SCGeneralAssignment.m in Sources */,
+				AA19B7E31B334568005CEB53 /* SCGeneralComponentsMetaData.m in Sources */,
+				AA19B8731B334568005CEB53 /* SCConnectClient.m in Sources */,
+				AA19B8651B334568005CEB53 /* SCSmartTransaction.m in Sources */,
+				AA19B89B1B334568005CEB53 /* SCCheckinService.m in Sources */,
+				AA19B8071B334568005CEB53 /* SCGeneralTransaction.m in Sources */,
+				AA19B8371B334568005CEB53 /* SCServicesIdRequestPerson.m in Sources */,
+				AA19B7B91B334568005CEB53 /* SCAccountManager.m in Sources */,
+				AA19B8051B334568005CEB53 /* SCGeneralStoreSetDefault.m in Sources */,
+				AA19B7D71B334568005CEB53 /* SCAuthTokenNew.m in Sources */,
+				AA19B7C71B334568005CEB53 /* SCStompConfiguration.m in Sources */,
+				AA19B84B1B334568005CEB53 /* SCServicesContract.m in Sources */,
+				AA19B8811B334568005CEB53 /* SCNewsService.m in Sources */,
+				AA19B8551B334568005CEB53 /* SCSmartCashierDisplay.m in Sources */,
+				AA19B8511B334568005CEB53 /* SCSmartBasket.m in Sources */,
+				AA19B87B1B334568005CEB53 /* SCAccountDevicesService.m in Sources */,
+				AA19B8971B334568005CEB53 /* SCAbstractService.m in Sources */,
+				AA19B8271B334568005CEB53 /* SCPaymentTransferAccount.m in Sources */,
+				AA19B7D11B334568005CEB53 /* SCAuthDeviceAuthCode.m in Sources */,
+				AA19B7BF1B334568005CEB53 /* SCPersistenceManager.m in Sources */,
+				AA19B7C91B334568005CEB53 /* SCStompDestination.m in Sources */,
+				AA19B8351B334568005CEB53 /* SCServiceEventObject.m in Sources */,
+				AA19B8851B334568005CEB53 /* SCStoreService.m in Sources */,
+				AA19B85F1B334568005CEB53 /* SCSmartProductGroup.m in Sources */,
+				AA19B8931B334568005CEB53 /* SCSecupayDebitService.m in Sources */,
+				AA19B7DF1B334568005CEB53 /* SCGeneralComponentsDayTime.m in Sources */,
+				AA19B8531B334568005CEB53 /* SCSmartBasketInfo.m in Sources */,
+				AA19B82F1B334568005CEB53 /* SCQueryParams.m in Sources */,
+				AA19B8011B334568005CEB53 /* SCGeneralPublicMerchant.m in Sources */,
+				AA19B8691B334568005CEB53 /* SCTransportMessage.m in Sources */,
+				AA19B8311B334568005CEB53 /* SCSecuObject.m in Sources */,
+				AA19B8411B334568005CEB53 /* SCServicesIdResultIdentificationDocument.m in Sources */,
+				AA19B7FF1B334568005CEB53 /* SCGeneralNotification.m in Sources */,
+				AA19B8631B334568005CEB53 /* SCSmartText.m in Sources */,
+				AA19B7CD1B334568005CEB53 /* SCStompStorageItem.m in Sources */,
+				AA19B83B1B334568005CEB53 /* SCServicesIdResultAttachment.m in Sources */,
+				AA19B7E91B334568005CEB53 /* SCGeneralAccountDevice.m in Sources */,
+				AA19B82D1B334568005CEB53 /* SCObjectList.m in Sources */,
+				AA19B8331B334568005CEB53 /* SCServiceCallWrapper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA19B68B1B334542005CEB53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA19B6971B334542005CEB53 /* SecucardConnectClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA19B6921B334542005CEB53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA19B6831B334542005CEB53 /* SecucardConnectClient */;
+			targetProxy = AA19B6911B334542005CEB53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA19B6981B334542005CEB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AA19B6991B334542005CEB53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AA19B69B1B334542005CEB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6647FF5B37941FD811B01A9 /* Pods-SecucardConnectClient.debug.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SecucardConnectClient/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AA19B69C1B334542005CEB53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74839717297B8F969606CC25 /* Pods-SecucardConnectClient.release.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SecucardConnectClient/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AA19B69E1B334542005CEB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SecucardConnectClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AA19B69F1B334542005CEB53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SecucardConnectClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA19B67E1B334542005CEB53 /* Build configuration list for PBXProject "SecucardConnectClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA19B6981B334542005CEB53 /* Debug */,
+				AA19B6991B334542005CEB53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA19B69A1B334542005CEB53 /* Build configuration list for PBXNativeTarget "SecucardConnectClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA19B69B1B334542005CEB53 /* Debug */,
+				AA19B69C1B334542005CEB53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA19B69D1B334542005CEB53 /* Build configuration list for PBXNativeTarget "SecucardConnectClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA19B69E1B334542005CEB53 /* Debug */,
+				AA19B69F1B334542005CEB53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA19B67B1B334542005CEB53 /* Project object */;
+}
