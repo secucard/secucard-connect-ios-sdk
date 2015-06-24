@@ -13,7 +13,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
   NSDictionary *superKeys = [super JSONKeyPathsByPropertyKey];
-  return [superKeys mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+  return [superKeys mtl_dictionaryByAddingEntriesFromDictionary:[NSDictionary mtl_identityPropertyMapWithModel:self]];
   
 }
 

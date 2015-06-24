@@ -35,17 +35,18 @@
 
 - (void) initWithConfiguration:(SCClientConfiguration*)configuration {
   
+  self.configuration = configuration;
   
   [SCConnectClient sharedInstance].configuration = configuration;
   
   // also initialize AccountManager
-  [[SCAccountManager sharedManager] initWithClientCredentials:[SCConnectClient sharedInstance].configuration.clientCredentials];
+  [[SCAccountManager sharedManager] initWithClientCredentials:configuration.clientCredentials andUserCredentials:configuration.userCredentials];
   
   // also  initalize rest
-  [[SCRestServiceManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.restConfiguration];
+  [[SCRestServiceManager sharedManager] initWithConfiguration:configuration.restConfiguration];
   
   // also initialze stomp
-  [[SCStompManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.stompConfiguration];
+  [[SCStompManager sharedManager] initWithConfiguration:configuration.stompConfiguration];
   
   
   

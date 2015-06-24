@@ -31,21 +31,33 @@
 #define kNotificationTokenDidGet            @"notificationTokenDidGet"
 #define kNotificationTokenDidRefresh        @"notificationTokenDidRefresh"
 
+@protocol SCAccountManagerDelegate <NSObject>
+
+@optional
+
+- (void) accountManagerDidLogout;
+- (void) accountManagerDidLogin;
+
+@end
+
 @interface SCAccountManager : NSObject
 
 @property (nonatomic, retain) NSString *accessToken;
 @property (nonatomic, retain) NSString *refreshToken;
 @property (nonatomic, retain) NSDate *expires;
+@property (nonatomic, assign) BOOL loggedIn;
+
+@property (nonatomic, retain) id<SCAccountManagerDelegate> delegate;
 
 + (SCAccountManager*)sharedManager;
 
-- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials;
+- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials andUserCredentials:(SCUserCredentials*)userCredentials;
 - (void) destroy;
-- (void) loginWithUserCedentials:(SCUserCredentials*)userCredentials completionHandler:(void (^)(BOOL success, NSError *error))handler;
 - (void) token:(void (^)(NSString *token, NSError *error))handler;
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
 - (void) killToken;
 
+- (void) logout;
 - (BOOL) accessTokenValid;
 - (NSTimeInterval) accessTokenValidUntil;
 

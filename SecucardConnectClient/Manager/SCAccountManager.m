@@ -40,9 +40,10 @@
   return instance;
 }
 
-- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials
+- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials andUserCredentials:(SCUserCredentials*)userCredentials
 {
   _clientCredentials = clientCredentials;
+  _userCredentials = userCredentials;
   
   if (self.refreshToken) {
     NSLog(@"REFRESHTOKEN: %@", [SCPersistenceManager itemForKey:@"refreshToken"]);
@@ -52,26 +53,6 @@
 - (void) destroy {
   self.clientCredentials = nil;
   self.userCredentials = nil;
-}
-
-- (void) loginWithUserCedentials:(SCUserCredentials*)userCredentials completionHandler:(void (^)(BOOL success, NSError *error))handler
-{
-  
-  _userCredentials = userCredentials;
-  
-  [[SCConnectClient sharedInstance] setUserCredentials:userCredentials];
-  
-    [self retrieveAccessToken:^(NSString *token, NSError *error) {
-      
-      if (error != nil) {
-        [SCPersistenceManager persist:_userCredentials.username forKey:kCredentialUsername];
-        [SCPersistenceManager persist:_userCredentials.password forKey:kCredentialPassword];
-      }
-      
-      handler(error != nil, error);
-      
-    }];
-  
 }
 
 - (BOOL) needsInitialization
@@ -122,6 +103,9 @@
       return;
     }
     
+    [SCPersistenceManager persist:self.userCredentials.username forKey:kCredentialUsername];
+    [SCPersistenceManager persist:self.userCredentials.password forKey:kCredentialPassword];
+    
     self.accessToken = [responseObject objectForKey:@"access_token"];
     self.refreshToken = [responseObject objectForKey:@"refresh_token"];
     
@@ -135,6 +119,10 @@
     [SCPersistenceManager persist:self.expires forKey:@"expires"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
+    
+    if ([self.delegate respondsToSelector:@selector(accountManagerDidLogin)]) {
+      [self.delegate accountManagerDidLogin];
+    }
     
     handler(self.accessToken, nil);
     
@@ -243,7 +231,7 @@
   {
     
     // if we have user credentials, this is a regular auth process
-    if (self.userCredentials) {
+    if (self.userCredentials.username && self.userCredentials.password) {
       
       [self retrieveAccessToken:^(NSString *token, NSError *error) {
         handler(token, error);
@@ -369,12 +357,23 @@
 - (void) logout
 {
   
+  [[SCStompManager sharedManager] close];
+  [[SCRestServiceManager sharedManager] close];
+  
   [SCPersistenceManager removeItemForKey:kCredentialUsername];
   [SCPersistenceManager removeItemForKey:kCredentialPassword];
   
-  self.userCredentials = nil;
-  
   [self killToken];
+  
+  if ([self.delegate respondsToSelector:@selector(accountManagerDidLogout)]) {
+    [self.delegate accountManagerDidLogout];
+  }
+  
+}
+
+- (BOOL)loggedIn {
+  
+  return ([SCPersistenceManager keyExists:kCredentialUsername] && [SCPersistenceManager keyExists:kCredentialPassword]);
   
 }
 
