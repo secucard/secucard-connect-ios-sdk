@@ -90,6 +90,10 @@
   
 }
 
+- (BOOL)connected {
+  return _client.connected;
+}
+
 - (void) destroy {
   [self close];
   self.configuration = nil;

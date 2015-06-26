@@ -49,6 +49,8 @@
 @property (nonatomic, copy) NSNumber *points;
 @property (nonatomic, copy) SCLoyaltyProgram *program;
 @property (nonatomic, assign) bool isDefault;
+@property (nonatomic, copy) NSArray *photo;
+@property (nonatomic, copy) NSString *photoMain;
 @property (nonatomic, copy) NSString *facebookId;
 @property (nonatomic, copy) NSArray *pictureUrls;
 @property (nonatomic, copy) NSString *logoUrl;

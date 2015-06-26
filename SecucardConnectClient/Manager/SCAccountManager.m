@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) SCClientCredentials *clientCredentials;
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
+
 @property (nonatomic, copy) void (^devicePollHandler)(NSString *, NSError *);
 
 @end
@@ -181,8 +182,6 @@
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler
 {
 
-  
-  
     if ([self needsInitialization])
     {
       handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
@@ -220,6 +219,25 @@
   
 }
 
+- (NSString *)username {
+  
+  if (self.userCredentials && self.userCredentials.username) {
+    return self.userCredentials.username;
+  } else {
+    return (NSString*)[SCPersistenceManager itemForKey:kCredentialUsername];
+  }
+  
+}
+
+- (NSString *)password {
+  
+  if (self.userCredentials && self.userCredentials.password) {
+    return self.userCredentials.password;
+  } else {
+    return (NSString*)[SCPersistenceManager itemForKey:kCredentialPassword];
+  }
+  
+}
 /**
  *  Check if token is valid
  */

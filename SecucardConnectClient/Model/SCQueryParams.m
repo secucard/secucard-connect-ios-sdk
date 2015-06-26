@@ -10,7 +10,6 @@
 
 @implementation SCQueryParams
 
-
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
   NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];

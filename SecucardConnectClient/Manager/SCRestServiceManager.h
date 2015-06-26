@@ -57,7 +57,7 @@
  */
 - (void) requestAuthWithParams:(id)params completionHandler:(void (^)(id responseObject, NSError *error))handler;
 
-- (void) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg completionHandler:(void (^)(id responseObject, NSError *error))handler;
+- (void)execute:(NSString *)appId action:(NSString *)action actionArg:(NSDictionary *)actionArg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
 
 - (void) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params completionHandler:(void (^)(id responseObject, NSError *error))handler;
 

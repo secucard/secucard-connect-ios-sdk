@@ -46,6 +46,11 @@ typedef void (^ReceiptHandler)(id responseObject, NSError *error);
 @property (nonatomic, retain) SCStompConfiguration *configuration;
 
 /**
+ *  flag stating if client is connected
+ */
+@property (nonatomic, assign) BOOL connected;
+
+/**
  *  init the actual stomp client
  *
  *  @param configuration the stomp configuration

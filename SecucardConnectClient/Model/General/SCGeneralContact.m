@@ -40,7 +40,7 @@
   
 }
 
-+ (NSValueTransformer *)addressObjectJSONTransformer {
++ (NSValueTransformer *)addressJSONTransformer {
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralAddress class]];
 }
 

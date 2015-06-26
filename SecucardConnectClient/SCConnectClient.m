@@ -48,7 +48,7 @@
   // also initialze stomp
   [[SCStompManager sharedManager] initWithConfiguration:configuration.stompConfiguration];
   
-  
+  self.initialized = TRUE;
   
 }
 
@@ -85,6 +85,10 @@
     
   }];
   
+}
+
+- (BOOL)connected {
+  return [SCStompManager sharedManager].connected;
 }
 
 - (void)disconnect:(void (^)(bool, NSError *))handler {

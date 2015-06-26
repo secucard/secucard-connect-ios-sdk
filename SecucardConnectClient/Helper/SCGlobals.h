@@ -16,7 +16,7 @@
 #define kNotifictaionCheckIdleState           @"notifictaionCheckIdleState"
 
 
-// SERVICE CALLS
+// DEPRECATED: SERVICE CALLS
 
 #define kAuthToken                            @"oauth/token"
 
@@ -45,6 +45,62 @@
 #define kParamDistance                        @"distance"
 #define kParamAccessToken                     @"access_token"
 #define kParamRefreshToken                    @"refresh_token"
+
+
+#define kGet @"get"
+#define kAdd @"add"
+#define kUpdate @"update"
+#define kRemove @"remove"
+#define kExecute @"execute"
+
+
+
+/**
+ * PRESET
+ */
+#define kPresetAccountRead @"account_read"
+#define kPresetOwn @"own"
+
+/**
+ * PID constant
+ */
+#define kMe @"me"
+
+/**
+ * SID
+ */
+
+#define kGetMyMerchants @"getMyMerchants"
+#define kStoreSetDefault @"setDefault"
+#define kStoreCheckIn @"checkIn"
+
+/**
+ * GENERAL
+ */
+#define kGeneralApps @"General.Apps"
+#define kGeneralMerchant @"General.Merchants"
+#define kGeneralPublicMerchant @"General.PublicMerchants"
+#define kGeneralSkeleton @"General.Skeletons"
+#define kGeneralStore @"General.Stores"
+#define kGeneralNews @"General.News"
+#define kGeneralContact @"General.Contacts"
+#define kGeneralTransaction @"General.Transactions"
+#define kGeneralAccounts @"General.Accounts"
+#define kGeneralAccountsGcm @"General.Accounts.Gcm"
+#define kGeneralAccountsLocation @"General.Accounts.Location"
+#define kGeneralAccountsBeacons @"General.Accounts.BeaconEnvironment"
+
+/**
+ * DOCUMENT
+ */
+#define kDocumentUpload @"Document.Uploads"
+
+/**
+ * LOYALTY
+ */
+#define kLoyaltyCard @"Loyalty.Cards"
+#define kLoyaltyCardgroups @"Loyalty.CardGroups"
+#define kLoyaltyMerchantcards @"Loyalty.MerchantCards"
 
 typedef enum {
   

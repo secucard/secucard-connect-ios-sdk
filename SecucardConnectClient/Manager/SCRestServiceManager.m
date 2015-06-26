@@ -336,7 +336,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   for (int i = 0; i < args.count; i++) {
     
-    if (![args[i] isKindOfClass:[NSString class]]) {
+    if (![args[i] isKindOfClass:[NSString class]] || [args[i] isEqualToString:@""]) {
       continue;
     }
     
@@ -344,32 +344,31 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
   }
   
-  //  // add ME to Accounts-Path
-  //  if (pid != nil)
-  //  {
-  //    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:[NSString stringWithFormat:@"%@/", pid]];
-  //  }
-  //  else
-  //  {
-  //    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:@""];
-  //  }
-  //
-  //  // add SID if there
-  //  if (sid != nil)
-  //  {
-  //    callString = [callString stringByAppendingString:[NSString stringWithFormat:@"/%@", sid]];
-  //  }
-  //
-  // if not an auth call add api and version to it
-  //      if (![callString containsString:@"oauth"])
-  //      {
-  // combine all
-  //c = [NSString stringWithFormat:@"%@%@%@", kAPIPrefix, kAPIVersion, c];
-  //      }
-  
   return callString;
   
+}
+
+- (NSString*) resolveAppEndpoint:(NSString*)appId args:(NSArray*)args {
   
+  NSString *path = @"General/Apps";
+  
+  if (appId) {
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"/%@", appId]];
+  }
+  
+  path = [path stringByAppendingString:@"/callBackend"];
+  
+  for (int i = 0; i < args.count; i++) {
+    
+    if (![args[i] isKindOfClass:[NSString class]] || [args[i] isEqualToString:@""]) {
+      continue;
+    }
+    
+    path = [path stringByAppendingString:[@"/" stringByAppendingString:args[i]]]; // -> General/PublicMerchants/pmc_231234124
+    
+  }
+  
+  return path;
 }
 
 #pragma mark - SCServiceManagerProtocol
@@ -385,7 +384,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
+- (void) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
   [self getRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -403,7 +402,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
   
   NSDictionary *params = [self createDic:queryParams];
   
@@ -521,7 +520,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure completionHandler:(void (^)(bool, NSError *))handler {
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure completionHandler:(void (^)(bool success, NSError *error))handler {
   
   [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:nil secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -535,27 +534,27 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
+- (void)execute:(NSString *)appId action:(NSString *)action actionArg:(NSDictionary *)actionArg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
-  NSDictionary *params = [self createDic:arg];
-  if (!params) {
+  NSDictionary *params = [self createDic:actionArg];
+  if (!params && actionArg != nil) {
     handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   
+  [self postRequestToEndpoint:[self resolveAppEndpoint:appId args:@[action]] WithParams:params secure:secure completionHandler:handler];
+  
+}
+
+- (void)execute:(Class)type objectId:(NSString *)objectId action:(NSString *)action actionArg:(NSString *)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
+ 
+    NSDictionary *params = [self createDic:arg];
+    if (!params && arg != nil) {
+      handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
+      return;
+    }
+  
   [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:handler];
-  
-}
-
-- (void) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
-  
-  [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg secure:secure completionHandler:handler];
-  
-}
-
-- (void)execute:(NSString *)appId command:(NSString *)command arg:(NSDictionary *)arg completionHandler:(void (^)(id responseObject, NSError *error))handler {
-  
-  [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg secure:false completionHandler:handler];
   
 }
 

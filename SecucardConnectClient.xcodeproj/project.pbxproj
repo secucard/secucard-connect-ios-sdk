@@ -254,7 +254,8 @@
 		AA19B8A11B334568005CEB53 /* SCSmartTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7AB1B334568005CEB53 /* SCSmartTransactionService.m */; };
 		AA19B8A21B334568005CEB53 /* StompKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7AE1B334568005CEB53 /* StompKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA19B8A31B334568005CEB53 /* StompKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7AF1B334568005CEB53 /* StompKit.m */; };
-		CC1D99F5B966E147CD691FE4 /* libPods-SecucardConnectClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CB37ACD074783C16CBBFFD /* libPods-SecucardConnectClient.a */; };
+		AEBB957500F469E29A82E357 /* Pods_SecucardConnectClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F951E7E02E5969C13FC5F59 /* Pods_SecucardConnectClientTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FD4A6CACF450CFC49AFB2CCC /* Pods_SecucardConnectClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8468298C2D62F353709880 /* Pods_SecucardConnectClient.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,8 +269,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15CB37ACD074783C16CBBFFD /* libPods-SecucardConnectClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecucardConnectClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B8468298C2D62F353709880 /* Pods_SecucardConnectClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69DF957B698199C88860E12D /* Pods-SecucardConnectClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClientTests/Pods-SecucardConnectClientTests.release.xcconfig"; sourceTree = "<group>"; };
+		6F951E7E02E5969C13FC5F59 /* Pods_SecucardConnectClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74839717297B8F969606CC25 /* Pods-SecucardConnectClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClient/Pods-SecucardConnectClient.release.xcconfig"; sourceTree = "<group>"; };
+		7A02B69DEAE0B12E4C62DF13 /* Pods-SecucardConnectClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClientTests/Pods-SecucardConnectClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA19B6841B334542005CEB53 /* SecucardConnectClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SecucardConnectClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA19B6881B334542005CEB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA19B6891B334542005CEB53 /* SecucardConnectClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecucardConnectClient.h; sourceTree = "<group>"; };
@@ -528,7 +532,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC1D99F5B966E147CD691FE4 /* libPods-SecucardConnectClient.a in Frameworks */,
+				FD4A6CACF450CFC49AFB2CCC /* Pods_SecucardConnectClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA19B6901B334542005CEB53 /* SecucardConnectClient.framework in Frameworks */,
+				AEBB957500F469E29A82E357 /* Pods_SecucardConnectClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +553,8 @@
 			children = (
 				C6647FF5B37941FD811B01A9 /* Pods-SecucardConnectClient.debug.xcconfig */,
 				74839717297B8F969606CC25 /* Pods-SecucardConnectClient.release.xcconfig */,
+				7A02B69DEAE0B12E4C62DF13 /* Pods-SecucardConnectClientTests.debug.xcconfig */,
+				69DF957B698199C88860E12D /* Pods-SecucardConnectClientTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1077,7 +1084,8 @@
 		C7221CDB18B34FA9CA718100 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				15CB37ACD074783C16CBBFFD /* libPods-SecucardConnectClient.a */,
+				3B8468298C2D62F353709880 /* Pods_SecucardConnectClient.framework */,
+				6F951E7E02E5969C13FC5F59 /* Pods_SecucardConnectClientTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1242,9 +1250,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA19B69D1B334542005CEB53 /* Build configuration list for PBXNativeTarget "SecucardConnectClientTests" */;
 			buildPhases = (
+				49F7BFA41629E5646D7EBA91 /* Check Pods Manifest.lock */,
 				AA19B68B1B334542005CEB53 /* Sources */,
 				AA19B68C1B334542005CEB53 /* Frameworks */,
 				AA19B68D1B334542005CEB53 /* Resources */,
+				D2B929229DE23BCA4114E66A /* Copy Pods Resources */,
+				9BB9475C5C8D2D5704E8D675 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1324,6 +1335,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectClient/Pods-SecucardConnectClient-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		49F7BFA41629E5646D7EBA91 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		92BEE7A676108317BC7BA69D /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1337,6 +1363,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9BB9475C5C8D2D5704E8D675 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectClientTests/Pods-SecucardConnectClientTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2B929229DE23BCA4114E66A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectClientTests/Pods-SecucardConnectClientTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1612,6 +1668,7 @@
 		};
 		AA19B69E1B334542005CEB53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A02B69DEAE0B12E4C62DF13 /* Pods-SecucardConnectClientTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1629,6 +1686,7 @@
 		};
 		AA19B69F1B334542005CEB53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69DF957B698199C88860E12D /* Pods-SecucardConnectClientTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

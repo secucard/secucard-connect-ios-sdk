@@ -29,7 +29,7 @@
  *
  *  @return a promise resolveing with SCGeneralMerchant
  */
-- (void) getMerchant:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(SCGeneralMerchant *, NSError *))handler;
+- (void) getMerchant:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(SCStoreList *, NSError *))handler;
 
 /**
  *  retrieve a lst of merchants
@@ -39,7 +39,7 @@
  *
  *  @return a promise fulfiling with SCObjectList with SCGeneralMerchant
  */
-- (void) getMerchants:(NSString*)appId arg:(SCQueryParams*)arg completionHandler:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getMerchants:(NSString*)appId arg:(SCQueryParams*)arg completionHandler:(void (^)(SCStoreList *, NSError *))handler;
 
 /**
  *  add a card to the account
