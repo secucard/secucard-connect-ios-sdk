@@ -14,7 +14,8 @@
   return [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{
                                                                          @"changed": @(EventTypeChanged),
                                                                          @"added": @(EventTypeAdded),
-                                                                         @"display": @(EventTypeDisplay)
+                                                                         @"display": @(EventTypeDisplay),
+                                                                         @"BeaconMonitor": @(EventTypeBeaconMonitor),
                                                                          }];
 }
 

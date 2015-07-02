@@ -21,7 +21,10 @@
   static SCAccountService *instance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
+    
     instance = [SCAccountService new];
+    instance.registeredEventClasses = @[[SCGeneralAccount class]];
+    
   });
   
   return instance;
@@ -33,6 +36,7 @@
   [[self serviceManagerByChannel:OnDemandChannel] updateObject:account completionHandler:^(SCSecuObject *responseObject, NSError *error) {
     
     if ([responseObject isKindOfClass:[SCSecuObject class]]) {
+      
       handler((SCGeneralAccount*)responseObject, error);
     } else {
       handler(nil, error);

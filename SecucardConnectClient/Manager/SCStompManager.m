@@ -296,8 +296,8 @@
       return;
     }
     
-    // refresh auth
-    [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@{@"refresh_interval":@120} completionHandler:^(id responseObject, NSError *error) {
+//     refresh auth //@{@"refresh_interval":@120}
+    [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@"" completionHandler:^(id responseObject, NSError *error) {
       
     }];
     
