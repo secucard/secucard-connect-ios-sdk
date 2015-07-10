@@ -19,7 +19,7 @@
 @property (nonatomic, copy) SCGeneralMerchant *createdForMerchant;
 @property (nonatomic, copy) SCLoyaltyCard *card;
 @property (nonatomic, copy) SCGeneralStore *createdForStore;
-@property (nonatomic, assign) BOOL isBaseCard;
+@property (nonatomic, assign) bool isBaseCard;
 @property (nonatomic, copy) SCLoyaltyCardGroup *cardgroup;
 @property (nonatomic, copy) SCLoyaltyCustomer *customer;
 @property (nonatomic, copy) NSNumber *balance;
@@ -28,5 +28,4 @@
 @property (nonatomic, copy) NSDate *lastCharge;
 @property (nonatomic, copy) NSString *stockStatus;
 @property (nonatomic, copy) NSString *lockStatus;
-
 @end

@@ -18,4 +18,8 @@
 
 + (NSString*) object;
 
++ (NSDateFormatter *)dateFormatter;
+
++ (NSDateFormatter *)dateShortFormatter;
+
 @end

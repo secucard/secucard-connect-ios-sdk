@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Mantle/Mantle.h>
+#import "Mantle.h"
 #import "SCGeoQuery.h"
 
 #define kSortAsc              @"asc"

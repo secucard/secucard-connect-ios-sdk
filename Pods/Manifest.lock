@@ -21,18 +21,13 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.4.1)
-  - Mantle (2.0.2):
-    - Mantle/extobjc (= 2.0.2)
-  - Mantle/extobjc (2.0.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - CocoaAsyncSocket (~> 7.4)
-  - Mantle (~> 2.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
-  Mantle: 967fd31ea0220890b2e76589198996b534bb3fb1
 
 COCOAPODS: 0.37.2

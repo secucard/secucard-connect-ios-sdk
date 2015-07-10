@@ -11,13 +11,6 @@
 
 @implementation SCGeneralContact
 
-+ (NSDateFormatter *)dateFormatter {
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-  dateFormatter.dateFormat = @"yyyy-MM-dd";
-  return dateFormatter;
-}
-
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
   NSDictionary *standards = [super JSONKeyPathsByPropertyKey];

@@ -254,6 +254,42 @@
 		AA19B8A11B334568005CEB53 /* SCSmartTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7AB1B334568005CEB53 /* SCSmartTransactionService.m */; };
 		AA19B8A21B334568005CEB53 /* StompKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19B7AE1B334568005CEB53 /* StompKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA19B8A31B334568005CEB53 /* StompKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19B7AF1B334568005CEB53 /* StompKit.m */; };
+		AAF4EF431B4FA60F00780E98 /* EXTKeyPathCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF1F1B4FA60F00780E98 /* EXTKeyPathCoding.h */; };
+		AAF4EF441B4FA60F00780E98 /* EXTRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF201B4FA60F00780E98 /* EXTRuntimeExtensions.h */; };
+		AAF4EF451B4FA60F00780E98 /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF211B4FA60F00780E98 /* EXTRuntimeExtensions.m */; };
+		AAF4EF461B4FA60F00780E98 /* EXTScope.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF221B4FA60F00780E98 /* EXTScope.h */; };
+		AAF4EF471B4FA60F00780E98 /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF231B4FA60F00780E98 /* EXTScope.m */; };
+		AAF4EF481B4FA60F00780E98 /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF241B4FA60F00780E98 /* metamacros.h */; };
+		AAF4EF491B4FA60F00780E98 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF4EF251B4FA60F00780E98 /* Info.plist */; };
+		AAF4EF4A1B4FA60F00780E98 /* Mantle.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF261B4FA60F00780E98 /* Mantle.h */; };
+		AAF4EF4B1B4FA60F00780E98 /* MTLJSONAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF271B4FA60F00780E98 /* MTLJSONAdapter.h */; };
+		AAF4EF4C1B4FA60F00780E98 /* MTLJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF281B4FA60F00780E98 /* MTLJSONAdapter.m */; };
+		AAF4EF4D1B4FA60F00780E98 /* MTLModel+NSCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF291B4FA60F00780E98 /* MTLModel+NSCoding.h */; };
+		AAF4EF4E1B4FA60F00780E98 /* MTLModel+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF2A1B4FA60F00780E98 /* MTLModel+NSCoding.m */; };
+		AAF4EF4F1B4FA60F00780E98 /* MTLModel.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF2B1B4FA60F00780E98 /* MTLModel.h */; };
+		AAF4EF501B4FA60F00780E98 /* MTLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF2C1B4FA60F00780E98 /* MTLModel.m */; };
+		AAF4EF511B4FA60F00780E98 /* MTLReflection.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF2D1B4FA60F00780E98 /* MTLReflection.h */; };
+		AAF4EF521B4FA60F00780E98 /* MTLReflection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF2E1B4FA60F00780E98 /* MTLReflection.m */; };
+		AAF4EF531B4FA60F00780E98 /* MTLTransformerErrorHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF2F1B4FA60F00780E98 /* MTLTransformerErrorHandling.h */; };
+		AAF4EF541B4FA60F00780E98 /* MTLTransformerErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF301B4FA60F00780E98 /* MTLTransformerErrorHandling.m */; };
+		AAF4EF551B4FA60F00780E98 /* MTLValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF311B4FA60F00780E98 /* MTLValueTransformer.h */; };
+		AAF4EF561B4FA60F00780E98 /* MTLValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF321B4FA60F00780E98 /* MTLValueTransformer.m */; };
+		AAF4EF571B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF331B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.h */; };
+		AAF4EF581B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF341B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.m */; };
+		AAF4EF591B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF351B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.h */; };
+		AAF4EF5A1B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF361B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.m */; };
+		AAF4EF5B1B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF371B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.h */; };
+		AAF4EF5C1B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF381B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.m */; };
+		AAF4EF5D1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF391B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.h */; };
+		AAF4EF5E1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF3A1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.m */; };
+		AAF4EF5F1B4FA60F00780E98 /* NSError+MTLModelException.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF3B1B4FA60F00780E98 /* NSError+MTLModelException.h */; };
+		AAF4EF601B4FA60F00780E98 /* NSError+MTLModelException.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF3C1B4FA60F00780E98 /* NSError+MTLModelException.m */; };
+		AAF4EF611B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF3D1B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.h */; };
+		AAF4EF621B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF3E1B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.m */; };
+		AAF4EF631B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF3F1B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.h */; };
+		AAF4EF641B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF401B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.m */; };
+		AAF4EF651B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF4EF411B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */; };
+		AAF4EF661B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF4EF421B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */; };
 		AEBB957500F469E29A82E357 /* Pods_SecucardConnectClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F951E7E02E5969C13FC5F59 /* Pods_SecucardConnectClientTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FD4A6CACF450CFC49AFB2CCC /* Pods_SecucardConnectClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8468298C2D62F353709880 /* Pods_SecucardConnectClient.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -524,6 +560,42 @@
 		AA19B7AB1B334568005CEB53 /* SCSmartTransactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmartTransactionService.m; sourceTree = "<group>"; };
 		AA19B7AE1B334568005CEB53 /* StompKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompKit.h; sourceTree = "<group>"; };
 		AA19B7AF1B334568005CEB53 /* StompKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompKit.m; sourceTree = "<group>"; };
+		AAF4EF1F1B4FA60F00780E98 /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTKeyPathCoding.h; sourceTree = "<group>"; };
+		AAF4EF201B4FA60F00780E98 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
+		AAF4EF211B4FA60F00780E98 /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
+		AAF4EF221B4FA60F00780E98 /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
+		AAF4EF231B4FA60F00780E98 /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
+		AAF4EF241B4FA60F00780E98 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		AAF4EF251B4FA60F00780E98 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAF4EF261B4FA60F00780E98 /* Mantle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mantle.h; sourceTree = "<group>"; };
+		AAF4EF271B4FA60F00780E98 /* MTLJSONAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLJSONAdapter.h; sourceTree = "<group>"; };
+		AAF4EF281B4FA60F00780E98 /* MTLJSONAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLJSONAdapter.m; sourceTree = "<group>"; };
+		AAF4EF291B4FA60F00780E98 /* MTLModel+NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTLModel+NSCoding.h"; sourceTree = "<group>"; };
+		AAF4EF2A1B4FA60F00780E98 /* MTLModel+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTLModel+NSCoding.m"; sourceTree = "<group>"; };
+		AAF4EF2B1B4FA60F00780E98 /* MTLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLModel.h; sourceTree = "<group>"; };
+		AAF4EF2C1B4FA60F00780E98 /* MTLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLModel.m; sourceTree = "<group>"; };
+		AAF4EF2D1B4FA60F00780E98 /* MTLReflection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLReflection.h; sourceTree = "<group>"; };
+		AAF4EF2E1B4FA60F00780E98 /* MTLReflection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLReflection.m; sourceTree = "<group>"; };
+		AAF4EF2F1B4FA60F00780E98 /* MTLTransformerErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLTransformerErrorHandling.h; sourceTree = "<group>"; };
+		AAF4EF301B4FA60F00780E98 /* MTLTransformerErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLTransformerErrorHandling.m; sourceTree = "<group>"; };
+		AAF4EF311B4FA60F00780E98 /* MTLValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLValueTransformer.h; sourceTree = "<group>"; };
+		AAF4EF321B4FA60F00780E98 /* MTLValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLValueTransformer.m; sourceTree = "<group>"; };
+		AAF4EF331B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
+		AAF4EF341B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MTLManipulationAdditions.m"; sourceTree = "<group>"; };
+		AAF4EF351B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MTLJSONKeyPath.h"; sourceTree = "<group>"; };
+		AAF4EF361B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MTLJSONKeyPath.m"; sourceTree = "<group>"; };
+		AAF4EF371B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
+		AAF4EF381B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MTLManipulationAdditions.m"; sourceTree = "<group>"; };
+		AAF4EF391B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MTLMappingAdditions.h"; sourceTree = "<group>"; };
+		AAF4EF3A1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MTLMappingAdditions.m"; sourceTree = "<group>"; };
+		AAF4EF3B1B4FA60F00780E98 /* NSError+MTLModelException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MTLModelException.h"; sourceTree = "<group>"; };
+		AAF4EF3C1B4FA60F00780E98 /* NSError+MTLModelException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MTLModelException.m"; sourceTree = "<group>"; };
+		AAF4EF3D1B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTLComparisonAdditions.h"; sourceTree = "<group>"; };
+		AAF4EF3E1B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTLComparisonAdditions.m"; sourceTree = "<group>"; };
+		AAF4EF3F1B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+MTLInversionAdditions.h"; sourceTree = "<group>"; };
+		AAF4EF401B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLInversionAdditions.m"; sourceTree = "<group>"; };
+		AAF4EF411B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
+		AAF4EF421B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
 		C6647FF5B37941FD811B01A9 /* Pods-SecucardConnectClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectClient/Pods-SecucardConnectClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1067,6 +1139,7 @@
 		AA19B7AC1B334568005CEB53 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				AAF4EF1D1B4FA60F00780E98 /* Mantle */,
 				AA19B7AD1B334568005CEB53 /* StompKit */,
 			);
 			path = Vendor;
@@ -1079,6 +1152,57 @@
 				AA19B7AF1B334568005CEB53 /* StompKit.m */,
 			);
 			path = StompKit;
+			sourceTree = "<group>";
+		};
+		AAF4EF1D1B4FA60F00780E98 /* Mantle */ = {
+			isa = PBXGroup;
+			children = (
+				AAF4EF1E1B4FA60F00780E98 /* extobjc */,
+				AAF4EF251B4FA60F00780E98 /* Info.plist */,
+				AAF4EF261B4FA60F00780E98 /* Mantle.h */,
+				AAF4EF271B4FA60F00780E98 /* MTLJSONAdapter.h */,
+				AAF4EF281B4FA60F00780E98 /* MTLJSONAdapter.m */,
+				AAF4EF291B4FA60F00780E98 /* MTLModel+NSCoding.h */,
+				AAF4EF2A1B4FA60F00780E98 /* MTLModel+NSCoding.m */,
+				AAF4EF2B1B4FA60F00780E98 /* MTLModel.h */,
+				AAF4EF2C1B4FA60F00780E98 /* MTLModel.m */,
+				AAF4EF2D1B4FA60F00780E98 /* MTLReflection.h */,
+				AAF4EF2E1B4FA60F00780E98 /* MTLReflection.m */,
+				AAF4EF2F1B4FA60F00780E98 /* MTLTransformerErrorHandling.h */,
+				AAF4EF301B4FA60F00780E98 /* MTLTransformerErrorHandling.m */,
+				AAF4EF311B4FA60F00780E98 /* MTLValueTransformer.h */,
+				AAF4EF321B4FA60F00780E98 /* MTLValueTransformer.m */,
+				AAF4EF331B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.h */,
+				AAF4EF341B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.m */,
+				AAF4EF351B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.h */,
+				AAF4EF361B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.m */,
+				AAF4EF371B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.h */,
+				AAF4EF381B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.m */,
+				AAF4EF391B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.h */,
+				AAF4EF3A1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.m */,
+				AAF4EF3B1B4FA60F00780E98 /* NSError+MTLModelException.h */,
+				AAF4EF3C1B4FA60F00780E98 /* NSError+MTLModelException.m */,
+				AAF4EF3D1B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.h */,
+				AAF4EF3E1B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.m */,
+				AAF4EF3F1B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.h */,
+				AAF4EF401B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.m */,
+				AAF4EF411B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */,
+				AAF4EF421B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */,
+			);
+			path = Mantle;
+			sourceTree = "<group>";
+		};
+		AAF4EF1E1B4FA60F00780E98 /* extobjc */ = {
+			isa = PBXGroup;
+			children = (
+				AAF4EF1F1B4FA60F00780E98 /* EXTKeyPathCoding.h */,
+				AAF4EF201B4FA60F00780E98 /* EXTRuntimeExtensions.h */,
+				AAF4EF211B4FA60F00780E98 /* EXTRuntimeExtensions.m */,
+				AAF4EF221B4FA60F00780E98 /* EXTScope.h */,
+				AAF4EF231B4FA60F00780E98 /* EXTScope.m */,
+				AAF4EF241B4FA60F00780E98 /* metamacros.h */,
+			);
+			path = extobjc;
 			sourceTree = "<group>";
 		};
 		C7221CDB18B34FA9CA718100 /* Frameworks */ = {
@@ -1107,6 +1231,7 @@
 				AA19B7B81B334568005CEB53 /* SCAccountManager.h in Headers */,
 				AA19B8781B334568005CEB53 /* SCSecuAppService.h in Headers */,
 				AA19B7BE1B334568005CEB53 /* SCPersistenceManager.h in Headers */,
+				AAF4EF591B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.h in Headers */,
 				AA19B80C1B334568005CEB53 /* SCLoyaltyCardGroup.h in Headers */,
 				AA19B7E61B334568005CEB53 /* SCGeneralAccount.h in Headers */,
 				AA19B7B61B334568005CEB53 /* SCGlobals.h in Headers */,
@@ -1115,11 +1240,13 @@
 				AA19B8021B334568005CEB53 /* SCGeneralStore.h in Headers */,
 				AA19B80E1B334568005CEB53 /* SCLoyaltyCondition.h in Headers */,
 				AA19B85C1B334568005CEB53 /* SCSmartProduct.h in Headers */,
+				AAF4EF551B4FA60F00780E98 /* MTLValueTransformer.h in Headers */,
 				AA19B8621B334568005CEB53 /* SCSmartText.h in Headers */,
 				AA19B7B01B334568005CEB53 /* MTLModel+Secucard.h in Headers */,
 				AA19B84E1B334568005CEB53 /* SCServicesIdentResult.h in Headers */,
 				AA19B8161B334568005CEB53 /* SCLoyaltySale.h in Headers */,
 				AA19B8461B334568005CEB53 /* SCServicesIdResultUserData.h in Headers */,
+				AAF4EF431B4FA60F00780E98 /* EXTKeyPathCoding.h in Headers */,
 				AA19B7E21B334568005CEB53 /* SCGeneralComponentsMetaData.h in Headers */,
 				AA19B7C21B334568005CEB53 /* SCRestServiceManager.h in Headers */,
 				AA19B7F41B334568005CEB53 /* SCGeneralLocation.h in Headers */,
@@ -1129,7 +1256,9 @@
 				AA19B7E41B334568005CEB53 /* SCGeneralComponentsOpenHours.h in Headers */,
 				AA19B84C1B334568005CEB53 /* SCServicesIdentRequest.h in Headers */,
 				AA19B89C1B334568005CEB53 /* SCDeviceService.h in Headers */,
+				AAF4EF4F1B4FA60F00780E98 /* MTLModel.h in Headers */,
 				AA19B8881B334568005CEB53 /* SCCardsService.h in Headers */,
+				AAF4EF571B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.h in Headers */,
 				AA19B7C61B334568005CEB53 /* SCStompConfiguration.h in Headers */,
 				AA19B89A1B334568005CEB53 /* SCCheckinService.h in Headers */,
 				AA19B7DC1B334568005CEB53 /* SCGeneralComponentsAssign.h in Headers */,
@@ -1152,6 +1281,7 @@
 				AA19B8941B334568005CEB53 /* SCSecupayPrepayService.h in Headers */,
 				AA19B8A01B334568005CEB53 /* SCSmartTransactionService.h in Headers */,
 				AA19B7FA1B334568005CEB53 /* SCGeneralMerchantList.h in Headers */,
+				AAF4EF511B4FA60F00780E98 /* MTLReflection.h in Headers */,
 				AA19B8561B334568005CEB53 /* SCSmartCheckin.h in Headers */,
 				AA19B8641B334568005CEB53 /* SCSmartTransaction.h in Headers */,
 				AA19B7CC1B334568005CEB53 /* SCStompStorageItem.h in Headers */,
@@ -1162,6 +1292,7 @@
 				AA19B7D81B334568005CEB53 /* SCDocumentUploadsDocument.h in Headers */,
 				AA19B8761B334568005CEB53 /* SCUploadService.h in Headers */,
 				AA19B86C1B334568005CEB53 /* SCTransportStatus.h in Headers */,
+				AAF4EF4B1B4FA60F00780E98 /* MTLJSONAdapter.h in Headers */,
 				AA19B83A1B334568005CEB53 /* SCServicesIdResultAttachment.h in Headers */,
 				AA19B8681B334568005CEB53 /* SCTransportMessage.h in Headers */,
 				AA19B8081B334568005CEB53 /* SCLoyaltyBonus.h in Headers */,
@@ -1169,9 +1300,11 @@
 				AA19B81C1B334568005CEB53 /* SCPaymentCustomer.h in Headers */,
 				AA19B8501B334568005CEB53 /* SCSmartBasket.h in Headers */,
 				AA19B8301B334568005CEB53 /* SCSecuObject.h in Headers */,
+				AAF4EF611B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.h in Headers */,
 				AA19B8481B334568005CEB53 /* SCServicesIdResultValue.h in Headers */,
 				AA19B8181B334568005CEB53 /* SCPaymentContainer.h in Headers */,
 				AA19B7F21B334568005CEB53 /* SCGeneralEvent.h in Headers */,
+				AAF4EF4D1B4FA60F00780E98 /* MTLModel+NSCoding.h in Headers */,
 				AA19B7F61B334568005CEB53 /* SCGeneralMerchant.h in Headers */,
 				AA19B8141B334568005CEB53 /* SCLoyaltyProgram.h in Headers */,
 				AA19B7BA1B334568005CEB53 /* SCAppDestination.h in Headers */,
@@ -1181,13 +1314,16 @@
 				AA19B8121B334568005CEB53 /* SCLoyaltyMerchantCard.h in Headers */,
 				AA19B83C1B334568005CEB53 /* SCServicesIdResultContactData.h in Headers */,
 				AA19B8981B334568005CEB53 /* SCIdentService.h in Headers */,
+				AAF4EF651B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h in Headers */,
 				AA19B7D21B334568005CEB53 /* SCAuthSession.h in Headers */,
 				AA19B7F81B334568005CEB53 /* SCGeneralMerchantDetail.h in Headers */,
 				AA19B7D01B334568005CEB53 /* SCAuthDeviceAuthCode.h in Headers */,
 				AA19B87C1B334568005CEB53 /* SCAccountService.h in Headers */,
 				AA19B8601B334568005CEB53 /* SCSmartReceiptLine.h in Headers */,
 				AA19B82C1B334568005CEB53 /* SCObjectList.h in Headers */,
+				AAF4EF441B4FA60F00780E98 /* EXTRuntimeExtensions.h in Headers */,
 				AA19B8821B334568005CEB53 /* SCPublicMerchantService.h in Headers */,
+				AAF4EF5B1B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.h in Headers */,
 				AA19B7FE1B334568005CEB53 /* SCGeneralNotification.h in Headers */,
 				AA19B88C1B334568005CEB53 /* SCMerchantCardsService.h in Headers */,
 				AA19B8101B334568005CEB53 /* SCLoyaltyCustomer.h in Headers */,
@@ -1202,16 +1338,22 @@
 				AA19B8661B334568005CEB53 /* SCSmartTransactionResult.h in Headers */,
 				AA19B7FC1B334568005CEB53 /* SCGeneralNews.h in Headers */,
 				AA19B8201B334568005CEB53 /* SCPaymentSecupayDebit.h in Headers */,
+				AAF4EF461B4FA60F00780E98 /* EXTScope.h in Headers */,
 				AA19B7EC1B334568005CEB53 /* SCGeneralAssignment.h in Headers */,
+				AAF4EF5F1B4FA60F00780E98 /* NSError+MTLModelException.h in Headers */,
 				AA19B7CA1B334568005CEB53 /* SCStompManager.h in Headers */,
 				AA19B8001B334568005CEB53 /* SCGeneralPublicMerchant.h in Headers */,
 				AA19B7BC1B334568005CEB53 /* SCLogManager.h in Headers */,
+				AAF4EF5D1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.h in Headers */,
 				AA19B7DE1B334568005CEB53 /* SCGeneralComponentsDayTime.h in Headers */,
 				AA19B7C01B334568005CEB53 /* SCRestConfiguration.h in Headers */,
+				AAF4EF631B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.h in Headers */,
 				AA19B7E81B334568005CEB53 /* SCGeneralAccountDevice.h in Headers */,
 				AA19B7CE1B334568005CEB53 /* SCAnnotationProductInfo.h in Headers */,
+				AAF4EF531B4FA60F00780E98 /* MTLTransformerErrorHandling.h in Headers */,
 				AA19B8261B334568005CEB53 /* SCPaymentTransferAccount.h in Headers */,
 				AA19B85E1B334568005CEB53 /* SCSmartProductGroup.h in Headers */,
+				AAF4EF481B4FA60F00780E98 /* metamacros.h in Headers */,
 				AA19B8841B334568005CEB53 /* SCStoreService.h in Headers */,
 				AA19B8801B334568005CEB53 /* SCNewsService.h in Headers */,
 				AA19B7F01B334568005CEB53 /* SCGeneralContact.h in Headers */,
@@ -1220,6 +1362,7 @@
 				AA19B7C81B334568005CEB53 /* SCStompDestination.h in Headers */,
 				AA19B8421B334568005CEB53 /* SCServicesIdResultIdentificationProcess.h in Headers */,
 				AA19B8061B334568005CEB53 /* SCGeneralTransaction.h in Headers */,
+				AAF4EF4A1B4FA60F00780E98 /* Mantle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,6 +1450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF4EF491B4FA60F00780E98 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1402,36 +1546,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF4EF541B4FA60F00780E98 /* MTLTransformerErrorHandling.m in Sources */,
 				AA19B82B1B334568005CEB53 /* SCMediaResource.m in Sources */,
 				AA19B7F71B334568005CEB53 /* SCGeneralMerchant.m in Sources */,
 				AA19B8871B334568005CEB53 /* SCTransactionService.m in Sources */,
 				AA19B8711B334568005CEB53 /* SCClientCredentials.m in Sources */,
+				AAF4EF471B4FA60F00780E98 /* EXTScope.m in Sources */,
 				AA19B7C11B334568005CEB53 /* SCRestConfiguration.m in Sources */,
+				AAF4EF5E1B4FA60F00780E98 /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				AA19B8231B334568005CEB53 /* SCPaymentSecupayPrepay.m in Sources */,
 				AA19B7F51B334568005CEB53 /* SCGeneralLocation.m in Sources */,
+				AAF4EF5C1B4FA60F00780E98 /* NSDictionary+MTLManipulationAdditions.m in Sources */,
+				AAF4EF451B4FA60F00780E98 /* EXTRuntimeExtensions.m in Sources */,
 				AA19B7FD1B334568005CEB53 /* SCGeneralNews.m in Sources */,
 				AA19B8111B334568005CEB53 /* SCLoyaltyCustomer.m in Sources */,
 				AA19B88F1B334568005CEB53 /* SCContainerService.m in Sources */,
+				AAF4EF4C1B4FA60F00780E98 /* MTLJSONAdapter.m in Sources */,
 				AA19B7BB1B334568005CEB53 /* SCAppDestination.m in Sources */,
 				AA19B8911B334568005CEB53 /* SCCustomerService.m in Sources */,
 				AA19B7CF1B334568005CEB53 /* SCAnnotationProductInfo.m in Sources */,
 				AA19B8611B334568005CEB53 /* SCSmartReceiptLine.m in Sources */,
 				AA19B7B71B334568005CEB53 /* SCGlobals.m in Sources */,
 				AA19B80D1B334568005CEB53 /* SCLoyaltyCardGroup.m in Sources */,
+				AAF4EF601B4FA60F00780E98 /* NSError+MTLModelException.m in Sources */,
 				AA19B7D51B334568005CEB53 /* SCAuthToken.m in Sources */,
 				AA19B83F1B334568005CEB53 /* SCServicesIdResultCustomData.m in Sources */,
 				AA19B8991B334568005CEB53 /* SCIdentService.m in Sources */,
+				AAF4EF661B4FA60F00780E98 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				AA19B7DB1B334568005CEB53 /* SCGeneralComponentsAddressComponent.m in Sources */,
 				AA19B7D31B334568005CEB53 /* SCAuthSession.m in Sources */,
 				AA19B8031B334568005CEB53 /* SCGeneralStore.m in Sources */,
 				AA19B7C51B334568005CEB53 /* SCServiceManager.m in Sources */,
 				AA19B81B1B334568005CEB53 /* SCPaymentContract.m in Sources */,
+				AAF4EF581B4FA60F00780E98 /* NSArray+MTLManipulationAdditions.m in Sources */,
 				AA19B7F91B334568005CEB53 /* SCGeneralMerchantDetail.m in Sources */,
 				AA19B85D1B334568005CEB53 /* SCSmartProduct.m in Sources */,
 				AA19B8211B334568005CEB53 /* SCPaymentSecupayDebit.m in Sources */,
+				AAF4EF4E1B4FA60F00780E98 /* MTLModel+NSCoding.m in Sources */,
 				AA19B81F1B334568005CEB53 /* SCPaymentData.m in Sources */,
 				AA19B8591B334568005CEB53 /* SCSmartDevice.m in Sources */,
 				AA19B88D1B334568005CEB53 /* SCMerchantCardsService.m in Sources */,
+				AAF4EF521B4FA60F00780E98 /* MTLReflection.m in Sources */,
 				AA19B8791B334568005CEB53 /* SCSecuAppService.m in Sources */,
 				AA19B8571B334568005CEB53 /* SCSmartCheckin.m in Sources */,
 				AA19B8A31B334568005CEB53 /* StompKit.m in Sources */,
@@ -1441,6 +1596,7 @@
 				AA19B7E11B334568005CEB53 /* SCGeneralComponentsGeometry.m in Sources */,
 				AA19B8491B334568005CEB53 /* SCServicesIdResultValue.m in Sources */,
 				AA19B81D1B334568005CEB53 /* SCPaymentCustomer.m in Sources */,
+				AAF4EF561B4FA60F00780E98 /* MTLValueTransformer.m in Sources */,
 				AA19B86F1B334568005CEB53 /* SCClientConfiguration.m in Sources */,
 				AA19B84D1B334568005CEB53 /* SCServicesIdentRequest.m in Sources */,
 				AA19B88B1B334568005CEB53 /* SCLoyaltyCustomerService.m in Sources */,
@@ -1450,6 +1606,7 @@
 				AA19B8451B334568005CEB53 /* SCServicesIdResultPerson.m in Sources */,
 				AA19B7DD1B334568005CEB53 /* SCGeneralComponentsAssign.m in Sources */,
 				AA19B7BD1B334568005CEB53 /* SCLogManager.m in Sources */,
+				AAF4EF501B4FA60F00780E98 /* MTLModel.m in Sources */,
 				AA19B8251B334568005CEB53 /* SCPaymentTransaction.m in Sources */,
 				AA19B86D1B334568005CEB53 /* SCTransportStatus.m in Sources */,
 				AA19B7CB1B334568005CEB53 /* SCStompManager.m in Sources */,
@@ -1468,6 +1625,7 @@
 				AA19B83D1B334568005CEB53 /* SCServicesIdResultContactData.m in Sources */,
 				AA19B8751B334568005CEB53 /* SCUserCredentials.m in Sources */,
 				AA19B7C31B334568005CEB53 /* SCRestServiceManager.m in Sources */,
+				AAF4EF5A1B4FA60F00780E98 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				AA19B8891B334568005CEB53 /* SCCardsService.m in Sources */,
 				AA19B8151B334568005CEB53 /* SCLoyaltyProgram.m in Sources */,
 				AA19B80F1B334568005CEB53 /* SCLoyaltyCondition.m in Sources */,
@@ -1503,6 +1661,8 @@
 				AA19B87B1B334568005CEB53 /* SCAccountDevicesService.m in Sources */,
 				AA19B8971B334568005CEB53 /* SCAbstractService.m in Sources */,
 				AA19B8271B334568005CEB53 /* SCPaymentTransferAccount.m in Sources */,
+				AAF4EF641B4FA60F00780E98 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
+				AAF4EF621B4FA60F00780E98 /* NSObject+MTLComparisonAdditions.m in Sources */,
 				AA19B7D11B334568005CEB53 /* SCAuthDeviceAuthCode.m in Sources */,
 				AA19B7BF1B334568005CEB53 /* SCPersistenceManager.m in Sources */,
 				AA19B7C91B334568005CEB53 /* SCStompDestination.m in Sources */,
@@ -1638,10 +1798,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6647FF5B37941FD811B01A9 /* Pods-SecucardConnectClient.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = SecucardConnectClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1654,10 +1816,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74839717297B8F969606CC25 /* Pods-SecucardConnectClient.release.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = SecucardConnectClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1670,6 +1834,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A02B69DEAE0B12E4C62DF13 /* Pods-SecucardConnectClientTests.debug.xcconfig */;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1688,6 +1853,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69DF957B698199C88860E12D /* Pods-SecucardConnectClientTests.release.xcconfig */;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

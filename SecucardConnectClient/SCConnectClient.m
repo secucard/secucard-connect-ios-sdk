@@ -95,7 +95,7 @@
   self.connected = false;
   [[SCStompManager sharedManager] close];
   [[SCRestServiceManager sharedManager] close];
-  
+  [[SCAccountManager sharedManager] destroy];
   handler(true, nil);
 }
 
@@ -105,7 +105,8 @@
   [[SCStompManager sharedManager] destroy];
   [[SCAccountManager sharedManager] destroy];
   self.configuration = nil;
-  self.connected = false;
+  self.connected = FALSE;
+  self.initialized = FALSE;
   
   handler(true, nil);
   

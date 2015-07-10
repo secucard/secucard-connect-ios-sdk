@@ -116,6 +116,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+      
       [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         handler(responseObject, nil);
@@ -158,6 +160,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+      
       [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         handler(responseObject, nil);
@@ -198,6 +202,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
   if (secure) {
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+      
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
       [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -240,6 +246,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
   if (secure) {
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+      
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
       [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -406,6 +414,19 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   NSDictionary *params = [self createDic:queryParams];
   
+  NSMutableDictionary *mutableParams = [params mutableCopy];
+  for(id key in params) {
+    
+    id val = [mutableParams objectForKey:key];
+    
+    if ([val isKindOfClass:[NSArray class]]) {
+      NSString *arrayString = [((NSArray*)val) componentsJoinedByString:@","];
+      [mutableParams setObject:arrayString forKey:key];
+    }
+    
+  }
+  params = [NSDictionary dictionaryWithDictionary:mutableParams];
+  
   if (!params) {
     handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
@@ -422,7 +443,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
     SCObjectList *objectList = [MTLJSONAdapter modelOfClass:[SCObjectList class] fromJSONDictionary:responseObject error:&parsingError];
     
     //parse Objects in list
-    if (!parsingError) {
+    if (!parsingError && objectList.data != nil) {
       objectList.data = [MTLJSONAdapter modelsOfClass:type fromJSONArray:objectList.data error:&parsingError];
     }
     
