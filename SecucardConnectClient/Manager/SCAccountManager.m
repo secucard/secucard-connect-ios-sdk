@@ -10,6 +10,7 @@
 #import "SCAuthDeviceAuthCode.h"
 #import "SCRestServiceManager.h"
 #import "SCStompManager.h"
+#import "SCConnectClient.h"
 
 @interface SCAccountManager()
 
@@ -54,6 +55,10 @@
 - (void) destroy {
   self.clientCredentials = nil;
   self.userCredentials = nil;
+  self.accessToken = nil;
+  self.refreshToken = nil;
+  self.expires = nil;
+  [self killToken];
 }
 
 - (BOOL) needsInitialization
@@ -90,8 +95,8 @@
   
   NSDictionary *params = @{
                            @"grant_type":@"appuser",
-                           @"username": self.userCredentials.username,
-                           @"password": self.userCredentials.password,
+                           @"username": [SCConnectClient sharedInstance].configuration.userCredentials.username,
+                           @"password": [SCConnectClient sharedInstance].configuration.userCredentials.password,
                            @"client_id": self.clientCredentials.clientId,
                            @"client_secret": self.clientCredentials.clientSecret,
                            @"device": [SCConnectClient sharedInstance].configuration.deviceId
@@ -249,7 +254,7 @@
   {
     
     // if we have user credentials, this is a regular auth process
-    if (self.userCredentials.username && self.userCredentials.password) {
+    if ([SCConnectClient sharedInstance].configuration.userCredentials.username && [SCConnectClient sharedInstance].configuration.userCredentials.password) {
       
       [self retrieveAccessToken:^(NSString *token, NSError *error) {
         handler(token, error);

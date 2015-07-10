@@ -186,9 +186,16 @@
   
   NSMutableArray *typedArray = [NSMutableArray new];
   for (id object in array) {
-    NSError *parsingError = nil;
-    id typedObject = [MTLJSONAdapter modelOfClass:class fromJSONDictionary:object error:&parsingError];
-    [typedArray addObject:typedObject];
+    
+    // if already parsed
+    if ([object isKindOfClass:class]) {
+      [typedArray addObject:object];
+    } else {
+      NSError *parsingError = nil;
+      id typedObject = [MTLJSONAdapter modelOfClass:class fromJSONDictionary:object error:&parsingError];
+      [typedArray addObject:typedObject];
+    }
+    
   }
   return [NSArray arrayWithArray:typedArray];
 }

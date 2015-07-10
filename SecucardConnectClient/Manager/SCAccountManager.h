@@ -43,9 +43,6 @@
 @interface SCAccountManager : NSObject
 
 @property (nonatomic, retain) NSString *accessToken;
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *password;
-
 @property (nonatomic, retain) NSString *refreshToken;
 @property (nonatomic, retain) NSDate *expires;
 @property (nonatomic, assign) BOOL loggedIn;

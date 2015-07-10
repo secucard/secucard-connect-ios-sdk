@@ -1,6 +1,0 @@
-framework module Pods_SecucardConnectClient {
-  umbrella header "Pods-SecucardConnectClient-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -205,11 +205,11 @@ extern const NSInteger MTLJSONAdapterErrorInvalidJSONMapping;
 /// receiver if it's implemented. It supports NSURL conversion through
 /// +NSURLJSONTransformer.
 ///
-/// modelClass - The class of the property to serialize. This property must not be
-///              nil.
+/// class - The class of the property to serialize. This property must not be
+///         nil.
 ///
 /// Returns a value transformer or nil if no transformation should be used.
-+ (NSValueTransformer *)transformerForModelPropertiesOfClass:(Class)modelClass;
++ (NSValueTransformer *)transformerForModelPropertiesOfClass:(Class)class;
 
 /// A value transformer that should be used for a properties of the given
 /// primitive type.

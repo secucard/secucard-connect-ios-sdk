@@ -1,6 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/AFNetworking.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/CocoaAsyncSocket.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Mantle.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "CocoaAsyncSocket" -framework "Mantle"
-PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-SecucardConnectClient
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/CocoaAsyncSocket" "${PODS_ROOT}/Headers/Public/Mantle"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/CocoaAsyncSocket" -isystem "${PODS_ROOT}/Headers/Public/Mantle"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"AFNetworking" -l"CocoaAsyncSocket" -l"Mantle" -framework "CFNetwork" -framework "CoreGraphics" -framework "Foundation" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
 PODS_ROOT = ${SRCROOT}/Pods

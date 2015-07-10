@@ -252,9 +252,12 @@ static BOOL MTLValidateAndSetValue(id obj, NSString *key, id value, BOOL forceUp
 		return;
 	}
 
-	IMP imp = [self methodForSelector:selector];
-	void (*function)(id, SEL, id<MTLModel>) = (__typeof__(function))imp;
-	function(self, selector, model);
+	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+	invocation.target = self;
+	invocation.selector = selector;
+
+	[invocation setArgument:&model atIndex:2];
+	[invocation invoke];
 }
 
 - (void)mergeValuesForKeysFromModel:(id<MTLModel>)model {
