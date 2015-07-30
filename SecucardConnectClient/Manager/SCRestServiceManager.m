@@ -575,7 +575,17 @@ AFHTTPRequestSerializer *authRequestSerializer;
       return;
     }
   
-  [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:handler];
+  NSMutableArray *argArray = [NSMutableArray new];
+  if (objectId) {
+    [argArray addObject:objectId];
+  }
+  if (action) {
+    [argArray addObject:action];
+  }
+  if (actionArg) {
+    [argArray addObject:actionArg];
+  }
+  [self postRequestToEndpoint:[self resolveEndpoint:type args:[NSArray arrayWithArray:argArray]] WithParams:params secure:secure completionHandler:handler];
   
 }
 

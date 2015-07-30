@@ -12,6 +12,8 @@
 
 @interface SCUploadService : SCAbstractService
 
++ (SCUploadService*)sharedService;
+
 /**
  *  Uploads a document to the server
  *
