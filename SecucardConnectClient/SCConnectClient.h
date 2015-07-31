@@ -25,6 +25,8 @@
 
 + (SCConnectClient *)sharedInstance;
 
+- (NSString*) myApiVersion;
+
 - (void) initWithConfiguration:(SCClientConfiguration*)configuration;
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials;
 - (void) connect:(void (^)(bool, NSError *))handler;

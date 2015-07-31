@@ -13,6 +13,10 @@
 
 @implementation SCConnectClient
 
+unsigned libVersionMajor = 0;
+unsigned libVersionMinor = 2;
+unsigned libVersionPatch = 1;
+
 + (SCConnectClient *)sharedInstance
 {
   static SCConnectClient *instance = nil;
@@ -51,6 +55,12 @@
   self.initialized = TRUE;
   
 }
+
+- (NSString*) myApiVersion
+{
+  return [NSString stringWithFormat:@"%u.%u.%u", libVersionMajor, libVersionMinor, libVersionPatch];
+}
+
 
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials {
   
