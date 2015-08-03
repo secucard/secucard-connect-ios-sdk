@@ -12,6 +12,14 @@
 @interface SCStoreService : SCAbstractService
 
 /**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCStoreService*)sharedService;
+
+
+/**
  *  check-in to a store
  *
  *  @param storeId the store's id

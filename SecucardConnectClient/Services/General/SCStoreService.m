@@ -10,11 +10,6 @@
 
 @implementation SCStoreService
 
-/**
- *  get instance of service
- *
- *  @return the singleton instance
- */
 + (SCStoreService*)sharedService
 {
   static SCStoreService *instance = nil;

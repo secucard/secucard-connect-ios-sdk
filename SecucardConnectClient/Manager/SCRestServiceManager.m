@@ -412,20 +412,9 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
   
-  NSDictionary *params = [self createDic:queryParams];
+  //NSDictionary *params = [self createDic:queryParams];
   
-  NSMutableDictionary *mutableParams = [params mutableCopy];
-  for(id key in params) {
-    
-    id val = [mutableParams objectForKey:key];
-    
-    if ([val isKindOfClass:[NSArray class]]) {
-      NSString *arrayString = [((NSArray*)val) componentsJoinedByString:@","];
-      [mutableParams setObject:arrayString forKey:key];
-    }
-    
-  }
-  params = [NSDictionary dictionaryWithDictionary:mutableParams];
+  NSDictionary *params = [self queryParamsToMap:queryParams];
   
   if (!params) {
     handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
@@ -609,6 +598,73 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) close {
   
+}
+
+- (NSDictionary*) queryParamsToMap:(SCQueryParams*)params {
+  
+  NSMutableDictionary *map = [NSMutableDictionary new];
+  
+  if (!params) {
+    return map;
+  }
+  
+  BOOL scroll = params.scrollId && ![params.scrollId isEqualToString:@""];
+  
+  if (scroll) {
+    [map setObject:params.scrollId forKey:@"scroll_id"];
+  }
+  
+  BOOL scrollExpire = params.scrollExpire && [params.scrollExpire isEqualToString:@""];
+  
+  if (scrollExpire) {
+    [map setObject:params.scrollExpire forKey:@"scroll_expire"];
+  }
+  
+  if (!scroll && params.count != nil && params.count >= 0) {
+    [map setObject:params.count forKey:@"count"];
+  }
+  
+  if (!scroll && !scrollExpire && params.offset != nil && params.offset >= 0) {
+    [map setObject:params.offset forKey:@"offset"];
+  }
+  
+  if (params.fields) {
+    [map setObject:[params.fields componentsJoinedByString:@","] forKey:@"fields"];
+  }
+  
+  for(id key in params.sortOrder)
+    [map setObject:[params.sortOrder objectForKey:key] forKey:[NSString stringWithFormat:@"sort[%@]", key]];
+  
+  if (params.query && ![params.query isEqualToString:@""]) {
+    [map setObject:params.query forKey:@"q"];
+  }
+  
+  if (params.preset && ![params.preset isEqualToString:@""]) {
+    [map setObject:params.preset forKey:@"preset"];
+  }
+  
+  if (params.geoQuery != nil) {
+    
+    if (params.geoQuery.field && ![params.geoQuery.field isEqualToString:@""]) {
+      [map setObject:params.geoQuery.field forKey:@"geo[field]"];
+    }
+    
+    if (params.geoQuery.lat) {
+      [map setObject:[NSString stringWithFormat:@"%f", params.geoQuery.lat] forKey:@"geo[lat]"];
+    }
+    
+    if (params.geoQuery.lon) {
+      [map setObject:[NSString stringWithFormat:@"%f", params.geoQuery.lon] forKey:@"geo[lon]"];
+    }
+    
+    if (params.geoQuery.distance && ![params.geoQuery.distance isEqualToString:@""]) {
+      [map setObject:params.geoQuery.distance forKey:@"geo[distance]"];
+    }
+    
+  }
+  
+  return map;
+
 }
 
 
