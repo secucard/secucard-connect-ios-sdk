@@ -23,4 +23,13 @@
                                                                   }];
 }
 
++ (NSValueTransformer *)merchantJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
++ (NSValueTransformer *)detailJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltySale class]];
+}
+
+
 @end
