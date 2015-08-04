@@ -27,7 +27,7 @@
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
 }
 
-+ (NSValueTransformer *)detailJSONTransformer {
++ (NSValueTransformer *)detailsJSONTransformer {
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltySale class]];
 }
 
