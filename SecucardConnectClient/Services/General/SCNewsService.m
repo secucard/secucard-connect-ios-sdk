@@ -11,11 +11,6 @@
 
 @implementation SCNewsService
 
-/**
- *  get instance of service
- *
- *  @return the singleton instance
- */
 + (SCNewsService*)sharedService
 {
   static SCNewsService *instance = nil;

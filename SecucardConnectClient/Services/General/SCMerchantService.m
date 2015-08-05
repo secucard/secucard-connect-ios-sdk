@@ -10,11 +10,6 @@
 
 @implementation SCMerchantService
 
-/**
- *  get instance of service
- *
- *  @return the singleton instance
- */
 + (SCMerchantService*)sharedService
 {
   static SCMerchantService *instance = nil;

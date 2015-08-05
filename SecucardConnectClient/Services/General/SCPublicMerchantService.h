@@ -13,6 +13,13 @@
 @interface SCPublicMerchantService : SCAbstractService
 
 /**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCPublicMerchantService*)sharedService;
+
+/**
  *  retireve the public merchant with the given id
  *
  *  @param id the merchant's id
