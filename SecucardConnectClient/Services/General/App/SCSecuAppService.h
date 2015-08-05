@@ -10,6 +10,8 @@
 #import "SCGeneralMerchant.h"
 @interface SCStoreList : SCObjectList
 
+
+
 @end
 
 @interface SCSecuAppService : SCAbstractService

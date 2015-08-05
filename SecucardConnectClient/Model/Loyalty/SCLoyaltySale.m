@@ -27,5 +27,20 @@
                                                                    }];
 }
 
++ (NSValueTransformer *)storeJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralStore class]];
+}
+
++ (NSValueTransformer *)cardJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCard class]];
+}
+
++ (NSValueTransformer *)cardgroupJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCardGroup class]];
+}
+
++ (NSValueTransformer *)merchantcardJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyMerchantCard class]];
+}
 
 @end

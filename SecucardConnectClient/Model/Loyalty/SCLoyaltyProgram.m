@@ -20,5 +20,8 @@
                                                                   }];
 }
 
++ (NSValueTransformer *)cardGroupJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCardGroup class]];
+}
 
 @end
