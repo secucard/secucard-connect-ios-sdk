@@ -11,11 +11,6 @@
 
 @implementation SCAccountService
 
-/**
- *  get instance of service
- *
- *  @return the singleton instance
- */
 + (SCAccountService*)sharedService
 {
   static SCAccountService *instance = nil;

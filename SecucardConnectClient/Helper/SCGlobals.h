@@ -116,9 +116,9 @@ typedef enum {
   EventTypeAdded,
   EventTypeDisplay,
   EventTypeBeaconMonitor,
-  EventTypePublicmerchantsAroundme,
-  EventTypeCheckinChanged,
-  EventTypeTransactionAdded
+//  EventTypePublicmerchantsAroundme,
+//  EventTypeCheckinChanged,
+//  EventTypeTransactionAdded
   
 } SCEventType;
 
