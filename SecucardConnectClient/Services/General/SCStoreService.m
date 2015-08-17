@@ -7,6 +7,7 @@
 //
 
 #import "SCStoreService.h"
+#import "SCGeneralStoreSetDefault.h"
 
 @implementation SCStoreService
 
@@ -31,9 +32,9 @@
   
 }
 
-- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler {
+- (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, NSError *))handler {
   
-  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil completionHandler:^(id responseObject, NSError *error) {
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:reason completionHandler:^(id responseObject, NSError *error) {
     
     handler((error == nil), error);
     
