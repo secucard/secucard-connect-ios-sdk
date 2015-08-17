@@ -8,6 +8,7 @@
 
 #import "SCAbstractService.h"
 #import "SCGeneralStore.h"
+#import "SCGeneralStoreSetDefault.h"
 
 @interface SCStoreService : SCAbstractService
 
@@ -33,10 +34,10 @@
  *  set store as default
  *
  *  @param storeId the store's id
- *
+ *  @param set default payload
  *  @return a promise resolveing to nil
  */
-- (void) setDefault:(NSString*)storeId completionHandler:(void (^)(bool success, NSError *error))handler;
+- (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, NSError *))handler;
 
 /**
  *  retrieve a list of stores
