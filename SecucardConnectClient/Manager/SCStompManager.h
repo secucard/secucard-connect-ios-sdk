@@ -64,5 +64,6 @@ typedef void (^ReceiptHandler)(id responseObject, NSError *error);
  */
 - (void) connect:(void (^)(bool success, NSError *error))handler;
 
+- (void) refreshConnection:(void (^)(bool success, NSError *error))handler;
 
 @end

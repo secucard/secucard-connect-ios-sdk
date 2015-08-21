@@ -30,6 +30,7 @@
 #define kNotificationTokenStillHave         @"notificationTokenStillHave"
 #define kNotificationTokenDidGet            @"notificationTokenDidGet"
 #define kNotificationTokenDidRefresh        @"notificationTokenDidRefresh"
+#define kNotificationStompRefreshed         @"notificationStompConnectionRefreshed"
 
 @protocol SCAccountManagerDelegate <NSObject>
 

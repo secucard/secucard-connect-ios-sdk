@@ -33,6 +33,11 @@
 #define kAckClient           @"client"
 #define kAckClientIndividual @"client-individual"
 
+#pragma mark notification names
+
+#define kStompConnected      @"stompConnected"
+#define kStompDisconnected   @"stompDisconnected"
+
 @class STOMPFrame;
 @class STOMPMessage;
 

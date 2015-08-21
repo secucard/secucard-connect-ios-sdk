@@ -164,6 +164,17 @@
   //[self setConnectionTimer];
 }
 
+- (void) refreshConnection:(void (^)(bool success, NSError *error))handler {
+  
+  [self closeConnection];
+  
+  [self connect:^(bool success, NSError *error) {
+    handler(success, error);
+  }];
+  
+}
+
+
 /**
  *  Actually connect to a host. The completion block is called when the connection is fully established e.g. with tls handshake
  *
@@ -256,7 +267,6 @@
                       if (error) {
                         
                         // revoke token if connection error
-                        // revoke token if connection error
                         [weakself.client disconnect:^(NSError *error) {
                           NSLog(@"really disconnected");
                         }];
@@ -296,8 +306,8 @@
       return;
     }
     
-//     refresh auth //@{@"refresh_interval":@120}
-    [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@"" completionHandler:^(id responseObject, NSError *error) {
+    //     refresh auth
+    [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@{@"refresh_interval":@120} completionHandler:^(id responseObject, NSError *error) {
       
     }];
     

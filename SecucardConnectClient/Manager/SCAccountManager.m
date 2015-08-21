@@ -286,8 +286,15 @@
     // or token is expired
     
     [self refreshAccessToken:^(NSString *token, NSError *error) {
-      handler(token, error);
-      return;
+      
+      // reconnect stomp
+      [[SCStompManager sharedManager] refreshConnection:^(bool success, NSError *error) {
+      
+        handler(token, error);
+        return;
+        
+      }];
+      
     }];
     
   } else {
