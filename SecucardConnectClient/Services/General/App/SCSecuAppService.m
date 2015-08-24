@@ -34,9 +34,9 @@
   return instance;
 }
 
-- (void)getMerchant:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(SCStoreList *list, NSError *error))handler {
+- (void)getMerchant:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
 
-  [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCStoreList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
+  [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -44,7 +44,7 @@
     }
     
     NSError *parsingError = nil;
-    SCStoreList *storeList = [MTLJSONAdapter modelOfClass:SCStoreList.class fromJSONDictionary:list error:&parsingError];
+    SCObjectList *storeList = [MTLJSONAdapter modelOfClass:SCObjectList.class fromJSONDictionary:list error:&parsingError];
     
     if (parsingError != nil) {
       handler(nil, parsingError);
@@ -57,9 +57,9 @@
   
 }
 
-- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCStoreList *list, NSError *error))handler {
+- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
   
-  [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCStoreList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
+  [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -67,7 +67,7 @@
     }
     
     NSError *parsingError = nil;
-    SCStoreList *storeList = [MTLJSONAdapter modelOfClass:SCStoreList.class fromJSONDictionary:list error:&parsingError];
+    SCObjectList *storeList = [MTLJSONAdapter modelOfClass:SCObjectList.class fromJSONDictionary:list error:&parsingError];
     
     if (parsingError != nil) {
       handler(nil, parsingError);
