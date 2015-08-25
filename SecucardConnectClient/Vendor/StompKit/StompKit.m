@@ -561,10 +561,6 @@ CFAbsoluteTime serverActivity;
   if([kCommandConnected isEqual:frame.command]) {
     self.connected = YES;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"stompConnected" object:nil];
-    });
-
     [self setupHeartBeatWithClient:self.clientHeartBeat server:frame.headers[kHeaderHeartBeat]];
     if (self.connectionCompletionHandler) {
       self.connectionCompletionHandler(frame, nil);
@@ -671,7 +667,23 @@ CFAbsoluteTime serverActivity;
   }
   self.connected = NO;
   
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"stompDisconnected" object:nil];
+}
+
+- (void)setConnected:(BOOL)connected {
+  
+  BOOL hasChanged = connected != _connected;
+  
+  _connected = connected;
+  
+  if (hasChanged) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if (!_connected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stompDisconnected" object:nil];
+      } else if (_connected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stompConnected" object:nil];
+      }
+    });
+  }
   
 }
 
