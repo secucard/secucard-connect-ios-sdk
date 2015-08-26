@@ -287,6 +287,8 @@
     
     [self refreshAccessToken:^(NSString *token, NSError *error) {
       
+      [SCLogManager info:[NSString stringWithFormat:@"TOKEN: refreshed Token: %@", token]];
+      
       // reconnect stomp
       [[SCStompManager sharedManager] refreshConnection:^(bool success, NSError *error) {
       

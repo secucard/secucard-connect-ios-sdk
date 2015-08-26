@@ -75,6 +75,13 @@ unsigned libVersionPatch = 1;
 
 - (void) connect:(void (^)(bool, NSError *))handler {
   
+  if (_isConnecting) {
+    handler(false, [SCLogManager makeErrorWithDescription:@"CONNECTTION: Already connecting"]);
+    return;
+  }
+  
+  _isConnecting = TRUE;
+  
   if (self.connected) {
     handler(true, nil);
     return;
@@ -90,6 +97,8 @@ unsigned libVersionPatch = 1;
     [[SCStompManager sharedManager] connect:^(bool success, NSError *error) {
       
       handler(success, error);
+      
+      _isConnecting = FALSE;
       
     }];
     

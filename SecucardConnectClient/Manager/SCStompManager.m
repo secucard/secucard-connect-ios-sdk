@@ -66,6 +66,8 @@
 - (void) initWithConfiguration:(SCStompConfiguration *)configuration
 {
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authDidChange) name:kNotificationTokenDidRefresh object:nil];
+  
   _configuration = configuration;
   
   self.promiseStore = [NSMutableDictionary new];
@@ -153,7 +155,8 @@
   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
   
   // resolve earlier messages by correlation id (timouts)
-  for (SCStompStorageItem *item in self.promiseStore) {
+  for (NSString *itemId in self.promiseStore) {
+    SCStompStorageItem *item = [self.promiseStore objectForKey:itemId];
     item.handler(nil, [SCLogManager makeErrorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
   }
   
@@ -186,23 +189,24 @@
   
   // initialized at all?
   if ([self needsInitialization]) {
-    handler(false, [SCLogManager makeErrorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"STOMP: manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
     return;
   }
   
   // stomp client does exist?
   if (!self.client) {
-    handler(false, [SCLogManager makeErrorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"STOMP: No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
     return;
   }
   
   // is already connected? Call completion immediately
   if (self.client.connected) {
     [self extendConnectionTimer];
-    [SCLogManager makeErrorWithDescription:@"already connected. Immediate request."];
     handler(true, nil);
     return;
   }
+  
+  [SCLogManager info:@"STOMP: connect"];
   
   [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
     
@@ -445,9 +449,23 @@
  *
  *  @return the next correlation id
  */
-- (int) getNextCorrelationID
-{
+- (int) getNextCorrelationID {
   return self.currentCorrelationID++;
+}
+
+- (void) authDidChange {
+  [self closeConnection];
+  [self connect:^(bool success, NSError *error) {
+    
+    if (error) {
+      [SCLogManager error:error];
+    } else if (success) {
+      [SCLogManager info:@"STOMP: Did reconnect after auth change"];
+    } else {
+      [SCLogManager errorWithDescription:@"STOMP: Did not reconnect after auth change"];
+    }
+    
+  }];
 }
 
 #pragma mark - SCServiceManagerProtocol

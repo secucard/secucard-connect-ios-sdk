@@ -21,6 +21,7 @@
 
 @property (nonatomic, retain) SCClientConfiguration *configuration;
 @property (nonatomic, assign) BOOL connected;
+@property (nonatomic, assign) BOOL isConnecting;
 @property (nonatomic, assign) BOOL initialized;
 
 + (SCConnectClient *)sharedInstance;
