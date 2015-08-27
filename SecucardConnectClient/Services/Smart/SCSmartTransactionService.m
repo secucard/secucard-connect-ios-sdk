@@ -25,16 +25,25 @@
 }
 
 - (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: createTransaction"];
+  
   [self create:transaction onChannel:DefaultChannel completionHandler:handler];
 }
 
 - (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: updateTransaction"];
+  
   [self update:transaction onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
     handler((SCSmartTransaction*)responseObject, error);
   }];
 }
 
 - (void) startTransaction:(NSString*)transactionId type:(NSString*)type completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: startTransaction"];
+  
   [self execute:[SCSmartTransaction class] withId:transactionId action:@"start" actionArg:type arg:nil returnType:[SCSmartTransaction class] onChannel:PersistentChannel completionHandler:handler];
 }
 

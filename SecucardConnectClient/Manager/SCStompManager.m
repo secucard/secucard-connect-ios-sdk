@@ -454,18 +454,22 @@
 }
 
 - (void) authDidChange {
-  [self closeConnection];
-  [self connect:^(bool success, NSError *error) {
-    
-    if (error) {
-      [SCLogManager error:error];
-    } else if (success) {
-      [SCLogManager info:@"STOMP: Did reconnect after auth change"];
-    } else {
-      [SCLogManager errorWithDescription:@"STOMP: Did not reconnect after auth change"];
-    }
-    
-  }];
+
+  // TODO: What todo if 
+  
+//  [self closeConnection];
+//  [self connect:^(bool success, NSError *error) {
+//    
+//    if (error) {
+//      [SCLogManager error:error];
+//    } else if (success) {
+//      [SCLogManager info:@"STOMP: Did reconnect after auth change"];
+//    } else {
+//      [SCLogManager errorWithDescription:@"STOMP: Did not reconnect after auth change"];
+//    }
+//    
+//  }];
+  
 }
 
 #pragma mark - SCServiceManagerProtocol

@@ -36,6 +36,8 @@
 
 - (void)getMerchant:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
 
+  [SCLogManager info:@"CONNECT-SDK: getMerchant"];
+  
   [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
     
     if (error != nil) {
@@ -59,6 +61,8 @@
 
 - (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: getMyMerchants"];
+  
   [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
     
     if (error != nil) {
@@ -80,6 +84,9 @@
 }
 
 - (void)addCard:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: addCard"];
+  
   [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel completionHandler:^(id responseObject, NSError *error) {
     
     handler((error == nil), error);

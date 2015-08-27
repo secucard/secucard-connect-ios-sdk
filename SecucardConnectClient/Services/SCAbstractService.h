@@ -13,6 +13,7 @@
 #import "SCSecuObject.h"
 #import "SCObjectList.h"
 #import "SCGeneralEvent.h"
+#import "SCLogManager.h"
 
 typedef void (^EventHandler)(SCGeneralEvent *event);
 

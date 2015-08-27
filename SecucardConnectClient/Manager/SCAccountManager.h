@@ -57,6 +57,7 @@
 - (void) token:(void (^)(NSString *token, NSError *error))handler;
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
 - (void) killToken;
+- (void) testInvalidateToken;
 
 - (void) logout;
 - (BOOL) accessTokenValid;

@@ -23,6 +23,8 @@
 
 - (void)checkIn:(NSString *)storeId sid:(NSString *)sid completionHandler:(void (^)(bool, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: checkIn"];
+  
   [[self serviceManagerByChannel:PersistentChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil completionHandler:^(id responseObject, NSError *error) {
     
     handler((error == nil), error);
@@ -33,6 +35,8 @@
 
 - (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: setDefaultStoreWithReason"];
+  
   [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:reason completionHandler:^(id responseObject, NSError *error) {
     
     handler((error == nil), error);
@@ -42,6 +46,8 @@
 }
 
 - (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: setDefaultStore"];
   
   [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil completionHandler:^(id responseObject, NSError *error) {
     
@@ -54,15 +60,23 @@
 
 - (void)getStores:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: getStores"];
+  
   [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralStore class] queryParams:queryParams completionHandler:handler];
   
 }
 
 - (void)getStoreList:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: getStoreList"];
+  
   [self getList:[SCGeneralStore class] withParams:queryParams onChannel:OnDemandChannel completionHandler:handler];
 }
 
 - (void)getStore:(NSString *)pid completionHandler:(void (^)(SCGeneralStore *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: getStore"];
+  
   [self get:[SCGeneralStore class] withId:pid onChannel:OnDemandChannel completionHandler:handler];
 }
 

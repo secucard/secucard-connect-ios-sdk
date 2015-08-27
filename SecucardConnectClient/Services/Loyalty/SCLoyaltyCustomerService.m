@@ -25,6 +25,8 @@
 
 - (void)getCustomer:(NSString *)id completionHandler:(void (^)(SCLoyaltyCustomer *, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: getCustomer"];
+  
   [self get:[SCLoyaltyCustomer class] withId:id onChannel:DefaultChannel completionHandler:handler];
   
 }

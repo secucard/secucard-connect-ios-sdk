@@ -424,6 +424,10 @@
   
 }
 
+- (void) testInvalidateToken {
+  [SCPersistenceManager persist:[NSDate dateWithTimeIntervalSinceNow:-1000] forKey:@"expires"];
+}
+
 - (NSString*) accessToken
 {
   if (_accessToken == nil)

@@ -33,12 +33,16 @@
 
 - (void)getCheckins:(void (^)(NSArray *, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: getCheckins"];
+  
   [self getList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel completionHandler:handler];
   
 }
 
 - (void) getCheckinsList:(void (^)(SCObjectList *, NSError *))handler {
 
+  [SCLogManager info:@"CONNECT-SDK: getCheckinsList"];
+  
   [self getObjectList:[SCSmartCheckin class] withParams:nil onChannel:PersistentChannel completionHandler:handler];
   
 }
