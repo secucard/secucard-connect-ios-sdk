@@ -559,7 +559,22 @@
   
   if (arg != nil) {
     NSError *parsingParams = nil;
-    message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+    
+    if ([arg isKindOfClass:[NSArray class]]) {
+      
+      NSMutableArray *convertedArray = [NSMutableArray new];
+      for (id item in (NSArray*)arg) {
+        [convertedArray addObject:[MTLJSONAdapter JSONDictionaryFromModel:item error:&parsingParams]];
+        if (parsingParams != nil) {
+          handler(nil, parsingParams);
+          return;
+        }
+      }
+      message.data = [NSArray arrayWithArray:convertedArray];
+      
+    } else {
+      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];
+    }
     
     if (parsingParams != nil) {
       handler(nil, parsingParams);

@@ -70,7 +70,7 @@
   
 }
 
-- (void) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler; {
+- (void) updateBeacons:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler {
   
   return [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:@"me" action:@"beaconEnvironment" actionArg:nil arg:beaconList completionHandler:^(id responseObject, NSError *error) {
     
