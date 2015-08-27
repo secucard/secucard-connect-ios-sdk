@@ -676,13 +676,11 @@ CFAbsoluteTime serverActivity;
   _connected = connected;
   
   if (hasChanged) {
-    dispatch_async(dispatch_get_main_queue(), ^{
       if (!_connected) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stompDisconnected" object:nil];
       } else if (_connected) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stompConnected" object:nil];
       }
-    });
   }
   
 }

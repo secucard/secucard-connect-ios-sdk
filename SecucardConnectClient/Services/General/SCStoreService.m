@@ -41,6 +41,17 @@
   
 }
 
+- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil completionHandler:^(id responseObject, NSError *error) {
+    
+    handler((error == nil), error);
+    
+  }];
+  
+}
+
+
 - (void)getStores:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
   [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralStore class] queryParams:queryParams completionHandler:handler];

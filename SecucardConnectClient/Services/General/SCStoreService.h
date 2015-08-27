@@ -40,6 +40,14 @@
 - (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, NSError *))handler;
 
 /**
+ *  set store as default
+ *
+ *  @param storeId the store's id
+ *  @return a promise resolveing to nil
+ */
+- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler;
+
+/**
  *  retrieve a list of stores
  *
  *  @param queryParams the search paramteres
