@@ -8,6 +8,9 @@
 
 #import "SCSecuAppService.h"
 #import "SCGeneralStore.h"
+#import "UIImageView+AFNetworking.h"
+#import "UIImage+AFNetworking.h"
+#import "AFNetworking.h"
 
 @implementation SCStoreList
 
@@ -78,7 +81,29 @@
       return;
     }
     
-    handler(storeList, nil);
+    // preload images
+    __block int loaded = 0;
+    
+    for (NSDictionary *store in storeList.data) {
+      
+      NSURL *url = [NSURL URLWithString:[store objectForKey:@"photoMain"]];
+      __block NSURLRequest *request = [NSURLRequest requestWithURL:url];
+      [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        if (connectionError) {
+          NSLog(@"sendAsynchronousRequest error: %@", connectionError);
+        } else {
+          UIImage *img = [UIImage safeImageWithData:data];
+          [[UIImageView sharedImageCache] cacheImage:img forRequest:request];
+        }
+        
+        loaded++;
+        if (loaded == storeList.data.count) {
+          handler(storeList, nil);
+        }
+      }];
+      
+    }
     
   }];
 }
