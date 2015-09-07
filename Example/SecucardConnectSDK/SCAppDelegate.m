@@ -7,6 +7,7 @@
 //
 
 #import "SCAppDelegate.h"
+#import <SecucardConnectSDK/SecucardConnectSDK.h>
 
 @implementation SCAppDelegate
 
