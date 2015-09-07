@@ -1,1 +1,0 @@
-../../../../../Pod/Classes/Model/Auth/SCAuthSession.h

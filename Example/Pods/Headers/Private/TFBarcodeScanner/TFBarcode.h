@@ -1,1 +1,0 @@
-../../../TFBarcodeScanner/TFBarcodeScanner/TFBarcode.h

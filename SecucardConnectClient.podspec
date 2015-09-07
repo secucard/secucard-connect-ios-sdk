@@ -16,19 +16,14 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SecucardConnectClient"
-  s.version      = "0.0.1"
-  s.summary      = "A short description of SecucardConnectClient."
+  s.version      = "0.2.1"
+  s.summary      = "Standard API for communication with the secucard infrastructure"
 
   s.description  = <<-DESC
-                   A longer description of SecucardConnectClient in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
+                   The Secucard Connect SDK offers a standard API for communication with the secucard infrastructure. An app developer can use the standard services to fetch data, start transactions and alike. For a detailed use-case check out the Example app.
                    DESC
 
-  s.homepage     = "http://EXAMPLE/SecucardConnectClient"
+  s.homepage     = "https://github.com/secucard/secucard-connect-ios-sdk.git"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -39,8 +34,7 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT (example)"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "Apache 2", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -78,7 +72,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://EXAMPLE/SecucardConnectClient.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/secucard/secucard-connect-ios-sdk.git", :tag => '0.2.1' }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

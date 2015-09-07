@@ -1,1 +1,0 @@
-../../../../../Pod/Classes/Services/Loyalty/SCCardsService.h

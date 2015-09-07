@@ -1,1 +1,0 @@
-../../../TFBarcodeScanner/TFBarcodeScanner/TFBarcodeScannerViewController.h
