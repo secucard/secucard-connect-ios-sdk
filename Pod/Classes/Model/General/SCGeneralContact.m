@@ -11,13 +11,6 @@
 
 @implementation SCGeneralContact
 
-+ (NSDateFormatter *)dateFormatter {
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-  dateFormatter.dateFormat = @"yyyy-MM-dd";
-  return dateFormatter;
-}
-
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
   NSDictionary *standards = [super JSONKeyPathsByPropertyKey];
@@ -33,14 +26,14 @@
 + (NSValueTransformer *)dateOfBirthJSONTransformer {
   
   return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
-    return [self.dateFormatter dateFromString:value];
+    return [self.dateShortFormatter dateFromString:value];
   } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
     return [self.dateFormatter stringFromDate:value];
   }];
   
 }
 
-+ (NSValueTransformer *)addressObjectJSONTransformer {
++ (NSValueTransformer *)addressJSONTransformer {
   return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralAddress class]];
 }
 

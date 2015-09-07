@@ -23,11 +23,16 @@
 }
 
 - (void)createTransaction:(SCPaymentSecupayDebit *)data completionHandler:(void (^)(SCPaymentSecupayDebit *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: createTransaction"];
+  
   [self create:data onChannel:DefaultChannel completionHandler:handler];
 }
 
 - (void)cancelTransaction:(NSString *)transactionId completionHandler:(void (^)(bool, NSError *))handler {
 
+  [SCLogManager info:@"CONNECT-SDK: cancelTransaction"];
+  
   [self execute:[SCPaymentSecupayDebit class] withId:transactionId action:@"cancel" actionArg:nil arg:nil returnType:nil onChannel:DefaultChannel completionHandler:^(id responseObject, NSError *error) {
     handler((error == nil), error);
   }];

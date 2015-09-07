@@ -7,10 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
 #import "SCGeoQuery.h"
 
-#define kSortAsc    @"asc"
-#define kSortDesc   @"desc"
+#define kSortAsc              @"asc"
+#define kSortDesc             @"desc"
+
+#define kCountStandard        @10
+#define kScrollExpireStandard @"5m"
+#define kFieldsStandard       @"id"
+#define kItemSort             @"asc"
+#define kItemSortField        @"name"
+
+
 
 @interface SCQueryParams : MTLModel <MTLJSONSerializing>
 

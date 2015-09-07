@@ -41,6 +41,7 @@
                                                                   @"facebookId":@"facebook_id",
                                                                   @"pictureUrls":@"photo",
                                                                   @"logoUrl":@"photo_main",
+                                                                  @"photoMain":@"photo_main",
                                                                   @"hasBeacon":@"has_beacon"
                                                                   }];
 }

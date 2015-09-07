@@ -14,4 +14,12 @@
   return [NSDictionary mtl_identityPropertyMapWithModel:self];
 }
 
++ (NSValueTransformer *)openJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralComponentsDayTime class]];
+}
+
++ (NSValueTransformer *)closeJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralComponentsDayTime class]];
+}
+
 @end

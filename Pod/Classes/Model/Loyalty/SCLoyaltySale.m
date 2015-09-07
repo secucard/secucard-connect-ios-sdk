@@ -27,5 +27,30 @@
                                                                    }];
 }
 
++ (NSValueTransformer *)storeJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralStore class]];
+}
+
++ (NSValueTransformer *)cardJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCard class]];
+}
+
++ (NSValueTransformer *)cardgroupJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCardGroup class]];
+}
+
++ (NSValueTransformer *)merchantcardJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyMerchantCard class]];
+}
+
++ (NSValueTransformer *)lastChangeJSONTransformer {
+  
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [self.dateFormatter dateFromString:value];
+  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [self.dateFormatter stringFromDate:value];
+  }];
+  
+}
 
 @end

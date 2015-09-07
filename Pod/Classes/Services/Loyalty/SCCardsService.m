@@ -22,17 +22,23 @@
 
 - (void) getCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyCard *, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: getCard"];
+  
   [[self serviceManagerByChannel:OnDemandChannel] getObject:[SCLoyaltyCard class] objectId:id completionHandler:handler];
   
 }
 
 - (void) getCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
   
+  [SCLogManager info:@"CONNECT-SDK: getCards"];
+  
   [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCLoyaltyCard class] queryParams:queryParams completionHandler:handler];
   
 }
 
 - (void) assignUserToCard:(NSString*)cardNumber pin:(id)pin completionHandler:(void (^)(bool, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: assignUserToCard"];
   
   [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin completionHandler:^(id responseObject, NSError *error) {
     
@@ -43,6 +49,8 @@
 }
 
 - (void) deleteUserFromCard:(NSString*)cardNumber completionHandler:(void (^)(bool, NSError *))handler {
+
+  [SCLogManager info:@"CONNECT-SDK: deleteUserFromCard"];
   
   [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" completionHandler:handler];
   

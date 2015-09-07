@@ -12,111 +12,9 @@
 #import "SCTransportMessage.h"
 #import "SCAuthSession.h"
 
-@implementation SCStompDestination
-
-- (NSString *)destination {
-  
-  NSString *dest = [NSString stringWithFormat:@"%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix];
-  
-  dest = [dest stringByAppendingString:self.command];
-  
-  if (self.type) {
-    dest = [dest stringByAppendingString:[[self.type object] lowercaseString]];                 // -> general.publicmerchants
-  }
-  
-  if (self.method) {
-    dest = [dest stringByAppendingString:@"."];
-    dest = [dest stringByAppendingString:self.method];
-  }
-  
-  return dest;
-  
-}
-
-+ (instancetype) initWithCommand:(NSString*)command {
-  return [self initWithCommand:command type:nil method:nil];
-}
-
-+ (instancetype) initWithCommand:(NSString*)command type:(Class)type {
-  return [self initWithCommand:command type:type method:nil];
-}
-
-+ (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method {
-  
-  SCStompDestination *destination = [SCStompDestination new];
-  
-  destination.command = command;
-  destination.type = type;
-  destination.method = method;
-  
-  return destination;
-  
-}
-
-@end
-
-@implementation SCAppDestination
-
-+ (instancetype) initWithCommand:(NSString*)command type:(Class)type method:(NSString*)method {
-  
-  SCAppDestination *destination = [SCAppDestination new];
-  
-  destination.command = command;
-  destination.type = type;
-  destination.method = method;
-  
-  return destination;
-  
-}
-
-+ (instancetype) initWithAppId:(NSString *)appId method:(NSString*)method {
-  
-  SCAppDestination *appDest = [SCAppDestination initWithCommand:nil type:nil method:method];
-  appDest.appId = appId;
-  return appDest;
-  
-}
-
-- (NSString *)destination {
-  return [NSString stringWithFormat:@"%@%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix, self.method];
-}
-
-@end
-
-@implementation SCStompStorageItem
-
-- (instancetype) initWithHandler:(ReceiptHandler)handler {
-  self = [super init];
-  if (self)
-    self.handler = handler;
-  return self;
-}
-
-@end
-
-@implementation SCStompConfiguration
-
-- (instancetype) initWithHost:(NSString *)host andVHost:(NSString *)virtualHost port:(int)port userId:(NSString *)userId password:(NSString *)password useSSL:(BOOL)useSsl replyQueue:(NSString *)replyQueue connectionTimeoutSec:(int)connectionTimeoutSec socketTimeoutSec:(int)socketTimeoutSec heartbeatMs:(int)heartbeatMs basicDestination:(NSString *)basicDestination {
-  
-  self = [super init];
-  if (self) {
-    self.host = host;
-    self.virtualHost = virtualHost;
-    self.port = port;
-    self.userId = userId;
-    self.password = password;
-    self.useSsl = useSsl;
-    self.replyQueue = replyQueue;
-    self.connectionTimeoutSec = connectionTimeoutSec;
-    self.socketTimeoutSec = socketTimeoutSec;
-    self.heartbeatMs = heartbeatMs;
-    self.basicDestination = basicDestination;
-  }
-  return self;
-  
-}
-
-@end
+#import "SCStompStorageItem.h"
+#import "SCStompDestination.h"
+#import "SCAppDestination.h"
 
 @interface SCStompManager()
 
@@ -168,6 +66,8 @@
 - (void) initWithConfiguration:(SCStompConfiguration *)configuration
 {
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authDidChange) name:kNotificationTokenDidRefresh object:nil];
+  
   _configuration = configuration;
   
   self.promiseStore = [NSMutableDictionary new];
@@ -190,6 +90,10 @@
     NSLog(@"RECEIPT_HANDLER CALLED");
   }];
   
+}
+
+- (BOOL)connected {
+  return _client.connected;
 }
 
 - (void) destroy {
@@ -251,7 +155,8 @@
   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
   
   // resolve earlier messages by correlation id (timouts)
-  for (SCStompStorageItem *item in self.promiseStore) {
+  for (NSString *itemId in self.promiseStore) {
+    SCStompStorageItem *item = [self.promiseStore objectForKey:itemId];
     item.handler(nil, [SCLogManager makeErrorWithDescription:@"Stomp request did time out" andDomain:kErrorDomainSCStompService]);
   }
   
@@ -261,6 +166,17 @@
 {
   //[self setConnectionTimer];
 }
+
+- (void) refreshConnection:(void (^)(bool success, NSError *error))handler {
+  
+  [self closeConnection];
+  
+  [self connect:^(bool success, NSError *error) {
+    handler(success, error);
+  }];
+  
+}
+
 
 /**
  *  Actually connect to a host. The completion block is called when the connection is fully established e.g. with tls handshake
@@ -273,23 +189,24 @@
   
   // initialized at all?
   if ([self needsInitialization]) {
-    handler(false, [SCLogManager makeErrorWithDescription:@"manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"STOMP: manager not initialzed yet" andDomain:kErrorDomainSCStompService]);
     return;
   }
   
   // stomp client does exist?
   if (!self.client) {
-    handler(false, [SCLogManager makeErrorWithDescription:@"No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
+    handler(false, [SCLogManager makeErrorWithDescription:@"STOMP: No client exisiting, create one first" andDomain:kErrorDomainSCStompService]);
     return;
   }
   
   // is already connected? Call completion immediately
   if (self.client.connected) {
     [self extendConnectionTimer];
-    [SCLogManager makeErrorWithDescription:@"already connected. Immediate request."];
     handler(true, nil);
     return;
   }
+  
+  [SCLogManager info:@"STOMP: connect"];
   
   [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
     
@@ -354,7 +271,6 @@
                       if (error) {
                         
                         // revoke token if connection error
-                        // revoke token if connection error
                         [weakself.client disconnect:^(NSError *error) {
                           NSLog(@"really disconnected");
                         }];
@@ -394,7 +310,7 @@
       return;
     }
     
-    // refresh auth
+    //     refresh auth
     [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@{@"refresh_interval":@120} completionHandler:^(id responseObject, NSError *error) {
       
     }];
@@ -533,9 +449,27 @@
  *
  *  @return the next correlation id
  */
-- (int) getNextCorrelationID
-{
+- (int) getNextCorrelationID {
   return self.currentCorrelationID++;
+}
+
+- (void) authDidChange {
+
+  // TODO: What todo if 
+  
+//  [self closeConnection];
+//  [self connect:^(bool success, NSError *error) {
+//    
+//    if (error) {
+//      [SCLogManager error:error];
+//    } else if (success) {
+//      [SCLogManager info:@"STOMP: Did reconnect after auth change"];
+//    } else {
+//      [SCLogManager errorWithDescription:@"STOMP: Did not reconnect after auth change"];
+//    }
+//    
+//  }];
+  
 }
 
 #pragma mark - SCServiceManagerProtocol
@@ -629,7 +563,22 @@
   
   if (arg != nil) {
     NSError *parsingParams = nil;
-    message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+    
+    if ([arg isKindOfClass:[NSArray class]]) {
+      
+      NSMutableArray *convertedArray = [NSMutableArray new];
+      for (id item in (NSArray*)arg) {
+        [convertedArray addObject:[MTLJSONAdapter JSONDictionaryFromModel:item error:&parsingParams]];
+        if (parsingParams != nil) {
+          handler(nil, parsingParams);
+          return;
+        }
+      }
+      message.data = [NSArray arrayWithArray:convertedArray];
+      
+    } else {
+      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];
+    }
     
     if (parsingParams != nil) {
       handler(nil, parsingParams);

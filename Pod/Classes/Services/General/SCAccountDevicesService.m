@@ -7,9 +7,23 @@
 //
 
 #import "SCAccountDevicesService.h"
+#import "SCGeneralAccountDevice.h"
 
 @implementation SCAccountDevicesService
 
-// TODO: How to register events without initialization, see java client
++ (SCAccountDevicesService*)sharedService
+{
+  static SCAccountDevicesService *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    
+    instance = [SCAccountDevicesService new];
+    instance.registeredEventClasses = @[[SCGeneralAccountDevice class]];
+    
+  });
+  
+  return instance;
+}
+
 
 @end

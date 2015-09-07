@@ -10,4 +10,11 @@
 
 @interface SCMerchantService : SCAbstractService
 
+/**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCMerchantService*)sharedService;
+
 @end

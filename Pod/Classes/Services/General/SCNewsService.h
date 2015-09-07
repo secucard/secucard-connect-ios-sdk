@@ -12,6 +12,13 @@
 @interface SCNewsService : SCAbstractService
 
 /**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCNewsService*)sharedService;
+
+/**
  *  Retrieve a list of news
  *
  *  @param queryParams the search parameters

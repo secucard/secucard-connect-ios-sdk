@@ -8,11 +8,15 @@
 
 #import "SCAccountManager.h"
 #import "SCAuthDeviceAuthCode.h"
+#import "SCRestServiceManager.h"
+#import "SCStompManager.h"
+#import "SCConnectClient.h"
 
 @interface SCAccountManager()
 
 @property (nonatomic, retain) SCClientCredentials *clientCredentials;
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
+
 @property (nonatomic, copy) void (^devicePollHandler)(NSString *, NSError *);
 
 @end
@@ -38,9 +42,10 @@
   return instance;
 }
 
-- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials
+- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials andUserCredentials:(SCUserCredentials*)userCredentials
 {
   _clientCredentials = clientCredentials;
+  _userCredentials = userCredentials;
   
   if (self.refreshToken) {
     NSLog(@"REFRESHTOKEN: %@", [SCPersistenceManager itemForKey:@"refreshToken"]);
@@ -50,26 +55,10 @@
 - (void) destroy {
   self.clientCredentials = nil;
   self.userCredentials = nil;
-}
-
-- (void) loginWithUserCedentials:(SCUserCredentials*)userCredentials completionHandler:(void (^)(BOOL success, NSError *error))handler
-{
-  
-  _userCredentials = userCredentials;
-  
-  [[SCConnectClient sharedInstance] setUserCredentials:userCredentials];
-  
-    [self retrieveAccessToken:^(NSString *token, NSError *error) {
-      
-      if (error != nil) {
-        [SCPersistenceManager persist:_userCredentials.username forKey:kCredentialUsername];
-        [SCPersistenceManager persist:_userCredentials.password forKey:kCredentialPassword];
-      }
-      
-      handler(error != nil, error);
-      
-    }];
-  
+  self.accessToken = nil;
+  self.refreshToken = nil;
+  self.expires = nil;
+  [self killToken];
 }
 
 - (BOOL) needsInitialization
@@ -106,8 +95,8 @@
   
   NSDictionary *params = @{
                            @"grant_type":@"appuser",
-                           @"username": self.userCredentials.username,
-                           @"password": self.userCredentials.password,
+                           @"username": [SCConnectClient sharedInstance].configuration.userCredentials.username,
+                           @"password": [SCConnectClient sharedInstance].configuration.userCredentials.password,
                            @"client_id": self.clientCredentials.clientId,
                            @"client_secret": self.clientCredentials.clientSecret,
                            @"device": [SCConnectClient sharedInstance].configuration.deviceId
@@ -119,6 +108,9 @@
       handler(nil, error);
       return;
     }
+    
+    [SCPersistenceManager persist:self.userCredentials.username forKey:kCredentialUsername];
+    [SCPersistenceManager persist:self.userCredentials.password forKey:kCredentialPassword];
     
     self.accessToken = [responseObject objectForKey:@"access_token"];
     self.refreshToken = [responseObject objectForKey:@"refresh_token"];
@@ -133,6 +125,10 @@
     [SCPersistenceManager persist:self.expires forKey:@"expires"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
+    
+    if ([self.delegate respondsToSelector:@selector(accountManagerDidLogin)]) {
+      [self.delegate accountManagerDidLogin];
+    }
     
     handler(self.accessToken, nil);
     
@@ -191,8 +187,6 @@
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler
 {
 
-  
-  
     if ([self needsInitialization])
     {
       handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
@@ -230,6 +224,25 @@
   
 }
 
+- (NSString *)username {
+  
+  if (self.userCredentials && self.userCredentials.username) {
+    return self.userCredentials.username;
+  } else {
+    return (NSString*)[SCPersistenceManager itemForKey:kCredentialUsername];
+  }
+  
+}
+
+- (NSString *)password {
+  
+  if (self.userCredentials && self.userCredentials.password) {
+    return self.userCredentials.password;
+  } else {
+    return (NSString*)[SCPersistenceManager itemForKey:kCredentialPassword];
+  }
+  
+}
 /**
  *  Check if token is valid
  */
@@ -241,7 +254,7 @@
   {
     
     // if we have user credentials, this is a regular auth process
-    if (self.userCredentials) {
+    if ([SCConnectClient sharedInstance].configuration.userCredentials.username && [SCConnectClient sharedInstance].configuration.userCredentials.password) {
       
       [self retrieveAccessToken:^(NSString *token, NSError *error) {
         handler(token, error);
@@ -273,8 +286,17 @@
     // or token is expired
     
     [self refreshAccessToken:^(NSString *token, NSError *error) {
-      handler(token, error);
-      return;
+      
+      [SCLogManager info:[NSString stringWithFormat:@"TOKEN: refreshed Token: %@", token]];
+      
+      // reconnect stomp
+      [[SCStompManager sharedManager] refreshConnection:^(bool success, NSError *error) {
+      
+        handler(token, error);
+        return;
+        
+      }];
+      
     }];
     
   } else {
@@ -367,12 +389,23 @@
 - (void) logout
 {
   
+  [[SCStompManager sharedManager] close];
+  [[SCRestServiceManager sharedManager] close];
+  
   [SCPersistenceManager removeItemForKey:kCredentialUsername];
   [SCPersistenceManager removeItemForKey:kCredentialPassword];
   
-  self.userCredentials = nil;
-  
   [self killToken];
+  
+  if ([self.delegate respondsToSelector:@selector(accountManagerDidLogout)]) {
+    [self.delegate accountManagerDidLogout];
+  }
+  
+}
+
+- (BOOL)loggedIn {
+  
+  return ([SCPersistenceManager keyExists:kCredentialUsername] && [SCPersistenceManager keyExists:kCredentialPassword]);
   
 }
 
@@ -389,6 +422,10 @@
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidLogout object:nil];
   
+}
+
+- (void) testInvalidateToken {
+  [SCPersistenceManager persist:[NSDate dateWithTimeIntervalSinceNow:-1000] forKey:@"expires"];
 }
 
 - (NSString*) accessToken

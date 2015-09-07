@@ -12,11 +12,6 @@
 
 @implementation SCPublicMerchantService
 
-/**
- *  get instance of service
- *
- *  @return the singleton instance
- */
 + (SCPublicMerchantService*)sharedService
 {
   static SCPublicMerchantService *instance = nil;
@@ -29,10 +24,16 @@
 }
 
 - (void)getPublicMerchant:(NSString *)id completionHandler:(void (^)(SCGeneralPublicMerchant *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: getPublicMerchant"];
+  
   [self get:[SCGeneralPublicMerchant class] withId:id onChannel:DefaultChannel completionHandler:handler];
 }
 
 - (void)getPublicMerchants:(SCQueryParams *)params completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+  
+  [SCLogManager info:@"CONNECT-SDK: getPublicMerchants"];
+  
   [self getObjectList:[SCGeneralPublicMerchant class] withParams:params onChannel:DefaultChannel completionHandler:handler];
 }
 

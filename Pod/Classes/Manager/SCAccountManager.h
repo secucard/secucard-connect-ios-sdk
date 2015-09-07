@@ -11,9 +11,8 @@
 #import "SCConnectClient.h"
 #import "SCPersistenceManager.h"
 #import "SCLogManager.h"
-
-@class SCUserCredentials;
-@class SCClientCredentials;
+#import "SCUserCredentials.h"
+#import "SCClientCredentials.h"
 
 #define kErrorDomainSCAccount               @"SCSecucardCoreAccount"
 
@@ -31,22 +30,36 @@
 #define kNotificationTokenStillHave         @"notificationTokenStillHave"
 #define kNotificationTokenDidGet            @"notificationTokenDidGet"
 #define kNotificationTokenDidRefresh        @"notificationTokenDidRefresh"
+#define kNotificationStompRefreshed         @"notificationStompConnectionRefreshed"
+
+@protocol SCAccountManagerDelegate <NSObject>
+
+@optional
+
+- (void) accountManagerDidLogout;
+- (void) accountManagerDidLogin;
+
+@end
 
 @interface SCAccountManager : NSObject
 
 @property (nonatomic, retain) NSString *accessToken;
 @property (nonatomic, retain) NSString *refreshToken;
 @property (nonatomic, retain) NSDate *expires;
+@property (nonatomic, assign) BOOL loggedIn;
+
+@property (nonatomic, retain) id<SCAccountManagerDelegate> delegate;
 
 + (SCAccountManager*)sharedManager;
 
-- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials;
+- (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials andUserCredentials:(SCUserCredentials*)userCredentials;
 - (void) destroy;
-- (void) loginWithUserCedentials:(SCUserCredentials*)userCredentials completionHandler:(void (^)(BOOL success, NSError *error))handler;
 - (void) token:(void (^)(NSString *token, NSError *error))handler;
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
 - (void) killToken;
+- (void) testInvalidateToken;
 
+- (void) logout;
 - (BOOL) accessTokenValid;
 - (NSTimeInterval) accessTokenValidUntil;
 

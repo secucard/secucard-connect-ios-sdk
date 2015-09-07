@@ -7,8 +7,7 @@
 //
 
 #import "SCSecuObject.h"
-
-@class SCLoyaltyCardGroup;
+#import "SCLoyaltyCardGroup.h"
 
 @interface SCLoyaltyProgram : SCSecuObject
 

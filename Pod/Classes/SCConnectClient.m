@@ -7,8 +7,15 @@
 //
 
 #import "SCConnectClient.h"
+#import "SCAccountManager.h"
+#import "SCRestServiceManager.h"
+#import "SCStompManager.h"
 
 @implementation SCConnectClient
+
+unsigned libVersionMajor = 0;
+unsigned libVersionMinor = 2;
+unsigned libVersionPatch = 1;
 
 + (SCConnectClient *)sharedInstance
 {
@@ -32,21 +39,28 @@
 
 - (void) initWithConfiguration:(SCClientConfiguration*)configuration {
   
+  self.configuration = configuration;
   
   [SCConnectClient sharedInstance].configuration = configuration;
   
   // also initialize AccountManager
-  [[SCAccountManager sharedManager] initWithClientCredentials:[SCConnectClient sharedInstance].configuration.clientCredentials];
+  [[SCAccountManager sharedManager] initWithClientCredentials:configuration.clientCredentials andUserCredentials:configuration.userCredentials];
   
   // also  initalize rest
-  [[SCRestServiceManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.restConfiguration];
+  [[SCRestServiceManager sharedManager] initWithConfiguration:configuration.restConfiguration];
   
   // also initialze stomp
-  [[SCStompManager sharedManager] initWithConfiguration:[SCConnectClient sharedInstance].configuration.stompConfiguration];
+  [[SCStompManager sharedManager] initWithConfiguration:configuration.stompConfiguration];
   
-  
+  self.initialized = TRUE;
   
 }
+
+- (NSString*) myApiVersion
+{
+  return [NSString stringWithFormat:@"%u.%u.%u", libVersionMajor, libVersionMinor, libVersionPatch];
+}
+
 
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials {
   
@@ -60,6 +74,13 @@
 }
 
 - (void) connect:(void (^)(bool, NSError *))handler {
+  
+  if (_isConnecting) {
+    handler(false, [SCLogManager makeErrorWithDescription:@"CONNECTTION: Already connecting"]);
+    return;
+  }
+  
+  _isConnecting = TRUE;
   
   if (self.connected) {
     handler(true, nil);
@@ -77,17 +98,23 @@
       
       handler(success, error);
       
+      _isConnecting = FALSE;
+      
     }];
     
   }];
   
 }
 
+- (BOOL)connected {
+  return [SCStompManager sharedManager].connected;
+}
+
 - (void)disconnect:(void (^)(bool, NSError *))handler {
   self.connected = false;
   [[SCStompManager sharedManager] close];
   [[SCRestServiceManager sharedManager] close];
-  
+  [[SCAccountManager sharedManager] destroy];
   handler(true, nil);
 }
 
@@ -97,7 +124,8 @@
   [[SCStompManager sharedManager] destroy];
   [[SCAccountManager sharedManager] destroy];
   self.configuration = nil;
-  self.connected = false;
+  self.connected = FALSE;
+  self.initialized = FALSE;
   
   handler(true, nil);
   

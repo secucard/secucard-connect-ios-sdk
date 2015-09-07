@@ -1,69 +1,48 @@
 //
-//  SecucardConnectClientLibTests.m
-//  SecucardConnectClientLibTests
+//  SecucardConnectSDKTests.m
+//  SecucardConnectSDKTests
 //
-//  Created by Jörn Schmidt on 04/25/2015.
-//  Copyright (c) 2014 Jörn Schmidt. All rights reserved.
+//  Created by Jörn Schmidt on 09/07/2015.
+//  Copyright (c) 2015 Jörn Schmidt. All rights reserved.
 //
 
-#import <Expecta/Expecta.h>
-#import <SecucardConnectClientLib/SCConnectClient.h>
+// https://github.com/Specta/Specta
 
-SpecBegin(InitClient)
+SpecBegin(InitialSpecs)
 
-describe(@"InitClient", ^{
-  
-  it(@"can init", ^{
+describe(@"these will fail", ^{
+
+    it(@"can do maths", ^{
+        expect(1).to.equal(2);
+    });
+
+    it(@"can read", ^{
+        expect(@"number").to.equal(@"string");
+    });
     
-    SCRestConfiguration *restConfig = [[SCRestConfiguration alloc] initWithBaseUrl:kBaseUrl
-                                                                        andAuthUrl:kAuthUrl];
+    it(@"will wait for 10 seconds and fail", ^{
+        waitUntil(^(DoneCallback done) {
+        
+        });
+    });
+});
+
+describe(@"these will pass", ^{
     
-    expect(restConfig).toNot.beNil();
+    it(@"can do maths", ^{
+        expect(1).beLessThan(23);
+    });
     
-    SCStompConfiguration *stompConfig = [[SCStompConfiguration alloc] initWithHost:kStompHost
-                                                                          andVHost:kStompVHost
-                                                                              port:kStompPort
-                                                                            userId:nil
-                                                                          password:nil
-                                                                            useSSL:TRUE
-                                                                        replyQueue:kReplyQueue
-                                                              connectionTimeoutSec:kConnectionTimeoutSec
-                                                                  socketTimeoutSec:kSocketTimeoutSec
-                                                                       heartbeatMs:kHeartbeatMs
-                                                                  basicDestination:kBasicDestination];
+    it(@"can read", ^{
+        expect(@"team").toNot.contain(@"I");
+    });
     
-    expect(stompConfig).toNot.beNil();
-    
-    SCUserCredentials *userCredentials = [[SCUserCredentials alloc] initWithUsername:kUsernameAppSample
-                                                                         andPassword:kPasswordAppSample];
-    
-    expect(userCredentials).toNot.beNil();
-    
-    SCClientCredentials *clientCredentials = [[SCClientCredentials alloc] initWithClientId:kClientIdAppSample
-                                                                              clientSecret:kClientSecretAppSample];
-    
-    expect(clientCredentials).toNot.beNil();
-    
-    SCClientConfiguration *clientConfig = [[SCClientConfiguration alloc] initWithRestConfiguration:restConfig
-                                                                                stompConfiguration:stompConfig
-                                                                                    defaultChannel:OnDemandChannel
-                                                                                      stompEnabled:TRUE
-                                                                                          oauthUrl:kAuthUrl
-                                                                                 clientCredentials:clientCredentials
-                                                                                   userCredentials:userCredentials
-                                                                                          deviceId:kDeviceIdAppSample
-                                                                                          authType:@"device"];
-    
-    expect(clientConfig).toNot.beNil();
-    
-    SCConnectClient *client = [SCConnectClient sharedInstance];
-    
-    expect(client).toNot.beNil();
-    
-    [client initWithConfiguration:clientConfig];
-    
-  });
-  
+    it(@"will wait and succeed", ^{
+        waitUntil(^(DoneCallback done) {
+            done();
+        });
+    });
 });
 
 SpecEnd
+

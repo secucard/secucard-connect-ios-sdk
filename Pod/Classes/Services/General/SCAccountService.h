@@ -72,7 +72,7 @@
  *
  *  @return returns a promise which resolves to nil
  */
-- (void) updateBeacons:(NSString*)accountId beachonList:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler;
+- (void) updateBeacons:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler;
 
 // TODO: compare to GCM function
 //- (void) updateAPNS:(NSString*)accountId arg:(id)objectArg onComplete:(void(^)(BOOL success, NSError *error))completion;

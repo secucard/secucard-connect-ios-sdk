@@ -11,26 +11,7 @@
 
 
 
-@interface SCRestConfiguration()
 
-@property (nonatomic, retain) NSString *baseUrl;
-@property (nonatomic, retain) NSString *authUrl;
-
-@end
-
-@implementation SCRestConfiguration
-
-- (instancetype) initWithBaseUrl:(NSString*)baseUrl andAuthUrl:(NSString*)authUrl {
-  self = [super init];
-  if (self) {
-    self.baseUrl = baseUrl;
-    self.authUrl = authUrl;
-  }
-  return self;
-  
-}
-
-@end
 
 @interface SCRestServiceManager()
 
@@ -135,6 +116,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+      
       [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         handler(responseObject, nil);
@@ -177,6 +160,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
       
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+      
       [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         handler(responseObject, nil);
@@ -217,6 +202,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
   if (secure) {
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+      
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
       [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -259,6 +246,8 @@ AFHTTPRequestSerializer *authRequestSerializer;
   if (secure) {
     
     [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+      
+      [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
       [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -355,7 +344,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   for (int i = 0; i < args.count; i++) {
     
-    if (![args[i] isKindOfClass:[NSString class]]) {
+    if (![args[i] isKindOfClass:[NSString class]] || [args[i] isEqualToString:@""]) {
       continue;
     }
     
@@ -363,32 +352,31 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
   }
   
-  //  // add ME to Accounts-Path
-  //  if (pid != nil)
-  //  {
-  //    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:[NSString stringWithFormat:@"%@/", pid]];
-  //  }
-  //  else
-  //  {
-  //    callString = [callString stringByReplacingOccurrencesOfString:@"{pid}/" withString:@""];
-  //  }
-  //
-  //  // add SID if there
-  //  if (sid != nil)
-  //  {
-  //    callString = [callString stringByAppendingString:[NSString stringWithFormat:@"/%@", sid]];
-  //  }
-  //
-  // if not an auth call add api and version to it
-  //      if (![callString containsString:@"oauth"])
-  //      {
-  // combine all
-  //c = [NSString stringWithFormat:@"%@%@%@", kAPIPrefix, kAPIVersion, c];
-  //      }
-  
   return callString;
   
+}
+
+- (NSString*) resolveAppEndpoint:(NSString*)appId args:(NSArray*)args {
   
+  NSString *path = @"General/Apps";
+  
+  if (appId) {
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"/%@", appId]];
+  }
+  
+  path = [path stringByAppendingString:@"/callBackend"];
+  
+  for (int i = 0; i < args.count; i++) {
+    
+    if (![args[i] isKindOfClass:[NSString class]] || [args[i] isEqualToString:@""]) {
+      continue;
+    }
+    
+    path = [path stringByAppendingString:[@"/" stringByAppendingString:args[i]]]; // -> General/PublicMerchants/pmc_231234124
+    
+  }
+  
+  return path;
 }
 
 #pragma mark - SCServiceManagerProtocol
@@ -404,7 +392,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler {
+- (void) getObject:(Class)type objectId:(NSString*)objectId secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
   [self getRequestToEndpoint:[self resolveEndpoint:type args:@[objectId]] WithParams:nil secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -422,9 +410,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams secure:(BOOL)secure completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
   
-  NSDictionary *params = [self createDic:queryParams];
+  //NSDictionary *params = [self createDic:queryParams];
+  
+  NSDictionary *params = [self queryParamsToMap:queryParams];
   
   if (!params) {
     handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
@@ -442,7 +432,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
     SCObjectList *objectList = [MTLJSONAdapter modelOfClass:[SCObjectList class] fromJSONDictionary:responseObject error:&parsingError];
     
     //parse Objects in list
-    if (!parsingError) {
+    if (!parsingError && objectList.data != nil) {
       objectList.data = [MTLJSONAdapter modelsOfClass:type fromJSONArray:objectList.data error:&parsingError];
     }
     
@@ -540,7 +530,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure completionHandler:(void (^)(bool, NSError *))handler {
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg secure:(BOOL)secure completionHandler:(void (^)(bool success, NSError *error))handler {
   
   [self deleteRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:nil secure:secure completionHandler:^(id responseObject, NSError *error) {
     
@@ -554,27 +544,37 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
 }
 
-- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
+- (void)execute:(NSString *)appId action:(NSString *)action actionArg:(NSDictionary *)actionArg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
   
-  NSDictionary *params = [self createDic:arg];
-  if (!params) {
+  NSDictionary *params = [self createDic:actionArg];
+  if (!params && actionArg != nil) {
     handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
     return;
   }
   
-  [self postRequestToEndpoint:[self resolveEndpoint:type args:@[objectId, action, actionArg]] WithParams:params secure:secure completionHandler:handler];
+  [self postRequestToEndpoint:[self resolveAppEndpoint:appId args:@[action]] WithParams:params secure:secure completionHandler:handler];
   
 }
 
-- (void) execute:(NSString*)appId command:(NSString*)command arg:(NSDictionary*)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
+- (void)execute:(Class)type objectId:(NSString *)objectId action:(NSString *)action actionArg:(NSString *)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
+ 
+    NSDictionary *params = [self createDic:arg];
+    if (!params && arg != nil) {
+      handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
+      return;
+    }
   
-  [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg secure:secure completionHandler:handler];
-  
-}
-
-- (void)execute:(NSString *)appId command:(NSString *)command arg:(NSDictionary *)arg completionHandler:(void (^)(id responseObject, NSError *error))handler {
-  
-  [self postRequestToEndpoint:[self resolveEndpoint:nil args:@[appId, command]] WithParams:arg secure:false completionHandler:handler];
+  NSMutableArray *argArray = [NSMutableArray new];
+  if (objectId) {
+    [argArray addObject:objectId];
+  }
+  if (action) {
+    [argArray addObject:action];
+  }
+  if (actionArg) {
+    [argArray addObject:actionArg];
+  }
+  [self postRequestToEndpoint:[self resolveEndpoint:type args:[NSArray arrayWithArray:argArray]] WithParams:params secure:secure completionHandler:handler];
   
 }
 
@@ -598,6 +598,73 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) close {
   
+}
+
+- (NSDictionary*) queryParamsToMap:(SCQueryParams*)params {
+  
+  NSMutableDictionary *map = [NSMutableDictionary new];
+  
+  if (!params) {
+    return map;
+  }
+  
+  BOOL scroll = params.scrollId && ![params.scrollId isEqualToString:@""];
+  
+  if (scroll) {
+    [map setObject:params.scrollId forKey:@"scroll_id"];
+  }
+  
+  BOOL scrollExpire = params.scrollExpire && [params.scrollExpire isEqualToString:@""];
+  
+  if (scrollExpire) {
+    [map setObject:params.scrollExpire forKey:@"scroll_expire"];
+  }
+  
+  if (!scroll && params.count != nil && params.count >= 0) {
+    [map setObject:params.count forKey:@"count"];
+  }
+  
+  if (!scroll && !scrollExpire && params.offset != nil && params.offset >= 0) {
+    [map setObject:params.offset forKey:@"offset"];
+  }
+  
+  if (params.fields) {
+    [map setObject:[params.fields componentsJoinedByString:@","] forKey:@"fields"];
+  }
+  
+  for(id key in params.sortOrder)
+    [map setObject:[params.sortOrder objectForKey:key] forKey:[NSString stringWithFormat:@"sort[%@]", key]];
+  
+  if (params.query && ![params.query isEqualToString:@""]) {
+    [map setObject:params.query forKey:@"q"];
+  }
+  
+  if (params.preset && ![params.preset isEqualToString:@""]) {
+    [map setObject:params.preset forKey:@"preset"];
+  }
+  
+  if (params.geoQuery != nil) {
+    
+    if (params.geoQuery.field && ![params.geoQuery.field isEqualToString:@""]) {
+      [map setObject:params.geoQuery.field forKey:@"geo[field]"];
+    }
+    
+    if (params.geoQuery.lat) {
+      [map setObject:[NSString stringWithFormat:@"%f", params.geoQuery.lat] forKey:@"geo[lat]"];
+    }
+    
+    if (params.geoQuery.lon) {
+      [map setObject:[NSString stringWithFormat:@"%f", params.geoQuery.lon] forKey:@"geo[lon]"];
+    }
+    
+    if (params.geoQuery.distance && ![params.geoQuery.distance isEqualToString:@""]) {
+      [map setObject:params.geoQuery.distance forKey:@"geo[distance]"];
+    }
+    
+  }
+  
+  return map;
+
 }
 
 

@@ -77,10 +77,13 @@
   
   SCGeneralEvent *event = [notification.userInfo objectForKey:@"event"];
   
-  // only handle events with the reviously set target
+  [SCLogManager info:[NSString stringWithFormat:@"EVENT: RECEIVED: \ntarget: %@ \ntype %d \ndata: %@", event.target, event.type, event.data]];
+  
+  // only handle events with the previously set target
   if ([self.registeredEventClasses containsObject:event.target]) {
   
     for (EventHandler handler in self.eventHandlers) {
+      [SCLogManager info:@"EVENT: HANDLED"];
       handler(event);
     }
     
@@ -186,9 +189,16 @@
   
   NSMutableArray *typedArray = [NSMutableArray new];
   for (id object in array) {
-    NSError *parsingError = nil;
-    id typedObject = [MTLJSONAdapter modelOfClass:class fromJSONDictionary:object error:&parsingError];
-    [typedArray addObject:typedObject];
+    
+    // if already parsed
+    if ([object isKindOfClass:class]) {
+      [typedArray addObject:object];
+    } else {
+      NSError *parsingError = nil;
+      id typedObject = [MTLJSONAdapter modelOfClass:class fromJSONDictionary:object error:&parsingError];
+      [typedArray addObject:typedObject];
+    }
+    
   }
   return [NSArray arrayWithArray:typedArray];
 }

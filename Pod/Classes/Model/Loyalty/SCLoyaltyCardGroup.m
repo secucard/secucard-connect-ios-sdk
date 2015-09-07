@@ -23,6 +23,16 @@
                                                                   @"displayNameRaw":@"display_name_raw",
                                                                   @"stockWarnLimit":@"stock_warn_limit"
                                                                   }];
+  
+  
+}
+
++ (NSValueTransformer *)merchantJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
++ (NSValueTransformer *)pictureObjectJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCMediaResource class]];
 }
 
 

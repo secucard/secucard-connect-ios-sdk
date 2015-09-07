@@ -12,7 +12,7 @@
 @interface SCLoyaltyCard : SCSecuObject
 
 @property (nonatomic, copy) NSString *cardNumber;
-@property (nonatomic, copy) NSString *created;
+@property (nonatomic, copy) NSDate *created;
 @property (nonatomic, copy) SCGeneralAccount *account;
 
 @end

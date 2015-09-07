@@ -8,32 +8,6 @@
 
 #import "SCClientConfiguration.h"
 
-@implementation SCUserCredentials
-
-- (instancetype) initWithUsername:(NSString*)username andPassword:(NSString*)password {
-  self = [super init];
-  if (self) {
-    self.username = username;
-    self.password = password;
-  }
-  return self;
-}
-
-@end
-
-@implementation SCClientCredentials
-
-- (instancetype) initWithClientId:(NSString*)clientId clientSecret:(NSString*)clientSecret {
-  self = [super init];
-  if (self) {
-    self.clientId = clientId;
-    self.clientSecret = clientSecret;
-  }
-  return self;
-}
-
-@end
-
 @implementation SCClientConfiguration
 
 - (instancetype) initWithRestConfiguration:(SCRestConfiguration*)restConfig stompConfiguration:(SCStompConfiguration*)stompConfig defaultChannel:(ServiceChannel)defaultChannel stompEnabled:(BOOL)stompEnabled oauthUrl:(NSString*)oauthUrl clientCredentials:(SCClientCredentials*)clientCredentials userCredentials:(SCUserCredentials*)userCredentials deviceId:(NSString*)deviceId authType:(NSString*)authType {

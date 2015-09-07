@@ -21,8 +21,8 @@
 @property (nonatomic, copy) SCLoyaltyCard *card;
 @property (nonatomic, copy) SCLoyaltyCardGroup *cardgroup;
 @property (nonatomic, copy) SCLoyaltyMerchantCard *merchantcard;
-@property (nonatomic, copy) NSNumber *balanceAmount;
-@property (nonatomic, copy) NSNumber *balancePoints;
+@property (nonatomic, copy) NSString *balanceAmount;
+@property (nonatomic, copy) NSString *balancePoints;
 @property (nonatomic, copy) id currency;
 @property (nonatomic, copy) NSArray *bonus;
 

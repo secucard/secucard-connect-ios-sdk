@@ -10,4 +10,11 @@
 
 @interface SCAccountDevicesService : SCAbstractService
 
+/**
+ *  get instance of service
+ *
+ *  @return the singleton instance
+ */
++ (SCAccountDevicesService*)sharedService;
+
 @end

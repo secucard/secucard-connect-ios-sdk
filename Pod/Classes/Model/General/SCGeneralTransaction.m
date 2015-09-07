@@ -23,4 +23,23 @@
                                                                   }];
 }
 
++ (NSValueTransformer *)merchantJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCGeneralMerchant class]];
+}
+
++ (NSValueTransformer *)detailsJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltySale class]];
+}
+
++ (NSValueTransformer *)lastChangeJSONTransformer {
+  
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [self.dateFormatter dateFromString:value];
+  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return [self.dateFormatter stringFromDate:value];
+  }];
+  
+}
+
+
 @end

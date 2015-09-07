@@ -6,8 +6,8 @@
 //
 //
 
+#import "MTLModel+Secucard.h"
 #import "SCTransportStatus.h"
-
 #import "SCQueryParams.h"
 
 @interface SCTransportMessage : SCTransportStatus <MTLJSONSerializing>

@@ -7,6 +7,7 @@
 //
 
 #import "SCLoyaltyProgram.h"
+#import "SCLoyaltyCondition.h"
 
 @implementation SCLoyaltyProgram
 
@@ -18,6 +19,14 @@
                                                                   @"descriptionText":@"description",
                                                                   @"cardGroup":@"cardgroup"
                                                                   }];
+}
+
++ (NSValueTransformer *)cardGroupJSONTransformer {
+  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[SCLoyaltyCardGroup class]];
+}
+
++ (NSValueTransformer *)conditionsJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCLoyaltyCondition class]];
 }
 
 

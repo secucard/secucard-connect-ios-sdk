@@ -13,6 +13,8 @@
 #import "NSDictionary+NullStripper.h"
 #import "NSArray+NullStripper.h"
 
+#import <Mantle/Mantle.h>
+
 #define kSecureStandard TRUE
 
 @implementation SCServiceManager
@@ -103,7 +105,7 @@
 - (NSDictionary*) createDic:(id)object {
   
   NSDictionary *params;
-  if (object) {
+  if (object && [object isKindOfClass:MTLModel.class]) {
     NSError *paramParsingError = nil;
     params = [MTLJSONAdapter JSONDictionaryFromModel:object error:&paramParsingError];
     
@@ -115,8 +117,14 @@
     params = [params copy];
     params = [params dictionaryByReplacingNullsWithBlanks];
     
+    return params;
+    
+  } else {
+    
+    return object;
+    
   }
-  return params;
+  
 }
 
 

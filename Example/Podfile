@@ -1,19 +1,20 @@
-platform :ios, '8.0'
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://git.devid.net/ios-pods/ios-private-pod-repo.git'
+
 use_frameworks!
 
-target 'SecucardConnectClientLib', :exclusive => true do
-  pod "SecucardConnectClientLib", :path => "../"
+target 'SecucardConnectSDK_Example', :exclusive => true do
   
-  pod 'SwiftyJSON', '~> 2.2'
-  pod 'SnapKit', '~> 0.10.0'
-  pod 'Alamofire', '~> 1.2'
-  pod 'TFBarcodeScanner'
+  pod "SecucardConnectSDK", :path => "../"
   
 end
 
-target 'Tests', :exclusive => true do
-  pod "SecucardConnectClientLib", :path => "../"
+target 'SecucardConnectSDK_Tests', :exclusive => true do
+  
+  pod "SecucardConnectSDK", :path => "../"
 
   pod 'Specta'
   pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
 end

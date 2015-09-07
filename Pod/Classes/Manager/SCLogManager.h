@@ -39,6 +39,7 @@ typedef enum {
 + (instancetype) initWithLevel:(SCLogLevel)level Message:(NSString*)message error:(NSError*)error;
 
 @property (nonatomic, assign) SCLogLevel level;
+@property (nonatomic, retain) NSDate *created;
 @property (nonatomic, retain) NSString *message;
 @property (nonatomic, retain) NSError *error;
 

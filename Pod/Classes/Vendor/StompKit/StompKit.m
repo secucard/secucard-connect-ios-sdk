@@ -560,6 +560,7 @@ CFAbsoluteTime serverActivity;
   // CONNECTED
   if([kCommandConnected isEqual:frame.command]) {
     self.connected = YES;
+    
     [self setupHeartBeatWithClient:self.clientHeartBeat server:frame.headers[kHeaderHeartBeat]];
     if (self.connectionCompletionHandler) {
       self.connectionCompletionHandler(frame, nil);
@@ -655,7 +656,6 @@ CFAbsoluteTime serverActivity;
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock
                   withError:(NSError *)err {
-  LogDebug(@"socket did disconnect");
   if (!self.connected && self.connectionCompletionHandler) {
     self.connectionCompletionHandler(nil, err);
   } else if (self.connected) {
@@ -666,6 +666,23 @@ CFAbsoluteTime serverActivity;
     }
   }
   self.connected = NO;
+  
+}
+
+- (void)setConnected:(BOOL)connected {
+  
+  BOOL hasChanged = connected != _connected;
+  
+  _connected = connected;
+  
+  if (hasChanged) {
+      if (!_connected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stompDisconnected" object:nil];
+      } else if (_connected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stompConnected" object:nil];
+      }
+  }
+  
 }
 
 @end
