@@ -557,12 +557,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
 }
 
 - (void)execute:(Class)type objectId:(NSString *)objectId action:(NSString *)action actionArg:(NSString *)actionArg arg:(id)arg secure:(BOOL)secure completionHandler:(void (^)(id responseObject, NSError *error))handler {
- 
-    NSDictionary *params = [self createDic:arg];
-    if (!params && arg != nil) {
-      handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
-      return;
-    }
+  
+  NSDictionary *params = [self createDic:arg];
+  if (!params && arg != nil) {
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Error: could not strip null-values from dictionary"]);
+    return;
+  }
   
   NSMutableArray *argArray = [NSMutableArray new];
   if (objectId) {
@@ -664,7 +664,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   }
   
   return map;
-
+  
 }
 
 

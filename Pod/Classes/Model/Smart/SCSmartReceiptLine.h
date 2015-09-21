@@ -11,6 +11,6 @@
 @interface SCSmartReceiptLine : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSString *value;
+@property (nonatomic, copy) NSDictionary *value;
 
 @end
