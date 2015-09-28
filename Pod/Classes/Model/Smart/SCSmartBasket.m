@@ -7,11 +7,16 @@
 //
 
 #import "SCSmartBasket.h"
+#import "SCSmartProduct.h"
 
 @implementation SCSmartBasket
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   return [NSDictionary mtl_identityPropertyMapWithModel:self];
+}
+
++ (NSValueTransformer *)productsJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartProduct class]];
 }
 
 

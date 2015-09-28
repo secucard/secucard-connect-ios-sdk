@@ -6,11 +6,11 @@
 //
 //
 
-#import "MTLModel+Secucard.h"
+#import "SCSecuObject.h"
 
-@interface SCSmartProduct : MTLModel <MTLJSONSerializing>
+@interface SCSmartProduct : SCSecuObject
 
-@property (nonatomic, copy) NSNumber *id;
+@property (nonatomic, copy) NSNumber *productId;
 @property (nonatomic, copy) NSNumber *parent;
 @property (nonatomic, copy) NSString *articleNumber;
 @property (nonatomic, copy) NSString *ean;

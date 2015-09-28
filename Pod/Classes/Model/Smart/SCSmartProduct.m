@@ -7,17 +7,25 @@
 //
 
 #import "SCSmartProduct.h"
+#import "SCSmartProductGroup.h"
 
 @implementation SCSmartProduct
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   
- NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
+  NSDictionary *standards = [NSDictionary mtl_identityPropertyMapWithModel:self];
   
   return [standards mtl_dictionaryByAddingEntriesFromDictionary:@{
+                                                                  @"id":@"articleNumber",
+                                                                  @"productId":@"id",
                                                                   @"groups":@"group"
                                                                   }];
 }
+
++ (NSValueTransformer *)groupsJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartProductGroup class]];
+}
+
 
 
 @end
