@@ -11,6 +11,7 @@
 @interface SCSmartProductGroup : SCSecuObject
 
 @property (nonatomic, copy) NSString *desc;
-@property (nonatomic, copy) NSNumber *level;
+@property (nonatomic, copy) NSNumber *groupLevel;
+
 
 @end
