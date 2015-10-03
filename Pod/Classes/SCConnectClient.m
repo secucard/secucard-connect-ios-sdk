@@ -110,15 +110,30 @@ unsigned libVersionPatch = 1;
   return [SCStompManager sharedManager].connected;
 }
 
-- (void)disconnect:(void (^)(bool, NSError *))handler {
+- (void)logoff:(void (^)(bool, NSError *))handler {
+  
+  [self disconnect:^(bool success, NSError *error) {
+    
+    if (error != nil) {
+      [SCLogManager error:error];
+    } else {
+      [[SCAccountManager sharedManager] destroy];
+      handler(true, nil);
+    }
+    
+  }];
+  
+}
+
+- (void)disconnect:(void (^)(bool success, NSError *error))handler {
   self.connected = false;
   [[SCStompManager sharedManager] close];
   [[SCRestServiceManager sharedManager] close];
-  [[SCAccountManager sharedManager] destroy];
   handler(true, nil);
 }
 
-- (void)destroy:(void (^)(bool, NSError *))handler {
+
+- (void)destroy:(void (^)(bool success, NSError *))handler {
   
   [[SCRestServiceManager sharedManager] destroy];
   [[SCStompManager sharedManager] destroy];

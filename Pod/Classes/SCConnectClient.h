@@ -32,6 +32,7 @@
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials;
 - (void) connect:(void (^)(bool, NSError *))handler;
 - (void) disconnect:(void (^)(bool, NSError *))handler;
+- (void) logoff:(void (^)(bool, NSError *))handler;
 - (void) destroy:(void (^)(bool, NSError *))handler;
 
 @end

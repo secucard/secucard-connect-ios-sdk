@@ -47,6 +47,7 @@
 @property (nonatomic, retain) NSString *refreshToken;
 @property (nonatomic, retain) NSDate *expires;
 @property (nonatomic, assign) BOOL loggedIn;
+@property (nonatomic, assign) BOOL alwaysRemindConnecting;
 
 @property (nonatomic, retain) id<SCAccountManagerDelegate> delegate;
 
@@ -54,6 +55,7 @@
 
 - (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials andUserCredentials:(SCUserCredentials*)userCredentials;
 - (void) destroy;
+- (void) requestTokenWithDeviceAuth:(void (^)(NSString *token, NSError *error))handler;
 - (void) token:(void (^)(NSString *token, NSError *error))handler;
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
 - (void) killToken;

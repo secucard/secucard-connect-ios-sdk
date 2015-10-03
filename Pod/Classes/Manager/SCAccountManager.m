@@ -37,6 +37,7 @@
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     instance = [SCAccountManager new];
+    instance.alwaysRemindConnecting = false;
   });
   
   return instance;
@@ -142,42 +143,42 @@
 - (void) retrieveDeviceAccessToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *deviceAccessToken, NSError *error))handler;
 {
   
-    if ([self needsInitialization])
-    {
-      handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+  if ([self needsInitialization])
+  {
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+  }
+  
+  NSDictionary *params = @{
+                           @"grant_type":@"device",
+                           @"client_id": self.clientCredentials.clientId,
+                           @"client_secret": self.clientCredentials.clientSecret,
+                           @"code": code.deviceCode
+                           };
+  
+  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
+    
+    if (error != nil) {
+      handler(nil, error);
+      return;
     }
     
-    NSDictionary *params = @{
-                             @"grant_type":@"device",
-                             @"client_id": self.clientCredentials.clientId,
-                             @"client_secret": self.clientCredentials.clientSecret,
-                             @"code": code.deviceCode
-                             };
+    self.accessToken = [responseObject objectForKey:@"access_token"];
+    self.refreshToken = [responseObject objectForKey:@"refresh_token"];
     
-    [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
-      
-      if (error != nil) {
-        handler(nil, error);
-        return;
-      }
-      
-      self.accessToken = [responseObject objectForKey:@"access_token"];
-      self.refreshToken = [responseObject objectForKey:@"refresh_token"];
-      
-      // get expires date
-      NSNumber *interval = [responseObject objectForKey:@"expires_in"];
-      self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
-      
-      // serialize
-      [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
-      [SCPersistenceManager persist:self.refreshToken forKey:@"refreshToken"];
-      [SCPersistenceManager persist:self.expires forKey:@"expires"];
-      
-      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
-      
-      handler(self.accessToken, nil);
-
-    }];
+    // get expires date
+    NSNumber *interval = [responseObject objectForKey:@"expires_in"];
+    self.expires = [NSDate dateWithTimeIntervalSinceNow: [interval doubleValue]];
+    
+    // serialize
+    [SCPersistenceManager persist:self.accessToken forKey:@"accessToken"];
+    [SCPersistenceManager persist:self.refreshToken forKey:@"refreshToken"];
+    [SCPersistenceManager persist:self.expires forKey:@"expires"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenDidGet object:nil];
+    
+    handler(self.accessToken, nil);
+    
+  }];
   
 }
 
@@ -186,18 +187,18 @@
  */
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler
 {
-
-    if ([self needsInitialization])
-    {
-      handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
-    }
-    
-    NSDictionary *params = @{
-                             @"grant_type":@"refresh_token",
-                             @"client_id": self.clientCredentials.clientId,
-                             @"client_secret": self.clientCredentials.clientSecret,
-                             @"refresh_token": self.refreshToken
-                             };
+  
+  if ([self needsInitialization])
+  {
+    handler(nil, [SCLogManager makeErrorWithDescription:@"Account Manager not yet initialized" andDomain:kErrorDomainSCAccount]);
+  }
+  
+  NSDictionary *params = @{
+                           @"grant_type":@"refresh_token",
+                           @"client_id": self.clientCredentials.clientId,
+                           @"client_secret": self.clientCredentials.clientSecret,
+                           @"refresh_token": self.refreshToken
+                           };
   
   [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
     
@@ -243,6 +244,25 @@
   }
   
 }
+
+- (void) requestTokenWithDeviceAuth:(void (^)(NSString *token, NSError *error))handler {
+  
+  // request codes
+  [self requestCode:^(SCAuthDeviceAuthCode *code, NSError *error) {
+    
+    if (error) {
+      handler(nil, error);
+      return;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"deviceAuthCodeRequesting" object:nil userInfo:@{@"code":code}];
+    
+    [self pollToken:code completionHandler:handler];
+    
+  }];
+  
+}
+
 /**
  *  Check if token is valid
  */
@@ -261,24 +281,10 @@
         return;
       }];
       
-    } else if ([[SCConnectClient sharedInstance].configuration.authType isEqualToString:@"device"]) {
+    } else if ([[SCConnectClient sharedInstance].configuration.authType isEqualToString:@"device"] && self.alwaysRemindConnecting) {
       
       // else this is a three-way auth process
-      
-      // request codes
-      [self requestCode:^(SCAuthDeviceAuthCode *code, NSError *error) {
-        
-        if (error) {
-          handler(nil, error);
-          return;
-        }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"deviceAuthCodeRequesting" object:nil userInfo:@{@"code":code}];
-        
-        [self pollToken:code completionHandler:handler];
-        
-      }];
-      
+      [self requestTokenWithDeviceAuth:handler];
     }
     
   } else if (![self accessTokenValid]) {
@@ -291,7 +297,7 @@
       
       // reconnect stomp
       [[SCStompManager sharedManager] refreshConnection:^(bool success, NSError *error) {
-      
+        
         handler(token, error);
         return;
         
