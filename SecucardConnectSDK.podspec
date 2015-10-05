@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SecucardConnectSDK"
-  s.version      = "0.2.7"
+  s.version      = "0.2.8"
   s.summary      = "Standard API for communication with the secucard infrastructure"
 
   s.description  = <<-DESC
