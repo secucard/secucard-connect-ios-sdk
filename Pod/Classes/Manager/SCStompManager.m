@@ -16,6 +16,8 @@
 #import "SCStompDestination.h"
 #import "SCAppDestination.h"
 
+#import "SCErrorPayload.h"
+
 @interface SCStompManager()
 
 /**
@@ -368,7 +370,29 @@
                                        
                                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStompError object:nil userInfo:@{@"message": message.body}];
                                        
-                                       [self resolveStoredItem:correlationId withError:[SCLogManager makeErrorWithDescription:[body objectForKey:@"error_user"] andDomain:kErrorDomainSCStompService]];
+                                       NSError *jsonError;
+                                       NSData *objectData = [message.body dataUsingEncoding:NSUTF8StringEncoding];
+                                       NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
+                                                                                            options:NSJSONReadingMutableContainers
+                                                                                              error:&jsonError];
+                                       
+                                       if (!jsonError) {
+                                       
+                                         NSError *parsingError;
+                                         SCErrorPayload *payload = [MTLJSONAdapter modelOfClass:[SCErrorPayload class] fromJSONDictionary:json error:&parsingError];
+                                         
+                                         if (!parsingError) {
+                                           NSDictionary *userinfo = @{NSLocalizedDescriptionKey: payload.errorUser,
+                                                                      NSLocalizedFailureReasonErrorKey: payload.errorDetails,
+                                                                      NSLocalizedRecoverySuggestionErrorKey: payload.supportId};
+                                           
+                                           NSError* error = [NSError errorWithDomain:payload.error code:payload.code.integerValue userInfo:userinfo];
+                                           
+                                           [self resolveStoredItem:correlationId withError:error];
+                                         }
+                                         
+                                       }
+                                       
                                        return;
                                        
                                      }

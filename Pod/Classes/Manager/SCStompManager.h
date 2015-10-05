@@ -10,6 +10,7 @@
 #import "SCAccountManager.h"
 #import "SCServiceManager.h"
 #import "SCStompConfiguration.h"
+#import <Mantle/Mantle.h>
 
 #define kErrorDomainSCStompService                  @"SCSecucardCoreStompService"
 
