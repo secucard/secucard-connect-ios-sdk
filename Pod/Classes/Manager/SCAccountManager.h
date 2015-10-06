@@ -60,6 +60,7 @@
 - (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
 - (void) killToken;
 - (void) testInvalidateToken;
+- (void) stopPollingToken;
 
 - (void) logout;
 - (BOOL) accessTokenValid;

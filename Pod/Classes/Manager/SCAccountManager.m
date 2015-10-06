@@ -17,6 +17,7 @@
 @property (nonatomic, retain) SCClientCredentials *clientCredentials;
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
 
+@property (nonatomic, retain) NSTimer *pollingTimer;
 @property (nonatomic, copy) void (^devicePollHandler)(NSString *, NSError *);
 
 @end
@@ -353,7 +354,14 @@
   
   self.devicePollHandler = handler;
   
-  [NSTimer scheduledTimerWithTimeInterval:[code.interval floatValue] target:self selector:@selector(doPoll:) userInfo:@{@"code":code, @"timerStart":now} repeats:TRUE];
+  self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:[code.interval floatValue] target:self selector:@selector(doPoll:) userInfo:@{@"code":code, @"timerStart":now} repeats:TRUE];
+  
+}
+
+- (void) stopPollingToken {
+  
+  [self.pollingTimer invalidate];
+  self.pollingTimer = nil;
   
 }
 
@@ -379,6 +387,10 @@
       // do not resolve when Error 401 as this is regular when user didn't enter the code
       if (![error.localizedDescription containsString:@"401"]) {
         weakSelf.devicePollHandler(nil, error);
+        
+        // stop polling
+        [self stopPollingToken];
+        
       }
       
     } else {

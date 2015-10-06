@@ -20,7 +20,7 @@
                                                                   @"errorDetails":@"error_details",
                                                                   @"errorUser":@"error_user",
                                                                   @"code":@"code",
-                                                                  @"supportId":@"support_id"
+                                                                  @"supportId":@"supportId"
                                                                   }];
 }
 
