@@ -15,7 +15,7 @@
 
 unsigned libVersionMajor = 0;
 unsigned libVersionMinor = 2;
-unsigned libVersionPatch = 9;
+unsigned libVersionPatch = 10;
 
 + (SCConnectClient *)sharedInstance
 {
@@ -83,6 +83,7 @@ unsigned libVersionPatch = 9;
   _isConnecting = TRUE;
   
   if (self.connected) {
+    _isConnecting = FALSE;
     handler(true, nil);
     return;
   }
@@ -90,6 +91,7 @@ unsigned libVersionPatch = 9;
   [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
     
     if (error != nil) {
+      _isConnecting = FALSE;
       handler(false, error);
       return;
     }
