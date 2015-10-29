@@ -15,7 +15,7 @@
 
 unsigned libVersionMajor = 0;
 unsigned libVersionMinor = 2;
-unsigned libVersionPatch = 10;
+unsigned libVersionPatch = 12;
 
 + (SCConnectClient *)sharedInstance
 {
