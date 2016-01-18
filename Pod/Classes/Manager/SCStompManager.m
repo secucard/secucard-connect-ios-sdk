@@ -245,7 +245,7 @@
                                   NSLog(@"really disconnected");
                                 }];
                                 
-                                handler(false, [SCLogManager makeErrorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                                handler(false, [SCLogManager makeErrorWithDescription:[NSString stringWithFormat:@"connect failed: %@", error.localizedDescription] andDomain:kErrorDomainSCStompService]);
                                 
                               } else {
                                 
@@ -277,7 +277,7 @@
                           NSLog(@"really disconnected");
                         }];
                         
-                        handler(false, [SCLogManager makeErrorWithDescription:@"connect failed" andDomain:kErrorDomainSCStompService]);
+                        handler(false, [SCLogManager makeErrorWithDescription:[NSString stringWithFormat:@"connect failed: %@", error.localizedDescription] andDomain:kErrorDomainSCStompService]);
                         
                       } else {
                         

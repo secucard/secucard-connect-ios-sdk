@@ -389,13 +389,13 @@
         weakSelf.devicePollHandler(nil, error);
         
         // stop polling
-        [self stopPollingToken];
+        [weakSelf stopPollingToken];
         
       }
       
     } else {
       
-      [timer invalidate];
+      [weakSelf stopPollingToken];
       weakSelf.devicePollHandler(deviceAccessToken, nil);
       
     }
