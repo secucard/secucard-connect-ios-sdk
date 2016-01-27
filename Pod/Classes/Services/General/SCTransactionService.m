@@ -21,14 +21,14 @@
   return instance;
 }
 
-- (void)getTransactions:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void)getTransactions:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getTransactions"];
   
   [[self serviceManagerByChannel:OnDemandChannel] findObjects:[SCGeneralTransaction class] queryParams:queryParams completionHandler:handler];
 }
 
-- (void)getTransaction:(NSString *)pid completionHandler:(void (^)(SCGeneralTransaction *, NSError *))handler {
+- (void)getTransaction:(NSString *)pid completionHandler:(void (^)(SCGeneralTransaction *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getTransaction"];
   

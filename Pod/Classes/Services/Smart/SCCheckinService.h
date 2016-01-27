@@ -12,8 +12,8 @@
 
 + (SCCheckinService*)sharedService;
 
-- (void) getCheckins:(void (^)(NSArray *, NSError *))handler;
+- (void) getCheckins:(void (^)(NSArray *, SecuError *))handler;
 
-- (void) getCheckinsList:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getCheckinsList:(void (^)(SCObjectList *, SecuError *))handler;
 
 @end

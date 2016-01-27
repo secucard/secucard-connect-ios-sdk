@@ -30,9 +30,9 @@
 
 - (void) initWithConfiguration:(SCClientConfiguration*)configuration;
 - (void) setUserCredentials:(SCUserCredentials*)userCredentials;
-- (void) connect:(void (^)(bool, NSError *))handler;
-- (void) disconnect:(void (^)(bool, NSError *))handler;
-- (void) logoff:(void (^)(bool, NSError *))handler;
-- (void) destroy:(void (^)(bool, NSError *))handler;
+- (void) connect:(void (^)(bool, SecuError *))handler;
+- (void) disconnect:(void (^)(bool, SecuError *))handler;
+- (void) logoff:(void (^)(bool, SecuError *))handler;
+- (void) destroy:(void (^)(bool, SecuError *))handler;
 
 @end

@@ -55,9 +55,9 @@
 
 - (void) initWithClientCredentials:(SCClientCredentials*)clientCredentials andUserCredentials:(SCUserCredentials*)userCredentials;
 - (void) destroy;
-- (void) requestTokenWithDeviceAuth:(void (^)(NSString *token, NSError *error))handler;
-- (void) token:(void (^)(NSString *token, NSError *error))handler;
-- (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler;
+- (void) requestTokenWithDeviceAuth:(void (^)(NSString *token, SecuError *error))handler;
+- (void) token:(void (^)(NSString *token, SecuError *error))handler;
+- (void) refreshAccessToken:(void (^)(NSString *token, SecuError *error))handler;
 - (void) killToken;
 - (void) testInvalidateToken;
 - (void) stopPollingToken;

@@ -21,11 +21,11 @@
   return instance;
 }
 
-- (void)checkIn:(NSString *)storeId sid:(NSString *)sid completionHandler:(void (^)(bool, NSError *))handler {
+- (void)checkIn:(NSString *)storeId sid:(NSString *)sid completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: checkIn"];
   
-  [[self serviceManagerByChannel:PersistentChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil completionHandler:^(id responseObject, NSError *error) {
+  [[self serviceManagerByChannel:PersistentChannel] execute:[SCGeneralStore class] objectId:storeId action:@"checkin" actionArg:sid arg:nil completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
@@ -33,11 +33,11 @@
   
 }
 
-- (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, NSError *))handler {
+- (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: setDefaultStoreWithReason"];
   
-  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:reason completionHandler:^(id responseObject, NSError *error) {
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:reason completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
@@ -45,11 +45,11 @@
   
 }
 
-- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler {
+- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: setDefaultStore"];
   
-  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil completionHandler:^(id responseObject, NSError *error) {
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralStore class] objectId:storeId action:@"setDefault" actionArg:nil arg:nil completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
@@ -58,7 +58,7 @@
 }
 
 
-- (void)getStores:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void)getStores:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getStores"];
   
@@ -66,21 +66,21 @@
   
 }
 
-- (void)getStoreList:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)getStoreList:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getStoreList"];
   
   [self getList:[SCGeneralStore class] withParams:queryParams onChannel:OnDemandChannel completionHandler:handler];
 }
 
-- (void)getStore:(NSString *)pid completionHandler:(void (^)(SCGeneralStore *, NSError *))handler {
+- (void)getStore:(NSString *)pid completionHandler:(void (^)(SCGeneralStore *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getStore"];
   
   [self get:[SCGeneralStore class] withId:pid onChannel:OnDemandChannel completionHandler:handler];
 }
 
-- (void)postProcessObjects:(NSArray *)list completionHandler:(void (^)(NSArray *objects, NSError *error))handler {
+- (void)postProcessObjects:(NSArray *)list completionHandler:(void (^)(NSArray *objects, SecuError *error))handler {
  
     for (SCGeneralStore *store in list) {
       NSLog(@"store: %@", store.id);

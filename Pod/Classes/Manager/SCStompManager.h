@@ -27,7 +27,7 @@
 #define kNotificationStompResult                    @"notificationStompResult"
 #define kNotificationStompEvent                     @"notificationStompEvent"
 
-typedef void (^ReceiptHandler)(id responseObject, NSError *error);
+typedef void (^ReceiptHandler)(id responseObject, SecuError *error);
 
 /**
  *  The StompManager
@@ -63,8 +63,8 @@ typedef void (^ReceiptHandler)(id responseObject, NSError *error);
 /**
  *  connect to stomp
  */
-- (void) connect:(void (^)(bool success, NSError *error))handler;
+- (void) connect:(void (^)(bool success, SecuError *error))handler;
 
-- (void) refreshConnection:(void (^)(bool success, NSError *error))handler;
+- (void) refreshConnection:(void (^)(bool success, SecuError *error))handler;
 
 @end

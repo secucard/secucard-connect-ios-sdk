@@ -25,7 +25,7 @@
  *
  *  @return a promise which resolves to SCObjectList
  */
-- (void) getNews:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getNews:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler;
 
 /**
  *  mark a news remotely as read
@@ -34,6 +34,6 @@
  *
  *  @return a promise which resolves to nil
  */
-- (void) markRead:(NSString*)pid  completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) markRead:(NSString*)pid  completionHandler:(void (^)(bool success, SecuError *))handler;
   
 @end

@@ -27,11 +27,11 @@
 }
 
 
-- (void) updateAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler {
+- (void) updateAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: updateAccount"];
   
-  [[self serviceManagerByChannel:OnDemandChannel] updateObject:account completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+  [[self serviceManagerByChannel:OnDemandChannel] updateObject:account completionHandler:^(SCSecuObject *responseObject, SecuError *error) {
     
     if ([responseObject isKindOfClass:[SCSecuObject class]]) {
       
@@ -45,7 +45,7 @@
   
 }
 
-- (void) getAccount:(NSString*)accountId completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler {
+- (void) getAccount:(NSString*)accountId completionHandler:(void (^)(SCGeneralAccount *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getAccount"];
   
@@ -53,7 +53,7 @@
   
 }
 
-- (void) deleteAccount:(NSString*)accountId completionHandler:(void (^)(bool, NSError *))handler {
+- (void) deleteAccount:(NSString*)accountId completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: deleteAccount"];
   
@@ -61,11 +61,11 @@
   
 }
 
-- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location completionHandler:(void (^)(bool, NSError *))handler {
+- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: updateLocation"];
   
-  [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:accountId action:@"location" actionArg:nil arg:location completionHandler:^(id responseObject, NSError *error) {
+  [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:accountId action:@"location" actionArg:nil arg:location completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
@@ -73,7 +73,7 @@
   
 }
 
-- (void) createAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler {
+- (void) createAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: createAccount"];
   
@@ -81,16 +81,27 @@
   
 }
 
-- (void) updateBeacons:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler {
+- (void) updateBeacons:(NSArray*)beaconList completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: updateBeacons"];
   
-  return [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:@"me" action:@"beaconEnvironment" actionArg:nil arg:beaconList completionHandler:^(id responseObject, NSError *error) {
+  return [[self serviceManagerByChannel:PersistentChannel] updateObject:[SCGeneralAccount class] objectId:@"me" action:@"beaconEnvironment" actionArg:nil arg:beaconList completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
   }];
   
 }
+
+- (void) passwordReset:(NSString*)email fromOrigin:(NSString*)origin completionHandler:(void (^)(bool, SecuError *))handler {
+
+  [SCLogManager info:@"CONNECT-SDK: passwordReset"];
+  
+  return [[self serviceManagerByChannel:OnDemandChannel] execute:[SCGeneralAccount class] objectId:@"null" action:@"passwordreset" actionArg:email arg:@{@"origin": origin} secure:FALSE completionHandler:^(id responseObject, SecuError *error) {
+    handler((error == nil), error);
+  }];
+  
+}
+
 
 @end

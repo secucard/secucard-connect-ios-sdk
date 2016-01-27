@@ -24,6 +24,6 @@
  *
  *  @return a promise resolveing with SCLoyaltyCustomer
  */
-- (void) getCustomer:(NSString*)id completionHandler:(void (^)(SCLoyaltyCustomer *, NSError *))handler;
+- (void) getCustomer:(NSString*)id completionHandler:(void (^)(SCLoyaltyCustomer *, SecuError *))handler;
   
 @end

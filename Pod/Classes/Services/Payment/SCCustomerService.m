@@ -22,7 +22,7 @@
   
 }
 
-- (void)getCustomers:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)getCustomers:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getCustomers"];
   
@@ -30,7 +30,7 @@
   
 }
 
-- (void)createCustomer:(SCPaymentCustomer *)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler {
+- (void)createCustomer:(SCPaymentCustomer *)customer completionHandler:(void (^)(SCPaymentCustomer *, SecuError *))handler {
 
   [SCLogManager info:@"CONNECT-SDK: createCustomer"];
   
@@ -38,11 +38,11 @@
   
 }
 
-- (void)updateCustomer:(SCPaymentCustomer *)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler {
+- (void)updateCustomer:(SCPaymentCustomer *)customer completionHandler:(void (^)(SCPaymentCustomer *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: updateCustomer"];
   
-  [self update:customer onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+  [self update:customer onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, SecuError *error) {
     
     if ([responseObject isKindOfClass:[SCSecuObject class]]) {
       handler((SCPaymentCustomer*)responseObject, error);
@@ -53,7 +53,7 @@
   }];
 }
 
-- (void)deleteCustomer:(NSString *)id completionHandler:(void (^)(bool, NSError *))handler {
+- (void)deleteCustomer:(NSString *)id completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: deleteCustomer"];
   

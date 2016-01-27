@@ -24,23 +24,23 @@
   return instance;
 }
 
-- (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+- (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: createTransaction"];
   
   [self create:transaction onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+- (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: updateTransaction"];
   
-  [self update:transaction onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, NSError *error) {
+  [self update:transaction onChannel:DefaultChannel completionHandler:^(SCSecuObject *responseObject, SecuError *error) {
     handler((SCSmartTransaction*)responseObject, error);
   }];
 }
 
-- (void) startTransaction:(NSString*)transactionId type:(NSString*)type completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler {
+- (void) startTransaction:(NSString*)transactionId type:(NSString*)type completionHandler:(void (^)(SCSmartTransaction *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: startTransaction"];
   

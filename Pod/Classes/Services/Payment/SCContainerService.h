@@ -25,7 +25,7 @@
  *
  *  @return a promise resolveing with NSArray
  */
-- (void) getContainers:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) getContainers:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *, SecuError *))handler;
 
 /**
  *  create a container
@@ -34,7 +34,7 @@
  *
  *  @return a promise resolveing with the created container
  */
-- (void) createContainer:(SCPaymentContainer*)container completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler;
+- (void) createContainer:(SCPaymentContainer*)container completionHandler:(void (^)(SCPaymentContainer *, SecuError *))handler;
 
 /**
  *  update a container
@@ -43,7 +43,7 @@
  *
  *  @return a promise resolveing with SCPaymentContainer
  */
-- (void) updateContainer:(SCPaymentContainer*)container completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler;
+- (void) updateContainer:(SCPaymentContainer*)container completionHandler:(void (^)(SCPaymentContainer *, SecuError *))handler;
 
 /**
  *  assigna container to a customer
@@ -53,7 +53,7 @@
  *
  *  @return a promise resolveing with the updated SCPaymentContainer
  */
-- (void) updateContainerAssignment:(NSString*)containerId customerId:(NSString*)customerId completionHandler:(void (^)(SCPaymentContainer *, NSError *))handler;
+- (void) updateContainerAssignment:(NSString*)containerId customerId:(NSString*)customerId completionHandler:(void (^)(SCPaymentContainer *, SecuError *))handler;
 
 /**
  *  unassign a container from any customer
@@ -62,7 +62,7 @@
  *
  *  @return a promise resolveing with nil
  */
-- (void) deleteContainerAssignment:(NSString*)containerId completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) deleteContainerAssignment:(NSString*)containerId completionHandler:(void (^)(bool success, SecuError *))handler;
 
 /**
  *  delete a container
@@ -71,6 +71,6 @@
  *
  *  @return a promise resolveing with nil
  */
-- (void) deleteContainer:(NSString*)id completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) deleteContainer:(NSString*)id completionHandler:(void (^)(bool success, SecuError *))handler;
 
 @end

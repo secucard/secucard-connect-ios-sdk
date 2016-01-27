@@ -73,7 +73,7 @@ unsigned libVersionPatch = 12;
   
 }
 
-- (void) connect:(void (^)(bool, NSError *))handler {
+- (void) connect:(void (^)(bool, SecuError *))handler {
   
   if (_isConnecting) {
     handler(false, [SCLogManager makeErrorWithDescription:@"CONNECTTION: Already connecting"]);
@@ -88,7 +88,7 @@ unsigned libVersionPatch = 12;
     return;
   }
   
-  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+  [[SCAccountManager sharedManager] token:^(NSString *token, SecuError *error) {
     
     if (error != nil) {
       _isConnecting = FALSE;
@@ -96,7 +96,7 @@ unsigned libVersionPatch = 12;
       return;
     }
     
-    [[SCStompManager sharedManager] connect:^(bool success, NSError *error) {
+    [[SCStompManager sharedManager] connect:^(bool success, SecuError *error) {
       
       handler(success, error);
       
@@ -112,9 +112,9 @@ unsigned libVersionPatch = 12;
   return [SCStompManager sharedManager].connected;
 }
 
-- (void)logoff:(void (^)(bool, NSError *))handler {
+- (void)logoff:(void (^)(bool, SecuError *))handler {
   
-  [self disconnect:^(bool success, NSError *error) {
+  [self disconnect:^(bool success, SecuError *error) {
     
     if (error != nil) {
       [SCLogManager error:error];
@@ -127,7 +127,7 @@ unsigned libVersionPatch = 12;
   
 }
 
-- (void)disconnect:(void (^)(bool success, NSError *error))handler {
+- (void)disconnect:(void (^)(bool success, SecuError *error))handler {
   self.connected = false;
   [[SCStompManager sharedManager] close];
   [[SCRestServiceManager sharedManager] close];
@@ -135,7 +135,7 @@ unsigned libVersionPatch = 12;
 }
 
 
-- (void)destroy:(void (^)(bool success, NSError *))handler {
+- (void)destroy:(void (^)(bool success, SecuError *))handler {
   
   [[SCRestServiceManager sharedManager] destroy];
   [[SCStompManager sharedManager] destroy];

@@ -21,6 +21,6 @@
  *
  *  @return a promise which resolves to SCDocumentUploadsDocument
  */
-- (void) uploadDocument:(SCDocumentUploadsDocument*)base64EncodeDocument completionHandler:(void (^)(SCDocumentUploadsDocument *, NSError *))handler;
+- (void) uploadDocument:(SCDocumentUploadsDocument*)base64EncodeDocument completionHandler:(void (^)(SCDocumentUploadsDocument *, SecuError *))handler;
 
 @end

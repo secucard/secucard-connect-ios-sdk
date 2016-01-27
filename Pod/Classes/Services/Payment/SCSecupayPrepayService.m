@@ -22,18 +22,18 @@
   
 }
 
-- (void)createPrepay:(SCPaymentSecupayPrepay *)data completionHandler:(void (^)(SCPaymentSecupayPrepay *, NSError *))handler {
+- (void)createPrepay:(SCPaymentSecupayPrepay *)data completionHandler:(void (^)(SCPaymentSecupayPrepay *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: createPrepay"];
   
   [self create:data onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (void)cancelTransaction:(NSString *)transactionId completionHandler:(void (^)(bool, NSError *))handler {
+- (void)cancelTransaction:(NSString *)transactionId completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: cancelTransaction"];
   
-  [self execute:[SCPaymentSecupayPrepay class] withId:transactionId action:@"cancel" actionArg:nil arg:nil returnType:nil onChannel:DefaultChannel completionHandler:^(id responseObject, NSError *error) {
+  [self execute:[SCPaymentSecupayPrepay class] withId:transactionId action:@"cancel" actionArg:nil arg:nil returnType:nil onChannel:DefaultChannel completionHandler:^(id responseObject, SecuError *error) {
     handler((error == nil), error);
   }];
   

@@ -16,8 +16,6 @@
 #import "SCStompDestination.h"
 #import "SCAppDestination.h"
 
-#import "SCErrorPayload.h"
-
 @interface SCStompManager()
 
 /**
@@ -105,7 +103,7 @@
 }
 
 
-- (void) resolveStoredItem:(NSString*)correlationId withError:(NSError *)error {
+- (void) resolveStoredItem:(NSString*)correlationId withError:(SecuError *)error {
   
   if (correlationId != nil) {
     
@@ -169,11 +167,11 @@
   //[self setConnectionTimer];
 }
 
-- (void) refreshConnection:(void (^)(bool success, NSError *error))handler {
+- (void) refreshConnection:(void (^)(bool success, SecuError *error))handler {
   
   [self closeConnection];
   
-  [self connect:^(bool success, NSError *error) {
+  [self connect:^(bool success, SecuError *error) {
     handler(success, error);
   }];
   
@@ -186,7 +184,7 @@
  *  @param host       the host
  *  @param completion the completion block
  */
-- (void) connect:(void (^)(bool, NSError *))handler
+- (void) connect:(void (^)(bool, SecuError *))handler
 {
   
   // initialized at all?
@@ -210,7 +208,7 @@
   
   [SCLogManager info:@"STOMP: connect"];
   
-  [[SCAccountManager sharedManager] token:^(NSString *token, NSError *error) {
+  [[SCAccountManager sharedManager] token:^(NSString *token, SecuError *error) {
     
     if (error != nil) {
       handler(false, error);
@@ -337,7 +335,7 @@
                                    // check if parsing error
                                    if (error)
                                    {
-                                     [self resolveStoredItem:correlationId withError:error];
+                                     [self resolveStoredItem:correlationId withError:[SecuError withError:error]];
                                      return;
                                    }
                                    
@@ -349,7 +347,7 @@
                                        NSError *objectParsingError = nil;
                                        SCGeneralEvent *event = [MTLJSONAdapter modelOfClass:[SCGeneralEvent class] fromJSONDictionary:body error:&objectParsingError];
                                        if (objectParsingError) {
-                                         [SCLogManager error:objectParsingError];
+                                         [SCLogManager error:[SecuError withError:objectParsingError]];
                                        }
                                        
                                        // send to registered instances
@@ -377,19 +375,9 @@
                                                                                               error:&jsonError];
                                        
                                        if (!jsonError) {
-                                       
-                                         NSError *parsingError;
-                                         SCErrorPayload *payload = [MTLJSONAdapter modelOfClass:[SCErrorPayload class] fromJSONDictionary:json error:&parsingError];
                                          
-                                         if (!parsingError) {
-                                           NSDictionary *userinfo = @{NSLocalizedDescriptionKey: payload.errorUser,
-                                                                      NSLocalizedFailureReasonErrorKey: payload.errorDetails,
-                                                                      NSLocalizedRecoverySuggestionErrorKey: payload.supportId};
-                                           
-                                           NSError* error = [NSError errorWithDomain:payload.error code:payload.code.integerValue userInfo:userinfo];
-                                           
-                                           [self resolveStoredItem:correlationId withError:error];
-                                         }
+                                         SecuError* error = [SecuError withDictionary:json];
+                                         [self resolveStoredItem:correlationId withError:error];
                                          
                                        }
                                        
@@ -478,31 +466,31 @@
 }
 
 - (void) authDidChange {
-
-  // TODO: What todo if 
   
-//  [self closeConnection];
-//  [self connect:^(bool success, NSError *error) {
-//    
-//    if (error) {
-//      [SCLogManager error:error];
-//    } else if (success) {
-//      [SCLogManager info:@"STOMP: Did reconnect after auth change"];
-//    } else {
-//      [SCLogManager errorWithDescription:@"STOMP: Did not reconnect after auth change"];
-//    }
-//    
-//  }];
+  // TODO: What todo if
+  
+  //  [self closeConnection];
+  //  [self connect:^(bool success, NSError *error) {
+  //
+  //    if (error) {
+  //      [SCLogManager error:error];
+  //    } else if (success) {
+  //      [SCLogManager info:@"STOMP: Did reconnect after auth change"];
+  //    } else {
+  //      [SCLogManager errorWithDescription:@"STOMP: Did not reconnect after auth change"];
+  //    }
+  //
+  //  }];
   
 }
 
 #pragma mark - SCServiceManagerProtocol
 
-- (void) open:(void (^)(bool, NSError *))handler {
+- (void) open:(void (^)(bool, SecuError *))handler {
   [self connect:handler];
 }
 
-- (void) getObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(id, NSError *))handler {
+- (void) getObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(id, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.data = objectId;
@@ -511,7 +499,7 @@
   
 }
 
-- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void) findObjects:(Class)type queryParams:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.query = queryParams;
@@ -519,7 +507,7 @@
   
   // TODO: Callback if false?
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type] completionHandler:^(id responseObject, NSError *error) {
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodGet type:type] completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -529,40 +517,40 @@
     NSError *parsingError = nil;
     SCObjectList *objectList = [MTLJSONAdapter modelOfClass:[SCObjectList class] fromJSONDictionary:responseObject error:&parsingError];
     
-    handler(objectList, parsingError);
+    handler(objectList, [SecuError withError:parsingError]);
     
   }];
   
 }
 
-- (void) createObject:(SCSecuObject*)object completionHandler:(void (^)(id, NSError *))handler {
+- (void) createObject:(SCSecuObject*)object completionHandler:(void (^)(id, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   
-  NSError *parsingParams = nil;
-  message.data = [MTLJSONAdapter JSONDictionaryFromModel:object error:&parsingParams];;
+  NSError *parsingError = nil;
+  message.data = [MTLJSONAdapter JSONDictionaryFromModel:object error:&parsingError];
   
-  if (parsingParams != nil) {
-    handler(nil, parsingParams);
+  if (parsingError != nil) {
+    handler(nil, [SecuError withError:parsingError]);
   }
   
   [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]completionHandler:handler];
   
 }
 
-- (void) updateObject:(SCSecuObject*)object completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
+- (void) updateObject:(SCSecuObject*)object completionHandler:(void (^)(SCSecuObject *, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = object.id;
   
-  NSError *parsingParams = nil;
-  message.data = [MTLJSONAdapter JSONDictionaryFromModel:object error:&parsingParams];;
+  NSError *parsingError = nil;
+  message.data = [MTLJSONAdapter JSONDictionaryFromModel:object error:&parsingError];
   
-  if (parsingParams != nil) {
-    handler(nil, parsingParams);
+  if (parsingError != nil) {
+    handler(nil, [SecuError withError:parsingError]);
   }
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]] completionHandler:^(id responseObject, NSError *error) {
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:[object class]] completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -572,44 +560,44 @@
     NSError *parsingError = nil;
     responseObject = [MTLJSONAdapter modelOfClass:[object class] fromJSONDictionary:responseObject error:&parsingError];
     
-    handler(responseObject, parsingError);
+    handler(responseObject, [SecuError withError:parsingError]);
     
     
   }];
   
 }
 
-- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
+- (void) updateObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
   
   if (arg != nil) {
-    NSError *parsingParams = nil;
+    NSError *parsingError = nil;
     
     if ([arg isKindOfClass:[NSArray class]]) {
       
       NSMutableArray *convertedArray = [NSMutableArray new];
       for (id item in (NSArray*)arg) {
-        [convertedArray addObject:[MTLJSONAdapter JSONDictionaryFromModel:item error:&parsingParams]];
-        if (parsingParams != nil) {
-          handler(nil, parsingParams);
+        [convertedArray addObject:[MTLJSONAdapter JSONDictionaryFromModel:item error:&parsingError]];
+        if (parsingError != nil) {
+          handler(nil, [SecuError withError:parsingError]);
           return;
         }
       }
       message.data = [NSArray arrayWithArray:convertedArray];
       
     } else {
-      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];
+      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingError];
     }
     
-    if (parsingParams != nil) {
-      handler(nil, parsingParams);
+    if (parsingError != nil) {
+      handler(nil, [SecuError withError:parsingError]);
     }
   }
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action] completionHandler:^(id responseObject, NSError *error) {
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodUpdate type:type method:action] completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -619,37 +607,37 @@
     NSError *parsingError = nil;
     responseObject = [MTLJSONAdapter modelOfClass:type fromJSONDictionary:responseObject error:&parsingError];
     
-    handler(responseObject, parsingError);
+    handler(responseObject, [SecuError withError:parsingError]);
     
     
   }];
   
 }
 
-- (void) deleteObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(bool, NSError *))handler {
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId completionHandler:(void (^)(bool, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type] completionHandler:^(id responseObject, NSError *error) {
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type] completionHandler:^(id responseObject, SecuError *error) {
     handler((error == nil), error);
   }];
   
 }
 
-- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg completionHandler:(void (^)(bool, NSError *))handler {
+- (void) deleteObject:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg completionHandler:(void (^)(bool, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
   message.sid = actionArg;
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action] completionHandler:^(id responseObject, NSError *error) {
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodDelete type:type method:action] completionHandler:^(id responseObject, SecuError *error) {
     handler((error == nil), error);
   }];
   
 }
 
-- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, NSError *))handler {
+- (void) execute:(Class)type objectId:(NSString*)objectId action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg completionHandler:(void (^)(id, SecuError *))handler {
   
   SCTransportMessage *message = [SCTransportMessage new];
   message.pid = objectId;
@@ -659,11 +647,11 @@
     
     if ([arg isKindOfClass:[MTLModel class]]) {
       
-      NSError *parsingParams = nil;
-      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingParams];;
+      NSError *parsingError = nil;
+      message.data = [MTLJSONAdapter JSONDictionaryFromModel:arg error:&parsingError];
       
-      if (parsingParams != nil) {
-        handler(nil, parsingParams);
+      if (parsingError != nil) {
+        handler(nil, [SecuError withError:parsingError]);
       }
       
     } else {
@@ -671,7 +659,7 @@
     }
   }
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:^(id responseObject, NSError *error) {
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodExecute type:type method:action] completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -681,13 +669,13 @@
     NSError *parsingError = nil;
     responseObject = [MTLJSONAdapter modelOfClass:type fromJSONDictionary:responseObject error:&parsingError];
     
-    handler(responseObject, parsingError);
+    handler(responseObject, [SecuError withError:parsingError]);
     
   }];
   
 }
 
-- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(SCTransportMessage*)actionArg completionHandler:(void (^)(id, NSError *))handler {
+- (void) execute:(NSString*)appId action:(NSString*)action actionArg:(SCTransportMessage*)actionArg completionHandler:(void (^)(id, SecuError *))handler {
   
   [self sendMessage:actionArg toDestination:[SCAppDestination initWithAppId:appId method:action] completionHandler:handler];
   

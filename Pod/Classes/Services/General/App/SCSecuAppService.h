@@ -31,7 +31,7 @@
  *
  *  @return a promise resolveing with SCGeneralMerchant
  */
-- (void) getMerchant:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(SCObjectList *list, NSError *error))handler;
+- (void) getMerchant:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(SCObjectList *list, SecuError *error))handler;
 
 /**
  *  retrieve a lst of merchants
@@ -41,7 +41,7 @@
  *
  *  @return a promise fulfiling with SCObjectList with SCGeneralMerchant
  */
-- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *list, NSError *error))handler;
+- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *list, SecuError *error))handler;
 
 /**
  *  add a card to the account
@@ -51,6 +51,6 @@
  *
  *  @return a promise resolveing with nil
  */
-- (void) addCard:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) addCard:(NSString*)appId argObject:(id)argObject completionHandler:(void (^)(bool success, SecuError *))handler;
 
 @end

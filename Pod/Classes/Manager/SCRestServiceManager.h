@@ -11,6 +11,7 @@
 #import "SCAccountManager.h"
 #import "SCServiceManager.h"
 #import "SCRestConfiguration.h"
+#import "SecuError.h"
 
 #define kErrorDomainSCRestService                 @"SCSecucardCoreRestService"
 
@@ -55,10 +56,10 @@
  *
  *  @return returns a promise resolveing with nil
  */
-- (void) requestAuthWithParams:(id)params completionHandler:(void (^)(id responseObject, NSError *error))handler;
+- (void) requestAuthWithParams:(id)params completionHandler:(void (^)(id responseObject, SecuError *error))handler;
 
-- (void)execute:(NSString *)appId action:(NSString *)action actionArg:(NSDictionary *)actionArg secure:(BOOL)secure completionHandler:(void (^)(id, NSError *))handler;
+- (void)execute:(NSString *)appId action:(NSString *)action actionArg:(NSDictionary *)actionArg secure:(BOOL)secure completionHandler:(void (^)(id, SecuError *))handler;
 
-- (void) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params completionHandler:(void (^)(id responseObject, NSError *error))handler;
+- (void) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params completionHandler:(void (^)(id responseObject, SecuError *error))handler;
 
 @end

@@ -28,7 +28,7 @@
   return instance;
 }
 
-- (void)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument completionHandler:(void (^)(SCDocumentUploadsDocument *, NSError *))handler {
+- (void)uploadDocument:(SCDocumentUploadsDocument *)base64EncodeDocument completionHandler:(void (^)(SCDocumentUploadsDocument *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: uploadDocument"];
   

@@ -23,31 +23,31 @@
   
 }
 
-- (void)getIdentRequests:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)getIdentRequests:(SCQueryParams *)queryParams completionHandler:(void (^)(NSArray *, SecuError *))handler {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 
-- (void)getIdentRequest:(NSString *)id completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler {
+- (void)getIdentRequest:(NSString *)id completionHandler:(void (^)(SCServicesIdentRequest *, SecuError *))handler {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 
-- (void)getIdentResultsByRequestIds:(NSArray *)identRequestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)getIdentResultsByRequestIds:(NSArray *)identRequestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, SecuError *))handler {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 
-- (void)getIdentResultsByRequestsRaw:(NSArray *)requestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)getIdentResultsByRequestsRaw:(NSArray *)requestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, SecuError *))handler {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 
-- (void)createIdentRequest:(SCServicesIdentRequest *)newIdentRequest completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler {
+- (void)createIdentRequest:(SCServicesIdentRequest *)newIdentRequest completionHandler:(void (^)(SCServicesIdentRequest *, SecuError *))handler {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 
-- (void)getIdentResults:(SCQueryParams *)queryParams downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)getIdentResults:(SCQueryParams *)queryParams downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, SecuError *))handler {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 
-- (void)getIdentResult:(NSString *)id downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler  {
+- (void)getIdentResult:(NSString *)id downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(SCServicesIdentRequest *, SecuError *))handler  {
   handler(nil, [SCLogManager makeErrorWithDescription:@"Not implemented"]);
 }
 

@@ -11,21 +11,21 @@
 
 @implementation SCSmartIdentService
 
-- (void) getIdentsList:(void (^)(SCObjectList *, NSError *))handler {
+- (void) getIdentsList:(void (^)(SCObjectList *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getIdentsList"];
   
   [self getObjectList:[SCSmartIdent class] withParams:nil onChannel:PersistentChannel completionHandler:handler];
 }
 
-- (void) getIdents:(void (^)(NSArray *, NSError *))handler {
+- (void) getIdents:(void (^)(NSArray *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getIdents"];
   
   [self getList:[SCSmartIdent class] withParams:nil onChannel:PersistentChannel completionHandler:handler];
 }
 
-- (void) readIdent:(NSString*)id completionHandler:(void (^)(SCSmartIdent *, NSError *))handler {
+- (void) readIdent:(NSString*)id completionHandler:(void (^)(SCSmartIdent *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: readIdent"];
   

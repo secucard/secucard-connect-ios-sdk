@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SecuError.h"
 #define kSCErrorDomain @"SCSecucardCore"
+
 
 typedef enum {
   
@@ -41,7 +42,7 @@ typedef enum {
 @property (nonatomic, assign) SCLogLevel level;
 @property (nonatomic, retain) NSDate *created;
 @property (nonatomic, retain) NSString *message;
-@property (nonatomic, retain) NSError *error;
+@property (nonatomic, retain) SecuError *error;
 
 @end
 
@@ -57,15 +58,15 @@ typedef enum {
 
 + (SCLogManager *)sharedManager;
 
-+ (NSError*) makeErrorWithCode:(SCErrorType)code;
-+ (NSError*) makeErrorWithCode:(SCErrorType)code andDomain:(NSString*) errorDomain;
-+ (NSError*) makeErrorWithDescription:(NSString*)description;
-+ (NSError*) makeErrorWithDescription:(NSString*)description andDomain:(NSString*) errorDomain;
++ (SecuError*) makeErrorWithCode:(SCErrorType)code;
++ (SecuError*) makeErrorWithCode:(SCErrorType)code andDomain:(NSString*) errorDomain;
++ (SecuError*) makeErrorWithDescription:(NSString*)description;
++ (SecuError*) makeErrorWithDescription:(NSString*)description andDomain:(NSString*) errorDomain;
 
 + (void) warn:(NSString*)message;
 + (void) info:(NSString*)message;
 
-+ (void) error:(NSError*)error;
++ (void) error:(SecuError*)error;
 + (void) errorWithDescription:(NSString*)description;
 
 @end

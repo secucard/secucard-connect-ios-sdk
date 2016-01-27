@@ -22,14 +22,14 @@
   
 }
 
-- (void)getMerchantCards:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void)getMerchantCards:(SCQueryParams *)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getMerchantCards"];
   
   [self getObjectList:[SCLoyaltyMerchantCard class] withParams:queryParams onChannel:DefaultChannel completionHandler:handler];
 }
 
-- (void)getMerchantCard:(NSString *)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, NSError *))handler {
+- (void)getMerchantCard:(NSString *)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getMerchantCard"];
   

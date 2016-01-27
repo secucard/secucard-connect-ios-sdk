@@ -31,7 +31,7 @@
   return instance;
 }
 
-- (void)getCheckins:(void (^)(NSArray *, NSError *))handler {
+- (void)getCheckins:(void (^)(NSArray *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getCheckins"];
   
@@ -39,7 +39,7 @@
   
 }
 
-- (void) getCheckinsList:(void (^)(SCObjectList *, NSError *))handler {
+- (void) getCheckinsList:(void (^)(SCObjectList *, SecuError *))handler {
 
   [SCLogManager info:@"CONNECT-SDK: getCheckinsList"];
   
@@ -47,7 +47,7 @@
   
 }
 
-- (void)postProcessObjects:(NSArray *)list completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void)postProcessObjects:(NSArray *)list completionHandler:(void (^)(NSArray *, SecuError *))handler {
   
   for (NSObject *object in list) {
     

@@ -31,7 +31,7 @@
  *
  *  @return a promise resolveing with NSArray of SCServicesIdentRequest
  */
-- (void) getIdentRequests:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) getIdentRequests:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *, SecuError *))handler;
     
 /**
  *  Returns a single ident request object.
@@ -40,7 +40,7 @@
  *
  *  @return a promise resolveing with SCServicesIdentRequest
  */
-- (void) getIdentRequest:(NSString*)id completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler;
+- (void) getIdentRequest:(NSString*)id completionHandler:(void (^)(SCServicesIdentRequest *, SecuError *))handler;
       
 /**
  *  Returns a ident result for a given list of ident request ids.
@@ -50,7 +50,7 @@
  *
  *  @return a promise resolveing with NSArray of SCServicesIdentRequest
  */
-- (void) getIdentResultsByRequestIds:(NSArray*)identRequestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) getIdentResultsByRequestIds:(NSArray*)identRequestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, SecuError *))handler;
 
 /**
  *  Returns a list of raw results for a given list of ident request ids.
@@ -60,7 +60,7 @@
  *
  *  @return a promise resolveing with NSArray of SCServicesIdentRequest
  */
-- (void) getIdentResultsByRequestsRaw:(NSArray*)requestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) getIdentResultsByRequestsRaw:(NSArray*)requestIds downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, SecuError *))handler;
           
 /**
  *  Creates a new ident request.
@@ -69,7 +69,7 @@
  *
  *  @return a promise resolveing with the new SCServicesIdentRequest
  */
-- (void) createIdentRequest:(SCServicesIdentRequest*)newIdentRequest completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler;
+- (void) createIdentRequest:(SCServicesIdentRequest*)newIdentRequest completionHandler:(void (^)(SCServicesIdentRequest *, SecuError *))handler;
             
 /**
  *  Returns a list of ident result objects according to the given query parameters.
@@ -84,7 +84,7 @@
  *
  * @return a promise resolveing with an NSArray of SCServicesIdentRequest
  */
-- (void) getIdentResults:(SCQueryParams*)queryParams downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) getIdentResults:(SCQueryParams*)queryParams downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(NSArray *, SecuError *))handler;
 
 /**
  * Returns a single ident result object.
@@ -97,7 +97,7 @@
  *
  * @return a promise resolveing with SCServicesIdentRequest
  */
-- (void) getIdentResult:(NSString*)id downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(SCServicesIdentRequest *, NSError *))handler;
+- (void) getIdentResult:(NSString*)id downloadAttachments:(BOOL)downloadAttachments completionHandler:(void (^)(SCServicesIdentRequest *, SecuError *))handler;
 
 
 @end

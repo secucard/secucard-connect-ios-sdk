@@ -23,7 +23,7 @@
   
 }
 
-- (void)getCustomer:(NSString *)id completionHandler:(void (^)(SCLoyaltyCustomer *, NSError *))handler {
+- (void)getCustomer:(NSString *)id completionHandler:(void (^)(SCLoyaltyCustomer *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getCustomer"];
   

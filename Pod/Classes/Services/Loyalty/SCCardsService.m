@@ -20,7 +20,7 @@
   return instance;
 }
 
-- (void) getCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyCard *, NSError *))handler {
+- (void) getCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyCard *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getCard"];
   
@@ -28,7 +28,7 @@
   
 }
 
-- (void) getCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void) getCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getCards"];
   
@@ -36,11 +36,11 @@
   
 }
 
-- (void) assignUserToCard:(NSString*)cardNumber pin:(id)pin completionHandler:(void (^)(bool, NSError *))handler {
+- (void) assignUserToCard:(NSString*)cardNumber pin:(id)pin completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: assignUserToCard"];
   
-  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin completionHandler:^(id responseObject, NSError *error) {
+  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
@@ -48,7 +48,7 @@
   
 }
 
-- (void) deleteUserFromCard:(NSString*)cardNumber completionHandler:(void (^)(bool, NSError *))handler {
+- (void) deleteUserFromCard:(NSString*)cardNumber completionHandler:(void (^)(bool, SecuError *))handler {
 
   [SCLogManager info:@"CONNECT-SDK: deleteUserFromCard"];
   

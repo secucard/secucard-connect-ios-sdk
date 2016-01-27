@@ -100,7 +100,7 @@
  *
  *  @return a promise resolveing with the found instance (id)
  */
-- (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
+- (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] getObject:type objectId:id completionHandler:handler];
   
@@ -115,7 +115,7 @@
  *
  *  @return a promise resolveing with a NSArray of the found objects (NSArray)
  */
-- (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, SecuError *))handler {
   
      [[self serviceManagerByChannel:channel] findObjects:type queryParams:queryParams completionHandler:^(SCObjectList *list, NSError *error) {
       
@@ -131,7 +131,7 @@
        }
        
       // process list
-      [self postProcessObjects:list.data completionHandler:^(NSArray *processedList, NSError *error) {
+      [self postProcessObjects:list.data completionHandler:^(NSArray *processedList, SecuError *error) {
         handler(processedList, error);
       }];
       
@@ -148,7 +148,7 @@
  *
  *  @return a promise resolveing with a SCObjectList of the found objects (SCObjectList)
  */
-- (void) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCObjectList *, NSError *))handler {
+- (void) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCObjectList *, SecuError *))handler {
   
     __block SCObjectList *objList;
     
@@ -171,7 +171,7 @@
       }
       
       // process list
-      [self postProcessObjects:list.data completionHandler:^(NSArray *processedList, NSError *error) {
+      [self postProcessObjects:list.data completionHandler:^(NSArray *processedList, SecuError *error) {
       
         if (error != nil) {
           objList.data = processedList;
@@ -211,7 +211,7 @@
  *
  *  @return a promise resolveing with the output list (NSArray)
  */
-- (void) postProcessObjects:(NSArray*)list completionHandler:(void (^)(NSArray *, NSError *))handler {
+- (void) postProcessObjects:(NSArray*)list completionHandler:(void (^)(NSArray *, SecuError *))handler {
   
   handler(list, nil);
   
@@ -226,7 +226,7 @@
  *
  *  @return a promise resolveing with the refreshed object (SCSecuObject)
  */
-- (void) update:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCSecuObject *, NSError *))handler {
+- (void) update:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCSecuObject *, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] updateObject:object completionHandler:handler];
   
@@ -246,7 +246,7 @@
  *
  *  @return a promise resolveing with the result (id)
  */
-- (void) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
+- (void) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] execute:type objectId:id action:action actionArg:actionArg arg:arg completionHandler:handler];
   
@@ -264,7 +264,7 @@
  *
  *  @return a promise resolveing with the result (id)
  */
-- (void) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
+- (void) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] execute:appId action:action actionArg:arg completionHandler:handler];
   
@@ -278,7 +278,7 @@
  *
  *  @return a promise returning the created object (id)
  */
-- (void) create:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler {
+- (void) create:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] createObject:object completionHandler:handler];
   
@@ -293,7 +293,7 @@
  *
  *  @return a promise just resolveing without result (nil)
  */
-- (void) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler {
+- (void) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] deleteObject:type objectId:id completionHandler:handler];
   
@@ -310,7 +310,7 @@
  *
  *  @return a promise just resolveing without result (nil)
  */
-- (void) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler {
+- (void) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, SecuError *))handler {
   
   [[self serviceManagerByChannel:channel] deleteObject:type objectId:id action:action actionArg:actionArg completionHandler:handler];
   

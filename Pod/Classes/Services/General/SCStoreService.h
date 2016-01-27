@@ -28,7 +28,7 @@
  *
  *  @return a promise resolveing to nil
  */
-- (void) checkIn:(NSString*) storeId sid:(NSString*)sid completionHandler:(void (^)(bool success, NSError *error))handler;
+- (void) checkIn:(NSString*) storeId sid:(NSString*)sid completionHandler:(void (^)(bool success, SecuError *error))handler;
 
 /**
  *  set store as default
@@ -37,7 +37,7 @@
  *  @param set default payload
  *  @return a promise resolveing to nil
  */
-- (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, NSError *))handler;
+- (void)setDefault:(NSString *)storeId withReason:(SCGeneralStoreSetDefault*)reason completionHandler:(void (^)(bool, SecuError *))handler;
 
 /**
  *  set store as default
@@ -45,7 +45,7 @@
  *  @param storeId the store's id
  *  @return a promise resolveing to nil
  */
-- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, NSError *))handler;
+- (void)setDefault:(NSString *)storeId completionHandler:(void (^)(bool, SecuError *))handler;
 
 /**
  *  retrieve a list of stores
@@ -54,7 +54,7 @@
  *
  *  @return a promise resolveing to SCObjectList of SCGeneralStore
  */
-- (void) getStores:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *stores, NSError *error))handler;
+- (void) getStores:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *stores, SecuError *error))handler;
 
 /**
  *  retrieve a list of stores
@@ -63,7 +63,7 @@
  *
  *  @return a promise resolveing to NSarray of SCGeneralStore
  */
-- (void) getStoreList:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *storeList, NSError *error))handler;
+- (void) getStoreList:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *storeList, SecuError *error))handler;
 
 /**
  *  get a store by search query
@@ -72,6 +72,6 @@
  *
  *  @return a promise resolveing to SCGeneralStore
  */
-- (void) getStore:(NSString*)pid completionHandler:(void (^)(SCGeneralStore *store, NSError *error))handler;
+- (void) getStore:(NSString*)pid completionHandler:(void (^)(SCGeneralStore *store, SecuError *error))handler;
 
 @end

@@ -25,7 +25,7 @@
  *
  *  @return a promise resolveing with SCPaymentSecupayDebit
  */
-- (void) createTransaction:(SCPaymentSecupayDebit*)data completionHandler:(void (^)(SCPaymentSecupayDebit *, NSError *))handler;
+- (void) createTransaction:(SCPaymentSecupayDebit*)data completionHandler:(void (^)(SCPaymentSecupayDebit *, SecuError *))handler;
 
 /**
  *  Cancel an existing transaction.
@@ -34,6 +34,6 @@
  *
  *  @return a promise resolveing with nil
  */
-- (void) cancelTransaction:(NSString*)id completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) cancelTransaction:(NSString*)id completionHandler:(void (^)(bool success, SecuError *))handler;
 
 @end

@@ -25,7 +25,7 @@
  *
  *  @return returns a promise which resolves to SCGeneralAccount
  */
-- (void) createAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler;
+- (void) createAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, SecuError *))handler;
 
 /**
  *  get an existing account
@@ -34,7 +34,7 @@
  *
  *  @return returns a promise which resolves to SCGeneralAccount
  */
-- (void) getAccount:(NSString*)accountId completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler;
+- (void) getAccount:(NSString*)accountId completionHandler:(void (^)(SCGeneralAccount *, SecuError *))handler;
 
 /**
  *  update an existing account
@@ -43,7 +43,7 @@
  *
  *  @return returns a promise which resolves to SCGeneralAccount
  */
-- (void) updateAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, NSError *))handler;
+- (void) updateAccount:(SCGeneralAccount*)account completionHandler:(void (^)(SCGeneralAccount *, SecuError *))handler;
 
 /**
  *  deletes ab account with the given id
@@ -52,7 +52,7 @@
  *
  *  @return returns a promise which resolves to nil
  */
-- (void) deleteAccount:(NSString*)accountId completionHandler:(void (^)(bool, NSError *))handler;
+- (void) deleteAccount:(NSString*)accountId completionHandler:(void (^)(bool, SecuError *))handler;
 
 /**
  *  updates an location for the given account id
@@ -62,7 +62,7 @@
  *
  *  @return returns a promise which resolves to nil
  */
-- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location completionHandler:(void (^)(bool, NSError *))handler;
+- (void) updateLocation:(NSString*)accountId location:(SCGeneralLocation*)location completionHandler:(void (^)(bool, SecuError *))handler;
 
 /**
  *  updates the beacons for the account
@@ -72,9 +72,11 @@
  *
  *  @return returns a promise which resolves to nil
  */
-- (void) updateBeacons:(NSArray*)beaconList completionHandler:(void (^)(bool, NSError *))handler;
+- (void) updateBeacons:(NSArray*)beaconList completionHandler:(void (^)(bool, SecuError *))handler;
+
+- (void) passwordReset:(NSString*)email fromOrigin:(NSString*)origin completionHandler:(void (^)(bool, SecuError *))handler;
 
 // TODO: compare to GCM function
-//- (void) updateAPNS:(NSString*)accountId arg:(id)objectArg onComplete:(void(^)(BOOL success, NSError *error))completion;
+//- (void) updateAPNS:(NSString*)accountId arg:(id)objectArg onComplete:(void(^)(BOOL success, SecuError *error))completion;
   
 @end

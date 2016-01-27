@@ -37,11 +37,11 @@
   return instance;
 }
 
-- (void)getMerchant:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
+- (void)getMerchant:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(SCObjectList *list, SecuError *error))handler {
 
   [SCLogManager info:@"CONNECT-SDK: getMerchant"];
   
-  [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
+  [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -52,7 +52,7 @@
     SCObjectList *storeList = [MTLJSONAdapter modelOfClass:SCObjectList.class fromJSONDictionary:list error:&parsingError];
     
     if (parsingError != nil) {
-      handler(nil, parsingError);
+      handler(nil, [SecuError withError:parsingError]);
       return;
     }
     
@@ -62,11 +62,11 @@
   
 }
 
-- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *list, NSError *error))handler {
+- (void)getMerchants:(NSString *)appId arg:(SCQueryParams *)arg completionHandler:(void (^)(SCObjectList *list, SecuError *error))handler {
   
   [SCLogManager info:@"CONNECT-SDK: getMyMerchants"];
   
-  [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, NSError *error) {
+  [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -77,7 +77,7 @@
     SCObjectList *storeList = [MTLJSONAdapter modelOfClass:SCObjectList.class fromJSONDictionary:list error:&parsingError];
     
     if (parsingError != nil) {
-      handler(nil, parsingError);
+      handler(nil, [SecuError withError:parsingError]);
       return;
     }
     
@@ -108,11 +108,11 @@
   }];
 }
 
-- (void)addCard:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(bool, NSError *))handler {
+- (void)addCard:(NSString *)appId argObject:(id)argObject completionHandler:(void (^)(bool, SecuError *))handler {
   
   [SCLogManager info:@"CONNECT-SDK: addCard"];
   
-  [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel completionHandler:^(id responseObject, NSError *error) {
+  [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     

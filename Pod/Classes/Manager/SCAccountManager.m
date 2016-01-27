@@ -18,7 +18,7 @@
 @property (nonatomic, retain) SCUserCredentials *userCredentials;
 
 @property (nonatomic, retain) NSTimer *pollingTimer;
-@property (nonatomic, copy) void (^devicePollHandler)(NSString *, NSError *);
+@property (nonatomic, copy) void (^devicePollHandler)(NSString *, SecuError *);
 
 @end
 
@@ -87,7 +87,7 @@
 /**
  *  Retrieves an access token
  */
-- (void) retrieveAccessToken:(void (^)(NSString *token, NSError *error))handler
+- (void) retrieveAccessToken:(void (^)(NSString *token, SecuError *error))handler
 {
   
   if ([self needsInitialization])
@@ -104,7 +104,7 @@
                            @"device": [SCConnectClient sharedInstance].configuration.deviceId
                            };
   
-  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
+  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -141,7 +141,7 @@
 /**
  *  Retrieves an access token for device
  */
-- (void) retrieveDeviceAccessToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *deviceAccessToken, NSError *error))handler;
+- (void) retrieveDeviceAccessToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *deviceAccessToken, SecuError *error))handler;
 {
   
   if ([self needsInitialization])
@@ -156,7 +156,7 @@
                            @"code": code.deviceCode
                            };
   
-  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
+  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -186,7 +186,7 @@
 /**
  *  Refreshes an access token
  */
-- (void) refreshAccessToken:(void (^)(NSString *token, NSError *error))handler
+- (void) refreshAccessToken:(void (^)(NSString *token, SecuError *error))handler
 {
   
   if ([self needsInitialization])
@@ -201,7 +201,7 @@
                            @"refresh_token": self.refreshToken
                            };
   
-  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, NSError *error) {
+  [[SCRestServiceManager sharedManager] requestAuthWithParams:params completionHandler:^(id responseObject, SecuError *error) {
     
     if (error) {
       handler(nil, error);
@@ -246,10 +246,10 @@
   
 }
 
-- (void) requestTokenWithDeviceAuth:(void (^)(NSString *token, NSError *error))handler {
+- (void) requestTokenWithDeviceAuth:(void (^)(NSString *token, SecuError *error))handler {
   
   // request codes
-  [self requestCode:^(SCAuthDeviceAuthCode *code, NSError *error) {
+  [self requestCode:^(SCAuthDeviceAuthCode *code, SecuError *error) {
     
     if (error) {
       handler(nil, error);
@@ -267,7 +267,7 @@
 /**
  *  Check if token is valid
  */
-- (void) token:(void (^)(NSString *token, NSError *error))handler
+- (void) token:(void (^)(NSString *token, SecuError *error))handler
 {
   
   // if we are freshly there without any access token
@@ -277,7 +277,7 @@
     // if we have user credentials, this is a regular auth process
     if ([SCConnectClient sharedInstance].configuration.userCredentials.username && [SCConnectClient sharedInstance].configuration.userCredentials.password) {
       
-      [self retrieveAccessToken:^(NSString *token, NSError *error) {
+      [self retrieveAccessToken:^(NSString *token, SecuError *error) {
         handler(token, error);
         return;
       }];
@@ -292,12 +292,12 @@
     
     // or token is expired
     
-    [self refreshAccessToken:^(NSString *token, NSError *error) {
+    [self refreshAccessToken:^(NSString *token, SecuError *error) {
       
       [SCLogManager info:[NSString stringWithFormat:@"TOKEN: refreshed Token: %@", token]];
       
       // reconnect stomp
-      [[SCStompManager sharedManager] refreshConnection:^(bool success, NSError *error) {
+      [[SCStompManager sharedManager] refreshConnection:^(bool success, SecuError *error) {
         
         handler(token, error);
         return;
@@ -316,7 +316,7 @@
   
 }
 
-- (void) requestCode:(void (^)(SCAuthDeviceAuthCode *code, NSError *error))handler {
+- (void) requestCode:(void (^)(SCAuthDeviceAuthCode *code, SecuError *error))handler {
   
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                                 @"grant_type": @"device",
@@ -325,7 +325,7 @@
                                                                                 @"uuid": [SCConnectClient sharedInstance].configuration.deviceId
                                                                                 }];
   
-  [[SCRestServiceManager sharedManager] post:@"oauth/token" withAuth:FALSE withParams:params completionHandler:^(id responseObject, NSError *error) {
+  [[SCRestServiceManager sharedManager] post:@"oauth/token" withAuth:FALSE withParams:params completionHandler:^(id responseObject, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -336,7 +336,7 @@
     SCAuthDeviceAuthCode *code = [MTLJSONAdapter modelOfClass:SCAuthDeviceAuthCode.class fromJSONDictionary:responseObject error:&parsingError];
     
     if (parsingError != nil) {
-      handler(nil, parsingError);
+      handler(nil, [SecuError withError:parsingError]);
       return;
     }
     
@@ -346,7 +346,7 @@
   
 }
 
-- (void) pollToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *token, NSError *error))handler {
+- (void) pollToken:(SCAuthDeviceAuthCode*)code completionHandler:(void (^)(NSString *token, SecuError *error))handler {
   
   NSLog(@"Insert code: %@ on site %@", code.userCode, code.verificationUrl);
   
@@ -379,7 +379,7 @@
   
   __weak __block SCAccountManager *weakSelf = self;
   
-  [self retrieveDeviceAccessToken:code completionHandler:^(NSString *deviceAccessToken, NSError *error) {
+  [self retrieveDeviceAccessToken:code completionHandler:^(NSString *deviceAccessToken, SecuError *error) {
     
     // TODO: check error number for 401 (should be if no code from user so far)
     if (error != nil) {

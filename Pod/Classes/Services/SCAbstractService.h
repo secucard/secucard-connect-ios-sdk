@@ -26,24 +26,24 @@ typedef void (^EventHandler)(SCGeneralEvent *event);
 
 - (void) addEventHandler:(EventHandler)handler;
 
-- (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
+- (void) get:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler;
 
-- (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) getList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(NSArray *, SecuError *))handler;
 
-- (void) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getObjectList:(Class)type withParams:(SCQueryParams*)queryParams onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCObjectList *, SecuError *))handler;
                            
-- (void) postProcessObjects:(NSArray*)list completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void) postProcessObjects:(NSArray*)list completionHandler:(void (^)(NSArray *, SecuError *))handler;
                            
-- (void) update:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCSecuObject *, NSError *))handler;
+- (void) update:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(SCSecuObject *, SecuError *))handler;
                            
-- (void) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
+- (void) execute:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler;
                            
-- (void) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
+- (void) execute:(NSString*)appId action:(NSString*)action arg:(id)arg returnType:(Class)returnType onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler;
                                           
-- (void) create:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, NSError *))handler;
+- (void) create:(id)object onChannel:(ServiceChannel)channel completionHandler:(void (^)(id, SecuError *))handler;
                                                         
-- (void) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler;
+- (void) delete:(Class)type withId:(NSString*)id onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, SecuError *))handler;
                                                         
-- (void) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, NSError *))handler;
+- (void) delete:(Class)type withId:(NSString*)id action:(NSString*)action actionArg:(NSString*)actionArg onChannel:(ServiceChannel)channel completionHandler:(void (^)(bool, SecuError *))handler;
                                                         
 @end

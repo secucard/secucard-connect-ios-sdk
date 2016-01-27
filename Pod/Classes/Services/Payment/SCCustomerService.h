@@ -24,7 +24,7 @@
  *
  *  @return a promise resolveing with NSArray
  */
-- (void) getCustomers:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *list, NSError *error))handler;
+- (void) getCustomers:(SCQueryParams*)queryParams completionHandler:(void (^)(NSArray *list, SecuError *error))handler;
 
 /**
  *  create a customer
@@ -33,7 +33,7 @@
  *
  *  @return a promise resolveing with SCPaymentCustomer
  */
-- (void) createCustomer:(SCPaymentCustomer*)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler;
+- (void) createCustomer:(SCPaymentCustomer*)customer completionHandler:(void (^)(SCPaymentCustomer *, SecuError *))handler;
 
 /**
  *  update a customer
@@ -42,7 +42,7 @@
  *
  *  @return a promise resolveing with SCPaymentCustomer
  */
-- (void) updateCustomer:(SCPaymentCustomer*)customer completionHandler:(void (^)(SCPaymentCustomer *, NSError *))handler;
+- (void) updateCustomer:(SCPaymentCustomer*)customer completionHandler:(void (^)(SCPaymentCustomer *, SecuError *))handler;
 
 /**
  *  delete a customer
@@ -51,7 +51,7 @@
  *
  *  @return a promise resolveing with nil
  */
-- (void) deleteCustomer:(NSString*)id completionHandler:(void (^)(bool success, NSError *))handler;
+- (void) deleteCustomer:(NSString*)id completionHandler:(void (^)(bool success, SecuError *))handler;
 
 
 @end

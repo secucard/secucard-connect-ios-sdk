@@ -27,7 +27,7 @@
  *
  *  @return a promise resolveing with SCObjectList of SCGeneralTransaction
  */
-- (void) getTransactions:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getTransactions:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler;
 
 /**
  *  retrieve a transaction by it's id
@@ -36,6 +36,6 @@
  *
  *  @return a promise resolveing with SCGeneralTransaction
  */
-- (void) getTransaction:(NSString*)pid completionHandler:(void (^)(SCGeneralTransaction *, NSError *))handler;
+- (void) getTransaction:(NSString*)pid completionHandler:(void (^)(SCGeneralTransaction *, SecuError *))handler;
   
 @end

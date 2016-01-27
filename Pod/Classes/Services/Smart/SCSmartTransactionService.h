@@ -25,7 +25,7 @@
  *
  *  @return a promise resolveing with a SCSmartTransaction
  */
-- (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler;
+- (void) createTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, SecuError *))handler;
 
 /**
  * Updating a transaction.
@@ -34,7 +34,7 @@
  *
  * @return a promise resolveing with SCSmartTransaction
  */
-- (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler;
+- (void) updateTransaction:(SCSmartTransaction*)transaction completionHandler:(void (^)(SCSmartTransaction *, SecuError *))handler;
 
 /**
  * Starting/Executing a transaction.
@@ -44,6 +44,6 @@
  *
  * @return a promise resolveing with SCSmartTransaction
  */
-- (void) startTransaction:(NSString*)transactionId type:(NSString*)type completionHandler:(void (^)(SCSmartTransaction *, NSError *))handler;
+- (void) startTransaction:(NSString*)transactionId type:(NSString*)type completionHandler:(void (^)(SCSmartTransaction *, SecuError *))handler;
 
 @end

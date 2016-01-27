@@ -26,7 +26,7 @@
  *
  *  @return returns a promise which resolves to SCGeneralPublicMerchant
  */
-- (void) getPublicMerchant:(NSString*)id completionHandler:(void (^)(SCGeneralPublicMerchant *, NSError *))handler;
+- (void) getPublicMerchant:(NSString*)id completionHandler:(void (^)(SCGeneralPublicMerchant *, SecuError *))handler;
 
 /**
  *  Get a lit of public merchants
@@ -35,6 +35,6 @@
  *
  *  @return returns a promise which resolves to SCObjectList containing SCGeneralPublicMerchant
  */
-- (void) getPublicMerchants:(SCQueryParams*)params completionHandler:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getPublicMerchants:(SCQueryParams*)params completionHandler:(void (^)(SCObjectList *, SecuError *))handler;
 
 @end

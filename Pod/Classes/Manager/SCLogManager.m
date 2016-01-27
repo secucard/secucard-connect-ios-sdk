@@ -10,7 +10,7 @@
 
 @implementation SCLogMessage
 
-+ (instancetype) initWithLevel:(SCLogLevel)level Message:(NSString*)message error:(NSError*)error {
++ (instancetype) initWithLevel:(SCLogLevel)level Message:(NSString*)message error:(SecuError*)error {
 
   SCLogMessage *logMessage = [SCLogMessage new];
   logMessage.level = level;
@@ -62,27 +62,27 @@
   
 }
 
-+ (NSError*) makeErrorWithCode:(SCErrorType)code {
++ (SecuError*) makeErrorWithCode:(SCErrorType)code {
   NSDictionary *details = @{NSLocalizedDescriptionKey:[SCLogManager descriptionByCode:code]};
-  return [NSError errorWithDomain:kSCErrorDomain code:code userInfo:details];
+  return [SecuError errorWithDomain:kSCErrorDomain code:code userInfo:details];
 }
 
-+ (NSError*) makeErrorWithCode:(SCErrorType)code andDomain:(NSString*) errorDomain {
++ (SecuError*) makeErrorWithCode:(SCErrorType)code andDomain:(NSString*) errorDomain {
   NSDictionary *details = @{NSLocalizedDescriptionKey: [SCLogManager descriptionByCode:code]};
-  return [NSError errorWithDomain:errorDomain code:code userInfo:details];
+  return [SecuError errorWithDomain:errorDomain code:code userInfo:details];
 }
 
-+ (NSError*) makeErrorWithDescription:(NSString*)description {
++ (SecuError*) makeErrorWithDescription:(NSString*)description {
   NSDictionary *details = @{NSLocalizedDescriptionKey: description};
-  return [NSError errorWithDomain:kSCErrorDomain code:ERR_UNDEFINED userInfo:details];
+  return [SecuError errorWithDomain:kSCErrorDomain code:ERR_UNDEFINED userInfo:details];
 }
 
-+ (NSError*) makeErrorWithDescription:(NSString*)description andDomain:(NSString*) errorDomain {
++ (SecuError*) makeErrorWithDescription:(NSString*)description andDomain:(NSString*) errorDomain {
   NSDictionary *details = @{NSLocalizedDescriptionKey: description};
-  return [NSError errorWithDomain:errorDomain code:ERR_UNDEFINED userInfo:details];
+  return [SecuError errorWithDomain:errorDomain code:ERR_UNDEFINED userInfo:details];
 }
 
-+ (void) error:(NSError*)error {
++ (void) error:(SecuError*)error {
   
   SCLogMessage *message = [SCLogMessage initWithLevel:LogLevelError Message:error.localizedDescription error:error];
   
@@ -91,7 +91,7 @@
     [manager.delegate logManagerHandleLogging:message];
   }
   
-  NSLog(@"Error: %@", error.localizedDescription);
+  NSLog(@"Error: %@", error.errorString);
   
 }
 

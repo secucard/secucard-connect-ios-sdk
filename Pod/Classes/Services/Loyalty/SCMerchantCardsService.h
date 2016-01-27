@@ -25,7 +25,7 @@
  *
  *  @return a promise resolveing with SCObjectList of SCLoyaltyMerchantCard
  */
-- (void) getMerchantCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, NSError *))handler;
+- (void) getMerchantCards:(SCQueryParams*)queryParams completionHandler:(void (^)(SCObjectList *, SecuError *))handler;
 
 /**
  *  get a card by id
@@ -34,6 +34,6 @@
  *
  *  @return a promise resolveing with SCLoyaltyMerchantCard
  */
-- (void) getMerchantCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, NSError *))handler;
+- (void) getMerchantCard:(NSString*)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, SecuError *))handler;
 
 @end
