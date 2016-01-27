@@ -10,6 +10,7 @@
 #import "SCQueryParams.h"
 #import "SCSecuObject.h"
 #import "SCObjectList.h"
+#import "SecuError.h"
 
 @protocol SCServiceManagerProtocol <NSObject>
 
