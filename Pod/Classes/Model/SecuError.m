@@ -13,6 +13,10 @@
 
 + (SecuError*) withError:(NSError*)error {
   
+  if (!error) {
+    return nil;
+  }
+  
   SecuError *err = [[SecuError alloc] initWithDomain:error.domain code:error.code userInfo:error.userInfo];
   
   NSData *errorData = [err.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];

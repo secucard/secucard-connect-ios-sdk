@@ -28,6 +28,8 @@
 @property (nonatomic, copy) NSString *transactionRef;
 @property (nonatomic, copy) NSString *paymentMethod;
 @property (nonatomic, copy) NSArray *receiptLines;
+@property (nonatomic, copy) NSArray *receiptLinesMerchant;
+@property (nonatomic, assign) BOOL receiptLinesMerchantPrint;
 @property (nonatomic, copy) NSString *paymentRequested;
 @property (nonatomic, copy) NSString *paymentExecuted;
 @property (nonatomic, copy) NSString *error;

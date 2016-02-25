@@ -24,6 +24,8 @@
                                                                   @"targetDevice":@"target_device",
                                                                   @"paymentMethod":@"payment_method",
                                                                   @"receiptLines":@"receipt",
+                                                                  @"receiptLinesMerchant":@"receipt_merchant",
+                                                                  @"receiptLinesMerchantPrint":@"receipt_merchchant_print",
                                                                   @"paymentRequested":@"payment_requested",
                                                                   @"paymentExecuted":@"payment_executed"
                                                                   }];
@@ -69,6 +71,16 @@
     return [self.dateFormatter dateFromString:value];
   } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
     return [self.dateFormatter stringFromDate:value];
+  }];
+  
+}
+
++ (NSValueTransformer *)receiptLinesMerchantPrintJSONTransformer {
+  
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return value;
+  } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+    return nil;
   }];
   
 }
