@@ -25,7 +25,7 @@
                                                                   @"paymentMethod":@"payment_method",
                                                                   @"receiptLines":@"receipt",
                                                                   @"receiptLinesMerchant":@"receipt_merchant",
-                                                                  @"receiptLinesMerchantPrint":@"receipt_merchchant_print",
+                                                                  @"receiptLinesMerchantPrint":@"receipt_merchant_print",
                                                                   @"paymentRequested":@"payment_requested",
                                                                   @"paymentExecuted":@"payment_executed"
                                                                   }];
@@ -52,6 +52,10 @@
 }
 
 + (NSValueTransformer *)receiptLinesJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartReceiptLine class]];
+}
+
++ (NSValueTransformer *)receiptLinesMerchantJSONTransformer {
   return [MTLJSONAdapter arrayTransformerWithModelClass:[SCSmartReceiptLine class]];
 }
 

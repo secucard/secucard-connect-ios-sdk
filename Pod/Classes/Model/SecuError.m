@@ -19,19 +19,23 @@
   
   SecuError *err = [[SecuError alloc] initWithDomain:error.domain code:error.code userInfo:error.userInfo];
   
-  NSData *errorData = [err.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
-  
-  NSError *parsingError;
-  id object = [NSJSONSerialization JSONObjectWithData:errorData options:NSJSONReadingAllowFragments error:&parsingError];
-  
-  if (parsingError == nil) {
+  if ([err.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey] != nil) {
     
-    err.scStatus = [object objectForKey:@"status"];
-    err.scCode = [object objectForKey:@"code"];
-    err.scError = [object objectForKey:@"error"];
-    err.scErrorUser = [object objectForKey:@"error_user"];
-    err.scErrorDetails = [object objectForKey:@"error_details"];
-    err.scSupportId = [object objectForKey:@"supportId"];
+    NSData *errorData = [err.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
+    
+    NSError *parsingError;
+    id object = [NSJSONSerialization JSONObjectWithData:errorData options:NSJSONReadingAllowFragments error:&parsingError];
+    
+    if (parsingError == nil) {
+      
+      err.scStatus = [object objectForKey:@"status"];
+      err.scCode = [object objectForKey:@"code"];
+      err.scError = [object objectForKey:@"error"];
+      err.scErrorUser = [object objectForKey:@"error_user"];
+      err.scErrorDetails = [object objectForKey:@"error_details"];
+      err.scSupportId = [object objectForKey:@"supportId"];
+      
+    }
     
   }
   
@@ -40,21 +44,42 @@
 
 + (SecuError*) withDictionary:(NSDictionary*)dict {
   
-  SecuError *err = [SecuError new];
+  NSString *domain = [dict objectForKey:@"error"];
+  if (!domain) {
+    domain = @"Unknown";
+  }
   
-    err.scStatus = [dict objectForKey:@"status"];
-    err.scCode = [dict objectForKey:@"code"];
-    err.scError = [dict objectForKey:@"error"];
-    err.scErrorUser = [dict objectForKey:@"error_user"];
-    err.scErrorDetails = [dict objectForKey:@"error_details"];
-    err.scSupportId = [dict objectForKey:@"supportId"];
+  NSString *info = [dict objectForKey:@"error_user"];
+  if (!info) {
+    info = @"Something went wrong";
+  }
+  
+  NSInteger code = [[dict objectForKey:@"code"] integerValue];
+  if (!code) {
+    code = 0;
+  }
+  
+  SecuError *err = [[SecuError alloc] initWithDomain:domain code:code userInfo:@{NSLocalizedDescriptionKey: info}];
+
+  err.scStatus = [dict objectForKey:@"status"];
+  err.scCode = [dict objectForKey:@"code"];
+  err.scError = [dict objectForKey:@"error"];
+  err.scErrorUser = [dict objectForKey:@"error_user"];
+  err.scErrorDetails = [dict objectForKey:@"error_details"];
+  err.scSupportId = [dict objectForKey:@"supportId"];
   
   return err;
+  
 }
 
 - (NSString*) errorString {
   
-  return [NSString stringWithFormat:@"Code: %@ | %@ | %@", self.scCode, self.scError, self.scErrorDetails];
+  if (self.scCode != nil && self.scError != nil && self.scErrorDetails != nil) {
+    return [NSString stringWithFormat:@"Code: %@ | %@ | %@", self.scCode, self.scError, self.scErrorDetails];
+  } else {
+    return self.localizedDescription;
+  }
+  
   
 }
 

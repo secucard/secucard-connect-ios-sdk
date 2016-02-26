@@ -15,7 +15,10 @@
   SCLogMessage *logMessage = [SCLogMessage new];
   logMessage.level = level;
   logMessage.message = message;
-  logMessage.error = error;
+  
+  if (error != nil) {
+    logMessage.error = error;
+  }
   
   return logMessage;
 }
@@ -83,8 +86,14 @@
 }
 
 + (void) error:(SecuError*)error {
+
+  SCLogMessage *message;
+  if (error.localizedDescription != nil) {
+    message = [SCLogMessage initWithLevel:LogLevelError Message:error.localizedDescription error:error];
+  } else {
+    message = [SCLogMessage initWithLevel:LogLevelError Message:@"" error:error];
+  }
   
-  SCLogMessage *message = [SCLogMessage initWithLevel:LogLevelError Message:error.localizedDescription error:error];
   
   SCLogManager *manager = [SCLogManager sharedManager];
   if ([manager.delegate respondsToSelector:@selector(logManagerHandleLogging:)]) {

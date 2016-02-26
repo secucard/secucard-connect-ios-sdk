@@ -33,6 +33,8 @@
  */
 @property (nonatomic, retain) NSTimer *connectionTimer;
 
+@property (nonatomic, retain) NSTimer *heartbeatTimer;
+
 @property (nonatomic, retain) NSMutableDictionary *promiseStore;
 
 @end
@@ -81,9 +83,19 @@
   self.client = [[STOMPClient alloc] initWithHost:self.configuration.host
                                              port:self.configuration.port];
   
+  
+  __block __weak STOMPClient *weak = self.client;
+  
   // set the error handler
   self.client.errorHandler = ^(NSError *error) {
+    
     [SCLogManager error:[SCLogManager makeErrorWithDescription:error.localizedDescription andDomain:kErrorDomainSCStompService]];
+    
+    if (error.domain == GCDAsyncSocketErrorDomain) {
+      if (error.code == 7) { // Socket closed by remote peer
+        weak.connected = false;
+      }
+    }
   };
   
   [self.client setReceiptHandler:^(STOMPFrame *frame) {
@@ -144,6 +156,10 @@
   [self performSelector:@selector(closeConnection) withObject:nil afterDelay:self.configuration.heartbeatMs+10000];
 }
 
+- (void) doSetHeartbeatTimer:(NSTimeInterval) interval {
+  [self sendHeartBeat];
+}
+
 - (void) closeConnection
 {
   
@@ -153,6 +169,7 @@
   
   // cancel disconnect requests
   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeConnection) object:nil];
+  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendHeartBeat) object:nil];
   
   // resolve earlier messages by correlation id (timouts)
   for (NSString *itemId in self.promiseStore) {
@@ -175,6 +192,13 @@
     handler(success, error);
   }];
   
+}
+
+- (void) sendHeartBeat {
+  [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@{@"refresh_interval":@120} completionHandler:^(id responseObject, NSError *error) {
+    
+  }];
+  [self performSelector:@selector(sendHeartBeat) withObject:nil afterDelay:120000];
 }
 
 
@@ -311,6 +335,7 @@
     }
     
     //     refresh auth
+    [self doSetHeartbeatTimer:120];
     [self execute:[SCAuthSession class] objectId:@"me" action:@"refresh" actionArg:@"" arg:@{@"refresh_interval":@120} completionHandler:^(id responseObject, NSError *error) {
       
     }];
@@ -376,8 +401,8 @@
                                        
                                        if (!jsonError) {
                                          
-                                         SecuError* error = [SecuError withDictionary:json];
-                                         [self resolveStoredItem:correlationId withError:error];
+                                         SecuError* secuError = [SecuError withDictionary:json];
+                                         [self resolveStoredItem:correlationId withError:secuError];
                                          
                                        }
                                        
@@ -534,7 +559,19 @@
     handler(nil, [SecuError withError:parsingError]);
   }
   
-  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]completionHandler:handler];
+  [self sendMessage:message toDestination:[SCStompDestination initWithCommand:kStompMethodAdd type:[object class]]completionHandler:^(id responseObject, SecuError *error) {
+    
+    if (error != nil) {
+      handler(nil, error);
+      return;
+    }
+    
+    NSError *parsingError = nil;
+    responseObject = [MTLJSONAdapter modelOfClass:[object class] fromJSONDictionary:responseObject error:&parsingError];
+    
+    handler(responseObject, [SecuError withError:parsingError]);
+    
+  }];
   
 }
 

@@ -66,5 +66,5 @@ typedef void (^ReceiptHandler)(id responseObject, SecuError *error);
 - (void) connect:(void (^)(bool success, SecuError *error))handler;
 
 - (void) refreshConnection:(void (^)(bool success, SecuError *error))handler;
-
+- (void) sendHeartBeat;
 @end
