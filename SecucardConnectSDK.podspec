@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SecucardConnectSDK"
-  s.version      = "0.2.17"
+  s.version      = "0.2.18"
   s.summary      = "Standard API for communication with the secucard infrastructure"
 
   s.description  = <<-DESC
@@ -47,7 +47,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Jörn Schmidt" => "schmidt@devid.net" }
+  s.author             = "Jörn Schmidt"
   # Or just: s.author    = "Jörn Schmidt"
   # s.authors            = { "Jörn Schmidt" => "schmidt@devid.net" }
   # s.social_media_url   = "http://twitter.com/Jörn Schmidt"

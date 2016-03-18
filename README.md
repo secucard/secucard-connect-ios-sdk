@@ -1,28 +1,32 @@
 # SecucardConnectSDK
 
-[![CI Status](http://img.shields.io/travis/Jörn Schmidt/SecucardConnectSDK.svg?style=flat)](https://travis-ci.org/Jörn Schmidt/SecucardConnectSDK)
-[![Version](https://img.shields.io/cocoapods/v/SecucardConnectSDK.svg?style=flat)](http://cocoapods.org/pods/SecucardConnectSDK)
-[![License](https://img.shields.io/cocoapods/l/SecucardConnectSDK.svg?style=flat)](http://cocoapods.org/pods/SecucardConnectSDK)
-[![Platform](https://img.shields.io/cocoapods/p/SecucardConnectSDK.svg?style=flat)](http://cocoapods.org/pods/SecucardConnectSDK)
 
-## Usage
+## Example Project
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+
+* iOS 8.0+
+* Xcode 7.2+
 
 ## Installation
 
 SecucardConnectSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
+```
 pod "SecucardConnectSDK"
 ```
 
-## Author
+## Usage
 
-Jörn Schmidt, schmidt@devid.net
+A general integration guide can be found here: [http://developer.secuconnect.com/doc/guide/README](http://developer.secuconnect.com/doc/guide/README)
+
+The iOS specific guid is here: [http://developer.secuconnect.com/doc/sdk/ios/guide/README](http://developer.secuconnect.com/doc/sdk/ios/guide/README). From there you have access to other information material.
+
+SDKs for other language can be found here: [http://developer.secuconnect.com/doc/sdk](http://developer.secuconnect.com/doc/sdk)
+
 
 ## License
 
