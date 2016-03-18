@@ -1,17 +1,16 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://git.devid.net/ios-pods/ios-private-pod-repo.git'
 
 use_frameworks!
 
 target 'SecucardConnectSDK_Example', :exclusive => true do
   
-  pod "SecucardConnectSDK", :path => "../"
+  pod 'SecucardConnectSDK', '0.2.18'
   
 end
 
 target 'SecucardConnectSDK_Tests', :exclusive => true do
   
-  pod "SecucardConnectSDK", :path => "../"
+  pod 'SecucardConnectSDK', '0.2.18'
 
   pod 'Specta'
   pod 'Expecta'
