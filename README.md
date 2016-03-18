@@ -30,4 +30,4 @@ SDKs for other language can be found here: [http://developer.secuconnect.com/doc
 
 ## License
 
-SecucardConnectSDK is available under the MIT license. See the LICENSE file for more info.
+SecucardConnectSDK is available under the Apache 2 license. See the LICENSE file for more info.
