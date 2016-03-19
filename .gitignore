@@ -43,4 +43,5 @@ Podfile.lock
 
 Carthage/Build
 
-doc/
+## Misc
+.idea
