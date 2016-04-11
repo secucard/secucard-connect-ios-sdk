@@ -1,0 +1,107 @@
+\hypertarget{interface_s_c_stomp_manager}{}\section{S\+C\+Stomp\+Manager Class Reference}
+\label{interface_s_c_stomp_manager}\index{S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}}
+
+
+{\ttfamily \#import $<$S\+C\+Stomp\+Manager.\+h$>$}
+
+Inheritance diagram for S\+C\+Stomp\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.868739cm]{interface_s_c_stomp_manager}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_stomp_manager_ace0e65e96ec11fb8346e1a616c679be9}{init\+With\+Configuration\+:}
+\item 
+(void) -\/ {\bfseries destroy}\hypertarget{interface_s_c_stomp_manager_ac988f20733295b472465b5701e1a4f85}{}\label{interface_s_c_stomp_manager_ac988f20733295b472465b5701e1a4f85}
+
+\item 
+(void) -\/ \hyperlink{interface_s_c_stomp_manager_a4d075f599b28262924819ff445279824}{connect\+:}
+\item 
+(void) -\/ {\bfseries refresh\+Connection\+:}\hypertarget{interface_s_c_stomp_manager_a7eee66a251e546855b737651e8e5f6c0}{}\label{interface_s_c_stomp_manager_a7eee66a251e546855b737651e8e5f6c0}
+
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_stomp_manager}{S\+C\+Stomp\+Manager} $\ast$) + \hyperlink{interface_s_c_stomp_manager_aa3a3cc7cdb68c987d0832adb12c0ef75}{shared\+Manager}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_s_c_stomp_configuration}{S\+C\+Stomp\+Configuration} $\ast$ \hyperlink{interface_s_c_stomp_manager_ad6d330a166a307f4f06a4bf105ea61ec}{configuration}
+\item 
+B\+O\+OL \hyperlink{interface_s_c_stomp_manager_a1d8713585f042229ddf6acd5412700ee}{connected}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Stomp\+Manager 
+
+\subsection{Method Documentation}
+\index{S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}!connect\+:@{connect\+:}}
+\index{connect\+:@{connect\+:}!S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}}
+\subsubsection[{\texorpdfstring{connect\+:(void($^\wedge$handler)(bool success, Secu\+Error $\ast$error))}{connect:(void(^handler)(bool success, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) connect\+: 
+\begin{DoxyParamCaption}
+\item[{(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_stomp_manager_a4d075f599b28262924819ff445279824}{}\label{interface_s_c_stomp_manager_a4d075f599b28262924819ff445279824}
+connect to stomp \index{S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}!init\+With\+Configuration\+:@{init\+With\+Configuration\+:}}
+\index{init\+With\+Configuration\+:@{init\+With\+Configuration\+:}!S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}}
+\subsubsection[{\texorpdfstring{init\+With\+Configuration\+:(\+S\+C\+Stomp\+Configuration $\ast$configuration)}{initWithConfiguration:(SCStompConfiguration *configuration)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) init\+With\+Configuration\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Stomp\+Configuration}$\ast$)}]{configuration}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_stomp_manager_ace0e65e96ec11fb8346e1a616c679be9}{}\label{interface_s_c_stomp_manager_ace0e65e96ec11fb8346e1a616c679be9}
+init the actual stomp client
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & the stomp configuration\\
+\hline
+\end{DoxyParams}
+Initialize the manager with the appropriate configuration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em host} & the stomp host \\
+\hline
+{\em port} & the port for stomp \\
+\hline
+{\em app\+Id} & the app id for stomp \\
+\hline
+\end{DoxyParams}
+\index{S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}!shared\+Manager@{shared\+Manager}}
+\index{shared\+Manager@{shared\+Manager}!S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}}
+\subsubsection[{\texorpdfstring{shared\+Manager()}{sharedManager()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Stomp\+Manager} $\ast$) shared\+Manager 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_stomp_manager_aa3a3cc7cdb68c987d0832adb12c0ef75}{}\label{interface_s_c_stomp_manager_aa3a3cc7cdb68c987d0832adb12c0ef75}
+singleton access
+
+\begin{DoxyReturn}{Returns}
+the manager\textquotesingle{}s instance
+\end{DoxyReturn}
+Shared manager as singleton
+
+\begin{DoxyReturn}{Returns}
+the manager instance 
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\index{S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}!configuration@{configuration}}
+\index{configuration@{configuration}!S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}}
+\subsubsection[{\texorpdfstring{configuration}{configuration}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf S\+C\+Stomp\+Configuration}$\ast$) configuration\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_manager_ad6d330a166a307f4f06a4bf105ea61ec}{}\label{interface_s_c_stomp_manager_ad6d330a166a307f4f06a4bf105ea61ec}
+the configuration \index{S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}!connected@{connected}}
+\index{connected@{connected}!S\+C\+Stomp\+Manager@{S\+C\+Stomp\+Manager}}
+\subsubsection[{\texorpdfstring{connected}{connected}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (B\+O\+OL) connected\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}\hypertarget{interface_s_c_stomp_manager_a1d8713585f042229ddf6acd5412700ee}{}\label{interface_s_c_stomp_manager_a1d8713585f042229ddf6acd5412700ee}
+flag stating if client is connected 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Manager/S\+C\+Stomp\+Manager.\+h\item 
+Pod/\+Classes/\+Manager/S\+C\+Stomp\+Manager.\+m\end{DoxyCompactItemize}

@@ -1,0 +1,101 @@
+\hypertarget{interface_s_c_smart_transaction_service}{}\section{S\+C\+Smart\+Transaction\+Service Class Reference}
+\label{interface_s_c_smart_transaction_service}\index{S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}}
+Inheritance diagram for S\+C\+Smart\+Transaction\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_smart_transaction_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_smart_transaction_service_a378d64e621c7771e221c7ad3efce1726}{create\+Transaction\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_smart_transaction_service_a1cbb2b1a5d3329564ef7b12d95d95745}{update\+Transaction\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_smart_transaction_service_acacd802bf2c49263c4c088c85885433a}{start\+Transaction\+:type\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_smart_transaction_service}{S\+C\+Smart\+Transaction\+Service} $\ast$) + \hyperlink{interface_s_c_smart_transaction_service_a61ef1e67357d94f79c7df6490dc0ab67}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}!create\+Transaction\+:completion\+Handler\+:@{create\+Transaction\+:completion\+Handler\+:}}
+\index{create\+Transaction\+:completion\+Handler\+:@{create\+Transaction\+:completion\+Handler\+:}!S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{create\+Transaction\+:completion\+Handler\+:(\+S\+C\+Smart\+Transaction $\ast$transaction,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Smart\+Transaction $\ast$, Secu\+Error $\ast$))}{createTransaction:completionHandler:(SCSmartTransaction *transaction,[completionHandler] void(^handler)(SCSmartTransaction *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Smart\+Transaction}$\ast$)}]{transaction}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Smart\+Transaction} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_smart_transaction_service_a378d64e621c7771e221c7ad3efce1726}{}\label{interface_s_c_smart_transaction_service_a378d64e621c7771e221c7ad3efce1726}
+Create a transaction
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & the transaction to create\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with a \hyperlink{interface_s_c_smart_transaction}{S\+C\+Smart\+Transaction} 
+\end{DoxyReturn}
+\index{S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Smart\+Transaction\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_smart_transaction_service_a61ef1e67357d94f79c7df6490dc0ab67}{}\label{interface_s_c_smart_transaction_service_a61ef1e67357d94f79c7df6490dc0ab67}
+get instance of service
+
+\begin{DoxyReturn}{Returns}
+the singleton instance 
+\end{DoxyReturn}
+\index{S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}!start\+Transaction\+:type\+:completion\+Handler\+:@{start\+Transaction\+:type\+:completion\+Handler\+:}}
+\index{start\+Transaction\+:type\+:completion\+Handler\+:@{start\+Transaction\+:type\+:completion\+Handler\+:}!S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{start\+Transaction\+:type\+:completion\+Handler\+:(\+N\+S\+String $\ast$transaction\+Id,[type] N\+S\+String $\ast$type,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Smart\+Transaction $\ast$, Secu\+Error $\ast$))}{startTransaction:type:completionHandler:(NSString *transactionId,[type] NSString *type,[completionHandler] void(^handler)(SCSmartTransaction *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) start\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{transaction\+Id}
+\item[{type:(N\+S\+String$\ast$)}]{type}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Smart\+Transaction} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_smart_transaction_service_acacd802bf2c49263c4c088c85885433a}{}\label{interface_s_c_smart_transaction_service_acacd802bf2c49263c4c088c85885433a}
+Starting/\+Executing a transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction\+Id} & The transaction id. \\
+\hline
+{\em type} & The transaction type like \char`\"{}auto\char`\"{} or \char`\"{}cash\char`\"{}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_smart_transaction}{S\+C\+Smart\+Transaction} 
+\end{DoxyReturn}
+\index{S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}!update\+Transaction\+:completion\+Handler\+:@{update\+Transaction\+:completion\+Handler\+:}}
+\index{update\+Transaction\+:completion\+Handler\+:@{update\+Transaction\+:completion\+Handler\+:}!S\+C\+Smart\+Transaction\+Service@{S\+C\+Smart\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{update\+Transaction\+:completion\+Handler\+:(\+S\+C\+Smart\+Transaction $\ast$transaction,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Smart\+Transaction $\ast$, Secu\+Error $\ast$))}{updateTransaction:completionHandler:(SCSmartTransaction *transaction,[completionHandler] void(^handler)(SCSmartTransaction *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Smart\+Transaction}$\ast$)}]{transaction}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Smart\+Transaction} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_smart_transaction_service_a1cbb2b1a5d3329564ef7b12d95d95745}{}\label{interface_s_c_smart_transaction_service_a1cbb2b1a5d3329564ef7b12d95d95745}
+Updating a transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction data to update.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_smart_transaction}{S\+C\+Smart\+Transaction} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Smart/S\+C\+Smart\+Transaction\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Smart/S\+C\+Smart\+Transaction\+Service.\+m\end{DoxyCompactItemize}

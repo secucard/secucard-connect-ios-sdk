@@ -1,0 +1,194 @@
+\hypertarget{interface_s_c_ident_service}{}\section{S\+C\+Ident\+Service Class Reference}
+\label{interface_s_c_ident_service}\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+Inheritance diagram for S\+C\+Ident\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_ident_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_a645210d9ed41e92c84acd4b0cb4b6276}{get\+Ident\+Requests\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_ad1d6e5701ec285e1711f93eb4438f474}{get\+Ident\+Request\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_a208218e3489135be9ffdf14c7a39c36e}{get\+Ident\+Results\+By\+Request\+Ids\+:download\+Attachments\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_a33c158bf3c84c364101ffa0b63486eca}{get\+Ident\+Results\+By\+Requests\+Raw\+:download\+Attachments\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_a15150e0f89ab1219749a9c61699f1643}{create\+Ident\+Request\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_ae42fb686735d2acf09006f6f77a0d222}{get\+Ident\+Results\+:download\+Attachments\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_ident_service_ac7970dcec87ed2e6916306e292486ebc}{get\+Ident\+Result\+:download\+Attachments\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_ident_service}{S\+C\+Ident\+Service} $\ast$) + \hyperlink{interface_s_c_ident_service_ad20a9502371d832843fdd075fe26e7e7}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!create\+Ident\+Request\+:completion\+Handler\+:@{create\+Ident\+Request\+:completion\+Handler\+:}}
+\index{create\+Ident\+Request\+:completion\+Handler\+:@{create\+Ident\+Request\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{create\+Ident\+Request\+:completion\+Handler\+:(\+S\+C\+Services\+Ident\+Request $\ast$new\+Ident\+Request,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Services\+Ident\+Request $\ast$, Secu\+Error $\ast$))}{createIdentRequest:completionHandler:(SCServicesIdentRequest *newIdentRequest,[completionHandler] void(^handler)(SCServicesIdentRequest *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Ident\+Request\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Services\+Ident\+Request}$\ast$)}]{new\+Ident\+Request}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Services\+Ident\+Request} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_a15150e0f89ab1219749a9c61699f1643}{}\label{interface_s_c_ident_service_a15150e0f89ab1219749a9c61699f1643}
+Creates a new ident request.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Ident\+Request} & the new ident request\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the new \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!get\+Ident\+Request\+:completion\+Handler\+:@{get\+Ident\+Request\+:completion\+Handler\+:}}
+\index{get\+Ident\+Request\+:completion\+Handler\+:@{get\+Ident\+Request\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{get\+Ident\+Request\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Services\+Ident\+Request $\ast$, Secu\+Error $\ast$))}{getIdentRequest:completionHandler:(NSString *id,[completionHandler] void(^handler)(SCServicesIdentRequest *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Ident\+Request\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Services\+Ident\+Request} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_ad1d6e5701ec285e1711f93eb4438f474}{}\label{interface_s_c_ident_service_ad1d6e5701ec285e1711f93eb4438f474}
+Returns a single ident request object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the ident\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!get\+Ident\+Requests\+:completion\+Handler\+:@{get\+Ident\+Requests\+:completion\+Handler\+:}}
+\index{get\+Ident\+Requests\+:completion\+Handler\+:@{get\+Ident\+Requests\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{get\+Ident\+Requests\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{getIdentRequests:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Ident\+Requests\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_a645210d9ed41e92c84acd4b0cb4b6276}{}\label{interface_s_c_ident_service_a645210d9ed41e92c84acd4b0cb4b6276}
+T\+O\+DO\+: Set to true/false to globally enable/disable attachment caching when requested by methods of this service. Caching is enabled by default but is only performed when requested in methods. Returns a list of ident request objects according to the given query parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with N\+S\+Array of \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!get\+Ident\+Result\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Result\+:download\+Attachments\+:completion\+Handler\+:}}
+\index{get\+Ident\+Result\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Result\+:download\+Attachments\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{get\+Ident\+Result\+:download\+Attachments\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[download\+Attachments] B\+O\+O\+L download\+Attachments,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Services\+Ident\+Request $\ast$, Secu\+Error $\ast$))}{getIdentResult:downloadAttachments:completionHandler:(NSString *id,[downloadAttachments] BOOL downloadAttachments,[completionHandler] void(^handler)(SCServicesIdentRequest *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Ident\+Result\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{id}
+\item[{downloadAttachments:(B\+O\+OL)}]{download\+Attachments}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Services\+Ident\+Request} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_ac7970dcec87ed2e6916306e292486ebc}{}\label{interface_s_c_ident_service_ac7970dcec87ed2e6916306e292486ebc}
+Returns a single ident result object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id \\
+\hline
+{\em callback} & Callback for asynchronous handling. \\
+\hline
+{\em download\+Attachments} & Set to true if attachments should be completely downloaded before returning. Note\+: Depending on the number of returned persons + attachments this may be a lot! Works only if cache\+Attachments is set to true, which is the default.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!get\+Ident\+Results\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Results\+:download\+Attachments\+:completion\+Handler\+:}}
+\index{get\+Ident\+Results\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Results\+:download\+Attachments\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{get\+Ident\+Results\+:download\+Attachments\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[download\+Attachments] B\+O\+O\+L download\+Attachments,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{getIdentResults:downloadAttachments:completionHandler:(SCQueryParams *queryParams,[downloadAttachments] BOOL downloadAttachments,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Ident\+Results\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{downloadAttachments:(B\+O\+OL)}]{download\+Attachments}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_ae42fb686735d2acf09006f6f77a0d222}{}\label{interface_s_c_ident_service_ae42fb686735d2acf09006f6f77a0d222}
+Returns a list of ident result objects according to the given query parameters. Supports also the optional download and caching of all attachments before returning. This will speed up clients access to them but involves increasing memory usage.
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & A set of parameters a ident result must match. \\
+\hline
+{\em callback} & Callback for asynchronous handling. \\
+\hline
+{\em download\+Attachments} & Set to true if attachments should be completely downloaded before returning. Note\+: Depending on the number of returned results + persons + attachments this may be a lot! Works only if \hyperlink{}{cache\+Attachments(boolean)} is set to true, which is the default.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with an N\+S\+Array of \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!get\+Ident\+Results\+By\+Request\+Ids\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Results\+By\+Request\+Ids\+:download\+Attachments\+:completion\+Handler\+:}}
+\index{get\+Ident\+Results\+By\+Request\+Ids\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Results\+By\+Request\+Ids\+:download\+Attachments\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{get\+Ident\+Results\+By\+Request\+Ids\+:download\+Attachments\+:completion\+Handler\+:(\+N\+S\+Array $\ast$ident\+Request\+Ids,[download\+Attachments] B\+O\+O\+L download\+Attachments,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{getIdentResultsByRequestIds:downloadAttachments:completionHandler:(NSArray *identRequestIds,[downloadAttachments] BOOL downloadAttachments,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Ident\+Results\+By\+Request\+Ids\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+Array$\ast$)}]{ident\+Request\+Ids}
+\item[{downloadAttachments:(B\+O\+OL)}]{download\+Attachments}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_a208218e3489135be9ffdf14c7a39c36e}{}\label{interface_s_c_ident_service_a208218e3489135be9ffdf14c7a39c36e}
+Returns a ident result for a given list of ident request ids.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ident\+Request\+Ids} & an array of ident request ids \\
+\hline
+{\em download\+Attachments} & whether to download attachments\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with N\+S\+Array of \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!get\+Ident\+Results\+By\+Requests\+Raw\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Results\+By\+Requests\+Raw\+:download\+Attachments\+:completion\+Handler\+:}}
+\index{get\+Ident\+Results\+By\+Requests\+Raw\+:download\+Attachments\+:completion\+Handler\+:@{get\+Ident\+Results\+By\+Requests\+Raw\+:download\+Attachments\+:completion\+Handler\+:}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{get\+Ident\+Results\+By\+Requests\+Raw\+:download\+Attachments\+:completion\+Handler\+:(\+N\+S\+Array $\ast$request\+Ids,[download\+Attachments] B\+O\+O\+L download\+Attachments,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{getIdentResultsByRequestsRaw:downloadAttachments:completionHandler:(NSArray *requestIds,[downloadAttachments] BOOL downloadAttachments,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Ident\+Results\+By\+Requests\+Raw\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+Array$\ast$)}]{request\+Ids}
+\item[{downloadAttachments:(B\+O\+OL)}]{download\+Attachments}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_a33c158bf3c84c364101ffa0b63486eca}{}\label{interface_s_c_ident_service_a33c158bf3c84c364101ffa0b63486eca}
+Returns a list of raw results for a given list of ident request ids.
+
+
+\begin{DoxyParams}{Parameters}
+{\em request\+Ids} & an array of ident request ids \\
+\hline
+{\em download\+Attachments} & whether to download attachments\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with N\+S\+Array of \hyperlink{interface_s_c_services_ident_request}{S\+C\+Services\+Ident\+Request} 
+\end{DoxyReturn}
+\index{S\+C\+Ident\+Service@{S\+C\+Ident\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Ident\+Service@{S\+C\+Ident\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Ident\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_ident_service_ad20a9502371d832843fdd075fe26e7e7}{}\label{interface_s_c_ident_service_ad20a9502371d832843fdd075fe26e7e7}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Services/S\+C\+Ident\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Services/S\+C\+Ident\+Service.\+m\end{DoxyCompactItemize}

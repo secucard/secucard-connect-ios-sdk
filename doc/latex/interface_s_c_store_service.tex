@@ -1,0 +1,164 @@
+\hypertarget{interface_s_c_store_service}{}\section{S\+C\+Store\+Service Class Reference}
+\label{interface_s_c_store_service}\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+Inheritance diagram for S\+C\+Store\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_store_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_store_service_a6f5fcead65e857a0b706065e2ff3c822}{check\+In\+:sid\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_store_service_a6961eb23220b17dd36f6a10e68032e41}{set\+Default\+:with\+Reason\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_store_service_aac981e3e6158ccff5440cfe9d615831c}{set\+Default\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_store_service_a7187d37ca52fa9c207580e7745e00b94}{get\+Stores\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_store_service_a7901fdb6ddd8ed450c9e707f566aee2f}{get\+Store\+List\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_store_service_a47b1a15ac76c7289a2d63b39f856ba40}{get\+Store\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_store_service}{S\+C\+Store\+Service} $\ast$) + \hyperlink{interface_s_c_store_service_ab8cf26e8492fa6d5f8e942372a8cf467}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!check\+In\+:sid\+:completion\+Handler\+:@{check\+In\+:sid\+:completion\+Handler\+:}}
+\index{check\+In\+:sid\+:completion\+Handler\+:@{check\+In\+:sid\+:completion\+Handler\+:}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{check\+In\+:sid\+:completion\+Handler\+:(\+N\+S\+String $\ast$store\+Id,[sid] N\+S\+String $\ast$sid,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$error))}{checkIn:sid:completionHandler:(NSString *storeId,[sid] NSString *sid,[completionHandler] void(^handler)(bool success, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) check\+In\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{store\+Id}
+\item[{sid:(N\+S\+String $\ast$)}]{sid}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_a6f5fcead65e857a0b706065e2ff3c822}{}\label{interface_s_c_store_service_a6f5fcead65e857a0b706065e2ff3c822}
+check-\/in to a store
+
+
+\begin{DoxyParams}{Parameters}
+{\em store\+Id} & the store\textquotesingle{}s id \\
+\hline
+{\em sid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing to nil 
+\end{DoxyReturn}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!get\+Store\+:completion\+Handler\+:@{get\+Store\+:completion\+Handler\+:}}
+\index{get\+Store\+:completion\+Handler\+:@{get\+Store\+:completion\+Handler\+:}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{get\+Store\+:completion\+Handler\+:(\+N\+S\+String $\ast$pid,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+General\+Store $\ast$store, Secu\+Error $\ast$error))}{getStore:completionHandler:(NSString *pid,[completionHandler] void(^handler)(SCGeneralStore *store, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Store\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{pid}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+General\+Store} $\ast$store, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_a47b1a15ac76c7289a2d63b39f856ba40}{}\label{interface_s_c_store_service_a47b1a15ac76c7289a2d63b39f856ba40}
+get a store by search query
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & the store id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing to \hyperlink{interface_s_c_general_store}{S\+C\+General\+Store} 
+\end{DoxyReturn}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!get\+Store\+List\+:completion\+Handler\+:@{get\+Store\+List\+:completion\+Handler\+:}}
+\index{get\+Store\+List\+:completion\+Handler\+:@{get\+Store\+List\+:completion\+Handler\+:}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{get\+Store\+List\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$store\+List, Secu\+Error $\ast$error))}{getStoreList:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(NSArray *storeList, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Store\+List\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params} $\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$store\+List, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_a7901fdb6ddd8ed450c9e707f566aee2f}{}\label{interface_s_c_store_service_a7901fdb6ddd8ed450c9e707f566aee2f}
+retrieve a list of stores
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramteres\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing to N\+Sarray of \hyperlink{interface_s_c_general_store}{S\+C\+General\+Store} 
+\end{DoxyReturn}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!get\+Stores\+:completion\+Handler\+:@{get\+Stores\+:completion\+Handler\+:}}
+\index{get\+Stores\+:completion\+Handler\+:@{get\+Stores\+:completion\+Handler\+:}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{get\+Stores\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$stores, Secu\+Error $\ast$error))}{getStores:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(SCObjectList *stores, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Stores\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params} $\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$stores, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_a7187d37ca52fa9c207580e7745e00b94}{}\label{interface_s_c_store_service_a7187d37ca52fa9c207580e7745e00b94}
+retrieve a list of stores
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramteres\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing to \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} of \hyperlink{interface_s_c_general_store}{S\+C\+General\+Store} 
+\end{DoxyReturn}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!set\+Default\+:completion\+Handler\+:@{set\+Default\+:completion\+Handler\+:}}
+\index{set\+Default\+:completion\+Handler\+:@{set\+Default\+:completion\+Handler\+:}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{set\+Default\+:completion\+Handler\+:(\+N\+S\+String $\ast$store\+Id,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{setDefault:completionHandler:(NSString *storeId,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) set\+Default\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{store\+Id}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_aac981e3e6158ccff5440cfe9d615831c}{}\label{interface_s_c_store_service_aac981e3e6158ccff5440cfe9d615831c}
+set store as default
+
+
+\begin{DoxyParams}{Parameters}
+{\em store\+Id} & the store\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing to nil 
+\end{DoxyReturn}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!set\+Default\+:with\+Reason\+:completion\+Handler\+:@{set\+Default\+:with\+Reason\+:completion\+Handler\+:}}
+\index{set\+Default\+:with\+Reason\+:completion\+Handler\+:@{set\+Default\+:with\+Reason\+:completion\+Handler\+:}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{set\+Default\+:with\+Reason\+:completion\+Handler\+:(\+N\+S\+String $\ast$store\+Id,[with\+Reason] S\+C\+General\+Store\+Set\+Default $\ast$reason,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{setDefault:withReason:completionHandler:(NSString *storeId,[withReason] SCGeneralStoreSetDefault *reason,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) set\+Default\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{store\+Id}
+\item[{withReason:({\bf S\+C\+General\+Store\+Set\+Default}$\ast$)}]{reason}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_a6961eb23220b17dd36f6a10e68032e41}{}\label{interface_s_c_store_service_a6961eb23220b17dd36f6a10e68032e41}
+set store as default
+
+
+\begin{DoxyParams}{Parameters}
+{\em store\+Id} & the store\textquotesingle{}s id \\
+\hline
+{\em set} & default payload \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing to nil 
+\end{DoxyReturn}
+\index{S\+C\+Store\+Service@{S\+C\+Store\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Store\+Service@{S\+C\+Store\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Store\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_store_service_ab8cf26e8492fa6d5f8e942372a8cf467}{}\label{interface_s_c_store_service_ab8cf26e8492fa6d5f8e942372a8cf467}
+get instance of service
+
+\begin{DoxyReturn}{Returns}
+the singleton instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Store\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Store\+Service.\+m\end{DoxyCompactItemize}

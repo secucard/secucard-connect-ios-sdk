@@ -1,0 +1,112 @@
+\hypertarget{interface_s_c_rest_service_manager}{}\section{S\+C\+Rest\+Service\+Manager Class Reference}
+\label{interface_s_c_rest_service_manager}\index{S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}}
+
+
+{\ttfamily \#import $<$S\+C\+Rest\+Service\+Manager.\+h$>$}
+
+Inheritance diagram for S\+C\+Rest\+Service\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_s_c_rest_service_manager}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_rest_service_manager_a8c41f25467e8b4744275928b04e6032e}{init\+With\+Configuration\+:}
+\item 
+(void) -\/ {\bfseries destroy}\hypertarget{interface_s_c_rest_service_manager_ac004e3ade0da8a94e0e0367090a71c49}{}\label{interface_s_c_rest_service_manager_ac004e3ade0da8a94e0e0367090a71c49}
+
+\item 
+(void) -\/ \hyperlink{interface_s_c_rest_service_manager_a8aebf99e17b53f9e7ad90dd7d8a90ccd}{request\+Auth\+With\+Params\+:completion\+Handler\+:}
+\item 
+(void) -\/ {\bfseries execute\+:action\+:action\+Arg\+:secure\+:completion\+Handler\+:}\hypertarget{interface_s_c_rest_service_manager_a87a8e99c816564af2455fce01dc653ce}{}\label{interface_s_c_rest_service_manager_a87a8e99c816564af2455fce01dc653ce}
+
+\item 
+(void) -\/ {\bfseries post\+:with\+Auth\+:with\+Params\+:completion\+Handler\+:}\hypertarget{interface_s_c_rest_service_manager_a41874f1271d4ba07315ded13de8da148}{}\label{interface_s_c_rest_service_manager_a41874f1271d4ba07315ded13de8da148}
+
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_rest_service_manager}{S\+C\+Rest\+Service\+Manager} $\ast$) + \hyperlink{interface_s_c_rest_service_manager_a11a04819fbd48686159d117b96001f77}{shared\+Manager}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_rest_service_manager_ab752cca020008931ba176247990e3fa2}{current\+Refresh\+Token}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_rest_service_manager_ab0c230f3dfbee06f085774e0802a0e6a}{current\+Access\+Token}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Rest\+Service\+Manager is a channel to connect to the secucard api in a standardized way as it conforms to the Service\+Manager\textquotesingle{}s protocol. The Rest\+Service\+Manager is also used to retrieve the auth token before being able to connect to stomp
+
+Thr \hyperlink{interface_s_c_rest_service_manager}{S\+C\+Rest\+Service\+Manager} is responsible for any R\+E\+ST communication with the given server 
+
+\subsection{Method Documentation}
+\index{S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}!init\+With\+Configuration\+:@{init\+With\+Configuration\+:}}
+\index{init\+With\+Configuration\+:@{init\+With\+Configuration\+:}!S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}}
+\subsubsection[{\texorpdfstring{init\+With\+Configuration\+:(\+S\+C\+Rest\+Configuration $\ast$configuration)}{initWithConfiguration:(SCRestConfiguration *configuration)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) init\+With\+Configuration\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Rest\+Configuration}$\ast$)}]{configuration}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_rest_service_manager_a8c41f25467e8b4744275928b04e6032e}{}\label{interface_s_c_rest_service_manager_a8c41f25467e8b4744275928b04e6032e}
+initializes the manager with the services configuration
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & the configuration \\
+\hline
+\end{DoxyParams}
+\index{S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}!request\+Auth\+With\+Params\+:completion\+Handler\+:@{request\+Auth\+With\+Params\+:completion\+Handler\+:}}
+\index{request\+Auth\+With\+Params\+:completion\+Handler\+:@{request\+Auth\+With\+Params\+:completion\+Handler\+:}!S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}}
+\subsubsection[{\texorpdfstring{request\+Auth\+With\+Params\+:completion\+Handler\+:(id params,[completion\+Handler] void($^\wedge$handler)(id response\+Object, Secu\+Error $\ast$error))}{requestAuthWithParams:completionHandler:(id params,[completionHandler] void(^handler)(id responseObject, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) request\+Auth\+With\+Params\+: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{params}
+\item[{completionHandler:(void($^\wedge$)(id response\+Object, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_rest_service_manager_a8aebf99e17b53f9e7ad90dd7d8a90ccd}{}\label{interface_s_c_rest_service_manager_a8aebf99e17b53f9e7ad90dd7d8a90ccd}
+requests for authentication
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & the auth parameters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}!shared\+Manager@{shared\+Manager}}
+\index{shared\+Manager@{shared\+Manager}!S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}}
+\subsubsection[{\texorpdfstring{shared\+Manager()}{sharedManager()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Rest\+Service\+Manager} $\ast$) shared\+Manager 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_rest_service_manager_a11a04819fbd48686159d117b96001f77}{}\label{interface_s_c_rest_service_manager_a11a04819fbd48686159d117b96001f77}
+retrieve the manager\textquotesingle{}s instance
+
+\begin{DoxyReturn}{Returns}
+the manager\textquotesingle{}s instance as singleton
+\end{DoxyReturn}
+get instance of manager
+
+\begin{DoxyReturn}{Returns}
+the singleton instance 
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\index{S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}!current\+Access\+Token@{current\+Access\+Token}}
+\index{current\+Access\+Token@{current\+Access\+Token}!S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}}
+\subsubsection[{\texorpdfstring{current\+Access\+Token}{currentAccessToken}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) current\+Access\+Token\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_rest_service_manager_ab0c230f3dfbee06f085774e0802a0e6a}{}\label{interface_s_c_rest_service_manager_ab0c230f3dfbee06f085774e0802a0e6a}
+the current access token saved to a local var \index{S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}!current\+Refresh\+Token@{current\+Refresh\+Token}}
+\index{current\+Refresh\+Token@{current\+Refresh\+Token}!S\+C\+Rest\+Service\+Manager@{S\+C\+Rest\+Service\+Manager}}
+\subsubsection[{\texorpdfstring{current\+Refresh\+Token}{currentRefreshToken}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) current\+Refresh\+Token\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_rest_service_manager_ab752cca020008931ba176247990e3fa2}{}\label{interface_s_c_rest_service_manager_ab752cca020008931ba176247990e3fa2}
+the current refresh token saved to a local var 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Manager/S\+C\+Rest\+Service\+Manager.\+h\item 
+Pod/\+Classes/\+Manager/S\+C\+Rest\+Service\+Manager.\+m\end{DoxyCompactItemize}

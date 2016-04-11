@@ -1,0 +1,58 @@
+\hypertarget{interface_s_c_loyalty_customer_service}{}\section{S\+C\+Loyalty\+Customer\+Service Class Reference}
+\label{interface_s_c_loyalty_customer_service}\index{S\+C\+Loyalty\+Customer\+Service@{S\+C\+Loyalty\+Customer\+Service}}
+Inheritance diagram for S\+C\+Loyalty\+Customer\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_loyalty_customer_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_loyalty_customer_service_a8760104cc1b8eb9f6bcfe8e45ae4fcbc}{get\+Customer\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_loyalty_customer_service}{S\+C\+Loyalty\+Customer\+Service} $\ast$) + \hyperlink{interface_s_c_loyalty_customer_service_a479f1a1e1ef6a2932051e954ce5aacf6}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Loyalty\+Customer\+Service@{S\+C\+Loyalty\+Customer\+Service}!get\+Customer\+:completion\+Handler\+:@{get\+Customer\+:completion\+Handler\+:}}
+\index{get\+Customer\+:completion\+Handler\+:@{get\+Customer\+:completion\+Handler\+:}!S\+C\+Loyalty\+Customer\+Service@{S\+C\+Loyalty\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{get\+Customer\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Loyalty\+Customer $\ast$, Secu\+Error $\ast$))}{getCustomer:completionHandler:(NSString *id,[completionHandler] void(^handler)(SCLoyaltyCustomer *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Customer\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Loyalty\+Customer} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_loyalty_customer_service_a8760104cc1b8eb9f6bcfe8e45ae4fcbc}{}\label{interface_s_c_loyalty_customer_service_a8760104cc1b8eb9f6bcfe8e45ae4fcbc}
+get a customer by it\textquotesingle{}s id
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the customer\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_loyalty_customer}{S\+C\+Loyalty\+Customer} 
+\end{DoxyReturn}
+\index{S\+C\+Loyalty\+Customer\+Service@{S\+C\+Loyalty\+Customer\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Loyalty\+Customer\+Service@{S\+C\+Loyalty\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Loyalty\+Customer\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_loyalty_customer_service_a479f1a1e1ef6a2932051e954ce5aacf6}{}\label{interface_s_c_loyalty_customer_service_a479f1a1e1ef6a2932051e954ce5aacf6}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Loyalty/S\+C\+Loyalty\+Customer\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Loyalty/S\+C\+Loyalty\+Customer\+Service.\+m\end{DoxyCompactItemize}

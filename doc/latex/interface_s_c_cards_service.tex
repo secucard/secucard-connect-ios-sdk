@@ -1,0 +1,121 @@
+\hypertarget{interface_s_c_cards_service}{}\section{S\+C\+Cards\+Service Class Reference}
+\label{interface_s_c_cards_service}\index{S\+C\+Cards\+Service@{S\+C\+Cards\+Service}}
+Inheritance diagram for S\+C\+Cards\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_cards_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_cards_service_ae34dded67943dff28140edafd0f94019}{get\+Card\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_cards_service_a02c2257ecdadb8a496183c7b17b0fc90}{get\+Cards\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_cards_service_a57dd58e201c3985c08f6d260828727ff}{assign\+User\+To\+Card\+:pin\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_cards_service_ad1179e966566cd5c0cbc2ff06d91af83}{delete\+User\+From\+Card\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_cards_service}{S\+C\+Cards\+Service} $\ast$) + \hyperlink{interface_s_c_cards_service_aa83640b09d29f94345937d1e9bf57673}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Cards\+Service@{S\+C\+Cards\+Service}!assign\+User\+To\+Card\+:pin\+:completion\+Handler\+:@{assign\+User\+To\+Card\+:pin\+:completion\+Handler\+:}}
+\index{assign\+User\+To\+Card\+:pin\+:completion\+Handler\+:@{assign\+User\+To\+Card\+:pin\+:completion\+Handler\+:}!S\+C\+Cards\+Service@{S\+C\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{assign\+User\+To\+Card\+:pin\+:completion\+Handler\+:(\+N\+S\+String $\ast$card\+Number,[pin] id pin,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{assignUserToCard:pin:completionHandler:(NSString *cardNumber,[pin] id pin,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) assign\+User\+To\+Card\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{card\+Number}
+\item[{pin:(id)}]{pin}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_cards_service_a57dd58e201c3985c08f6d260828727ff}{}\label{interface_s_c_cards_service_a57dd58e201c3985c08f6d260828727ff}
+Assign a card to the user
+
+
+\begin{DoxyParams}{Parameters}
+{\em card\+Number} & the card number \\
+\hline
+{\em pin} & the pin of the card\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Cards\+Service@{S\+C\+Cards\+Service}!delete\+User\+From\+Card\+:completion\+Handler\+:@{delete\+User\+From\+Card\+:completion\+Handler\+:}}
+\index{delete\+User\+From\+Card\+:completion\+Handler\+:@{delete\+User\+From\+Card\+:completion\+Handler\+:}!S\+C\+Cards\+Service@{S\+C\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{delete\+User\+From\+Card\+:completion\+Handler\+:(\+N\+S\+String $\ast$card\+Number,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{deleteUserFromCard:completionHandler:(NSString *cardNumber,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+User\+From\+Card\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{card\+Number}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_cards_service_ad1179e966566cd5c0cbc2ff06d91af83}{}\label{interface_s_c_cards_service_ad1179e966566cd5c0cbc2ff06d91af83}
+remove a card from the user
+
+
+\begin{DoxyParams}{Parameters}
+{\em card\+Number} & the card number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Cards\+Service@{S\+C\+Cards\+Service}!get\+Card\+:completion\+Handler\+:@{get\+Card\+:completion\+Handler\+:}}
+\index{get\+Card\+:completion\+Handler\+:@{get\+Card\+:completion\+Handler\+:}!S\+C\+Cards\+Service@{S\+C\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{get\+Card\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Loyalty\+Card $\ast$, Secu\+Error $\ast$))}{getCard:completionHandler:(NSString *id,[completionHandler] void(^handler)(SCLoyaltyCard *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Card\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Loyalty\+Card} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_cards_service_ae34dded67943dff28140edafd0f94019}{}\label{interface_s_c_cards_service_ae34dded67943dff28140edafd0f94019}
+get a card by id
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the card\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_loyalty_card}{S\+C\+Loyalty\+Card} 
+\end{DoxyReturn}
+\index{S\+C\+Cards\+Service@{S\+C\+Cards\+Service}!get\+Cards\+:completion\+Handler\+:@{get\+Cards\+:completion\+Handler\+:}}
+\index{get\+Cards\+:completion\+Handler\+:@{get\+Cards\+:completion\+Handler\+:}!S\+C\+Cards\+Service@{S\+C\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{get\+Cards\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$, Secu\+Error $\ast$))}{getCards:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(SCObjectList *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Cards\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_cards_service_a02c2257ecdadb8a496183c7b17b0fc90}{}\label{interface_s_c_cards_service_a02c2257ecdadb8a496183c7b17b0fc90}
+get a list of cards
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} with \hyperlink{interface_s_c_loyalty_card}{S\+C\+Loyalty\+Card} 
+\end{DoxyReturn}
+\index{S\+C\+Cards\+Service@{S\+C\+Cards\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Cards\+Service@{S\+C\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Cards\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_cards_service_aa83640b09d29f94345937d1e9bf57673}{}\label{interface_s_c_cards_service_aa83640b09d29f94345937d1e9bf57673}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Loyalty/S\+C\+Cards\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Loyalty/S\+C\+Cards\+Service.\+m\end{DoxyCompactItemize}

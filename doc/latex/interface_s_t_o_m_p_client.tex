@@ -1,0 +1,71 @@
+\hypertarget{interface_s_t_o_m_p_client}{}\section{S\+T\+O\+M\+P\+Client Class Reference}
+\label{interface_s_t_o_m_p_client}\index{S\+T\+O\+M\+P\+Client@{S\+T\+O\+M\+P\+Client}}
+Inheritance diagram for S\+T\+O\+M\+P\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_s_t_o_m_p_client}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(id) -\/ {\bfseries init\+With\+Host\+:port\+:}\hypertarget{interface_s_t_o_m_p_client_ad93cb937c4aac9f274bad21ba35792ea}{}\label{interface_s_t_o_m_p_client_ad93cb937c4aac9f274bad21ba35792ea}
+
+\item 
+(void) -\/ {\bfseries connect\+With\+Login\+:passcode\+:completion\+Handler\+:}\hypertarget{interface_s_t_o_m_p_client_aa552d650d12716ea20689a44f0c01369}{}\label{interface_s_t_o_m_p_client_aa552d650d12716ea20689a44f0c01369}
+
+\item 
+(void) -\/ {\bfseries connect\+With\+Headers\+:completion\+Handler\+:}\hypertarget{interface_s_t_o_m_p_client_aa685cff3a11eaa877a1b2bc8d8be6954}{}\label{interface_s_t_o_m_p_client_aa685cff3a11eaa877a1b2bc8d8be6954}
+
+\item 
+(void) -\/ {\bfseries connect\+Secure\+With\+T\+L\+S\+Option\+:and\+Headers\+:completion\+Handler\+:}\hypertarget{interface_s_t_o_m_p_client_aa9087c7a80399cd97dd681af1e49535f}{}\label{interface_s_t_o_m_p_client_aa9087c7a80399cd97dd681af1e49535f}
+
+\item 
+(void) -\/ {\bfseries send\+To\+:body\+:}\hypertarget{interface_s_t_o_m_p_client_aab30b84111b0fe749c9a6d51169d2c0e}{}\label{interface_s_t_o_m_p_client_aab30b84111b0fe749c9a6d51169d2c0e}
+
+\item 
+(void) -\/ {\bfseries send\+To\+:headers\+:body\+:}\hypertarget{interface_s_t_o_m_p_client_aeca7f3726eda72c1f3ed48bd12f92e0c}{}\label{interface_s_t_o_m_p_client_aeca7f3726eda72c1f3ed48bd12f92e0c}
+
+\item 
+(\hyperlink{interface_s_t_o_m_p_subscription}{S\+T\+O\+M\+P\+Subscription} $\ast$) -\/ {\bfseries subscribe\+To\+:message\+Handler\+:}\hypertarget{interface_s_t_o_m_p_client_a83cd27550fcea6e4d015816fb8ba2d34}{}\label{interface_s_t_o_m_p_client_a83cd27550fcea6e4d015816fb8ba2d34}
+
+\item 
+(\hyperlink{interface_s_t_o_m_p_subscription}{S\+T\+O\+M\+P\+Subscription} $\ast$) -\/ {\bfseries subscribe\+To\+:headers\+:message\+Handler\+:}\hypertarget{interface_s_t_o_m_p_client_a9e062e2e945668062458535f61db80f1}{}\label{interface_s_t_o_m_p_client_a9e062e2e945668062458535f61db80f1}
+
+\item 
+(\hyperlink{interface_s_t_o_m_p_subscription}{S\+T\+O\+M\+P\+Subscription} $\ast$) -\/ {\bfseries subscribe\+To\+Without\+Registration\+:headers\+:message\+Handler\+:}\hypertarget{interface_s_t_o_m_p_client_abaaad977750225439886d558d2b1c0fb}{}\label{interface_s_t_o_m_p_client_abaaad977750225439886d558d2b1c0fb}
+
+\item 
+(\hyperlink{interface_s_t_o_m_p_transaction}{S\+T\+O\+M\+P\+Transaction} $\ast$) -\/ {\bfseries begin}\hypertarget{interface_s_t_o_m_p_client_a8b8811a169d05614e5abac4f503bd378}{}\label{interface_s_t_o_m_p_client_a8b8811a169d05614e5abac4f503bd378}
+
+\item 
+(\hyperlink{interface_s_t_o_m_p_transaction}{S\+T\+O\+M\+P\+Transaction} $\ast$) -\/ {\bfseries begin\+:}\hypertarget{interface_s_t_o_m_p_client_a451f417d7d5f3106394ac66a559bb02b}{}\label{interface_s_t_o_m_p_client_a451f417d7d5f3106394ac66a559bb02b}
+
+\item 
+(void) -\/ {\bfseries hard\+Disconnect}\hypertarget{interface_s_t_o_m_p_client_a1d7a740465fa50fe121a04b8063ee485}{}\label{interface_s_t_o_m_p_client_a1d7a740465fa50fe121a04b8063ee485}
+
+\item 
+(void) -\/ {\bfseries disconnect}\hypertarget{interface_s_t_o_m_p_client_a10fd8e1b3ba61ca1cdbb90eef51c42ef}{}\label{interface_s_t_o_m_p_client_a10fd8e1b3ba61ca1cdbb90eef51c42ef}
+
+\item 
+(void) -\/ {\bfseries disconnect\+:}\hypertarget{interface_s_t_o_m_p_client_a63bbe3bf9651425fd62079e2cd4cbecd}{}\label{interface_s_t_o_m_p_client_a63bbe3bf9651425fd62079e2cd4cbecd}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+S\+T\+O\+M\+P\+Frame\+Handler {\bfseries receipt\+Handler}\hypertarget{interface_s_t_o_m_p_client_a8099202d5c9d7fbcd430314d00f17015}{}\label{interface_s_t_o_m_p_client_a8099202d5c9d7fbcd430314d00f17015}
+
+\item 
+void($^\wedge$ {\bfseries error\+Handler} )(N\+S\+Error $\ast$error)\hypertarget{interface_s_t_o_m_p_client_aaad657c8a436b36effd7346bce55baef}{}\label{interface_s_t_o_m_p_client_aaad657c8a436b36effd7346bce55baef}
+
+\item 
+B\+O\+OL {\bfseries connected}\hypertarget{interface_s_t_o_m_p_client_a5205b74e2b6fde4c4a4a7feeaebcdfb6}{}\label{interface_s_t_o_m_p_client_a5205b74e2b6fde4c4a4a7feeaebcdfb6}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Vendor/\+Stomp\+Kit/Stomp\+Kit.\+h\item 
+Pod/\+Classes/\+Vendor/\+Stomp\+Kit/Stomp\+Kit.\+m\end{DoxyCompactItemize}

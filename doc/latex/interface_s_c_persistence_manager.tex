@@ -1,0 +1,90 @@
+\hypertarget{interface_s_c_persistence_manager}{}\section{S\+C\+Persistence\+Manager Class Reference}
+\label{interface_s_c_persistence_manager}\index{S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}}
+Inheritance diagram for S\+C\+Persistence\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_s_c_persistence_manager}
+\end{center}
+\end{figure}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) + \hyperlink{interface_s_c_persistence_manager_a5ad22df55da65da318f2ae03a9300801}{persist\+:for\+Key\+:}
+\item 
+(id) + \hyperlink{interface_s_c_persistence_manager_a6943d7fb3ba3d0cd7b0be8cfb254d34c}{item\+For\+Key\+:}
+\item 
+(void) + \hyperlink{interface_s_c_persistence_manager_adc85b6d6e28716c95c224767f49cad8b}{remove\+Item\+For\+Key\+:}
+\item 
+(B\+O\+OL) + \hyperlink{interface_s_c_persistence_manager_a15ca9794e20ffc864c4f3b594f565d17}{key\+Exists\+:}
+\end{DoxyCompactItemize}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}!item\+For\+Key\+:@{item\+For\+Key\+:}}
+\index{item\+For\+Key\+:@{item\+For\+Key\+:}!S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}}
+\subsubsection[{\texorpdfstring{item\+For\+Key\+:(\+N\+S\+String $\ast$key)}{itemForKey:(NSString *key)}}]{\setlength{\rightskip}{0pt plus 5cm}+ (id) item\+For\+Key\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{key}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_persistence_manager_a6943d7fb3ba3d0cd7b0be8cfb254d34c}{}\label{interface_s_c_persistence_manager_a6943d7fb3ba3d0cd7b0be8cfb254d34c}
+retrive a persisted object
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the reference key\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the saved value 
+\end{DoxyReturn}
+\index{S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}!key\+Exists\+:@{key\+Exists\+:}}
+\index{key\+Exists\+:@{key\+Exists\+:}!S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}}
+\subsubsection[{\texorpdfstring{key\+Exists\+:(\+N\+S\+String $\ast$key)}{keyExists:(NSString *key)}}]{\setlength{\rightskip}{0pt plus 5cm}+ (B\+O\+OL) key\+Exists\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{key}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_persistence_manager_a15ca9794e20ffc864c4f3b594f565d17}{}\label{interface_s_c_persistence_manager_a15ca9794e20ffc864c4f3b594f565d17}
+checks if a persisted object exists
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the reference key \\
+\hline
+\end{DoxyParams}
+\index{S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}!persist\+:for\+Key\+:@{persist\+:for\+Key\+:}}
+\index{persist\+:for\+Key\+:@{persist\+:for\+Key\+:}!S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}}
+\subsubsection[{\texorpdfstring{persist\+:for\+Key\+:(id object,[for\+Key] N\+S\+String $\ast$key)}{persist:forKey:(id object,[forKey] NSString *key)}}]{\setlength{\rightskip}{0pt plus 5cm}+ (void) persist\+: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\item[{forKey:(N\+S\+String$\ast$)}]{key}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_persistence_manager_a5ad22df55da65da318f2ae03a9300801}{}\label{interface_s_c_persistence_manager_a5ad22df55da65da318f2ae03a9300801}
+persist an object in user defaults
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & the object to save \\
+\hline
+{\em key} & the key as reference \\
+\hline
+\end{DoxyParams}
+\index{S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}!remove\+Item\+For\+Key\+:@{remove\+Item\+For\+Key\+:}}
+\index{remove\+Item\+For\+Key\+:@{remove\+Item\+For\+Key\+:}!S\+C\+Persistence\+Manager@{S\+C\+Persistence\+Manager}}
+\subsubsection[{\texorpdfstring{remove\+Item\+For\+Key\+:(\+N\+S\+String $\ast$key)}{removeItemForKey:(NSString *key)}}]{\setlength{\rightskip}{0pt plus 5cm}+ (void) remove\+Item\+For\+Key\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{key}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_persistence_manager_adc85b6d6e28716c95c224767f49cad8b}{}\label{interface_s_c_persistence_manager_adc85b6d6e28716c95c224767f49cad8b}
+removes a persisted object
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the reference key \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Manager/S\+C\+Persistence\+Manager.\+h\item 
+Pod/\+Classes/\+Manager/S\+C\+Persistence\+Manager.\+m\end{DoxyCompactItemize}

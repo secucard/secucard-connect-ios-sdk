@@ -1,0 +1,161 @@
+\hypertarget{interface_s_c_container_service}{}\section{S\+C\+Container\+Service Class Reference}
+\label{interface_s_c_container_service}\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+Inheritance diagram for S\+C\+Container\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_container_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_container_service_a24261444351ce211c41e52b33f3e3b50}{get\+Containers\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_container_service_aaa0b55442e9576cd149f9f6e0cffb344}{create\+Container\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_container_service_a4ec339fac7bb30d6f362850c9109729b}{update\+Container\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_container_service_ac9e937b496c75c61d27ee9b38cddc745}{update\+Container\+Assignment\+:customer\+Id\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_container_service_a12d0c67e6d668680979ae8f513eaf2e0}{delete\+Container\+Assignment\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_container_service_afed26a1a3305d28b49442f6c701c7942}{delete\+Container\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_container_service}{S\+C\+Container\+Service} $\ast$) + \hyperlink{interface_s_c_container_service_a9b5b8986b9241c08684c309ad94c0f55}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!create\+Container\+:completion\+Handler\+:@{create\+Container\+:completion\+Handler\+:}}
+\index{create\+Container\+:completion\+Handler\+:@{create\+Container\+:completion\+Handler\+:}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{create\+Container\+:completion\+Handler\+:(\+S\+C\+Payment\+Container $\ast$container,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Container $\ast$, Secu\+Error $\ast$))}{createContainer:completionHandler:(SCPaymentContainer *container,[completionHandler] void(^handler)(SCPaymentContainer *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Container\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Payment\+Container}$\ast$)}]{container}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Container} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_aaa0b55442e9576cd149f9f6e0cffb344}{}\label{interface_s_c_container_service_aaa0b55442e9576cd149f9f6e0cffb344}
+create a container
+
+
+\begin{DoxyParams}{Parameters}
+{\em container} & the container\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the created container 
+\end{DoxyReturn}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!delete\+Container\+:completion\+Handler\+:@{delete\+Container\+:completion\+Handler\+:}}
+\index{delete\+Container\+:completion\+Handler\+:@{delete\+Container\+:completion\+Handler\+:}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{delete\+Container\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{deleteContainer:completionHandler:(NSString *id,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+Container\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_afed26a1a3305d28b49442f6c701c7942}{}\label{interface_s_c_container_service_afed26a1a3305d28b49442f6c701c7942}
+delete a container
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the container\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!delete\+Container\+Assignment\+:completion\+Handler\+:@{delete\+Container\+Assignment\+:completion\+Handler\+:}}
+\index{delete\+Container\+Assignment\+:completion\+Handler\+:@{delete\+Container\+Assignment\+:completion\+Handler\+:}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{delete\+Container\+Assignment\+:completion\+Handler\+:(\+N\+S\+String $\ast$container\+Id,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{deleteContainerAssignment:completionHandler:(NSString *containerId,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+Container\+Assignment\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{container\+Id}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_a12d0c67e6d668680979ae8f513eaf2e0}{}\label{interface_s_c_container_service_a12d0c67e6d668680979ae8f513eaf2e0}
+unassign a container from any customer
+
+
+\begin{DoxyParams}{Parameters}
+{\em container\+Id} & the container id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!get\+Containers\+:completion\+Handler\+:@{get\+Containers\+:completion\+Handler\+:}}
+\index{get\+Containers\+:completion\+Handler\+:@{get\+Containers\+:completion\+Handler\+:}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{get\+Containers\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{getContainers:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Containers\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_a24261444351ce211c41e52b33f3e3b50}{}\label{interface_s_c_container_service_a24261444351ce211c41e52b33f3e3b50}
+retrieve container
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with N\+S\+Array 
+\end{DoxyReturn}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Container\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_a9b5b8986b9241c08684c309ad94c0f55}{}\label{interface_s_c_container_service_a9b5b8986b9241c08684c309ad94c0f55}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!update\+Container\+:completion\+Handler\+:@{update\+Container\+:completion\+Handler\+:}}
+\index{update\+Container\+:completion\+Handler\+:@{update\+Container\+:completion\+Handler\+:}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{update\+Container\+:completion\+Handler\+:(\+S\+C\+Payment\+Container $\ast$container,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Container $\ast$, Secu\+Error $\ast$))}{updateContainer:completionHandler:(SCPaymentContainer *container,[completionHandler] void(^handler)(SCPaymentContainer *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Container\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Payment\+Container}$\ast$)}]{container}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Container} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_a4ec339fac7bb30d6f362850c9109729b}{}\label{interface_s_c_container_service_a4ec339fac7bb30d6f362850c9109729b}
+update a container
+
+
+\begin{DoxyParams}{Parameters}
+{\em container} & the container to update\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_payment_container}{S\+C\+Payment\+Container} 
+\end{DoxyReturn}
+\index{S\+C\+Container\+Service@{S\+C\+Container\+Service}!update\+Container\+Assignment\+:customer\+Id\+:completion\+Handler\+:@{update\+Container\+Assignment\+:customer\+Id\+:completion\+Handler\+:}}
+\index{update\+Container\+Assignment\+:customer\+Id\+:completion\+Handler\+:@{update\+Container\+Assignment\+:customer\+Id\+:completion\+Handler\+:}!S\+C\+Container\+Service@{S\+C\+Container\+Service}}
+\subsubsection[{\texorpdfstring{update\+Container\+Assignment\+:customer\+Id\+:completion\+Handler\+:(\+N\+S\+String $\ast$container\+Id,[customer\+Id] N\+S\+String $\ast$customer\+Id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Container $\ast$, Secu\+Error $\ast$))}{updateContainerAssignment:customerId:completionHandler:(NSString *containerId,[customerId] NSString *customerId,[completionHandler] void(^handler)(SCPaymentContainer *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Container\+Assignment\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{container\+Id}
+\item[{customerId:(N\+S\+String$\ast$)}]{customer\+Id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Container} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_container_service_ac9e937b496c75c61d27ee9b38cddc745}{}\label{interface_s_c_container_service_ac9e937b496c75c61d27ee9b38cddc745}
+assigna container to a customer
+
+
+\begin{DoxyParams}{Parameters}
+{\em container\+Id} & the container id \\
+\hline
+{\em customer\+Id} & the customer id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the updated \hyperlink{interface_s_c_payment_container}{S\+C\+Payment\+Container} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Container\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Container\+Service.\+m\end{DoxyCompactItemize}

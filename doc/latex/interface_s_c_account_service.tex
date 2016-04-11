@@ -1,0 +1,155 @@
+\hypertarget{interface_s_c_account_service}{}\section{S\+C\+Account\+Service Class Reference}
+\label{interface_s_c_account_service}\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+Inheritance diagram for S\+C\+Account\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_account_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_service_a55e6e13b199a5b6fbf04e9e28f61302a}{create\+Account\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_service_a1a773fd02110bc3b358a8028a3b7b38b}{get\+Account\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_service_a160287f1a6812bba589c76fdedfa7327}{update\+Account\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_service_a761ac12868562526f0e8f592a2a3834b}{delete\+Account\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_service_a5acb4a7e22d4efbfa5c725ebdc110fcc}{update\+Location\+:location\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_service_acd6973d04dfb660c6c231766108c8240}{update\+Beacons\+:completion\+Handler\+:}
+\item 
+(void) -\/ {\bfseries password\+Reset\+:from\+Origin\+:completion\+Handler\+:}\hypertarget{interface_s_c_account_service_a1f2c7b0e4e1e4af5026ac95104d2e7cb}{}\label{interface_s_c_account_service_a1f2c7b0e4e1e4af5026ac95104d2e7cb}
+
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_account_service}{S\+C\+Account\+Service} $\ast$) + {\bfseries shared\+Service}\hypertarget{interface_s_c_account_service_a70a65b0590f66b42e9b9c468a18cff48}{}\label{interface_s_c_account_service_a70a65b0590f66b42e9b9c468a18cff48}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}!create\+Account\+:completion\+Handler\+:@{create\+Account\+:completion\+Handler\+:}}
+\index{create\+Account\+:completion\+Handler\+:@{create\+Account\+:completion\+Handler\+:}!S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+\subsubsection[{\texorpdfstring{create\+Account\+:completion\+Handler\+:(\+S\+C\+General\+Account $\ast$account,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+General\+Account $\ast$, Secu\+Error $\ast$))}{createAccount:completionHandler:(SCGeneralAccount *account,[completionHandler] void(^handler)(SCGeneralAccount *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Account\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+General\+Account}$\ast$)}]{account}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+General\+Account} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_service_a55e6e13b199a5b6fbf04e9e28f61302a}{}\label{interface_s_c_account_service_a55e6e13b199a5b6fbf04e9e28f61302a}
+creates an account
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & the account to create\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to \hyperlink{interface_s_c_general_account}{S\+C\+General\+Account} 
+\end{DoxyReturn}
+\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}!delete\+Account\+:completion\+Handler\+:@{delete\+Account\+:completion\+Handler\+:}}
+\index{delete\+Account\+:completion\+Handler\+:@{delete\+Account\+:completion\+Handler\+:}!S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+\subsubsection[{\texorpdfstring{delete\+Account\+:completion\+Handler\+:(\+N\+S\+String $\ast$account\+Id,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{deleteAccount:completionHandler:(NSString *accountId,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+Account\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{account\+Id}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_service_a761ac12868562526f0e8f592a2a3834b}{}\label{interface_s_c_account_service_a761ac12868562526f0e8f592a2a3834b}
+deletes ab account with the given id
+
+
+\begin{DoxyParams}{Parameters}
+{\em account\+Id} & the account\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to nil 
+\end{DoxyReturn}
+\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}!get\+Account\+:completion\+Handler\+:@{get\+Account\+:completion\+Handler\+:}}
+\index{get\+Account\+:completion\+Handler\+:@{get\+Account\+:completion\+Handler\+:}!S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+\subsubsection[{\texorpdfstring{get\+Account\+:completion\+Handler\+:(\+N\+S\+String $\ast$account\+Id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+General\+Account $\ast$, Secu\+Error $\ast$))}{getAccount:completionHandler:(NSString *accountId,[completionHandler] void(^handler)(SCGeneralAccount *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Account\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{account\+Id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+General\+Account} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_service_a1a773fd02110bc3b358a8028a3b7b38b}{}\label{interface_s_c_account_service_a1a773fd02110bc3b358a8028a3b7b38b}
+get an existing account
+
+
+\begin{DoxyParams}{Parameters}
+{\em account\+Id} & the id to retrieve\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to \hyperlink{interface_s_c_general_account}{S\+C\+General\+Account} 
+\end{DoxyReturn}
+\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}!update\+Account\+:completion\+Handler\+:@{update\+Account\+:completion\+Handler\+:}}
+\index{update\+Account\+:completion\+Handler\+:@{update\+Account\+:completion\+Handler\+:}!S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+\subsubsection[{\texorpdfstring{update\+Account\+:completion\+Handler\+:(\+S\+C\+General\+Account $\ast$account,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+General\+Account $\ast$, Secu\+Error $\ast$))}{updateAccount:completionHandler:(SCGeneralAccount *account,[completionHandler] void(^handler)(SCGeneralAccount *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Account\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+General\+Account}$\ast$)}]{account}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+General\+Account} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_service_a160287f1a6812bba589c76fdedfa7327}{}\label{interface_s_c_account_service_a160287f1a6812bba589c76fdedfa7327}
+update an existing account
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & the account\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to \hyperlink{interface_s_c_general_account}{S\+C\+General\+Account} 
+\end{DoxyReturn}
+\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}!update\+Beacons\+:completion\+Handler\+:@{update\+Beacons\+:completion\+Handler\+:}}
+\index{update\+Beacons\+:completion\+Handler\+:@{update\+Beacons\+:completion\+Handler\+:}!S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+\subsubsection[{\texorpdfstring{update\+Beacons\+:completion\+Handler\+:(\+N\+S\+Array $\ast$beacon\+List,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{updateBeacons:completionHandler:(NSArray *beaconList,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Beacons\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+Array$\ast$)}]{beacon\+List}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_service_acd6973d04dfb660c6c231766108c8240}{}\label{interface_s_c_account_service_acd6973d04dfb660c6c231766108c8240}
+updates the beacons for the account
+
+
+\begin{DoxyParams}{Parameters}
+{\em account\+Id} & the acount\textquotesingle{}s if \\
+\hline
+{\em beacon\+List} & the list of beacons\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to nil 
+\end{DoxyReturn}
+\index{S\+C\+Account\+Service@{S\+C\+Account\+Service}!update\+Location\+:location\+:completion\+Handler\+:@{update\+Location\+:location\+:completion\+Handler\+:}}
+\index{update\+Location\+:location\+:completion\+Handler\+:@{update\+Location\+:location\+:completion\+Handler\+:}!S\+C\+Account\+Service@{S\+C\+Account\+Service}}
+\subsubsection[{\texorpdfstring{update\+Location\+:location\+:completion\+Handler\+:(\+N\+S\+String $\ast$account\+Id,[location] S\+C\+General\+Location $\ast$location,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{updateLocation:location:completionHandler:(NSString *accountId,[location] SCGeneralLocation *location,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Location\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{account\+Id}
+\item[{location:({\bf S\+C\+General\+Location}$\ast$)}]{location}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_service_a5acb4a7e22d4efbfa5c725ebdc110fcc}{}\label{interface_s_c_account_service_a5acb4a7e22d4efbfa5c725ebdc110fcc}
+updates an location for the given account id
+
+
+\begin{DoxyParams}{Parameters}
+{\em account\+Id} & the account\textquotesingle{}s id \\
+\hline
+{\em location} & the location to send\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to nil 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Account\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Account\+Service.\+m\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\hypertarget{interface_s_c_public_merchant_service}{}\section{S\+C\+Public\+Merchant\+Service Class Reference}
+\label{interface_s_c_public_merchant_service}\index{S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}}
+Inheritance diagram for S\+C\+Public\+Merchant\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_public_merchant_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_public_merchant_service_ace6f378120955333c0d6ff8394ce5fa4}{get\+Public\+Merchant\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_public_merchant_service_aef32ab09037c99f5fd45c50372057fbd}{get\+Public\+Merchants\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_public_merchant_service}{S\+C\+Public\+Merchant\+Service} $\ast$) + \hyperlink{interface_s_c_public_merchant_service_ac924d6ade68a4e5b3a2d581a13edd8cc}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}!get\+Public\+Merchant\+:completion\+Handler\+:@{get\+Public\+Merchant\+:completion\+Handler\+:}}
+\index{get\+Public\+Merchant\+:completion\+Handler\+:@{get\+Public\+Merchant\+:completion\+Handler\+:}!S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}}
+\subsubsection[{\texorpdfstring{get\+Public\+Merchant\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+General\+Public\+Merchant $\ast$, Secu\+Error $\ast$))}{getPublicMerchant:completionHandler:(NSString *id,[completionHandler] void(^handler)(SCGeneralPublicMerchant *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Public\+Merchant\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+General\+Public\+Merchant} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_public_merchant_service_ace6f378120955333c0d6ff8394ce5fa4}{}\label{interface_s_c_public_merchant_service_ace6f378120955333c0d6ff8394ce5fa4}
+retireve the public merchant with the given id
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the merchant\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to \hyperlink{interface_s_c_general_public_merchant}{S\+C\+General\+Public\+Merchant} 
+\end{DoxyReturn}
+\index{S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}!get\+Public\+Merchants\+:completion\+Handler\+:@{get\+Public\+Merchants\+:completion\+Handler\+:}}
+\index{get\+Public\+Merchants\+:completion\+Handler\+:@{get\+Public\+Merchants\+:completion\+Handler\+:}!S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}}
+\subsubsection[{\texorpdfstring{get\+Public\+Merchants\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$params,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$, Secu\+Error $\ast$))}{getPublicMerchants:completionHandler:(SCQueryParams *params,[completionHandler] void(^handler)(SCObjectList *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Public\+Merchants\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{params}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_public_merchant_service_aef32ab09037c99f5fd45c50372057fbd}{}\label{interface_s_c_public_merchant_service_aef32ab09037c99f5fd45c50372057fbd}
+Get a lit of public merchants
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & the search parameters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a promise which resolves to \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} containing \hyperlink{interface_s_c_general_public_merchant}{S\+C\+General\+Public\+Merchant} 
+\end{DoxyReturn}
+\index{S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Public\+Merchant\+Service@{S\+C\+Public\+Merchant\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Public\+Merchant\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_public_merchant_service_ac924d6ade68a4e5b3a2d581a13edd8cc}{}\label{interface_s_c_public_merchant_service_ac924d6ade68a4e5b3a2d581a13edd8cc}
+get instance of service
+
+\begin{DoxyReturn}{Returns}
+the singleton instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Public\+Merchant\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Public\+Merchant\+Service.\+m\end{DoxyCompactItemize}

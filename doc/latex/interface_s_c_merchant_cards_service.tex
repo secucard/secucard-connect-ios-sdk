@@ -1,0 +1,78 @@
+\hypertarget{interface_s_c_merchant_cards_service}{}\section{S\+C\+Merchant\+Cards\+Service Class Reference}
+\label{interface_s_c_merchant_cards_service}\index{S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}}
+Inheritance diagram for S\+C\+Merchant\+Cards\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_merchant_cards_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_merchant_cards_service_a17cbbc59af2642cf55b553178ead5a9a}{get\+Merchant\+Cards\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_merchant_cards_service_a05e149d2a9c8c66b99498c1a85c1b571}{get\+Merchant\+Card\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_merchant_cards_service}{S\+C\+Merchant\+Cards\+Service} $\ast$) + \hyperlink{interface_s_c_merchant_cards_service_ac2167f5e35f731ec665d0e9eda1f4688}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}!get\+Merchant\+Card\+:completion\+Handler\+:@{get\+Merchant\+Card\+:completion\+Handler\+:}}
+\index{get\+Merchant\+Card\+:completion\+Handler\+:@{get\+Merchant\+Card\+:completion\+Handler\+:}!S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{get\+Merchant\+Card\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Loyalty\+Merchant\+Card $\ast$, Secu\+Error $\ast$))}{getMerchantCard:completionHandler:(NSString *id,[completionHandler] void(^handler)(SCLoyaltyMerchantCard *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Merchant\+Card\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Loyalty\+Merchant\+Card} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_merchant_cards_service_a05e149d2a9c8c66b99498c1a85c1b571}{}\label{interface_s_c_merchant_cards_service_a05e149d2a9c8c66b99498c1a85c1b571}
+get a card by id
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the card\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_loyalty_merchant_card}{S\+C\+Loyalty\+Merchant\+Card} 
+\end{DoxyReturn}
+\index{S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}!get\+Merchant\+Cards\+:completion\+Handler\+:@{get\+Merchant\+Cards\+:completion\+Handler\+:}}
+\index{get\+Merchant\+Cards\+:completion\+Handler\+:@{get\+Merchant\+Cards\+:completion\+Handler\+:}!S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{get\+Merchant\+Cards\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$, Secu\+Error $\ast$))}{getMerchantCards:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(SCObjectList *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Merchant\+Cards\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_merchant_cards_service_a17cbbc59af2642cf55b553178ead5a9a}{}\label{interface_s_c_merchant_cards_service_a17cbbc59af2642cf55b553178ead5a9a}
+get a list of cards
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} of \hyperlink{interface_s_c_loyalty_merchant_card}{S\+C\+Loyalty\+Merchant\+Card} 
+\end{DoxyReturn}
+\index{S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Merchant\+Cards\+Service@{S\+C\+Merchant\+Cards\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Merchant\+Cards\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_merchant_cards_service_ac2167f5e35f731ec665d0e9eda1f4688}{}\label{interface_s_c_merchant_cards_service_ac2167f5e35f731ec665d0e9eda1f4688}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Loyalty/S\+C\+Merchant\+Cards\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Loyalty/S\+C\+Merchant\+Cards\+Service.\+m\end{DoxyCompactItemize}

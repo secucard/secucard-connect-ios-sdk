@@ -1,0 +1,137 @@
+\hypertarget{interface_s_c_stomp_configuration}{}\section{S\+C\+Stomp\+Configuration Class Reference}
+\label{interface_s_c_stomp_configuration}\index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+
+
+{\ttfamily \#import $<$S\+C\+Stomp\+Configuration.\+h$>$}
+
+Inheritance diagram for S\+C\+Stomp\+Configuration\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_s_c_stomp_configuration}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(instancetype) -\/ \hyperlink{interface_s_c_stomp_configuration_aa0ee1aa71a9be46d8a3b7724f4e22bb4}{init\+With\+Host\+:and\+V\+Host\+:port\+:user\+Id\+:password\+:use\+S\+S\+L\+:reply\+Queue\+:connection\+Timeout\+Sec\+:socket\+Timeout\+Sec\+:heartbeat\+Ms\+:basic\+Destination\+:}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_stomp_configuration_a534749ad7eb52e5a66f404884eda6b53}{host}
+\item 
+N\+S\+U\+Integer \hyperlink{interface_s_c_stomp_configuration_a5232ff4f532f210a64de8e6cbdacd6eb}{port}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_stomp_configuration_aa868becdadbb872edbc70ca5d636475d}{password}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_stomp_configuration_ac56e7c704554c36ad37216643100753c}{virtual\+Host}
+\item 
+N\+S\+U\+Integer \hyperlink{interface_s_c_stomp_configuration_ae002e458d8e27fc4cd19e60256bc71bd}{heartbeat\+Ms}
+\item 
+B\+O\+OL \hyperlink{interface_s_c_stomp_configuration_a9a176c86f9a4744628408fd741ae6250}{use\+Ssl}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_stomp_configuration_a43d6136acb34f8926c17833000c7133e}{user\+Id}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_stomp_configuration_ae04db0c3fab164ace5d88bed0f2d8801}{reply\+Queue}
+\item 
+N\+S\+U\+Integer \hyperlink{interface_s_c_stomp_configuration_a0b3c3eb58edb936494019e43eef2f7b7}{connection\+Timeout\+Sec}
+\item 
+N\+S\+U\+Integer \hyperlink{interface_s_c_stomp_configuration_a3eb260255e207f5cc8f092dacc3aa16f}{socket\+Timeout\+Sec}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_stomp_configuration_a81aeeded88b8c1b3ce6cf8c02b749936}{basic\+Destination}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Stomp\+Configuration holds all information to communicate with the secucard infrastructure via stomp in a standardized way 
+
+\subsection{Method Documentation}
+\index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!init\+With\+Host\+:and\+V\+Host\+:port\+:user\+Id\+:password\+:use\+S\+S\+L\+:reply\+Queue\+:connection\+Timeout\+Sec\+:socket\+Timeout\+Sec\+:heartbeat\+Ms\+:basic\+Destination\+:@{init\+With\+Host\+:and\+V\+Host\+:port\+:user\+Id\+:password\+:use\+S\+S\+L\+:reply\+Queue\+:connection\+Timeout\+Sec\+:socket\+Timeout\+Sec\+:heartbeat\+Ms\+:basic\+Destination\+:}}
+\index{init\+With\+Host\+:and\+V\+Host\+:port\+:user\+Id\+:password\+:use\+S\+S\+L\+:reply\+Queue\+:connection\+Timeout\+Sec\+:socket\+Timeout\+Sec\+:heartbeat\+Ms\+:basic\+Destination\+:@{init\+With\+Host\+:and\+V\+Host\+:port\+:user\+Id\+:password\+:use\+S\+S\+L\+:reply\+Queue\+:connection\+Timeout\+Sec\+:socket\+Timeout\+Sec\+:heartbeat\+Ms\+:basic\+Destination\+:}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{init\+With\+Host\+:and\+V\+Host\+:port\+:user\+Id\+:password\+:use\+S\+S\+L\+:reply\+Queue\+:connection\+Timeout\+Sec\+:socket\+Timeout\+Sec\+:heartbeat\+Ms\+:basic\+Destination\+:(\+N\+S\+String $\ast$host,[and\+V\+Host] N\+S\+String $\ast$virtual\+Host,[port] int port,[user\+Id] N\+S\+String $\ast$user\+Id,[password] N\+S\+String $\ast$password,[use\+S\+SL] B\+O\+O\+L use\+Ssl,[reply\+Queue] N\+S\+String $\ast$reply\+Queue,[connection\+Timeout\+Sec] int connection\+Timeout\+Sec,[socket\+Timeout\+Sec] int socket\+Timeout\+Sec,[heartbeat\+Ms] int heartbeat\+Ms,[basic\+Destination] N\+S\+String $\ast$basic\+Destination)}{initWithHost:andVHost:port:userId:password:useSSL:replyQueue:connectionTimeoutSec:socketTimeoutSec:heartbeatMs:basicDestination:(NSString *host,[andVHost] NSString *virtualHost,[port] int port,[userId] NSString *userId,[password] NSString *password,[useSSL] BOOL useSsl,[replyQueue] NSString *replyQueue,[connectionTimeoutSec] int connectionTimeoutSec,[socketTimeoutSec] int socketTimeoutSec,[heartbeatMs] int heartbeatMs,[basicDestination] NSString *basicDestination)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (instancetype) init\+With\+Host\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{host}
+\item[{andVHost:(N\+S\+String$\ast$)}]{virtual\+Host}
+\item[{port:(int)}]{port}
+\item[{userId:(N\+S\+String$\ast$)}]{user\+Id}
+\item[{password:(N\+S\+String$\ast$)}]{password}
+\item[{useSSL:(B\+O\+OL)}]{use\+Ssl}
+\item[{replyQueue:(N\+S\+String$\ast$)}]{reply\+Queue}
+\item[{connectionTimeoutSec:(int)}]{connection\+Timeout\+Sec}
+\item[{socketTimeoutSec:(int)}]{socket\+Timeout\+Sec}
+\item[{heartbeatMs:(int)}]{heartbeat\+Ms}
+\item[{basicDestination:(N\+S\+String$\ast$)}]{basic\+Destination}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_stomp_configuration_aa0ee1aa71a9be46d8a3b7724f4e22bb4}{}\label{interface_s_c_stomp_configuration_aa0ee1aa71a9be46d8a3b7724f4e22bb4}
+instantiates the stomp configuration
+
+
+\begin{DoxyParams}{Parameters}
+{\em host} & the stomp host \\
+\hline
+{\em virtual\+Host} & the virtual host \\
+\hline
+{\em port} & the port (tyically 61613 or 61614) \\
+\hline
+{\em user\+Id} & the user id to connect \\
+\hline
+{\em password} & the password needed to connect the user \\
+\hline
+{\em use\+Ssl} & if the service should use ssl \\
+\hline
+{\em reply\+Queue} & the reply queue\textquotesingle{}s name \\
+\hline
+{\em connection\+Timeout\+Sec} & the connection timeout in seconds \\
+\hline
+{\em socket\+Timeout\+Sec} & the socket\textquotesingle{}s timeout in seconds \\
+\hline
+{\em heartbeat\+Ms} & the stomp heartbeat in milliseconds \\
+\hline
+{\em basic\+Destination} & the server\textquotesingle{}s basic destination\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the configuration\textquotesingle{}s insatnce 
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!basic\+Destination@{basic\+Destination}}
+\index{basic\+Destination@{basic\+Destination}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{basic\+Destination}{basicDestination}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) basic\+Destination\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_configuration_a81aeeded88b8c1b3ce6cf8c02b749936}{}\label{interface_s_c_stomp_configuration_a81aeeded88b8c1b3ce6cf8c02b749936}
+the socket\textquotesingle{}s timeout in seconds \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!connection\+Timeout\+Sec@{connection\+Timeout\+Sec}}
+\index{connection\+Timeout\+Sec@{connection\+Timeout\+Sec}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{connection\+Timeout\+Sec}{connectionTimeoutSec}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+U\+Integer) connection\+Timeout\+Sec\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}\hypertarget{interface_s_c_stomp_configuration_a0b3c3eb58edb936494019e43eef2f7b7}{}\label{interface_s_c_stomp_configuration_a0b3c3eb58edb936494019e43eef2f7b7}
+the connection timeout in seconds \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!heartbeat\+Ms@{heartbeat\+Ms}}
+\index{heartbeat\+Ms@{heartbeat\+Ms}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{heartbeat\+Ms}{heartbeatMs}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+U\+Integer) heartbeat\+Ms\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}\hypertarget{interface_s_c_stomp_configuration_ae002e458d8e27fc4cd19e60256bc71bd}{}\label{interface_s_c_stomp_configuration_ae002e458d8e27fc4cd19e60256bc71bd}
+the stomp heartbeat in milliseconds \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!host@{host}}
+\index{host@{host}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{host}{host}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) host\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_configuration_a534749ad7eb52e5a66f404884eda6b53}{}\label{interface_s_c_stomp_configuration_a534749ad7eb52e5a66f404884eda6b53}
+the stomp host \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!password@{password}}
+\index{password@{password}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{password}{password}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) password\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_configuration_aa868becdadbb872edbc70ca5d636475d}{}\label{interface_s_c_stomp_configuration_aa868becdadbb872edbc70ca5d636475d}
+the password needed to connect the user \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!port@{port}}
+\index{port@{port}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{port}{port}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+U\+Integer) port\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}\hypertarget{interface_s_c_stomp_configuration_a5232ff4f532f210a64de8e6cbdacd6eb}{}\label{interface_s_c_stomp_configuration_a5232ff4f532f210a64de8e6cbdacd6eb}
+the port (tyically 61613 or 61614) \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!reply\+Queue@{reply\+Queue}}
+\index{reply\+Queue@{reply\+Queue}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{reply\+Queue}{replyQueue}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) reply\+Queue\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_configuration_ae04db0c3fab164ace5d88bed0f2d8801}{}\label{interface_s_c_stomp_configuration_ae04db0c3fab164ace5d88bed0f2d8801}
+the reply queue\textquotesingle{}s name \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!socket\+Timeout\+Sec@{socket\+Timeout\+Sec}}
+\index{socket\+Timeout\+Sec@{socket\+Timeout\+Sec}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{socket\+Timeout\+Sec}{socketTimeoutSec}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+U\+Integer) socket\+Timeout\+Sec\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}\hypertarget{interface_s_c_stomp_configuration_a3eb260255e207f5cc8f092dacc3aa16f}{}\label{interface_s_c_stomp_configuration_a3eb260255e207f5cc8f092dacc3aa16f}
+the socket\textquotesingle{}s timeout in seconds \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!user\+Id@{user\+Id}}
+\index{user\+Id@{user\+Id}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{user\+Id}{userId}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) user\+Id\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_configuration_a43d6136acb34f8926c17833000c7133e}{}\label{interface_s_c_stomp_configuration_a43d6136acb34f8926c17833000c7133e}
+the user id to connect \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!use\+Ssl@{use\+Ssl}}
+\index{use\+Ssl@{use\+Ssl}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{use\+Ssl}{useSsl}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (B\+O\+OL) use\+Ssl\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}\hypertarget{interface_s_c_stomp_configuration_a9a176c86f9a4744628408fd741ae6250}{}\label{interface_s_c_stomp_configuration_a9a176c86f9a4744628408fd741ae6250}
+if the service should use ssl \index{S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}!virtual\+Host@{virtual\+Host}}
+\index{virtual\+Host@{virtual\+Host}!S\+C\+Stomp\+Configuration@{S\+C\+Stomp\+Configuration}}
+\subsubsection[{\texorpdfstring{virtual\+Host}{virtualHost}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) virtual\+Host\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_stomp_configuration_ac56e7c704554c36ad37216643100753c}{}\label{interface_s_c_stomp_configuration_ac56e7c704554c36ad37216643100753c}
+the virtual host 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Manager/S\+C\+Stomp\+Configuration.\+h\item 
+Pod/\+Classes/\+Manager/S\+C\+Stomp\+Configuration.\+m\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\hypertarget{interface_s_c_secupay_debit_service}{}\section{S\+C\+Secupay\+Debit\+Service Class Reference}
+\label{interface_s_c_secupay_debit_service}\index{S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}}
+Inheritance diagram for S\+C\+Secupay\+Debit\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_secupay_debit_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secupay_debit_service_ae646f1253797f1c1263489576e02ef55}{create\+Transaction\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secupay_debit_service_a8b29ce42a4e77555d4ebe6368989124a}{cancel\+Transaction\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_secupay_debit_service}{S\+C\+Secupay\+Debit\+Service} $\ast$) + \hyperlink{interface_s_c_secupay_debit_service_a4703564f808c568a91f3174cccf7999d}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}!cancel\+Transaction\+:completion\+Handler\+:@{cancel\+Transaction\+:completion\+Handler\+:}}
+\index{cancel\+Transaction\+:completion\+Handler\+:@{cancel\+Transaction\+:completion\+Handler\+:}!S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}}
+\subsubsection[{\texorpdfstring{cancel\+Transaction\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{cancelTransaction:completionHandler:(NSString *id,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) cancel\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secupay_debit_service_a8b29ce42a4e77555d4ebe6368989124a}{}\label{interface_s_c_secupay_debit_service_a8b29ce42a4e77555d4ebe6368989124a}
+Cancel an existing transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the transaction\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}!create\+Transaction\+:completion\+Handler\+:@{create\+Transaction\+:completion\+Handler\+:}}
+\index{create\+Transaction\+:completion\+Handler\+:@{create\+Transaction\+:completion\+Handler\+:}!S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}}
+\subsubsection[{\texorpdfstring{create\+Transaction\+:completion\+Handler\+:(\+S\+C\+Payment\+Secupay\+Debit $\ast$data,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Secupay\+Debit $\ast$, Secu\+Error $\ast$))}{createTransaction:completionHandler:(SCPaymentSecupayDebit *data,[completionHandler] void(^handler)(SCPaymentSecupayDebit *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Payment\+Secupay\+Debit}$\ast$)}]{data}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Secupay\+Debit} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secupay_debit_service_ae646f1253797f1c1263489576e02ef55}{}\label{interface_s_c_secupay_debit_service_ae646f1253797f1c1263489576e02ef55}
+Create a secupay debit transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the debit transaction\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_payment_secupay_debit}{S\+C\+Payment\+Secupay\+Debit} 
+\end{DoxyReturn}
+\index{S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Secupay\+Debit\+Service@{S\+C\+Secupay\+Debit\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Secupay\+Debit\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secupay_debit_service_a4703564f808c568a91f3174cccf7999d}{}\label{interface_s_c_secupay_debit_service_a4703564f808c568a91f3174cccf7999d}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Secupay\+Debit\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Secupay\+Debit\+Service.\+m\end{DoxyCompactItemize}

@@ -1,0 +1,82 @@
+\hypertarget{interface_s_c_secupay_prepay_service}{}\section{S\+C\+Secupay\+Prepay\+Service Class Reference}
+\label{interface_s_c_secupay_prepay_service}\index{S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}}
+Inheritance diagram for S\+C\+Secupay\+Prepay\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_secupay_prepay_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secupay_prepay_service_a3c08aad06fd64def47a58c0d2d675d11}{create\+Prepay\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secupay_prepay_service_a8dcb7a521d8d5b6ee5bfd3e9d655fd55}{cancel\+Transaction\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_secupay_prepay_service}{S\+C\+Secupay\+Prepay\+Service} $\ast$) + \hyperlink{interface_s_c_secupay_prepay_service_add0e02ac01b3d588c08959fed167fe79}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}!cancel\+Transaction\+:completion\+Handler\+:@{cancel\+Transaction\+:completion\+Handler\+:}}
+\index{cancel\+Transaction\+:completion\+Handler\+:@{cancel\+Transaction\+:completion\+Handler\+:}!S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}}
+\subsubsection[{\texorpdfstring{cancel\+Transaction\+:completion\+Handler\+:(\+N\+S\+String $\ast$transaction\+Id,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{cancelTransaction:completionHandler:(NSString *transactionId,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) cancel\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{transaction\+Id}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secupay_prepay_service_a8dcb7a521d8d5b6ee5bfd3e9d655fd55}{}\label{interface_s_c_secupay_prepay_service_a8dcb7a521d8d5b6ee5bfd3e9d655fd55}
+Cancel an existing prepay transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The prepay object id. \\
+\hline
+{\em callback} & Callback for async processing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}!create\+Prepay\+:completion\+Handler\+:@{create\+Prepay\+:completion\+Handler\+:}}
+\index{create\+Prepay\+:completion\+Handler\+:@{create\+Prepay\+:completion\+Handler\+:}!S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}}
+\subsubsection[{\texorpdfstring{create\+Prepay\+:completion\+Handler\+:(\+S\+C\+Payment\+Secupay\+Prepay $\ast$data,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Secupay\+Prepay $\ast$, Secu\+Error $\ast$))}{createPrepay:completionHandler:(SCPaymentSecupayPrepay *data,[completionHandler] void(^handler)(SCPaymentSecupayPrepay *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Prepay\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Payment\+Secupay\+Prepay}$\ast$)}]{data}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Secupay\+Prepay} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secupay_prepay_service_a3c08aad06fd64def47a58c0d2d675d11}{}\label{interface_s_c_secupay_prepay_service_a3c08aad06fd64def47a58c0d2d675d11}
+Create a secupay prepay transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The prepay data. \\
+\hline
+{\em callback} & Callback for async result processing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created transaction. 
+\end{DoxyReturn}
+\index{S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Secupay\+Prepay\+Service@{S\+C\+Secupay\+Prepay\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Secupay\+Prepay\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secupay_prepay_service_add0e02ac01b3d588c08959fed167fe79}{}\label{interface_s_c_secupay_prepay_service_add0e02ac01b3d588c08959fed167fe79}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Secupay\+Prepay\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Secupay\+Prepay\+Service.\+m\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\hypertarget{interface_s_c_transaction_service}{}\section{S\+C\+Transaction\+Service Class Reference}
+\label{interface_s_c_transaction_service}\index{S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}}
+Inheritance diagram for S\+C\+Transaction\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_transaction_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_transaction_service_ac68a99e4700bfb52683f8b85da1db778}{get\+Transactions\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_transaction_service_abe365436527afb855340ffbb63f16b3d}{get\+Transaction\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_transaction_service}{S\+C\+Transaction\+Service} $\ast$) + \hyperlink{interface_s_c_transaction_service_adcafa3945695482008dcfa000512e5e1}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}!get\+Transaction\+:completion\+Handler\+:@{get\+Transaction\+:completion\+Handler\+:}}
+\index{get\+Transaction\+:completion\+Handler\+:@{get\+Transaction\+:completion\+Handler\+:}!S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{get\+Transaction\+:completion\+Handler\+:(\+N\+S\+String $\ast$pid,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+General\+Transaction $\ast$, Secu\+Error $\ast$))}{getTransaction:completionHandler:(NSString *pid,[completionHandler] void(^handler)(SCGeneralTransaction *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Transaction\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{pid}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+General\+Transaction} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_transaction_service_abe365436527afb855340ffbb63f16b3d}{}\label{interface_s_c_transaction_service_abe365436527afb855340ffbb63f16b3d}
+retrieve a transaction by it\textquotesingle{}s id
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & hte tranaction\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_general_transaction}{S\+C\+General\+Transaction} 
+\end{DoxyReturn}
+\index{S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}!get\+Transactions\+:completion\+Handler\+:@{get\+Transactions\+:completion\+Handler\+:}}
+\index{get\+Transactions\+:completion\+Handler\+:@{get\+Transactions\+:completion\+Handler\+:}!S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{get\+Transactions\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$, Secu\+Error $\ast$))}{getTransactions:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(SCObjectList *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Transactions\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_transaction_service_ac68a99e4700bfb52683f8b85da1db778}{}\label{interface_s_c_transaction_service_ac68a99e4700bfb52683f8b85da1db778}
+retrieve a list of transactions
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} of \hyperlink{interface_s_c_general_transaction}{S\+C\+General\+Transaction} 
+\end{DoxyReturn}
+\index{S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Transaction\+Service@{S\+C\+Transaction\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Transaction\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_transaction_service_adcafa3945695482008dcfa000512e5e1}{}\label{interface_s_c_transaction_service_adcafa3945695482008dcfa000512e5e1}
+retrieve the services instance
+
+\begin{DoxyReturn}{Returns}
+the service\textquotesingle{}s instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Transaction\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+Transaction\+Service.\+m\end{DoxyCompactItemize}

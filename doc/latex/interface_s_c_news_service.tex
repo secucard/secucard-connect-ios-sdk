@@ -1,0 +1,78 @@
+\hypertarget{interface_s_c_news_service}{}\section{S\+C\+News\+Service Class Reference}
+\label{interface_s_c_news_service}\index{S\+C\+News\+Service@{S\+C\+News\+Service}}
+Inheritance diagram for S\+C\+News\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_news_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_news_service_af3a4641c83da76dec17cfc6ae3ac72c5}{get\+News\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_news_service_ad716b7f9f4e914349d51a56a10ba425a}{mark\+Read\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_news_service}{S\+C\+News\+Service} $\ast$) + \hyperlink{interface_s_c_news_service_ae0f19bdc45853071b5cb56e1b5e42647}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+News\+Service@{S\+C\+News\+Service}!get\+News\+:completion\+Handler\+:@{get\+News\+:completion\+Handler\+:}}
+\index{get\+News\+:completion\+Handler\+:@{get\+News\+:completion\+Handler\+:}!S\+C\+News\+Service@{S\+C\+News\+Service}}
+\subsubsection[{\texorpdfstring{get\+News\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$, Secu\+Error $\ast$))}{getNews:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(SCObjectList *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+News\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_news_service_af3a4641c83da76dec17cfc6ae3ac72c5}{}\label{interface_s_c_news_service_af3a4641c83da76dec17cfc6ae3ac72c5}
+Retrieve a list of news
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search parameters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise which resolves to \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} 
+\end{DoxyReturn}
+\index{S\+C\+News\+Service@{S\+C\+News\+Service}!mark\+Read\+:completion\+Handler\+:@{mark\+Read\+:completion\+Handler\+:}}
+\index{mark\+Read\+:completion\+Handler\+:@{mark\+Read\+:completion\+Handler\+:}!S\+C\+News\+Service@{S\+C\+News\+Service}}
+\subsubsection[{\texorpdfstring{mark\+Read\+:completion\+Handler\+:(\+N\+S\+String $\ast$pid,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{markRead:completionHandler:(NSString *pid,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) mark\+Read\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{pid}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_news_service_ad716b7f9f4e914349d51a56a10ba425a}{}\label{interface_s_c_news_service_ad716b7f9f4e914349d51a56a10ba425a}
+mark a news remotely as read
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & the news\textquotesingle{} id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise which resolves to nil 
+\end{DoxyReturn}
+\index{S\+C\+News\+Service@{S\+C\+News\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+News\+Service@{S\+C\+News\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+News\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_news_service_ae0f19bdc45853071b5cb56e1b5e42647}{}\label{interface_s_c_news_service_ae0f19bdc45853071b5cb56e1b5e42647}
+get instance of service
+
+\begin{DoxyReturn}{Returns}
+the singleton instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+News\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+General/S\+C\+News\+Service.\+m\end{DoxyCompactItemize}

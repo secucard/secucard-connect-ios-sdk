@@ -1,0 +1,65 @@
+\hypertarget{interface_s_c_rest_configuration}{}\section{S\+C\+Rest\+Configuration Class Reference}
+\label{interface_s_c_rest_configuration}\index{S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}}
+
+
+{\ttfamily \#import $<$S\+C\+Rest\+Configuration.\+h$>$}
+
+Inheritance diagram for S\+C\+Rest\+Configuration\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_s_c_rest_configuration}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(instancetype) -\/ \hyperlink{interface_s_c_rest_configuration_af41bda42397b4f6b8cc89ffa0742f2e1}{init\+With\+Base\+Url\+:and\+Auth\+Url\+:}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_rest_configuration_ab62562b47f88f8e01a6f0573cab8b053}{base\+Url}
+\item 
+N\+S\+String $\ast$ \hyperlink{interface_s_c_rest_configuration_aa964c8baa1824ce588064babd8314059}{auth\+Url}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Rest\+Configuration holds all needed data to connect appropriately to the A\+PI via Rest Calls 
+
+\subsection{Method Documentation}
+\index{S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}!init\+With\+Base\+Url\+:and\+Auth\+Url\+:@{init\+With\+Base\+Url\+:and\+Auth\+Url\+:}}
+\index{init\+With\+Base\+Url\+:and\+Auth\+Url\+:@{init\+With\+Base\+Url\+:and\+Auth\+Url\+:}!S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}}
+\subsubsection[{\texorpdfstring{init\+With\+Base\+Url\+:and\+Auth\+Url\+:(\+N\+S\+String $\ast$base\+Url,[and\+Auth\+Url] N\+S\+String $\ast$auth\+Url)}{initWithBaseUrl:andAuthUrl:(NSString *baseUrl,[andAuthUrl] NSString *authUrl)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (instancetype) init\+With\+Base\+Url\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{base\+Url}
+\item[{andAuthUrl:(N\+S\+String$\ast$)}]{auth\+Url}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_rest_configuration_af41bda42397b4f6b8cc89ffa0742f2e1}{}\label{interface_s_c_rest_configuration_af41bda42397b4f6b8cc89ffa0742f2e1}
+instantiation
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Url} & the base url to the api \\
+\hline
+{\em auth\+Url} & the authentiaction bas url\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the configuration instance 
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\index{S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}!auth\+Url@{auth\+Url}}
+\index{auth\+Url@{auth\+Url}!S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}}
+\subsubsection[{\texorpdfstring{auth\+Url}{authUrl}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) auth\+Url\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_rest_configuration_aa964c8baa1824ce588064babd8314059}{}\label{interface_s_c_rest_configuration_aa964c8baa1824ce588064babd8314059}
+the auth url which is different as it is not secured with token \index{S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}!base\+Url@{base\+Url}}
+\index{base\+Url@{base\+Url}!S\+C\+Rest\+Configuration@{S\+C\+Rest\+Configuration}}
+\subsubsection[{\texorpdfstring{base\+Url}{baseUrl}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+String$\ast$) base\+Url\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [nonatomic]}, {\ttfamily [retain]}}\hypertarget{interface_s_c_rest_configuration_ab62562b47f88f8e01a6f0573cab8b053}{}\label{interface_s_c_rest_configuration_ab62562b47f88f8e01a6f0573cab8b053}
+The base U\+RL to the api 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Manager/S\+C\+Rest\+Configuration.\+h\item 
+Pod/\+Classes/\+Manager/S\+C\+Rest\+Configuration.\+m\end{DoxyCompactItemize}

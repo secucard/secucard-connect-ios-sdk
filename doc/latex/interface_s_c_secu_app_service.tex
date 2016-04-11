@@ -1,0 +1,107 @@
+\hypertarget{interface_s_c_secu_app_service}{}\section{S\+C\+Secu\+App\+Service Class Reference}
+\label{interface_s_c_secu_app_service}\index{S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}}
+Inheritance diagram for S\+C\+Secu\+App\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_secu_app_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secu_app_service_a6451375bc06f1f698efda57b71cf6d58}{get\+Merchant\+:arg\+Object\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secu_app_service_a25ce19cf038b0bd32970b8b2e0043258}{get\+Merchants\+:arg\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_secu_app_service_a537b23b2d47062977d1547f6b022e46b}{add\+Card\+:arg\+Object\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_secu_app_service}{S\+C\+Secu\+App\+Service} $\ast$) + \hyperlink{interface_s_c_secu_app_service_a10a2e0c5d6288c9e36814bc8663614d0}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}!add\+Card\+:arg\+Object\+:completion\+Handler\+:@{add\+Card\+:arg\+Object\+:completion\+Handler\+:}}
+\index{add\+Card\+:arg\+Object\+:completion\+Handler\+:@{add\+Card\+:arg\+Object\+:completion\+Handler\+:}!S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}}
+\subsubsection[{\texorpdfstring{add\+Card\+:arg\+Object\+:completion\+Handler\+:(\+N\+S\+String $\ast$app\+Id,[arg\+Object] id arg\+Object,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{addCard:argObject:completionHandler:(NSString *appId,[argObject] id argObject,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) add\+Card\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{app\+Id}
+\item[{argObject:(id)}]{arg\+Object}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secu_app_service_a537b23b2d47062977d1547f6b022e46b}{}\label{interface_s_c_secu_app_service_a537b23b2d47062977d1547f6b022e46b}
+add a card to the account
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+Id} & the app id \\
+\hline
+{\em arg\+Object} & an argument object with cardnumber and pin\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}!get\+Merchant\+:arg\+Object\+:completion\+Handler\+:@{get\+Merchant\+:arg\+Object\+:completion\+Handler\+:}}
+\index{get\+Merchant\+:arg\+Object\+:completion\+Handler\+:@{get\+Merchant\+:arg\+Object\+:completion\+Handler\+:}!S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}}
+\subsubsection[{\texorpdfstring{get\+Merchant\+:arg\+Object\+:completion\+Handler\+:(\+N\+S\+String $\ast$app\+Id,[arg\+Object] id arg\+Object,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$list, Secu\+Error $\ast$error))}{getMerchant:argObject:completionHandler:(NSString *appId,[argObject] id argObject,[completionHandler] void(^handler)(SCObjectList *list, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Merchant\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{app\+Id}
+\item[{argObject:(id)}]{arg\+Object}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$list, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secu_app_service_a6451375bc06f1f698efda57b71cf6d58}{}\label{interface_s_c_secu_app_service_a6451375bc06f1f698efda57b71cf6d58}
+get the merchant with the given id
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+Id} & the app id \\
+\hline
+{\em arg\+Object} & an object with the store id and merchant id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_general_merchant}{S\+C\+General\+Merchant} 
+\end{DoxyReturn}
+\index{S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}!get\+Merchants\+:arg\+:completion\+Handler\+:@{get\+Merchants\+:arg\+:completion\+Handler\+:}}
+\index{get\+Merchants\+:arg\+:completion\+Handler\+:@{get\+Merchants\+:arg\+:completion\+Handler\+:}!S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}}
+\subsubsection[{\texorpdfstring{get\+Merchants\+:arg\+:completion\+Handler\+:(\+N\+S\+String $\ast$app\+Id,[arg] S\+C\+Query\+Params $\ast$arg,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$list, Secu\+Error $\ast$error))}{getMerchants:arg:completionHandler:(NSString *appId,[arg] SCQueryParams *arg,[completionHandler] void(^handler)(SCObjectList *list, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Merchants\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{app\+Id}
+\item[{arg:({\bf S\+C\+Query\+Params} $\ast$)}]{arg}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$list, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secu_app_service_a25ce19cf038b0bd32970b8b2e0043258}{}\label{interface_s_c_secu_app_service_a25ce19cf038b0bd32970b8b2e0043258}
+retrieve a lst of merchants
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+Id} & the app id \\
+\hline
+{\em arg} & search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise fulfiling with \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} with \hyperlink{interface_s_c_general_merchant}{S\+C\+General\+Merchant} 
+\end{DoxyReturn}
+\index{S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Secu\+App\+Service@{S\+C\+Secu\+App\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Secu\+App\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_secu_app_service_a10a2e0c5d6288c9e36814bc8663614d0}{}\label{interface_s_c_secu_app_service_a10a2e0c5d6288c9e36814bc8663614d0}
+get the ap\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+General/\+App/S\+C\+Secu\+App\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+General/\+App/S\+C\+Secu\+App\+Service.\+m\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\hypertarget{interface_s_c_upload_service}{}\section{S\+C\+Upload\+Service Class Reference}
+\label{interface_s_c_upload_service}\index{S\+C\+Upload\+Service@{S\+C\+Upload\+Service}}
+Inheritance diagram for S\+C\+Upload\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_upload_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_upload_service_a0613db20452100ea41d8ec4b45fdd60a}{upload\+Document\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_upload_service}{S\+C\+Upload\+Service} $\ast$) + \hyperlink{interface_s_c_upload_service_a26e5718c3c47802b7a9f8d936e222f83}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Upload\+Service@{S\+C\+Upload\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Upload\+Service@{S\+C\+Upload\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Upload\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_upload_service_a26e5718c3c47802b7a9f8d936e222f83}{}\label{interface_s_c_upload_service_a26e5718c3c47802b7a9f8d936e222f83}
+get instance of service
+
+\begin{DoxyReturn}{Returns}
+the singleton instance 
+\end{DoxyReturn}
+\index{S\+C\+Upload\+Service@{S\+C\+Upload\+Service}!upload\+Document\+:completion\+Handler\+:@{upload\+Document\+:completion\+Handler\+:}}
+\index{upload\+Document\+:completion\+Handler\+:@{upload\+Document\+:completion\+Handler\+:}!S\+C\+Upload\+Service@{S\+C\+Upload\+Service}}
+\subsubsection[{\texorpdfstring{upload\+Document\+:completion\+Handler\+:(\+S\+C\+Document\+Uploads\+Document $\ast$base64\+Encode\+Document,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Document\+Uploads\+Document $\ast$, Secu\+Error $\ast$))}{uploadDocument:completionHandler:(SCDocumentUploadsDocument *base64EncodeDocument,[completionHandler] void(^handler)(SCDocumentUploadsDocument *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) upload\+Document\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Document\+Uploads\+Document}$\ast$)}]{base64\+Encode\+Document}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Document\+Uploads\+Document} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_upload_service_a0613db20452100ea41d8ec4b45fdd60a}{}\label{interface_s_c_upload_service_a0613db20452100ea41d8ec4b45fdd60a}
+Uploads a document to the server
+
+
+\begin{DoxyParams}{Parameters}
+{\em base64\+Encode\+Document} & the document\textquotesingle{}s data\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise which resolves to \hyperlink{interface_s_c_document_uploads_document}{S\+C\+Document\+Uploads\+Document} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Document/S\+C\+Upload\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Document/S\+C\+Upload\+Service.\+m\end{DoxyCompactItemize}

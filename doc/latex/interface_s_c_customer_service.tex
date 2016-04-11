@@ -1,0 +1,118 @@
+\hypertarget{interface_s_c_customer_service}{}\section{S\+C\+Customer\+Service Class Reference}
+\label{interface_s_c_customer_service}\index{S\+C\+Customer\+Service@{S\+C\+Customer\+Service}}
+Inheritance diagram for S\+C\+Customer\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_s_c_customer_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_s_c_customer_service_a2d9a6679bfb4fe0044e773c6f310d5f8}{get\+Customers\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_customer_service_a7bb9a10b4815215b56c39680f453d324}{create\+Customer\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_customer_service_ad91a51099e96c353ab7cd62fb03deffe}{update\+Customer\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_customer_service_a45ad4b819c4ecea0cb7042ba74a5f9e5}{delete\+Customer\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_customer_service}{S\+C\+Customer\+Service} $\ast$) + \hyperlink{interface_s_c_customer_service_ac7cedd69d8d436982ba853129fbeead7}{shared\+Service}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Customer\+Service@{S\+C\+Customer\+Service}!create\+Customer\+:completion\+Handler\+:@{create\+Customer\+:completion\+Handler\+:}}
+\index{create\+Customer\+:completion\+Handler\+:@{create\+Customer\+:completion\+Handler\+:}!S\+C\+Customer\+Service@{S\+C\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{create\+Customer\+:completion\+Handler\+:(\+S\+C\+Payment\+Customer $\ast$customer,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Customer $\ast$, Secu\+Error $\ast$))}{createCustomer:completionHandler:(SCPaymentCustomer *customer,[completionHandler] void(^handler)(SCPaymentCustomer *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+Customer\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Payment\+Customer}$\ast$)}]{customer}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Customer} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_customer_service_a7bb9a10b4815215b56c39680f453d324}{}\label{interface_s_c_customer_service_a7bb9a10b4815215b56c39680f453d324}
+create a customer
+
+
+\begin{DoxyParams}{Parameters}
+{\em customer} & the customer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_payment_customer}{S\+C\+Payment\+Customer} 
+\end{DoxyReturn}
+\index{S\+C\+Customer\+Service@{S\+C\+Customer\+Service}!delete\+Customer\+:completion\+Handler\+:@{delete\+Customer\+:completion\+Handler\+:}}
+\index{delete\+Customer\+:completion\+Handler\+:@{delete\+Customer\+:completion\+Handler\+:}!S\+C\+Customer\+Service@{S\+C\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{delete\+Customer\+:completion\+Handler\+:(\+N\+S\+String $\ast$id,[completion\+Handler] void($^\wedge$handler)(bool success, Secu\+Error $\ast$))}{deleteCustomer:completionHandler:(NSString *id,[completionHandler] void(^handler)(bool success, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+Customer\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{id}
+\item[{completionHandler:(void($^\wedge$)(bool success, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_customer_service_a45ad4b819c4ecea0cb7042ba74a5f9e5}{}\label{interface_s_c_customer_service_a45ad4b819c4ecea0cb7042ba74a5f9e5}
+delete a customer
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the customer\textquotesingle{}s id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with nil 
+\end{DoxyReturn}
+\index{S\+C\+Customer\+Service@{S\+C\+Customer\+Service}!get\+Customers\+:completion\+Handler\+:@{get\+Customers\+:completion\+Handler\+:}}
+\index{get\+Customers\+:completion\+Handler\+:@{get\+Customers\+:completion\+Handler\+:}!S\+C\+Customer\+Service@{S\+C\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{get\+Customers\+:completion\+Handler\+:(\+S\+C\+Query\+Params $\ast$query\+Params,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$list, Secu\+Error $\ast$error))}{getCustomers:completionHandler:(SCQueryParams *queryParams,[completionHandler] void(^handler)(NSArray *list, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Customers\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Query\+Params} $\ast$)}]{query\+Params}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$list, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_customer_service_a2d9a6679bfb4fe0044e773c6f310d5f8}{}\label{interface_s_c_customer_service_a2d9a6679bfb4fe0044e773c6f310d5f8}
+get a list if customers
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Params} & the search paramters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with N\+S\+Array 
+\end{DoxyReturn}
+\index{S\+C\+Customer\+Service@{S\+C\+Customer\+Service}!shared\+Service@{shared\+Service}}
+\index{shared\+Service@{shared\+Service}!S\+C\+Customer\+Service@{S\+C\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{shared\+Service()}{sharedService()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Customer\+Service} $\ast$) shared\+Service 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_customer_service_ac7cedd69d8d436982ba853129fbeead7}{}\label{interface_s_c_customer_service_ac7cedd69d8d436982ba853129fbeead7}
+get the service\textquotesingle{}s singleton instance
+
+\begin{DoxyReturn}{Returns}
+the instance 
+\end{DoxyReturn}
+\index{S\+C\+Customer\+Service@{S\+C\+Customer\+Service}!update\+Customer\+:completion\+Handler\+:@{update\+Customer\+:completion\+Handler\+:}}
+\index{update\+Customer\+:completion\+Handler\+:@{update\+Customer\+:completion\+Handler\+:}!S\+C\+Customer\+Service@{S\+C\+Customer\+Service}}
+\subsubsection[{\texorpdfstring{update\+Customer\+:completion\+Handler\+:(\+S\+C\+Payment\+Customer $\ast$customer,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Payment\+Customer $\ast$, Secu\+Error $\ast$))}{updateCustomer:completionHandler:(SCPaymentCustomer *customer,[completionHandler] void(^handler)(SCPaymentCustomer *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+Customer\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf S\+C\+Payment\+Customer}$\ast$)}]{customer}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Payment\+Customer} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_customer_service_ad91a51099e96c353ab7cd62fb03deffe}{}\label{interface_s_c_customer_service_ad91a51099e96c353ab7cd62fb03deffe}
+update a customer
+
+
+\begin{DoxyParams}{Parameters}
+{\em customer} & the customer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with \hyperlink{interface_s_c_payment_customer}{S\+C\+Payment\+Customer} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Customer\+Service.\+h\item 
+Pod/\+Classes/\+Services/\+Payment/S\+C\+Customer\+Service.\+m\end{DoxyCompactItemize}

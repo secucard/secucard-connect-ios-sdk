@@ -1,0 +1,118 @@
+\hypertarget{interface_s_c_account_manager}{}\section{S\+C\+Account\+Manager Class Reference}
+\label{interface_s_c_account_manager}\index{S\+C\+Account\+Manager@{S\+C\+Account\+Manager}}
+Inheritance diagram for S\+C\+Account\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_s_c_account_manager}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ {\bfseries init\+With\+Client\+Credentials\+:and\+User\+Credentials\+:}\hypertarget{interface_s_c_account_manager_af14f562bcdb49aab4005cd7257ea521e}{}\label{interface_s_c_account_manager_af14f562bcdb49aab4005cd7257ea521e}
+
+\item 
+(void) -\/ {\bfseries destroy}\hypertarget{interface_s_c_account_manager_a375e07068334bb191586c8581113c7a6}{}\label{interface_s_c_account_manager_a375e07068334bb191586c8581113c7a6}
+
+\item 
+(void) -\/ {\bfseries request\+Token\+With\+Device\+Auth\+:}\hypertarget{interface_s_c_account_manager_ab0d46412d9bceabc7aa9d6607d294f3a}{}\label{interface_s_c_account_manager_ab0d46412d9bceabc7aa9d6607d294f3a}
+
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_manager_aadf9a65dda930b011861b333b66646bb}{token\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_account_manager_a4b9d44be000569b312c7e96f1df32d41}{refresh\+Access\+Token\+:}
+\item 
+(void) -\/ {\bfseries kill\+Token}\hypertarget{interface_s_c_account_manager_a106237494a81fab3b37f37e2fa858133}{}\label{interface_s_c_account_manager_a106237494a81fab3b37f37e2fa858133}
+
+\item 
+(void) -\/ {\bfseries test\+Invalidate\+Token}\hypertarget{interface_s_c_account_manager_a8d8bc8406555a0da080582c1932447c4}{}\label{interface_s_c_account_manager_a8d8bc8406555a0da080582c1932447c4}
+
+\item 
+(void) -\/ {\bfseries stop\+Polling\+Token}\hypertarget{interface_s_c_account_manager_a16696c42c3457976023b1c5a033669f1}{}\label{interface_s_c_account_manager_a16696c42c3457976023b1c5a033669f1}
+
+\item 
+(void) -\/ {\bfseries logout}\hypertarget{interface_s_c_account_manager_a4ae46dd973cbd73055688bbca9df7552}{}\label{interface_s_c_account_manager_a4ae46dd973cbd73055688bbca9df7552}
+
+\item 
+(B\+O\+OL) -\/ \hyperlink{interface_s_c_account_manager_a10dabf89ed4f6d576721c75fc7963af0}{access\+Token\+Valid}
+\item 
+(N\+S\+Time\+Interval) -\/ \hyperlink{interface_s_c_account_manager_a4b98c88dc7f7b5504aec11871634fe7c}{access\+Token\+Valid\+Until}
+\end{DoxyCompactItemize}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_account_manager}{S\+C\+Account\+Manager} $\ast$) + \hyperlink{interface_s_c_account_manager_afd360a7ef855a4e3c237a0561340883f}{shared\+Manager}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ {\bfseries access\+Token}\hypertarget{interface_s_c_account_manager_aa245b5d895289a0abfe97a4737de8082}{}\label{interface_s_c_account_manager_aa245b5d895289a0abfe97a4737de8082}
+
+\item 
+N\+S\+String $\ast$ {\bfseries refresh\+Token}\hypertarget{interface_s_c_account_manager_ab312530270fff19e8d68ce52efdbc17d}{}\label{interface_s_c_account_manager_ab312530270fff19e8d68ce52efdbc17d}
+
+\item 
+N\+S\+Date $\ast$ {\bfseries expires}\hypertarget{interface_s_c_account_manager_afe5abe9821736b1ed012cd7583ee42e1}{}\label{interface_s_c_account_manager_afe5abe9821736b1ed012cd7583ee42e1}
+
+\item 
+B\+O\+OL {\bfseries logged\+In}\hypertarget{interface_s_c_account_manager_a7b036c4414d7edc9acd2f63275d9ff07}{}\label{interface_s_c_account_manager_a7b036c4414d7edc9acd2f63275d9ff07}
+
+\item 
+B\+O\+OL {\bfseries always\+Remind\+Connecting}\hypertarget{interface_s_c_account_manager_a1bf924720ad43fbef72dbe99105475ff}{}\label{interface_s_c_account_manager_a1bf924720ad43fbef72dbe99105475ff}
+
+\item 
+id$<$ \hyperlink{protocol_s_c_account_manager_delegate-p}{S\+C\+Account\+Manager\+Delegate} $>$ {\bfseries delegate}\hypertarget{interface_s_c_account_manager_a5a5811ca451c47d533f2fba6e2077791}{}\label{interface_s_c_account_manager_a5a5811ca451c47d533f2fba6e2077791}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Account\+Manager is secucard wrapper for the Social Login but also regular Login. It kan hold Login information and alike 
+
+\subsection{Method Documentation}
+\index{S\+C\+Account\+Manager@{S\+C\+Account\+Manager}!access\+Token\+Valid@{access\+Token\+Valid}}
+\index{access\+Token\+Valid@{access\+Token\+Valid}!S\+C\+Account\+Manager@{S\+C\+Account\+Manager}}
+\subsubsection[{\texorpdfstring{access\+Token\+Valid()}{accessTokenValid()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (B\+O\+OL) access\+Token\+Valid 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_manager_a10dabf89ed4f6d576721c75fc7963af0}{}\label{interface_s_c_account_manager_a10dabf89ed4f6d576721c75fc7963af0}
+checks if token is valid \index{S\+C\+Account\+Manager@{S\+C\+Account\+Manager}!access\+Token\+Valid\+Until@{access\+Token\+Valid\+Until}}
+\index{access\+Token\+Valid\+Until@{access\+Token\+Valid\+Until}!S\+C\+Account\+Manager@{S\+C\+Account\+Manager}}
+\subsubsection[{\texorpdfstring{access\+Token\+Valid\+Until()}{accessTokenValidUntil()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\+S\+Time\+Interval) access\+Token\+Valid\+Until 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_manager_a4b98c88dc7f7b5504aec11871634fe7c}{}\label{interface_s_c_account_manager_a4b98c88dc7f7b5504aec11871634fe7c}
+returns amount of seconds to become invalid \index{S\+C\+Account\+Manager@{S\+C\+Account\+Manager}!refresh\+Access\+Token\+:@{refresh\+Access\+Token\+:}}
+\index{refresh\+Access\+Token\+:@{refresh\+Access\+Token\+:}!S\+C\+Account\+Manager@{S\+C\+Account\+Manager}}
+\subsubsection[{\texorpdfstring{refresh\+Access\+Token\+:(void($^\wedge$handler)(\+N\+S\+String $\ast$token, Secu\+Error $\ast$error))}{refreshAccessToken:(void(^handler)(NSString *token, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) refresh\+Access\+Token\+: 
+\begin{DoxyParamCaption}
+\item[{(void($^\wedge$)(N\+S\+String $\ast$token, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_manager_a4b9d44be000569b312c7e96f1df32d41}{}\label{interface_s_c_account_manager_a4b9d44be000569b312c7e96f1df32d41}
+Refreshes an access token \index{S\+C\+Account\+Manager@{S\+C\+Account\+Manager}!shared\+Manager@{shared\+Manager}}
+\index{shared\+Manager@{shared\+Manager}!S\+C\+Account\+Manager@{S\+C\+Account\+Manager}}
+\subsubsection[{\texorpdfstring{shared\+Manager()}{sharedManager()}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf S\+C\+Account\+Manager} $\ast$) shared\+Manager 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_manager_afd360a7ef855a4e3c237a0561340883f}{}\label{interface_s_c_account_manager_afd360a7ef855a4e3c237a0561340883f}
+Shared manager as singleton
+
+\begin{DoxyReturn}{Returns}
+the manager instance 
+\end{DoxyReturn}
+\index{S\+C\+Account\+Manager@{S\+C\+Account\+Manager}!token\+:@{token\+:}}
+\index{token\+:@{token\+:}!S\+C\+Account\+Manager@{S\+C\+Account\+Manager}}
+\subsubsection[{\texorpdfstring{token\+:(void($^\wedge$handler)(\+N\+S\+String $\ast$token, Secu\+Error $\ast$error))}{token:(void(^handler)(NSString *token, SecuError *error))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) token\+: 
+\begin{DoxyParamCaption}
+\item[{(void($^\wedge$)(N\+S\+String $\ast$token, {\bf Secu\+Error} $\ast$error))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_account_manager_aadf9a65dda930b011861b333b66646bb}{}\label{interface_s_c_account_manager_aadf9a65dda930b011861b333b66646bb}
+Check if token is valid 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Manager/S\+C\+Account\+Manager.\+h\item 
+Pod/\+Classes/\+Manager/S\+C\+Account\+Manager.\+m\end{DoxyCompactItemize}

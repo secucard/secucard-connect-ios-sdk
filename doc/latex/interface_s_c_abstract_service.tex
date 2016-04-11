@@ -1,0 +1,323 @@
+\hypertarget{interface_s_c_abstract_service}{}\section{S\+C\+Abstract\+Service Class Reference}
+\label{interface_s_c_abstract_service}\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+Inheritance diagram for S\+C\+Abstract\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{interface_s_c_abstract_service}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_s_c_service_manager}{S\+C\+Service\+Manager} $\ast$) -\/ \hyperlink{interface_s_c_abstract_service_abacd77c4f0ca9ab525b83b6224aa26d3}{service\+Manager\+By\+Channel\+:}
+\item 
+(void) -\/ {\bfseries add\+Event\+Handler\+:}\hypertarget{interface_s_c_abstract_service_a132319e348f6bb052d263b8700428969}{}\label{interface_s_c_abstract_service_a132319e348f6bb052d263b8700428969}
+
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_ac445d8d6aee8c01e7d58b431b0dd6f24}{get\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_ab353a5436b86810210702c316a62253d}{get\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_adbc850a99d2a71cc90be83f55ed22ce3}{get\+Object\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_a569e0dc4a0734d28a6750a9074315d36}{post\+Process\+Objects\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_a150e20038a5ced6f3f8a3c8cb8c40007}{update\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_a25e154c6d50e8e88ee90b712ecbfb066}{execute\+:with\+Id\+:action\+:action\+Arg\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_a5bc3b75a76f28461b4d2c4a1733d580a}{execute\+:action\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_a9c3dd7e1c6d999d7d60e531a87c6c2f4}{create\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_ac0af977d373e4027ed1e1319e745de72}{delete\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:}
+\item 
+(void) -\/ \hyperlink{interface_s_c_abstract_service_af8c7ee699e0321c8c4101a3421941ac8}{delete\+:with\+Id\+:action\+:action\+Arg\+:on\+Channel\+:completion\+Handler\+:}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Array $\ast$ {\bfseries registered\+Event\+Classes}\hypertarget{interface_s_c_abstract_service_a34392243d3635280ed7d0316999d6d24}{}\label{interface_s_c_abstract_service_a34392243d3635280ed7d0316999d6d24}
+
+\item 
+N\+S\+Mutable\+Array $\ast$ {\bfseries event\+Handlers}\hypertarget{interface_s_c_abstract_service_ab12d154e6c4b370e02652a2103716a4c}{}\label{interface_s_c_abstract_service_ab12d154e6c4b370e02652a2103716a4c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Method Documentation}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!create\+:on\+Channel\+:completion\+Handler\+:@{create\+:on\+Channel\+:completion\+Handler\+:}}
+\index{create\+:on\+Channel\+:completion\+Handler\+:@{create\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{create\+:on\+Channel\+:completion\+Handler\+:(id object,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(id, Secu\+Error $\ast$))}{create:onChannel:completionHandler:(id object,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(id, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) create\+: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(id, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_a9c3dd7e1c6d999d7d60e531a87c6c2f4}{}\label{interface_s_c_abstract_service_a9c3dd7e1c6d999d7d60e531a87c6c2f4}
+create an object server-\/side
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & the object \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise returning the created object (id) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!delete\+:with\+Id\+:action\+:action\+Arg\+:on\+Channel\+:completion\+Handler\+:@{delete\+:with\+Id\+:action\+:action\+Arg\+:on\+Channel\+:completion\+Handler\+:}}
+\index{delete\+:with\+Id\+:action\+:action\+Arg\+:on\+Channel\+:completion\+Handler\+:@{delete\+:with\+Id\+:action\+:action\+Arg\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{delete\+:with\+Id\+:action\+:action\+Arg\+:on\+Channel\+:completion\+Handler\+:(\+Class type,[with\+Id] N\+S\+String $\ast$id,[action] N\+S\+String $\ast$action,[action\+Arg] N\+S\+String $\ast$action\+Arg,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{delete:withId:action:actionArg:onChannel:completionHandler:(Class type,[withId] NSString *id,[action] NSString *action,[actionArg] NSString *actionArg,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+: 
+\begin{DoxyParamCaption}
+\item[{(Class)}]{type}
+\item[{withId:(N\+S\+String$\ast$)}]{id}
+\item[{action:(N\+S\+String$\ast$)}]{action}
+\item[{actionArg:(N\+S\+String$\ast$)}]{action\+Arg}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_af8c7ee699e0321c8c4101a3421941ac8}{}\label{interface_s_c_abstract_service_af8c7ee699e0321c8c4101a3421941ac8}
+deletes an object server-\/side telling the server to take action
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the class type \\
+\hline
+{\em id} & the object\textquotesingle{}s id \\
+\hline
+{\em action} & the action to take \\
+\hline
+{\em action\+Arg} & the action arguments as string \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise just resolveing without result (nil) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!delete\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:@{delete\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:}}
+\index{delete\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:@{delete\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{delete\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:(\+Class type,[with\+Id] N\+S\+String $\ast$id,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(bool, Secu\+Error $\ast$))}{delete:withId:onChannel:completionHandler:(Class type,[withId] NSString *id,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(bool, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) delete\+: 
+\begin{DoxyParamCaption}
+\item[{(Class)}]{type}
+\item[{withId:(N\+S\+String$\ast$)}]{id}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(bool, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_ac0af977d373e4027ed1e1319e745de72}{}\label{interface_s_c_abstract_service_ac0af977d373e4027ed1e1319e745de72}
+deletes an object server-\/side
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the class type \\
+\hline
+{\em id} & the id of the object \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise just resolveing without result (nil) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!execute\+:action\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:@{execute\+:action\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:}}
+\index{execute\+:action\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:@{execute\+:action\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{execute\+:action\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:(\+N\+S\+String $\ast$app\+Id,[action] N\+S\+String $\ast$action,[arg] id arg,[return\+Type] Class return\+Type,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(id, Secu\+Error $\ast$))}{execute:action:arg:returnType:onChannel:completionHandler:(NSString *appId,[action] NSString *action,[arg] id arg,[returnType] Class returnType,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(id, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) execute\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{app\+Id}
+\item[{action:(N\+S\+String$\ast$)}]{action}
+\item[{arg:(id)}]{arg}
+\item[{returnType:(Class)}]{return\+Type}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(id, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_a5bc3b75a76f28461b4d2c4a1733d580a}{}\label{interface_s_c_abstract_service_a5bc3b75a76f28461b4d2c4a1733d580a}
+execute an object server-\/side
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+Id} & the app id \\
+\hline
+{\em action} & a string clarifying the action to take \\
+\hline
+{\em arg} & a dictionary as argument \\
+\hline
+{\em return\+Type} & the wanted return type \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the result (id) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!execute\+:with\+Id\+:action\+:action\+Arg\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:@{execute\+:with\+Id\+:action\+:action\+Arg\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:}}
+\index{execute\+:with\+Id\+:action\+:action\+Arg\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:@{execute\+:with\+Id\+:action\+:action\+Arg\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{execute\+:with\+Id\+:action\+:action\+Arg\+:arg\+:return\+Type\+:on\+Channel\+:completion\+Handler\+:(\+Class type,[with\+Id] N\+S\+String $\ast$id,[action] N\+S\+String $\ast$action,[action\+Arg] N\+S\+String $\ast$action\+Arg,[arg] id arg,[return\+Type] Class return\+Type,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(id, Secu\+Error $\ast$))}{execute:withId:action:actionArg:arg:returnType:onChannel:completionHandler:(Class type,[withId] NSString *id,[action] NSString *action,[actionArg] NSString *actionArg,[arg] id arg,[returnType] Class returnType,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(id, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) execute\+: 
+\begin{DoxyParamCaption}
+\item[{(Class)}]{type}
+\item[{withId:(N\+S\+String$\ast$)}]{id}
+\item[{action:(N\+S\+String$\ast$)}]{action}
+\item[{actionArg:(N\+S\+String$\ast$)}]{action\+Arg}
+\item[{arg:(id)}]{arg}
+\item[{returnType:(Class)}]{return\+Type}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(id, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_a25e154c6d50e8e88ee90b712ecbfb066}{}\label{interface_s_c_abstract_service_a25e154c6d50e8e88ee90b712ecbfb066}
+execute an object server-\/side
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the class type \\
+\hline
+{\em id} & the object\textquotesingle{}s id \\
+\hline
+{\em action} & a string clarifying the action to take \\
+\hline
+{\em action\+Arg} & the parameters for the action as string \\
+\hline
+{\em arg} & a dictionary as argument \\
+\hline
+{\em return\+Type} & the wanted return type \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the result (id) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!get\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:@{get\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:}}
+\index{get\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:@{get\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{get\+:with\+Id\+:on\+Channel\+:completion\+Handler\+:(\+Class type,[with\+Id] N\+S\+String $\ast$id,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(id, Secu\+Error $\ast$))}{get:withId:onChannel:completionHandler:(Class type,[withId] NSString *id,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(id, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+: 
+\begin{DoxyParamCaption}
+\item[{(Class)}]{type}
+\item[{withId:(N\+S\+String$\ast$)}]{id}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(id, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_ac445d8d6aee8c01e7d58b431b0dd6f24}{}\label{interface_s_c_abstract_service_ac445d8d6aee8c01e7d58b431b0dd6f24}
+retrieve an object
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the class type \\
+\hline
+{\em id} & the id \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the found instance (id) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!get\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:@{get\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:}}
+\index{get\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:@{get\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{get\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:(\+Class type,[with\+Params] S\+C\+Query\+Params $\ast$query\+Params,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{getList:withParams:onChannel:completionHandler:(Class type,[withParams] SCQueryParams *queryParams,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+List\+: 
+\begin{DoxyParamCaption}
+\item[{(Class)}]{type}
+\item[{withParams:({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_ab353a5436b86810210702c316a62253d}{}\label{interface_s_c_abstract_service_ab353a5436b86810210702c316a62253d}
+retrieve a list of objects which is a N\+S\+Array
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the class type of the resulting objects \\
+\hline
+{\em query\+Params} & the query parameters \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with a N\+S\+Array of the found objects (N\+S\+Array) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!get\+Object\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:@{get\+Object\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:}}
+\index{get\+Object\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:@{get\+Object\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{get\+Object\+List\+:with\+Params\+:on\+Channel\+:completion\+Handler\+:(\+Class type,[with\+Params] S\+C\+Query\+Params $\ast$query\+Params,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Object\+List $\ast$, Secu\+Error $\ast$))}{getObjectList:withParams:onChannel:completionHandler:(Class type,[withParams] SCQueryParams *queryParams,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(SCObjectList *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+Object\+List\+: 
+\begin{DoxyParamCaption}
+\item[{(Class)}]{type}
+\item[{withParams:({\bf S\+C\+Query\+Params}$\ast$)}]{query\+Params}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Object\+List} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_adbc850a99d2a71cc90be83f55ed22ce3}{}\label{interface_s_c_abstract_service_adbc850a99d2a71cc90be83f55ed22ce3}
+retrieve a list of objects which is a \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the class type of the resulting objects \\
+\hline
+{\em query\+Params} & the query parameters \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with a \hyperlink{interface_s_c_object_list}{S\+C\+Object\+List} of the found objects (\hyperlink{interface_s_c_object_list}{S\+C\+Object\+List}) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!post\+Process\+Objects\+:completion\+Handler\+:@{post\+Process\+Objects\+:completion\+Handler\+:}}
+\index{post\+Process\+Objects\+:completion\+Handler\+:@{post\+Process\+Objects\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{post\+Process\+Objects\+:completion\+Handler\+:(\+N\+S\+Array $\ast$list,[completion\+Handler] void($^\wedge$handler)(\+N\+S\+Array $\ast$, Secu\+Error $\ast$))}{postProcessObjects:completionHandler:(NSArray *list,[completionHandler] void(^handler)(NSArray *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) post\+Process\+Objects\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+Array$\ast$)}]{list}
+\item[{completionHandler:(void($^\wedge$)(N\+S\+Array $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_a569e0dc4a0734d28a6750a9074315d36}{}\label{interface_s_c_abstract_service_a569e0dc4a0734d28a6750a9074315d36}
+Post process the objects found by the list retireval methods, this is used internally after a list result arrived and before it is passed by the promise resolveer
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the input list\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the output list (N\+S\+Array) 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!service\+Manager\+By\+Channel\+:@{service\+Manager\+By\+Channel\+:}}
+\index{service\+Manager\+By\+Channel\+:@{service\+Manager\+By\+Channel\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{service\+Manager\+By\+Channel\+:(\+Service\+Channel channel)}{serviceManagerByChannel:(ServiceChannel channel)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf S\+C\+Service\+Manager} $\ast$) service\+Manager\+By\+Channel\+: 
+\begin{DoxyParamCaption}
+\item[{(Service\+Channel)}]{channel}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_abacd77c4f0ca9ab525b83b6224aa26d3}{}\label{interface_s_c_abstract_service_abacd77c4f0ca9ab525b83b6224aa26d3}
+retrieve the channel from the given channel type.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & teh channel type\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a sublass of the Service\+Manager, either Stomp or Rest 
+\end{DoxyReturn}
+\index{S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}!update\+:on\+Channel\+:completion\+Handler\+:@{update\+:on\+Channel\+:completion\+Handler\+:}}
+\index{update\+:on\+Channel\+:completion\+Handler\+:@{update\+:on\+Channel\+:completion\+Handler\+:}!S\+C\+Abstract\+Service@{S\+C\+Abstract\+Service}}
+\subsubsection[{\texorpdfstring{update\+:on\+Channel\+:completion\+Handler\+:(id object,[on\+Channel] Service\+Channel channel,[completion\+Handler] void($^\wedge$handler)(\+S\+C\+Secu\+Object $\ast$, Secu\+Error $\ast$))}{update:onChannel:completionHandler:(id object,[onChannel] ServiceChannel channel,[completionHandler] void(^handler)(SCSecuObject *, SecuError *))}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) update\+: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\item[{onChannel:(Service\+Channel)}]{channel}
+\item[{completionHandler:(void($^\wedge$)({\bf S\+C\+Secu\+Object} $\ast$, {\bf Secu\+Error} $\ast$))}]{handler}
+\end{DoxyParamCaption}
+}\hypertarget{interface_s_c_abstract_service_a150e20038a5ced6f3f8a3c8cb8c40007}{}\label{interface_s_c_abstract_service_a150e20038a5ced6f3f8a3c8cb8c40007}
+saves an object server-\/side
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & the object to be saved \\
+\hline
+{\em channel} & the preferred channel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a promise resolveing with the refreshed object (\hyperlink{interface_s_c_secu_object}{S\+C\+Secu\+Object}) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Pod/\+Classes/\+Services/S\+C\+Abstract\+Service.\+h\item 
+Pod/\+Classes/\+Services/S\+C\+Abstract\+Service.\+m\end{DoxyCompactItemize}
