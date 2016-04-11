@@ -1,5 +1,6 @@
 # secucard connect iOS SDK Guide
 
+
 SDK for using the [secuconnect API](http://developer.secuconnect.com/) on iOS.
 
 ## Requirements
@@ -26,13 +27,30 @@ Since there are two ways of communication, you will need to enter the appropriat
 **REST-Channel-Config (On-Demand)**
 
 ```swift
-let restConfig: SCRestConfiguration = SCRestConfiguration(baseUrl: Constants.apiBaseUrl, andAuthUrl: Constants.baseUrl)
+let restConfig: SCRestConfiguration = 
+	SCRestConfiguration(
+		baseUrl: Constants.apiBaseUrl, 
+		andAuthUrl: Constants.baseUrl
+	)
 ```
 
 **STOMP-Channel-Config (Persistent)**
 
 ```swift
-let stompConfig: SCStompConfiguration = SCStompConfiguration(host: "connect.secucard.com", andVHost: "/", port: "61614", userId: "", password: "", useSSL: true, replyQueue: "/temp-queue/main", connectionTimeoutSec: 30, socketTimeoutSec: 30, heartbeatMs: 40000, basicDestination: "/exchange/connect.api/")
+let stompConfig: SCStompConfiguration = 
+	SCStompConfiguration(
+		host: "connect.secucard.com", 
+		andVHost: "/", 
+		port: "61614", 
+		userId: "", 
+		password: "", 
+		useSSL: true, 
+		replyQueue: "/temp-queue/main", 
+		connectionTimeoutSec: 30, 
+		socketTimeoutSec: 30, 
+		heartbeatMs: 40000, 
+		basicDestination: "/exchange/connect.api/"
+	)
 ```
 
 **Client Credentials**
@@ -40,7 +58,11 @@ let stompConfig: SCStompConfiguration = SCStompConfiguration(host: "connect.secu
 Of course the clients needs to authorize agains the API. The client in this case can be an app but does not identify a single user. 
 
 ```swift
-let clientCredentials: SCClientCredentials = SCClientCredentials(clientId: "611c00ec6b2be6c77c2338774f50040x", clientSecret: "dc1f422dde755f0b1c4ac04e7efabcc4c78870691fe783266d7d6c89439925eb")
+let clientCredentials: SCClientCredentials = 
+	SCClientCredentials(
+		clientId: "611c00ec6b2be6c77c2338774f50040x", 
+		clientSecret: "dc1f422dde755f0b1c4ac04e7efabcc4c78870691fe783266d7d6c89439925eb"
+	)
 ```
 
 **User Credentials**
@@ -48,7 +70,11 @@ let clientCredentials: SCClientCredentials = SCClientCredentials(clientId: "611c
 The user credentials identify and authorize a specific user of the client (aka App). 
 
 ```swift
-let userCredentials: SCClientCredentials = SCUserCredentials(username: "User", andPassword: "pa**wo**")
+let userCredentials: SCClientCredentials = 
+	SCUserCredentials(
+		username: "User", 
+		andPassword: "pa**wo**"
+	)
 ```
 
 For your initialization workflow you can set the user credentials later using 
@@ -62,7 +88,18 @@ SCConnectClient.sharedInstance().setUserCredentials(userCredentials: SCUserCrede
 The client configuration now consists of the upper configurations and additional information like which channel is supposed to be the default channel or what the  auth type should be
 
 ```swift
-let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: Constants.baseUrl, clientCredentials: clientCredentials, userCredentials: userCredentials, deviceId: uuid, authType: "device")     
+let clientConfig: SCClientConfiguration = 
+	SCClientConfiguration(
+		restConfiguration: restConfig, 
+		stompConfiguration: stompConfig, 
+		defaultChannel: OnDemandChannel, 
+		stompEnabled: true, 
+		oauthUrl: Constants.baseUrl, 
+		clientCredentials: clientCredentials, 
+		userCredentials: userCredentials, 
+		deviceId: uuid, 
+		authType: "device"
+	)     
 ```
 **Initialization and connection**
 
