@@ -1,6 +1,5 @@
 # secucard connect iOS SDK Guide
 
-
 SDK for using the [secuconnect API](http://developer.secuconnect.com/) on iOS.
 
 ## Requirements
