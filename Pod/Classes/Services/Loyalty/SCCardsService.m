@@ -40,7 +40,7 @@
   
   [SCLogManager info:@"CONNECT-SDK: assignUserToCard"];
   
-  [[self serviceManagerByChannel:OnDemandChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin completionHandler:^(id responseObject, SecuError *error) {
+  [[self serviceManagerByChannel:PersistentChannel] execute:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" arg:pin completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
@@ -48,11 +48,11 @@
   
 }
 
-- (void) deleteUserFromCard:(NSString*)cardNumber completionHandler:(void (^)(bool, SecuError *))handler {
+- (void) deleteUserFromCard:(NSString*)cardId completionHandler:(void (^)(bool, SecuError *))handler {
 
   [SCLogManager info:@"CONNECT-SDK: deleteUserFromCard"];
   
-  [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCLoyaltyCard class] objectId:cardNumber action:@"assignUser" actionArg:@"me" completionHandler:handler];
+  [[self serviceManagerByChannel:OnDemandChannel] deleteObject:[SCLoyaltyCard class] objectId:cardId action:@"assignUser" actionArg:@"me" completionHandler:handler];
   
 }
 

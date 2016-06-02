@@ -5,13 +5,13 @@ use_frameworks!
 
 target 'SecucardConnectSDK_Example' do
   
-  pod 'SecucardConnectSDK'
+  pod 'SecucardConnectSDK', :path => "../"
   
 end
 
 target 'SecucardConnectSDK_Tests' do
   
-  pod 'SecucardConnectSDK'
+  pod 'SecucardConnectSDK', :path => "../"
 
   pod 'Specta'
   pod 'Expecta'

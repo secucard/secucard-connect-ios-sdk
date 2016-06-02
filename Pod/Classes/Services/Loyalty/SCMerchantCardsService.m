@@ -26,7 +26,7 @@
   
   [SCLogManager info:@"CONNECT-SDK: getMerchantCards"];
   
-  [self getObjectList:[SCLoyaltyMerchantCard class] withParams:queryParams onChannel:DefaultChannel completionHandler:handler];
+  [self getObjectList:[SCLoyaltyMerchantCard class] withParams:queryParams onChannel:PersistentChannel completionHandler:handler];
 }
 
 - (void)getMerchantCard:(NSString *)id completionHandler:(void (^)(SCLoyaltyMerchantCard *, SecuError *))handler {

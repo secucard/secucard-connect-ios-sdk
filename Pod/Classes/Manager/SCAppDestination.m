@@ -38,7 +38,7 @@
 }
 
 - (NSString *)destination {
-  return [NSString stringWithFormat:@"%@%@%@", [SCStompManager sharedManager].configuration.basicDestination, kStompDestinationPrefix, self.method];
+  return [NSString stringWithFormat:@"%@%@%@", [SCStompManager sharedManager].configuration.basicDestination, kAppDestinationPrefix, self.method];
 }
 
 @end

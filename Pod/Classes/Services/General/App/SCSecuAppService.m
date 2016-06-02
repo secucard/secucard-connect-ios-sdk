@@ -41,7 +41,7 @@
 
   [SCLogManager info:@"CONNECT-SDK: getMerchant"];
   
-  [self execute:appId action:@"getMerchantDetails" arg:argObject returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, SecuError *error) {
+  [self execute:appId action:@"callBackend/getMerchantDetails" arg:argObject returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -66,7 +66,7 @@
   
   [SCLogManager info:@"CONNECT-SDK: getMyMerchants"];
   
-  [self execute:appId action:@"getMyMerchants" arg:arg returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, SecuError *error) {
+  [self execute:appId action:@"callBackend/getMyMerchants" arg:arg returnType:[SCObjectList class] onChannel:OnDemandChannel completionHandler:^(id list, SecuError *error) {
     
     if (error != nil) {
       handler(nil, error);
@@ -78,6 +78,11 @@
     
     if (parsingError != nil) {
       handler(nil, [SecuError withError:parsingError]);
+      return;
+    }
+    
+    if (storeList.data.count == 0) {
+      handler(storeList, nil);
       return;
     }
     
@@ -112,7 +117,7 @@
   
   [SCLogManager info:@"CONNECT-SDK: addCard"];
   
-  [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel completionHandler:^(id responseObject, SecuError *error) {
+  [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:PersistentChannel completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
