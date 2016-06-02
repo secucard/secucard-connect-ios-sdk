@@ -1,5 +1,5 @@
 # Change log
 
-## 1.0.0
+## 0.2.18
 
-* Initial release
+* set deployment target to iOS 8
