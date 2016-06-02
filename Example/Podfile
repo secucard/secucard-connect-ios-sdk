@@ -1,16 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+platform :ios, '8.0'
 use_frameworks!
 
-target 'SecucardConnectSDK_Example', :exclusive => true do
+target 'SecucardConnectSDK_Example' do
   
-  pod 'SecucardConnectSDK', '0.2.18'
+  pod 'SecucardConnectSDK'
   
 end
 
-target 'SecucardConnectSDK_Tests', :exclusive => true do
+target 'SecucardConnectSDK_Tests' do
   
-  pod 'SecucardConnectSDK', '0.2.18'
+  pod 'SecucardConnectSDK'
 
   pod 'Specta'
   pod 'Expecta'

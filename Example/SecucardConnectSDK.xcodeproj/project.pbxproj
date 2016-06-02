@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44C2A43990C9ECC6425333AC /* Pods_SecucardConnectSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11500153553F8697BC238912 /* Pods_SecucardConnectSDK_Tests.framework */; };
+		1E38234295EDE89D49CAD725 /* Pods_SecucardConnectSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F242A8934407166F6770AF /* Pods_SecucardConnectSDK_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -22,7 +22,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		D12397890AF4EA314457B342 /* Pods_SecucardConnectSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070B4F97C0D2FBD5D84B2D64 /* Pods_SecucardConnectSDK_Example.framework */; };
+		B8109E251FAD81A8B59AF111 /* Pods_SecucardConnectSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2E620CE4FD988BD14632A5 /* Pods_SecucardConnectSDK_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06535AA977C02A8E47FE2A86 /* Pods-SecucardConnectSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		070B4F97C0D2FBD5D84B2D64 /* Pods_SecucardConnectSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11500153553F8697BC238912 /* Pods_SecucardConnectSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34F242A8934407166F6770AF /* Pods_SecucardConnectSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43C0DA5B631A6C49550EFCEB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		5C2FF0F1B68433F003EB8039 /* Pods-SecucardConnectSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* Secucard Connect SDK Example App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secucard Connect SDK Example App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,11 +58,12 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		84576254E856047EBF344C27 /* Pods-SecucardConnectSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		64153CE234C563A6044AFAAC /* Pods-SecucardConnectSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		6A2E620CE4FD988BD14632A5 /* Pods_SecucardConnectSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecucardConnectSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		B51C3DDFE01326582499D3C4 /* Pods-SecucardConnectSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		AADF25A109B64D7A23592E74 /* Pods-SecucardConnectSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		AC5D714797B570842945F917 /* Pods-SecucardConnectSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BCBF13AFDE5D1B81E35534EB /* SecucardConnectSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SecucardConnectSDK.podspec; path = ../SecucardConnectSDK.podspec; sourceTree = "<group>"; };
-		DA09CAC2100FE54571151245 /* Pods-SecucardConnectSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecucardConnectSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		DB268633B0D7791B4940A3F4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +75,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				D12397890AF4EA314457B342 /* Pods_SecucardConnectSDK_Example.framework in Frameworks */,
+				B8109E251FAD81A8B59AF111 /* Pods_SecucardConnectSDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,24 +86,13 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				44C2A43990C9ECC6425333AC /* Pods_SecucardConnectSDK_Tests.framework in Frameworks */,
+				1E38234295EDE89D49CAD725 /* Pods_SecucardConnectSDK_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C7BBA27528894636A0F0288 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B51C3DDFE01326582499D3C4 /* Pods-SecucardConnectSDK_Example.debug.xcconfig */,
-				DA09CAC2100FE54571151245 /* Pods-SecucardConnectSDK_Example.release.xcconfig */,
-				84576254E856047EBF344C27 /* Pods-SecucardConnectSDK_Tests.debug.xcconfig */,
-				06535AA977C02A8E47FE2A86 /* Pods-SecucardConnectSDK_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +101,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				1C7BBA27528894636A0F0288 /* Pods */,
+				7AEE2A45962B64AE00E2F4F4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,8 +121,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				070B4F97C0D2FBD5D84B2D64 /* Pods_SecucardConnectSDK_Example.framework */,
-				11500153553F8697BC238912 /* Pods_SecucardConnectSDK_Tests.framework */,
+				6A2E620CE4FD988BD14632A5 /* Pods_SecucardConnectSDK_Example.framework */,
+				34F242A8934407166F6770AF /* Pods_SecucardConnectSDK_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -193,6 +182,17 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		7AEE2A45962B64AE00E2F4F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C2FF0F1B68433F003EB8039 /* Pods-SecucardConnectSDK_Example.debug.xcconfig */,
+				AADF25A109B64D7A23592E74 /* Pods-SecucardConnectSDK_Example.release.xcconfig */,
+				64153CE234C563A6044AFAAC /* Pods-SecucardConnectSDK_Tests.debug.xcconfig */,
+				AC5D714797B570842945F917 /* Pods-SecucardConnectSDK_Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,12 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "SecucardConnectSDK_Example" */;
 			buildPhases = (
-				EA729116FA3D89C07D6A2977 /* Check Pods Manifest.lock */,
+				C3FC9476FAEEBAEB2017AF26 /* 📦 Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				379102C8504FDC877E459020 /* Embed Pods Frameworks */,
-				9A10AC5613051751428C537A /* Copy Pods Resources */,
+				A58B7B7636CDAF8D219F13D0 /* 📦 Embed Pods Frameworks */,
+				52FFFDF5BA454A76164F285E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,12 +220,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "SecucardConnectSDK_Tests" */;
 			buildPhases = (
-				E46A245767E2963FC9D6BBC1 /* Check Pods Manifest.lock */,
+				28B7CDC5286AB6F8A3CC284C /* 📦 Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				8D9EA79E0C74EBEF1ACE3230 /* Embed Pods Frameworks */,
-				09D9D2F7CD27DE03BEBD2039 /* Copy Pods Resources */,
+				85E8AC98B8A4E52A42518E66 /* 📦 Embed Pods Frameworks */,
+				59657541BAE7C94F5A963223 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -293,74 +293,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09D9D2F7CD27DE03BEBD2039 /* Copy Pods Resources */ = {
+		28B7CDC5286AB6F8A3CC284C /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		379102C8504FDC877E459020 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8D9EA79E0C74EBEF1ACE3230 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9A10AC5613051751428C537A /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E46A245767E2963FC9D6BBC1 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,14 +308,74 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		EA729116FA3D89C07D6A2977 /* Check Pods Manifest.lock */ = {
+		52FFFDF5BA454A76164F285E /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59657541BAE7C94F5A963223 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85E8AC98B8A4E52A42518E66 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Tests/Pods-SecucardConnectSDK_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A58B7B7636CDAF8D219F13D0 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SecucardConnectSDK_Example/Pods-SecucardConnectSDK_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3FC9476FAEEBAEB2017AF26 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,7 +510,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B51C3DDFE01326582499D3C4 /* Pods-SecucardConnectSDK_Example.debug.xcconfig */;
+			baseConfigurationReference = 5C2FF0F1B68433F003EB8039 /* Pods-SecucardConnectSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -527,7 +527,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA09CAC2100FE54571151245 /* Pods-SecucardConnectSDK_Example.release.xcconfig */;
+			baseConfigurationReference = AADF25A109B64D7A23592E74 /* Pods-SecucardConnectSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -544,7 +544,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84576254E856047EBF344C27 /* Pods-SecucardConnectSDK_Tests.debug.xcconfig */;
+			baseConfigurationReference = 64153CE234C563A6044AFAAC /* Pods-SecucardConnectSDK_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -567,7 +567,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06535AA977C02A8E47FE2A86 /* Pods-SecucardConnectSDK_Tests.release.xcconfig */;
+			baseConfigurationReference = AC5D714797B570842945F917 /* Pods-SecucardConnectSDK_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
