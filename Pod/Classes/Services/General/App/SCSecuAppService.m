@@ -117,7 +117,7 @@
   
   [SCLogManager info:@"CONNECT-SDK: addCard"];
   
-  [self execute:appId action:@"addCard" arg:argObject returnType:[NSDictionary class] onChannel:PersistentChannel completionHandler:^(id responseObject, SecuError *error) {
+  [self execute:appId action:@"callBackend/addCard" arg:argObject returnType:[NSDictionary class] onChannel:OnDemandChannel completionHandler:^(id responseObject, SecuError *error) {
     
     handler((error == nil), error);
     
