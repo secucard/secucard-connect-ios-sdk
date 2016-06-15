@@ -589,7 +589,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   
   NSString *host = (secure) ? self.configuration.baseUrl : self.configuration.authUrl;
   
-  [man POST:[NSString stringWithFormat:@"%@%@", host, endpoint] parameters:params success:^(NSURLSessionTask *task, id responseObject) {
+  [man POST:[NSString stringWithFormat:@"%@%@", host, endpoint] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
     
     handler(responseObject, nil);
     

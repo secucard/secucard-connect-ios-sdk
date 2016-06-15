@@ -92,40 +92,39 @@
     return;
     
     // preload images
-    __block int loaded = 0;
-    
-    for (NSDictionary *store in storeList.data) {
-      
-      NSURL *url = [NSURL URLWithString:[store objectForKey:@"photoMain"]];
-      __block NSURLRequest *request = [NSURLRequest requestWithURL:url];
-      [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        
-        if (connectionError) {
-          NSLog(@"sendAsynchronousRequest error: %@", connectionError);
-        } else {
-          
-          UIImage *img = [UIImage safeImageWithData:data];
-          [[UIImageView sharedImageDownloader] downloadImageForURLRequest:request success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull responseObject) {
-        
-            loaded++;
-            if (loaded == storeList.data.count) {
-              handler(storeList, nil);
-            }
-            
-          } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-            
-            loaded++;
-            if (loaded == storeList.data.count) {
-              handler(storeList, nil);
-            }
-            
-          }];
-        }
-        
-        
-      }];
-      
-    }
+//    __block int loaded = 0;
+//    
+//    for (NSDictionary *store in storeList.data) {
+//      
+//      NSURL *url = [NSURL URLWithString:[store objectForKey:@"photoMain"]];
+//      __block NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//      [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        
+//        if (connectionError) {
+//          NSLog(@"sendAsynchronousRequest error: %@", connectionError);
+//        } else {
+//          
+//          [[UIImageView sharedImageDownloader] downloadImageForURLRequest:request success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull responseObject) {
+//        
+//            loaded++;
+//            if (loaded == storeList.data.count) {
+//              handler(storeList, nil);
+//            }
+//            
+//          } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+//            
+//            loaded++;
+//            if (loaded == storeList.data.count) {
+//              handler(storeList, nil);
+//            }
+//            
+//          }];
+//        }
+//        
+//        
+//      }];
+//      
+//    }
     
   }];
 }
