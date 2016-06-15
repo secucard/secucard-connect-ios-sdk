@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "UIImage+AFNetworking.h"
 #import "AFNetworking.h"
+#import "AFImageDownloader.h"
 
 @implementation SCStoreList
 
@@ -86,6 +87,10 @@
       return;
     }
     
+    handler(storeList, nil);
+    
+    return;
+    
     // preload images
     __block int loaded = 0;
     
@@ -98,14 +103,26 @@
         if (connectionError) {
           NSLog(@"sendAsynchronousRequest error: %@", connectionError);
         } else {
+          
           UIImage *img = [UIImage safeImageWithData:data];
-          [[UIImageView sharedImageCache] cacheImage:img forRequest:request];
+          [[UIImageView sharedImageDownloader] downloadImageForURLRequest:request success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull responseObject) {
+        
+            loaded++;
+            if (loaded == storeList.data.count) {
+              handler(storeList, nil);
+            }
+            
+          } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+            
+            loaded++;
+            if (loaded == storeList.data.count) {
+              handler(storeList, nil);
+            }
+            
+          }];
         }
         
-        loaded++;
-        if (loaded == storeList.data.count) {
-          handler(storeList, nil);
-        }
+        
       }];
       
     }

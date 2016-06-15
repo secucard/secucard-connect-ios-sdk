@@ -21,8 +21,8 @@
 
 @property (nonatomic, retain) SCRestConfiguration *configuration;
 
-@property (nonatomic, retain) AFHTTPRequestOperationManager* authOperationManager;
-@property (nonatomic, retain) AFHTTPRequestOperationManager* operationManager;
+@property (nonatomic, retain) AFHTTPSessionManager* authOperationManager;
+@property (nonatomic, retain) AFHTTPSessionManager* operationManager;
 
 @end
 
@@ -67,7 +67,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   }
   
   
-  self.operationManager = [AFHTTPRequestOperationManager manager];
+  self.operationManager = [AFHTTPSessionManager manager];
   self.operationManager.requestSerializer = requestSerializer;
   
   authRequestSerializer = [AFJSONRequestSerializer serializer];
@@ -75,7 +75,7 @@ AFHTTPRequestSerializer *authRequestSerializer;
   [authRequestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [authRequestSerializer setValue:@"utf-8" forHTTPHeaderField:@"Accept-Charset"];
   
-  self.authOperationManager = [AFHTTPRequestOperationManager manager];
+  self.authOperationManager = [AFHTTPSessionManager manager];
   self.authOperationManager.requestSerializer = authRequestSerializer;
   
 }
@@ -94,12 +94,12 @@ AFHTTPRequestSerializer *authRequestSerializer;
 {
   
   // do the actual request
-  [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, @"oauth/token"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.authUrl, @"oauth/token"] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
     
     [self.operationManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", responseObject] forHTTPHeaderField:@"Authorization"];
     handler(responseObject, nil);
     
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+  } failure:^(NSURLSessionTask *task, NSError *error) {
     
     handler(nil, [self doBasicErrorHandling:error]);
     
@@ -122,11 +122,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
-      [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         
         handler(responseObject, nil);
         
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      } failure:^(NSURLSessionTask *task, NSError *error) {
         
         handler(nil, [self doBasicErrorHandling:error]);
         
@@ -136,11 +136,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
   } else {
     
-    [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.authOperationManager POST:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
       
       handler(responseObject, nil);
       
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionTask *task, NSError *error) {
       
       handler(nil, [self doBasicErrorHandling:error]);
       
@@ -166,11 +166,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
-      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         
         handler(responseObject, nil);
         
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      } failure:^(NSURLSessionTask *task, NSError *error) {
         
         handler(nil, [self doBasicErrorHandling:error]);
         
@@ -180,11 +180,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
   } else {
     
-    [self.authOperationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.authOperationManager GET:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
       
       handler(responseObject, nil);
       
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionTask *task, NSError *error) {
       
       handler(nil, [self doBasicErrorHandling:error]);
       
@@ -209,11 +209,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
-      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(NSURLSessionTask *task, id responseObject) {
         
         handler(responseObject, nil);
         
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      } failure:^(NSURLSessionTask *task, NSError *error) {
         
         handler(nil, [self doBasicErrorHandling:error]);
         
@@ -223,11 +223,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
   } else {
     
-    [self.authOperationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.authOperationManager PUT:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(NSURLSessionTask *task, id responseObject) {
       
       handler(responseObject, nil);
       
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionTask *task, NSError *error) {
       
       handler(nil, [self doBasicErrorHandling:error]);
       
@@ -253,11 +253,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
       
       [requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
       
-      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [self.operationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(NSURLSessionTask *task, id responseObject) {
         
         handler(responseObject, nil);
         
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      } failure:^(NSURLSessionTask *task, NSError *error) {
         
         handler(nil, [self doBasicErrorHandling:error]);
         
@@ -267,11 +267,11 @@ AFHTTPRequestSerializer *authRequestSerializer;
     
   } else {
     
-    [self.authOperationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.authOperationManager DELETE:[NSString stringWithFormat:@"%@%@", self.configuration.baseUrl, endpoint] parameters:params success:^(NSURLSessionTask *task, id responseObject) {
       
       handler(responseObject, nil);
       
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionTask *task, NSError *error) {
       
       handler(nil, [self doBasicErrorHandling:error]);
       
@@ -585,15 +585,15 @@ AFHTTPRequestSerializer *authRequestSerializer;
 
 - (void) post:(NSString*)endpoint withAuth:(BOOL)secure withParams:(id)params completionHandler:(void (^)(id responseObject, SecuError *error))handler {
   
-  AFHTTPRequestOperationManager *man = (secure) ? self.operationManager : self.authOperationManager;
+  AFHTTPSessionManager *man = (secure) ? self.operationManager : self.authOperationManager;
   
   NSString *host = (secure) ? self.configuration.baseUrl : self.configuration.authUrl;
   
-  [man POST:[NSString stringWithFormat:@"%@%@", host, endpoint] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  [man POST:[NSString stringWithFormat:@"%@%@", host, endpoint] parameters:params success:^(NSURLSessionTask *task, id responseObject) {
     
     handler(responseObject, nil);
     
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+  } failure:^(NSURLSessionTask *task, NSError *error) {
     
     handler(nil, [SecuError withError:error]);
     
