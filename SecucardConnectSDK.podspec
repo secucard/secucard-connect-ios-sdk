@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SecucardConnectSDK"
-  s.version      = "0.2.22"
+  s.version      = "0.2.23"
   s.summary      = "Standard API for communication with the secucard infrastructure"
 
   s.description  = <<-DESC
@@ -126,7 +126,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency 'AFNetworking', '3.1.0'
+  s.dependency 'AFNetworking', '~> 3.0.0'
   s.dependency 'Mantle', '2.0.7'
   s.dependency 'CocoaAsyncSocket', '7.4.3'
 
