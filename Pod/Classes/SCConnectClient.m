@@ -82,7 +82,7 @@ unsigned libVersionPatch = 12;
 - (void) connect:(void (^)(bool, SecuError *))handler {
   
   if (_isConnecting) {
-    handler(false, [SCLogManager makeErrorWithDescription:@"CONNECTTION: Already connecting"]);
+//    handler(false, [SCLogManager makeErrorWithDescription:@"CONNECTION: Already connecting"]);
     return;
   }
   

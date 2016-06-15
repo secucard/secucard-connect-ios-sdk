@@ -83,12 +83,16 @@
 
 + (SecuError*) makeErrorWithDescription:(NSString*)description {
   NSDictionary *details = @{NSLocalizedDescriptionKey: description};
-  return [SecuError errorWithDomain:kSCErrorDomain code:ERR_UNDEFINED userInfo:details];
+  SecuError *error = [SecuError errorWithDomain:kSCErrorDomain code:ERR_UNDEFINED userInfo:details];
+  error.scErrorUser = description;
+  return error;
 }
 
 + (SecuError*) makeErrorWithDescription:(NSString*)description andDomain:(NSString*) errorDomain {
   NSDictionary *details = @{NSLocalizedDescriptionKey: description};
-  return [SecuError errorWithDomain:errorDomain code:ERR_UNDEFINED userInfo:details];
+  SecuError *error = [SecuError errorWithDomain:errorDomain code:ERR_UNDEFINED userInfo:details];
+  error.scErrorUser = description;
+  return error;
 }
 
 + (void) error:(SecuError*)error {
